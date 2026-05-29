@@ -1,0 +1,43 @@
+task_id: MC-VAL-01
+split: validation
+task_type: method_comparison
+topic: policy optimization
+research_question: "How should PPO and SAC be compared for continuous-control research without making unfair general claims?"
+input_prompt: |
+  Using only the provided source packet, compare PPO and SAC for continuous-control research.
+  Produce a method comparison matrix, assumptions table, benchmark/evaluation caveats, and scoped recommendations for when each method is appropriate.
+  Mark unsupported claims as unknown.
+evaluation_mode: closed_source
+source_material_required: true
+provided_materials:
+  - material_id: packet_mc_ho_ppo_sac
+    type: paper_set_packet
+    status: source_material_required
+    description: "A frozen packet containing PPO, SAC, and benchmark/evaluation source documents or excerpts."
+required_outputs:
+  - method_comparison_matrix
+  - assumptions_table
+  - benchmark_protocol_review
+  - evidence_strength_summary
+  - scoped_recommendations
+critical_facts_to_capture:
+  - "On-policy/off-policy assumptions and objective differences described in the packet."
+  - "Environment suites, metrics, seeds, and baselines used in any reported comparison."
+  - "Sensitivity to tuning, compute, reward scale, exploration, and implementation choices when supported."
+  - "Limits on broad superiority claims."
+common_failure_modes:
+  - "Declaring PPO or SAC universally better."
+  - "Ignoring on-policy versus off-policy data assumptions."
+  - "Comparing results across incompatible benchmark setups."
+  - "Omitting seed variance or hyperparameter sensitivity."
+scoring_dimensions:
+  - factual_accuracy
+  - evidence_traceability
+  - comparison_fairness
+  - experimental_rigor
+  - rl_specific_correctness
+  - inference_boundary_discipline
+  - output_usefulness
+  - efficiency
+notes_on_domain_specificity: "RL method comparison. It should reward fairness and protocol awareness over memorized preferences."
+

@@ -1,0 +1,35 @@
+packet_id: packet_ls_dev_transformer_efficiency
+task_id: LS-DEV-01
+split: dev
+packet_version: 2
+packet_status: draft_pending_human_review
+created_at: 2026-05-29
+supersedes_benchmark_packet_version: round1_dev_v0.1
+runtime_retrieval_allowed: false
+gold_annotations_included: false
+skill_instructions_included: false
+model_input:
+  path: model_input_packet.md
+  sha256: 7fa2a08a92695f861c73095ffdc430c3c7805434170a6eb5d37b9c958938be9c
+  previous_v0_1_sha256: c13078138079e23f025595895c33bd2b5bf482babe6a6cbbde7c871beb05cd77
+canonical_sources:
+  - title: "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"
+    local_filename: ../../dev/LS-DEV-01/canonical_sources/flashattention_arxiv_2205.14135.pdf
+    sha256: ca7f9fda10b90fc05dd291a3accc85e9c1a4a860b99b31928dab03ed3fcb14e4
+    added_evidence:
+      - location: "p. 1, Abstract"
+        reason_included: "Expose distinction between core exact IO-aware attention and the paper's block-sparse extension."
+      - location: "p. 4, Section 3"
+        reason_included: "Expose exact-attention IO-aware tiling and reduced HBM reads/writes."
+      - location: "p. 7, Section 4.1 and Table 1"
+        reason_included: "Expose setup-specific BERT-large training-time comparison."
+      - location: "p. 8, Table 2"
+        reason_included: "Expose setup-specific GPT-2 training-time comparison."
+unchanged_canonical_sources:
+  - ../../dev/LS-DEV-01/canonical_sources/efficient_transformers_survey_arxiv_2009.06732.pdf
+  - ../../dev/LS-DEV-01/canonical_sources/linformer_arxiv_2006.04768.pdf
+  - ../../dev/LS-DEV-01/canonical_sources/longformer_arxiv_2004.05150.pdf
+  - ../../dev/LS-DEV-01/canonical_sources/lora_arxiv_2106.09685.pdf
+human_review_required: true
+notes:
+  - "Draft v0.2 packet adds only source-facing evidence details."

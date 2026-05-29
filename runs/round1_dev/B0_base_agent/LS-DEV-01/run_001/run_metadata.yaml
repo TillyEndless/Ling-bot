@@ -1,0 +1,33 @@
+run_id: round1_dev_v0.1__B0_base_agent__LS-DEV-01__run001
+variant: B0_base_agent
+task_id: LS-DEV-01
+split: dev
+benchmark_version: round1_dev_v0.1
+model: gpt-5.5
+agent_environment: Codex CLI v0.133.0-alpha.1
+workdir: /private/tmp/ling_bot_round1_dev_v0_1/B0_base_agent_execution
+tool_access: none_dynamic
+source_packet_sha256: c13078138079e23f025595895c33bd2b5bf482babe6a6cbbde7c871beb05cd77
+prompt_sha256: 1f77aadf0a36c57fee85170a74f75c4041ee7d222ca09c9132d8bf58835b2f56
+raw_output_sha256: 20d9f5fce41cdb5f75cb3623089dd63da3fea49b1978c509f929841e768c99c5
+fresh_context_confirmation: true
+generation_settings:
+  provider: openai
+  reasoning_effort: none
+  reasoning_summaries: none
+  approval: never
+  sandbox: read-only
+  search_enabled: false
+  plugins_disabled: true
+  browser_disabled: true
+  computer_use_disabled: true
+  image_generation_disabled: true
+  multi_agent_disabled: true
+  shell_tool_disabled: true
+  ignore_user_config: true
+  ignore_rules: true
+  ephemeral: true
+gold_visible_during_generation: false
+scoring_rubric_visible_during_generation: false
+external_retrieval_allowed: false
+dynamic_tools_allowed: false

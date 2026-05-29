@@ -1,0 +1,43 @@
+task_id: SPR-VAL-02
+split: validation
+task_type: single_paper_deep_reading
+topic: sequence modeling for reinforcement learning
+research_question: "What does the provided Decision-Transformer-style paper demonstrate, and where are its evidence boundaries?"
+input_prompt: |
+  Read only the provided source packet. Produce a structured paper card, claim ledger, evidence ledger, baseline/metric summary, reproducibility notes, and limitation summary.
+  Do not use external retrieval. If the packet does not contain a detail, say so.
+evaluation_mode: closed_source
+source_material_required: true
+provided_materials:
+  - material_id: packet_spr_ho_decision_transformer
+    type: paper_packet
+    status: source_material_required
+    description: "A Decision-Transformer-style paper packet with PDF or markdown plus metadata."
+required_outputs:
+  - paper_card
+  - claim_ledger
+  - evidence_ledger
+  - baseline_metric_summary
+  - reproducibility_notes
+  - limitations_and_open_questions
+critical_facts_to_capture:
+  - "How the paper formulates RL as sequence modeling or conditional generation."
+  - "Datasets, environments, baselines, metrics, and evaluation protocols in the packet."
+  - "Whether claims apply to offline RL, imitation, planning, or broader RL settings."
+  - "Implementation and reproducibility details available or missing."
+common_failure_modes:
+  - "Treating the method as a generic transformer without RL context."
+  - "Ignoring offline data assumptions and evaluation limitations."
+  - "Using facts from memory instead of the packet."
+  - "Overstating online-control or generalization implications."
+scoring_dimensions:
+  - factual_accuracy
+  - evidence_traceability
+  - citation_validity
+  - experimental_rigor
+  - rl_specific_correctness
+  - inference_boundary_discipline
+  - output_usefulness
+  - efficiency
+notes_on_domain_specificity: "Sequence-modeling-for-RL task tests cross-domain reading rather than pure NLP or pure RL familiarity."
+

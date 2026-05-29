@@ -1,0 +1,37 @@
+run_id: round1_dev_v0.1__B0_base_agent__ERA-DEV-01__run001
+variant: B0_base_agent
+task_id: ERA-DEV-01
+reviewer: codex_agent_draft
+benchmark_version: round1_dev_v0.1
+scores:
+  factual_accuracy: 3
+  evidence_traceability: 3
+  citation_validity: 4
+  literature_coverage: null
+  comparison_fairness: 3
+  experimental_rigor: 4
+  benchmark_validity: 3
+  inference_boundary_discipline: 4
+  hypothesis_quality: null
+  rl_specific_correctness: null
+  output_usefulness: 4
+  efficiency: 4
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: major
+  dimension: calibration
+  description: Good generic rigor audit and appropriate caution about general agency claims.
+  evidence: raw_output.md
+- severity: minor
+  dimension: calibration
+  description: 'Misses approved AgentBench-specific anchors: pinned-version model-count sensitivity, heterogeneous metric
+    set, weighted aggregation procedure, and observed execution-outcome categories.'
+  evidence: raw_output.md
+- severity: minor
+  dimension: calibration
+  description: These misses trace partly to the model packet, which did not expose the F1/reward/game-progress/step-SR details
+    or Table 4 category specifics.
+  evidence: raw_output.md
+summary: Draft calibration score; review recommended before using as final comparative score.

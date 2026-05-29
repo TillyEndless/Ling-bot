@@ -1,0 +1,40 @@
+packet_id: packet_spr_dev_lora
+task_id: SPR-DEV-01
+split: dev
+packet_version: 2
+packet_status: draft_pending_human_review
+created_at: 2026-05-29
+supersedes_benchmark_packet_version: round1_dev_v0.1
+runtime_retrieval_allowed: false
+gold_annotations_included: false
+skill_instructions_included: false
+model_input:
+  path: model_input_packet.md
+  sha256: f8cb9d7c689c3bec00924ef2fce3bfd30d1b7eadc25ca28cf25ed058b3a44880
+  previous_v0_1_sha256: 88c35c6bab01d76400e18045edf4ced0c215804570ff0df865e0b7d75f774732
+canonical_sources:
+  - title: "LoRA: Low-Rank Adaptation of Large Language Models"
+    local_filename: ../../dev/SPR-DEV-01/canonical_sources/lora_arxiv_2106.09685.pdf
+    sha256: e9a0d3128767db616085dc0f4e6e455e672e89af823e8ed1282793682787395a
+    added_evidence:
+      - location: "p. 4, Section 4.1, Equation 3"
+        reason_included: "Expose frozen W0, trainable A/B, and Delta W = BA formulation."
+      - location: "p. 4, Section 4.2"
+        reason_included: "Expose general dense-layer applicability and Transformer-module experimental focus."
+      - location: "p. 3, Table 1 and pp. 3-4 no-additional-inference-latency discussion"
+        reason_included: "Expose inference-latency distinction and merge-for-deployment mechanism."
+      - location: "p. 4, paragraph before Section 5"
+        reason_included: "Expose paper-reported GPT-3 175B training-speed comparison."
+      - location: "p. 6, Table 3"
+        reason_included: "Expose GPT-2 E2E NLG empirical scope."
+      - location: "p. 7, Table 4"
+        reason_included: "Expose GPT-3 task and trainable-parameter comparison scope."
+      - location: "p. 9, Section 7.1 and Table 5"
+        reason_included: "Expose setting-specific analysis of adapted attention weight matrices."
+      - location: "p. 9, Section 7.2 and Table 6"
+        reason_included: "Expose setting-specific rank-r analysis."
+      - location: "p. 10, footnote 6"
+        reason_included: "Expose caveat that small rank is not expected to work for every task or dataset."
+human_review_required: true
+notes:
+  - "Draft v0.2 packet expands source-facing LoRA evidence without embedding gold labels or scoring criteria."

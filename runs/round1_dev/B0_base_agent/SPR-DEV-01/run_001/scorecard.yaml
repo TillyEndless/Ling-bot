@@ -1,0 +1,36 @@
+run_id: round1_dev_v0.1__B0_base_agent__SPR-DEV-01__run001
+variant: B0_base_agent
+task_id: SPR-DEV-01
+reviewer: codex_agent_draft
+benchmark_version: round1_dev_v0.1
+scores:
+  factual_accuracy: 3
+  evidence_traceability: 3
+  citation_validity: 4
+  literature_coverage: null
+  comparison_fairness: null
+  experimental_rigor: 2
+  benchmark_validity: null
+  inference_boundary_discipline: 4
+  hypothesis_quality: null
+  rl_specific_correctness: null
+  output_usefulness: 3
+  efficiency: 2
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: major
+  dimension: calibration
+  description: Captures LoRA core mechanism, evaluated model families, and broad efficiency dimensions.
+  evidence: raw_output.md
+- severity: minor
+  dimension: calibration
+  description: Misses the approved matrix-choice/rank ablation entry from Tables 5-6 and the footnote caveat because the model
+    packet did not include those details.
+  evidence: raw_output.md
+- severity: minor
+  dimension: calibration
+  description: Overly marks many details unknown, which is safe but makes the output less useful for deep reading.
+  evidence: raw_output.md
+summary: Draft calibration score; review recommended before using as final comparative score.

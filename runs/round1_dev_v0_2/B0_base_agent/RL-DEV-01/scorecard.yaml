@@ -1,0 +1,34 @@
+run_id: round1_dev_v0.2__B0_base_agent__RL-DEV-01__run001
+variant: B0_base_agent
+task_id: RL-DEV-01
+reviewer: codex_agent_draft
+benchmark_version: round1_dev_v0.2
+scores:
+  factual_accuracy: 4
+  evidence_traceability: 4
+  citation_validity: 5
+  literature_coverage: null
+  comparison_fairness: 4
+  experimental_rigor: 5
+  benchmark_validity: 5
+  inference_boundary_discipline: 5
+  hypothesis_quality: null
+  rl_specific_correctness: 5
+  output_usefulness: 5
+  efficiency: 4
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: factual_accuracy
+  description: Correctly separates offline training from simulator evaluation, behavior-policy/dataset issues, normalized
+    score versus raw return, and conservative-value diagnostics. It does not explicitly restate the CQL Table 3 Atari role,
+    but does not misuse it.
+  evidence: raw_output.md
+- severity: minor
+  dimension: rl_specific_correctness
+  description: Excellent RL-specific protocol framing, including static datasets, distribution shift, seeds, uncertainty,
+    and offline-to-online claim boundaries.
+  evidence: raw_output.md
+summary: Strong RL-specific audit. v0.2 packet additions resolved the v0.1 D4RL/CQL protocol and table-role coverage problem.

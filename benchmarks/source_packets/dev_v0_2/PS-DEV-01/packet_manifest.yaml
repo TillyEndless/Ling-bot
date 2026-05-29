@@ -1,0 +1,33 @@
+packet_id: packet_ps_dev_representation_probing
+task_id: PS-DEV-01
+split: dev
+packet_version: 2
+packet_status: sanitized_from_v0.1_for_v0.2
+created_at: 2026-05-29
+supersedes_benchmark_packet_version: round1_dev_v0.1
+runtime_retrieval_allowed: false
+gold_annotations_included: false
+skill_instructions_included: false
+model_input:
+  path: model_input_packet.md
+  sha256: e5f38734af02a95c1a1f9fb2bf2d17a15b32cb1c7be2583e1527752a14a4dada
+  previous_v0_1_sha256: 4cd8323980d2bdf31ddceeaddad3f8dc007fb7c048564ac59d6e780471cfa45c
+canonical_sources:
+  - title: "BERT Rediscovers the Classical NLP Pipeline"
+    local_filename: ../../dev/PS-DEV-01/canonical_sources/bert_rediscovers_arxiv_1905.05950.pdf
+    sha256: 3e5214dacf51eeeef5490a4699fa79b2c162145e673d98e817101412b91e5d5e
+  - title: "A Primer in BERTology: What we know about how BERT works"
+    local_filename: ../../dev/PS-DEV-01/canonical_sources/bertology_arxiv_2002.12327.pdf
+    sha256: c4b5b7bffb63b2276515d91d5579a33dbd93f2e1b5a93e106c576d5de7d1a8d0
+  - title: "A Structural Probe for Finding Syntax in Word Representations"
+    local_filename: ../../dev/PS-DEV-01/canonical_sources/structural_probe_acl_N19-1419.pdf
+    sha256: d571e76c926d158417715c9379499f6031f6dc4eda1ff4e336194e0ab1ec1ffd
+  - title: "Development seed idea brief for representation probing"
+    local_filename: ../../dev/PS-DEV-01/canonical_sources/local_seed_idea_representation_probing.md
+    sha256: 807070e7c6f9edbcfeb52f8b3b885ec0084fcbbfafdf371efe4a9bdef8575264
+sanitization_actions:
+  - "Removed task/runtime instructions from the evidence packet."
+  - "Removed Required Boundaries section."
+  - "Replaced use-as guidance for BERTology with neutral survey-source wording."
+  - "Replaced imperative local seed wording with neutral source description."
+human_review_required: true

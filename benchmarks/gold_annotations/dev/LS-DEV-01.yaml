@@ -1,0 +1,85 @@
+task_id: LS-DEV-01
+source_packet_id: packet_ls_dev_transformer_efficiency
+drafted_by_agent: true
+human_review_status: approved_with_minor_notes
+eligible_for_scoring: true
+must_capture:
+  - id: LS1
+    fact_or_analytical_finding: "The survey paper should be treated as taxonomy/background, not as empirical evidence that one efficiency method is best."
+    evidence_source: "Efficient Transformers: A Survey"
+    evidence_location:
+      - "p. 2: survey scope and statement that the paper proposes a taxonomy of efficient Transformer models."
+      - "p. 7, Table 1: summary/classification of efficient Transformer models rather than controlled head-to-head experiments."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "Efficient Transformers organizes the design space and should not be used as a head-to-head result source."
+  - id: LS2
+    fact_or_analytical_finding: "Linformer represents approximate projected attention intended to reduce self-attention complexity with respect to sequence length."
+    evidence_source: "Linformer: Self-Attention with Linear Complexity"
+    evidence_location:
+      - "p. 1, Abstract: low-rank approximation of self-attention and O(n) time/space claim."
+      - "p. 2, Table 1: Linformer per-layer complexity reported as O(n)."
+      - "p. 3, Section 3: low-rank property of the self-attention context mapping matrix."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "Linformer projects keys/values and reports linear per-layer complexity in its setup."
+  - id: LS3
+    fact_or_analytical_finding: "Longformer is a sparse long-context architecture using local windowed attention plus task-motivated global attention."
+    evidence_source: "Longformer: The Long-Document Transformer"
+    evidence_location:
+      - "p. 1, Abstract: local windowed attention plus task-motivated global attention; linear scaling with sequence length."
+      - "p. 1, Figure 1: runtime and memory scaling comparison."
+      - "p. 2, Table 1: Longformer categorized among sparse long-document Transformer approaches."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "Longformer addresses long documents through linear-scaling sparse attention patterns."
+  - id: LS4
+    fact_or_analytical_finding: "The core FlashAttention algorithm computes exact attention using IO-aware tiling to reduce GPU memory traffic; the paper additionally includes a block-sparse approximate extension, which should not be conflated with the core exact method."
+    evidence_source: "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"
+    evidence_location:
+      - "p. 1, Abstract: IO-aware exact attention algorithm and block-sparse extension."
+      - "p. 4, Section 3: exact attention with fewer HBM reads/writes."
+      - "p. 7, Section 4.1 and Table 1: BERT-large training-time comparison under the stated setup."
+      - "p. 8, Table 2: GPT-2 training-time comparison under the stated setup."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "FlashAttention preserves exact attention while reducing memory traffic through IO-aware tiling."
+  - id: LS5
+    fact_or_analytical_finding: "LoRA is relevant to broad Transformer efficiency as parameter-efficient adaptation, but it is not part of the attention-computation-efficiency lineage."
+    evidence_source: "LoRA: Low-Rank Adaptation of Large Language Models"
+    evidence_location:
+      - "p. 1, Abstract and Introduction: downstream adaptation framing; frozen pretrained weights with trainable low-rank matrices."
+      - "p. 4, Section 4.1: low-rank-parametrized update matrices for adaptation."
+      - "p. 4, Table 1: latency comparison with adapter variants."
+      - "p. 6, Table 2: adaptation-method comparison on GLUE."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "LoRA is an adaptation-efficiency method based on low-rank trainable updates."
+critical_errors:
+  - id: LS-E1
+    error: "Fixed-corpus evidence policy for external material."
+    penalty:
+      incidental_background_mention_not_used_for_scored_claim: no_penalty
+      external_source_identified_as_outside_corpus_and_not_used_as_evidence: no_reward_and_at_most_minor_penalty
+      external_source_used_to_support_core_scored_claim: major
+      claim_external_material_was_in_packet_or_fabricated_citation_or_evidence: hard_fail
+  - id: LS-E2
+    error: "Compares speedups or quality across papers without noting different hardware, models, tasks, or benchmarks. Within-paper results may be reported when properly attributed and conditioned on the paper's own setup, but global rankings across incompatible evaluation setups are not supported."
+    penalty: major
+  - id: LS-E3
+    error: "Fails to separate approximate attention, sparse long-context attention, exact IO-aware attention, survey/taxonomy, and adaptation efficiency."
+    penalty: major
+inference_boundary_requirements:
+  - "State that the map is limited to the fixed corpus."
+  - "Separate paper claims from cross-corpus synthesis."
+  - "Mark unsupported synthesis requiring outside evidence."
+  - "Do not infer a globally best efficiency method, because the fixed corpus spans different efficiency targets and incompatible evaluation protocols."
+corpus_roles:
+  - source: "LoRA: Low-Rank Adaptation of Large Language Models"
+    role: boundary_case_or_contrast_paper
+    expected_treatment: "Include as adaptation-efficiency work related to Transformer efficiency broadly, but exclude from the attention-efficiency lineage."
+optional_high_value_findings:
+  - "Separates training, inference, memory, sequence-length, and adaptation efficiency axes."
+  - "Identifies missing families as fixed-corpus coverage limitations."
+ambiguities_requiring_human_review:
+  - "Minor note: scorer should enforce the LoRA boundary-case treatment and the graded external-evidence policy."

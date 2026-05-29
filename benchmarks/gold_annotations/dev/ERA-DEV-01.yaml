@@ -1,0 +1,97 @@
+task_id: ERA-DEV-01
+source_packet_id: packet_era_dev_agent_eval
+drafted_by_agent: true
+human_review_status: approved_with_minor_notes
+eligible_for_scoring: true
+version_verification:
+  AgentBench: "Local canonical PDF first page reports ICLR 2024, arXiv:2308.03688v3 [cs.AI] 4 Oct 2025, and 29 API-based and open-sourced (OSS) LLMs."
+must_capture:
+  - id: ERA1
+    fact_or_analytical_finding: "AgentBench evaluates LLMs as agents across eight distinct interactive environments spanning code-grounded, game-grounded, and web-grounded task types."
+    evidence_source: "AgentBench: Evaluating LLMs as Agents"
+    evidence_location:
+      - "p. 1, Abstract: benchmark consists of 8 distinct environments."
+      - "p. 2, Figure 2 and Introduction: eight environments and three grounding categories."
+      - "pp. 4-5, Section 3: descriptions of the individual environments."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "The benchmark is multi-environment and interactive, spanning code-, game-, and web-grounded LLM-as-agent tasks."
+  - id: ERA2
+    fact_or_analytical_finding: "In the pinned ICLR 2024 / arXiv v3 version used for this packet, AgentBench evaluates 29 API-based and open-source LLMs and reports both environment-specific results and an overall AgentBench score."
+    evidence_source: "AgentBench: Evaluating LLMs as Agents"
+    evidence_location:
+      - "p. 1, Abstract: evaluation over 29 API-based and OSS LLMs."
+      - "p. 2, Figure 2: 29 LLMs examined in this edition."
+      - "p. 3, Table 1: list of evaluated models."
+      - "p. 6, Section 4.1: 29-model evaluation setup."
+      - "p. 7, Table 3: environment-specific scores and overall AgentBench score."
+    scoring_weight: high
+    version_condition: "Valid only for the pinned ICLR 2024 / arXiv v3 PDF reporting 29 models."
+    acceptable_equivalent_formulations:
+      - "The audit should mention that the 29-model count and model roster are version-specific."
+  - id: ERA3
+    fact_or_analytical_finding: "AgentBench uses heterogeneous environment-specific metrics: success rate for several environments, but F1, reward, game progress, and step success rate for others. Its overall score aggregates these heterogeneous outcomes using task weights derived from average model performance rather than a naive unweighted mean."
+    evidence_source: "AgentBench: Evaluating LLMs as Agents"
+    evidence_location:
+      - "p. 6, Table 2: environment-specific metrics and inverse-weight statistics."
+      - "p. 7, Section 4.1, Overall Score Calculation: task-score resizing and reciprocal-average weighting procedure."
+      - "p. 7, Table 3: resulting overall and environment-specific scores."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "A rigorous audit should examine whether weighted aggregation across heterogeneous environments supports the intended cross-model comparison."
+  - id: ERA5
+    fact_or_analytical_finding: "AgentBench reports execution-outcome categories including Completed, Context Limit Exceeded, Invalid Format, Invalid Action, and Task Limit Exceeded; the paper identifies Task Limit Exceeded as the predominant failure outcome in its aggregate analysis, while some environments show substantial format- or action-validity failures."
+    evidence_source: "AgentBench: Evaluating LLMs as Agents"
+    evidence_location:
+      - "p. 4, Section 2: definitions of execution-outcome categories."
+      - "p. 8, Table 4 and Section 4.3: aggregate outcome proportions and paper interpretation."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "The audit should distinguish reported execution-outcome categories from speculative causes of those outcomes."
+benchmark_audit_requirements:
+  - requirement: "A qualifying audit must examine whether the benchmark's environment coverage, heterogeneous metrics, weighted aggregation, prompt and interaction protocol, environment isolation, and reported failure categories adequately support broad claims about LLM agent capability. It must distinguish paper-reported design choices and failure outcomes from proposed risks requiring further validation, such as contamination, prompt sensitivity, leakage, or robustness to protocol changes."
+    scoring_weight: high
+    justification:
+      - "pp. 2-5: benchmark scope and environment construction."
+      - "p. 6, Section 4.1 and Table 2: environment-specific metrics, API-centric toolkit, Docker/worker isolation, and evaluation-prompt setup."
+      - "p. 7, Section 4.1 and Table 3: weighted overall-score calculation and results."
+      - "p. 8, Section 4.3 and Table 4: reported execution-outcome categories and failure analysis."
+      - "Appendices B-I: environment-specific task and prompt specifications."
+critical_errors:
+  - id: ERA-E1
+    error: "Treats a high AgentBench overall score as sufficient proof of general-purpose agency or broad real-world agent competence without acknowledging the benchmark's eight-environment scope, heterogeneous metrics, weighted aggregation, and protocol-specific nature."
+    penalty: major
+    allowed_claims:
+      - "May state that a model performs strongly on the reported AgentBench evaluation under the pinned benchmark protocol."
+      - "May not equate benchmark leadership with validated general agency outside the benchmark scope."
+  - id: ERA-E2
+    error: "Ignores that AgentBench environments use different metrics and task structures, or treats the overall score as a simple directly comparable success-rate average across all environments."
+    penalty: major
+  - id: ERA-E3
+    error: "States that contamination, prompt leakage, inadequate environment isolation, or protocol-induced bias has been established when the fixed packet provides only a basis for raising these as audit risks or follow-up checks."
+    penalty: major
+    allowed_claims:
+      - "May propose contamination, prompt-sensitivity, leakage, or isolation audits as necessary follow-up checks."
+      - "May refer to paper-reported design choices such as Docker/worker isolation or dataset-generation procedures without inferring unreported failures."
+  - id: ERA-E4
+    error: "Reports benchmark model counts, model roster, or score interpretation without respecting the pinned canonical paper version supplied in the packet."
+    penalty: major
+outside_corpus_policy:
+  incidental_background_mention_not_used_for_scored_conclusion: no_penalty
+  clearly_marked_external_benchmark_or_follow_up_audit_reference: no_reward_and_at_most_minor_penalty
+  external_source_used_to_assert_core_validity_or_invalidity_conclusion_about_agentbench: major
+  fabricated_evidence_or_false_claim_external_material_is_contained_in_packet: hard_fail
+inference_boundary_requirements:
+  - "Distinguish benchmark construction claims, metric and aggregation design, measured model-performance results, author interpretations, and proposed audit risks."
+  - "Separate observed execution-outcome categories from unverified explanations of their causes."
+  - "Do not equate strong performance on the pinned AgentBench protocol with validated general-purpose agency."
+  - "Treat contamination, prompt leakage, prompt sensitivity, environment-isolation failure, and broader robustness concerns as audit questions unless directly evidenced in the packet."
+  - "Respect the pinned paper version when stating the number of evaluated models, included models, or reported scores."
+optional_high_value_findings:
+  - "Classifies concerns as internal-validity, construct-validity, external-validity, or reproducibility risks."
+  - "Examines the implications of combining SR, F1, reward, game progress, and step-SR metrics into a weighted overall score."
+  - "Proposes prompt-sensitivity or interaction-protocol robustness checks without claiming existing leakage."
+  - "Proposes score-aggregation ablations, such as reporting environment-level profiles alongside or instead of relying on a single overall score."
+  - "Distinguishes the paper's observed execution-outcome analysis from additional causal explanations that would require new experiments."
+ambiguities_requiring_human_review:
+  - "Minor note: scorer should enforce pinned-version model counts and avoid treating audit risks as established failures."

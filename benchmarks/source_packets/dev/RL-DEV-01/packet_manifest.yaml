@@ -1,0 +1,48 @@
+packet_id: packet_rl_dev_offline_rl_protocol
+task_id: RL-DEV-01
+split: dev
+packet_version: 1
+packet_status: materialized_agent_drafted
+created_at: 2026-05-29
+runtime_retrieval_allowed: false
+exactly_matches_task_specification: true
+unresolved_source_or_version_issues:
+  - "DOIs and paper-level licenses were not fully verified; public arXiv PDFs are used as canonical Round 1 sources."
+  - "D4RL dataset license was not separately audited."
+model_input:
+  path: model_input_packet.md
+  sha256: 042acef2f135d640c4fc62f0fd0add4dc8452bf50dd6f37fb6857306a4994d12
+canonical_sources:
+  - title: "D4RL: Datasets for Deep Data-Driven Reinforcement Learning"
+    authors: "Justin Fu; Aviral Kumar; Ofir Nachum; George Tucker; Sergey Levine"
+    year: 2020
+    canonical_identifier:
+      arxiv: "2004.07219"
+      doi: unknown_pending_verification
+    canonical_version_used: "arXiv PDF downloaded from https://arxiv.org/pdf/2004.07219"
+    acquisition_location: https://arxiv.org/pdf/2004.07219
+    local_filename: canonical_sources/d4rl_arxiv_2004.07219.pdf
+    sha256: 8a7b164dda59674366520aabbd6717b1049b489af383cb9b17b505b861799f5f
+    sections_pages_tables_appendices_included_in_model_input:
+      - "Abstract"
+      - "Sections 1-4 benchmark/dataset design"
+      - "Dataset/task tables"
+      - "Score normalization discussion"
+      - "Limitations/discussion"
+  - title: "Conservative Q-Learning for Offline Reinforcement Learning"
+    authors: "Aviral Kumar; Aurick Zhou; George Tucker; Sergey Levine"
+    year: 2020
+    canonical_identifier:
+      arxiv: "2006.04779"
+      doi: unknown_pending_verification
+    canonical_version_used: "arXiv PDF downloaded from https://arxiv.org/pdf/2006.04779"
+    acquisition_location: https://arxiv.org/pdf/2006.04779
+    local_filename: canonical_sources/cql_arxiv_2006.04779.pdf
+    sha256: 2bae51a0b45635ab714df39446cd656a9f4f1c503f512d6d0ce1eec3198d1716
+    sections_pages_tables_appendices_included_in_model_input:
+      - "Abstract"
+      - "Section 2 offline RL setup"
+      - "Section 3 CQL method"
+      - "Section 6 experiments"
+      - "Tables 1-4"
+      - "Conclusion/limitations"

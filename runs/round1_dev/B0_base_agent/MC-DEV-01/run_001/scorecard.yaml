@@ -1,0 +1,36 @@
+run_id: round1_dev_v0.1__B0_base_agent__MC-DEV-01__run001
+variant: B0_base_agent
+task_id: MC-DEV-01
+reviewer: codex_agent_draft
+benchmark_version: round1_dev_v0.1
+scores:
+  factual_accuracy: 4
+  evidence_traceability: 3
+  citation_validity: 4
+  literature_coverage: null
+  comparison_fairness: 5
+  experimental_rigor: 4
+  benchmark_validity: null
+  inference_boundary_discipline: 5
+  hypothesis_quality: null
+  rl_specific_correctness: null
+  output_usefulness: 4
+  efficiency: 5
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: major
+  dimension: calibration
+  description: Correctly distinguishes DPO direct preference optimization from PPO-style RLHF.
+  evidence: raw_output.md
+- severity: minor
+  dimension: calibration
+  description: Correctly avoids universal DPO-over-RLHF claims and separates direct from indirect comparisons.
+  evidence: raw_output.md
+- severity: minor
+  dimension: calibration
+  description: Implicit-reward nuance is present but not as explicitly tied to DPO policy parameterization as the approved
+    gold.
+  evidence: raw_output.md
+summary: Draft calibration score; review recommended before using as final comparative score.

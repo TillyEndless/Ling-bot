@@ -1,0 +1,94 @@
+task_id: PS-DEV-01
+source_packet_id: packet_ps_dev_representation_probing
+drafted_by_agent: true
+human_review_status: approved_with_minor_notes
+eligible_for_scoring: true
+must_capture:
+  - id: PS1
+    fact_or_analytical_finding: "BERT Rediscovers applies edge probing and layer-wise analysis to localize linguistic information in BERT, while explicitly warning that observing a linguistic pattern through a probe does not establish how the model uses that pattern."
+    evidence_source: "BERT Rediscovers the Classical NLP Pipeline"
+    evidence_location:
+      - "BERT Rediscovers p. 4594, Section 2 and Limitations: edge probing setup and explicit warning that observation of a pattern does not tell how it is used."
+      - "BERT Rediscovers pp. 4595-4597, Figures 1-3 and Results: layer-wise probing findings used as empirical context, not as evidence of causal use."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "The proposal must treat probing as inspection evidence, not causal evidence."
+  - id: PS2
+    fact_or_analytical_finding: "BERTology is a survey and methodological context source, not a single controlled probing experiment; it summarizes representation/probing findings and explicitly discusses probe limitations, probe complexity, and the need to investigate what models actually rely on at inference time."
+    evidence_source: "A Primer in BERTology"
+    evidence_location:
+      - "BERTology p. 842, Abstract and Introduction: survey scope covering over 150 BERT studies."
+      - "BERTology p. 843, Section 3.1: overview of syntactic knowledge and structural-probe findings."
+      - "BERTology p. 845, Section 3.4 Limitations: probing limitations, probe complexity, potentially contradictory conclusions, and inference-time reliance."
+    scoring_weight: medium
+    acceptable_equivalent_formulations:
+      - "Use BERTology to frame methodological cautions and open questions."
+  - id: PS3
+    fact_or_analytical_finding: "The Structural Probe paper tests a specific geometric hypothesis: whether a learned linear transformation of contextual representations yields squared distances corresponding to dependency-tree distances and squared norms corresponding to dependency-tree depths."
+    evidence_source: "A Structural Probe for Finding Syntax in Word Representations"
+    evidence_location:
+      - "Structural Probe p. 4129, Abstract and Introduction: statement of the structural hypothesis."
+      - "Structural Probe pp. 4130-4131, Section 2 and Equation 1: linear transformation and squared-distance / squared-norm formulations."
+      - "Structural Probe p. 4132, Table 1: comparison with baselines and contextual representations."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "The structural probe tests a geometric hypothesis about syntax in representation space."
+  - id: PS5
+    fact_or_analytical_finding: "Evidence that a probe can extract or geometrically recover linguistic structure from representations does not by itself establish that the model causally relies on that structure during computation; stronger mechanism claims require behavioral, intervention, removal, or other reliance-oriented evidence."
+    evidence_source: "BERT Rediscovers; BERTology; Structural Probe"
+    evidence_location:
+      direct_support:
+        - "BERT Rediscovers p. 4594, Limitations: observing a pattern does not tell how it is used; structural analysis should be combined with behavioral studies."
+        - "BERTology p. 845, Section 3.4: probing limitations and discussion of inference-time reliance and amnesic probing."
+      contextual_example_only:
+        - "Structural Probe p. 4133, Section 5: the study is limited to testing its specific structural hypothesis."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "Distinguish representation availability from mechanism or causal use."
+proposal_quality_requirements:
+  - requirement: "A qualifying proposal must state at least one falsifiable hypothesis, specify observable outcomes that would support or disconfirm it, include relevant controls or baselines, and distinguish representational evidence from stronger mechanism claims."
+    justification:
+      - "Structural Probe pp. 4129-4134: example of a narrowly specified geometric hypothesis with explicit baselines and stated limitations."
+      - "BERT Rediscovers p. 4594, Limitations: probing observation does not determine how information is used; structural analysis should be combined with behavioral study."
+      - "BERTology p. 845, Section 3.4: probing limitations and motivation for inference-time reliance or intervention-style analyses."
+      - "Local seed idea: requires separate human verification before it may be used for scoring proposal relevance."
+critical_errors:
+  - id: PS-E1
+    error: "Proposes a research idea without a testable hypothesis, measurable outcome, baseline or control, or stated condition that would count against the hypothesis."
+    penalty: major
+  - id: PS-E2
+    error: "Claims a field-level literature gap or novelty statement not supported by the fixed packet."
+    penalty: major
+    allowed_claims:
+      - "May identify limitations or unaddressed questions within the supplied packet."
+      - "Must label broader gap or novelty claims as requiring external literature review."
+  - id: PS-E3
+    error: "Treats probing correlations as causal evidence."
+    penalty: major
+    allowed_claims:
+      - "May claim that information is extractable or geometrically represented under the stated probe."
+      - "May propose future intervention, removal, or behavioral experiments to test whether the information is causally used."
+  - id: PS-E4
+    error: "Graded outside-corpus policy for external material."
+    penalty:
+      incidental_background_mention_not_used_for_scored_claim: no_penalty
+      clearly_marked_external_extension_suggested_for_future_review: no_reward_and_at_most_minor_penalty
+      external_material_used_to_claim_novelty_core_literature_gap_or_support_scored_proposal_conclusion: major
+      fabricated_evidence_or_false_claim_external_material_is_contained_in_packet: hard_fail
+inference_boundary_requirements:
+  - "Separate packet facts, cross-paper synthesis, and newly proposed hypotheses."
+  - "State what observation or experiment would disconfirm each proposed hypothesis."
+  - "Mark speculative ideas as speculative and do not present them as literature-established gaps."
+  - "Distinguish representation availability or probe recoverability from causal use in model computation."
+  - "If making a stronger mechanism claim, specify what intervention, ablation, removal, behavioral, or reliance-oriented evidence would be required."
+corpus_roles:
+  - source: "local_seed_idea_representation_probing.md"
+    role: user_provided_research_motivation
+    scoring_use: context_only_not_authoritative_evidence
+optional_high_value_findings:
+  - "Includes negative controls, simple baselines, and probe-capacity controls."
+  - "Proposes intervention-style or removal-style tests for causal-use claims."
+  - "Prioritizes hypotheses by feasibility and expected information gain."
+ambiguities_requiring_human_review:
+  - "Scorers must treat local_seed_idea_representation_probing.md as context for proposal relevance only, not as authoritative evidence for literature facts, literature gaps, or causal claims."
+  - "Confirm that proposal-quality requirements are treated as scoring criteria rather than packet-grounded paper findings."

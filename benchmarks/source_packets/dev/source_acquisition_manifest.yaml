@@ -1,0 +1,296 @@
+manifest_version: 1
+round: round_1_fixed_source_packets
+status: materialized_pending_human_gold_review
+rules:
+  runtime_retrieval_allowed: false
+  external_apis_allowed_at_runtime: false
+  pdf_parsers_integrated_at_runtime: false
+  source_packets_required_before_run: true
+  checksums_required_before_run: true
+
+tasks:
+  - task_id: LS-DEV-01
+    packet_id: packet_ls_dev_transformer_efficiency
+    packet_type: fixed_corpus_packet
+    currently_available: true
+    packet_status: materialized
+    required_materials:
+      - title: "Efficient Transformers: A Survey"
+        canonical_version: "arXiv version to verify at acquisition"
+        identifier:
+          arxiv: "2009.06732"
+          doi: unknown_pending_verification
+          official_publication: unknown_pending_verification
+        required_parts:
+          - abstract
+          - taxonomy or survey framework sections
+          - comparison tables if present
+          - limitations or discussion sections if present
+        packet_form: excerpt_packet
+        checksum: see_task_packet_manifest
+        license_or_access_notes: "arXiv open-access; verify license on acquisition."
+      - title: "Linformer: Self-Attention with Linear Complexity"
+        canonical_version: "arXiv version to verify at acquisition"
+        identifier:
+          arxiv: "2006.04768"
+          doi: unknown_pending_verification
+          official_publication: unknown_pending_verification
+        required_parts:
+          - abstract
+          - introduction/contribution framing
+          - method section
+          - experiment setup
+          - main result tables
+          - limitations if present
+        packet_form: excerpt_packet
+        checksum: see_task_packet_manifest
+        license_or_access_notes: "arXiv open-access; verify license on acquisition."
+      - title: "Longformer: The Long-Document Transformer"
+        canonical_version: "arXiv version to verify at acquisition"
+        identifier:
+          arxiv: "2004.05150"
+          doi: unknown_pending_verification
+          official_publication: unknown_pending_verification
+        required_parts:
+          - abstract
+          - attention-pattern/method section
+          - experiment setup
+          - main result tables
+          - limitations if present
+        packet_form: excerpt_packet
+        checksum: see_task_packet_manifest
+        license_or_access_notes: "arXiv open-access; verify license on acquisition."
+      - title: "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"
+        canonical_version: "arXiv version to verify at acquisition"
+        identifier:
+          arxiv: "2205.14135"
+          doi: unknown_pending_verification
+          official_publication: unknown_pending_verification
+        required_parts:
+          - abstract
+          - IO-aware attention method section
+          - complexity or memory analysis
+          - experiment setup
+          - main result tables
+          - limitations if present
+        packet_form: excerpt_packet
+        checksum: see_task_packet_manifest
+        license_or_access_notes: "arXiv open-access; verify license on acquisition."
+      - title: "LoRA: Low-Rank Adaptation of Large Language Models"
+        canonical_version: "arXiv version to verify at acquisition"
+        identifier:
+          arxiv: "2106.09685"
+          doi: unknown_pending_verification
+          official_publication: unknown_pending_verification
+        required_parts:
+          - abstract
+          - method section
+          - parameter-efficiency evidence
+          - main result tables
+          - ablations
+          - limitations if present
+        packet_form: excerpt_packet
+        checksum: see_task_packet_manifest
+        license_or_access_notes: "arXiv open-access; verify license on acquisition."
+
+  - task_id: SPR-DEV-01
+    packet_id: packet_spr_dev_lora
+    packet_type: paper_packet
+    currently_available: true
+    packet_status: materialized
+    required_materials:
+      - title: "LoRA: Low-Rank Adaptation of Large Language Models"
+        canonical_version: "arXiv 2106.09685 or official publication version; choose one and record version"
+        identifier:
+          arxiv: "2106.09685"
+          doi: unknown_pending_verification
+          official_publication: unknown_pending_verification
+        required_parts:
+          - full_pdf_or_full_markdown
+          - abstract
+          - introduction/contributions
+          - method section
+          - experiment setup
+          - main result tables
+          - ablations
+          - appendices if they contain implementation details
+        packet_form: full_pdf_preferred
+        checksum: see_task_packet_manifest
+        license_or_access_notes: "arXiv open-access; verify license on acquisition."
+
+  - task_id: MC-DEV-01
+    packet_id: packet_mc_dev_dpo_ppo_rlhf
+    packet_type: paper_set_packet
+    currently_available: true
+    packet_status: materialized
+    required_materials:
+      - title: "Direct Preference Optimization: Your Language Model is Secretly a Reward Model"
+        canonical_version: "arXiv 2305.18290 or official publication version; choose one and record version"
+        identifier:
+          arxiv: "2305.18290"
+          doi: unknown_pending_verification
+          official_publication: unknown_pending_verification
+        required_parts:
+          - abstract
+          - method/objective sections
+          - algorithm description
+          - experiment setup
+          - main result tables
+          - limitations/discussion if present
+        packet_form: full_pdf_or_excerpt_packet
+        checksum: see_task_packet_manifest
+        license_or_access_notes: "arXiv/open publication access to verify."
+      - title: "Training language models to follow instructions with human feedback"
+        canonical_version: "arXiv 2203.02155 or official publication version; choose one and record version"
+        identifier:
+          arxiv: "2203.02155"
+          doi: unknown_pending_verification
+          official_publication: unknown_pending_verification
+        required_parts:
+          - method sections on supervised fine-tuning, reward modeling, and PPO/RLHF
+          - data collection description
+          - evaluation protocol
+          - main result tables
+          - limitations/discussion if present
+        packet_form: full_pdf_or_excerpt_packet
+        checksum: see_task_packet_manifest
+        license_or_access_notes: "arXiv/open publication access to verify."
+      - title: "Proximal Policy Optimization Algorithms"
+        canonical_version: "arXiv 1707.06347"
+        identifier:
+          arxiv: "1707.06347"
+          doi: unknown_pending_verification
+          official_publication: unknown_pending_verification
+        required_parts:
+          - objective/method sections
+          - algorithm details
+          - experiment setup
+          - limitations if present
+        packet_form: excerpt_packet
+        checksum: see_task_packet_manifest
+        license_or_access_notes: "arXiv open-access; verify license on acquisition."
+
+  - task_id: ERA-DEV-01
+    packet_id: packet_era_dev_agent_eval
+    packet_type: experiment_excerpt_packet
+    currently_available: true
+    packet_status: materialized
+    required_materials:
+      - title: "AgentBench: Evaluating LLMs as Agents"
+        canonical_version: "arXiv 2308.03688 or official version; choose one and record version"
+        identifier:
+          arxiv: "2308.03688"
+          doi: unknown_pending_verification
+          official_publication: unknown_pending_verification
+        required_parts:
+          - benchmark/task description
+          - environment suite description
+          - evaluation protocol
+          - models/baselines
+          - main result tables
+          - limitations/discussion
+          - appendix details if needed for reproducibility
+        packet_form: full_pdf_or_excerpt_packet
+        checksum: see_task_packet_manifest
+        license_or_access_notes: "arXiv open-access; verify benchmark/data license separately if included."
+
+  - task_id: RL-DEV-01
+    packet_id: packet_rl_dev_offline_rl_protocol
+    packet_type: protocol_packet
+    currently_available: true
+    packet_status: materialized
+    required_materials:
+      - title: "D4RL: Datasets for Deep Data-Driven Reinforcement Learning"
+        canonical_version: "arXiv 2004.07219 or official publication version; choose one and record version"
+        identifier:
+          arxiv: "2004.07219"
+          doi: unknown_pending_verification
+          official_publication: unknown_pending_verification
+        required_parts:
+          - dataset/task definitions
+          - environment and dataset descriptions
+          - evaluation protocol
+          - score normalization details
+          - limitations/discussion
+        packet_form: full_pdf_or_excerpt_packet
+        checksum: see_task_packet_manifest
+        license_or_access_notes: "arXiv open-access; verify dataset license separately."
+      - title: "Conservative Q-Learning for Offline Reinforcement Learning"
+        canonical_version: "arXiv 2006.04779 or official publication version; choose one and record version"
+        identifier:
+          arxiv: "2006.04779"
+          doi: unknown_pending_verification
+          official_publication: unknown_pending_verification
+        required_parts:
+          - offline RL problem setup
+          - method/objective sections
+          - experiment setup
+          - D4RL/result tables if present
+          - ablations
+          - limitations/discussion
+        packet_form: full_pdf_or_excerpt_packet
+        checksum: see_task_packet_manifest
+        license_or_access_notes: "arXiv/open publication access to verify."
+
+  - task_id: PS-DEV-01
+    packet_id: packet_ps_dev_representation_probing
+    packet_type: seed_literature_and_idea_packet
+    currently_available: true
+    packet_status: materialized
+    required_materials:
+      - title: "BERT Rediscovers the Classical NLP Pipeline"
+        canonical_version: "arXiv 1905.05950 or ACL Anthology official version; choose one and record version"
+        identifier:
+          arxiv: "1905.05950"
+          doi: unknown_pending_verification
+          official_publication: "ACL Anthology identifier to verify"
+        required_parts:
+          - motivation
+          - probing methodology
+          - layer-wise or task evidence
+          - result tables/figures
+          - caveats/limitations if present
+        packet_form: excerpt_packet
+        checksum: see_task_packet_manifest
+        license_or_access_notes: "ACL/arXiv access; verify license on acquisition."
+      - title: "A Primer in BERTology: What we know about how BERT works"
+        canonical_version: "arXiv 2002.12327 or TACL/ACL Anthology official version; choose one and record version"
+        identifier:
+          arxiv: "2002.12327"
+          doi: unknown_pending_verification
+          official_publication: "ACL Anthology/TACL identifier to verify"
+        required_parts:
+          - survey taxonomy
+          - representation/probing discussion
+          - limitations or methodological cautions
+        packet_form: excerpt_packet
+        checksum: see_task_packet_manifest
+        license_or_access_notes: "ACL/arXiv access; verify license on acquisition."
+      - title: "A Structural Probe for Finding Syntax in Word Representations"
+        canonical_version: "ACL Anthology official version or arXiv version if available; choose one and record version"
+        identifier:
+          arxiv: unknown_pending_verification
+          doi: unknown_pending_verification
+          official_publication: "ACL Anthology N19-1419 to verify"
+        required_parts:
+          - probe definition
+          - method and training setup
+          - evaluation setup
+          - main results
+          - caveats/limitations if present
+        packet_form: excerpt_packet
+        checksum: see_task_packet_manifest
+        license_or_access_notes: "ACL Anthology access; verify license on acquisition."
+      - title: "Development seed idea brief for representation probing"
+        canonical_version: "locally authored benchmark prompt, to be written before source packet freeze"
+        identifier:
+          arxiv: not_applicable
+          doi: not_applicable
+          official_publication: not_applicable
+        required_parts:
+          - one_paragraph_seed_idea
+          - stated_constraints
+          - desired_research_output
+        packet_form: local_excerpt
+        checksum: see_task_packet_manifest
+        license_or_access_notes: "Local benchmark artifact."

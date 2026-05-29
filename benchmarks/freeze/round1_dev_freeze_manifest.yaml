@@ -1,0 +1,94 @@
+benchmark_version: round1_dev_v0.1
+created_at: '2026-05-29'
+split: dev
+eligible_task_ids:
+- LS-DEV-01
+- SPR-DEV-01
+- MC-DEV-01
+- ERA-DEV-01
+- RL-DEV-01
+- PS-DEV-01
+conditions:
+  source_mode: fixed_source
+  dynamic_tools_allowed: false
+  external_retrieval_allowed: false
+  external_apis_allowed: false
+  citation_databases_allowed: false
+  pdf_parser_integrations_allowed: false
+  autonomous_experiment_execution_allowed: false
+  gold_annotations_exposed_during_generation: false
+variant_state:
+  confirmation_no_skill_variant_exists_yet: true
+  variants_directory_observed_files:
+  - variants/README.md
+  forbidden_variants_not_created:
+  - B1_kdense_subset
+  - B2_orchestra_subset
+  - B3_your_v1_original
+  - B4_your_v1_integrated
+immutability_rule: Any later benchmark edit creates a new benchmark version and cannot be silently mixed with results from
+  round1_dev_v0.1.
+files:
+  tasks:
+    LS-DEV-01:
+      path: benchmarks/tasks/dev/LS-DEV-01.yaml
+      sha256: 8df08fa4c9af12eecc09ab47a504c9f62281f28c5b46d31113187b3ddb61a090
+    SPR-DEV-01:
+      path: benchmarks/tasks/dev/SPR-DEV-01.yaml
+      sha256: 634b44d9d7f94e68ba821247014958d0a979cce84b1323e8c35a508394b66d02
+    MC-DEV-01:
+      path: benchmarks/tasks/dev/MC-DEV-01.yaml
+      sha256: 8130f1bf4ccb914c28e51da0ad55ea18a2776bb2303e1d29b5a6c82fbc0f43d6
+    ERA-DEV-01:
+      path: benchmarks/tasks/dev/ERA-DEV-01.yaml
+      sha256: e7f47590a177576f5017de425196cf6d74ac75ec26279b862c83d856ec7786f3
+    RL-DEV-01:
+      path: benchmarks/tasks/dev/RL-DEV-01.yaml
+      sha256: 01edc85b76a577e49899a75c70fa96a2b77a107c1bf1544ae69b1dbcc0adac76
+    PS-DEV-01:
+      path: benchmarks/tasks/dev/PS-DEV-01.yaml
+      sha256: 4c1ddeb3e0853d853226b6d804505e3a8b8f5d42575295e92267498bede4f084
+  model_input_packets:
+    LS-DEV-01:
+      path: benchmarks/source_packets/dev/LS-DEV-01/model_input_packet.md
+      sha256: c13078138079e23f025595895c33bd2b5bf482babe6a6cbbde7c871beb05cd77
+    SPR-DEV-01:
+      path: benchmarks/source_packets/dev/SPR-DEV-01/model_input_packet.md
+      sha256: 88c35c6bab01d76400e18045edf4ced0c215804570ff0df865e0b7d75f774732
+    MC-DEV-01:
+      path: benchmarks/source_packets/dev/MC-DEV-01/model_input_packet.md
+      sha256: 811f34eb8d3f3f51dfabb99c16bb65c6ade364c2b0fd626eb6b346a76460f5be
+    ERA-DEV-01:
+      path: benchmarks/source_packets/dev/ERA-DEV-01/model_input_packet.md
+      sha256: 864038d23703d73d6d0b834b4670fc44c2a06edb3633df3e2b4d777e3994addb
+    RL-DEV-01:
+      path: benchmarks/source_packets/dev/RL-DEV-01/model_input_packet.md
+      sha256: 042acef2f135d640c4fc62f0fd0add4dc8452bf50dd6f37fb6857306a4994d12
+    PS-DEV-01:
+      path: benchmarks/source_packets/dev/PS-DEV-01/model_input_packet.md
+      sha256: 4cd8323980d2bdf31ddceeaddad3f8dc007fb7c048564ac59d6e780471cfa45c
+  gold_annotations:
+    LS-DEV-01:
+      path: benchmarks/gold_annotations/dev/LS-DEV-01.yaml
+      sha256: c1fa6435f340a2b9330d65b8c9ea22094929b614e87e4c1a19a7df485841e3fb
+    SPR-DEV-01:
+      path: benchmarks/gold_annotations/dev/SPR-DEV-01.yaml
+      sha256: ecd8a35fe9e77668cb893bb78216417906ee217224d019928d6783054de204c4
+    MC-DEV-01:
+      path: benchmarks/gold_annotations/dev/MC-DEV-01.yaml
+      sha256: 321c0399cf0b712eec49faad0f77a714f735f6108c85b75242ba5a568a0e2552
+    ERA-DEV-01:
+      path: benchmarks/gold_annotations/dev/ERA-DEV-01.yaml
+      sha256: 22d69b685515fdc8d5a8e51ebce9114d7f584d964b68feaa3be7637d4632a8b9
+    RL-DEV-01:
+      path: benchmarks/gold_annotations/dev/RL-DEV-01.yaml
+      sha256: 986404c7cf0b3c9a476173f89450195f59f7122b868b00e8209cb6991d20673e
+    PS-DEV-01:
+      path: benchmarks/gold_annotations/dev/PS-DEV-01.yaml
+      sha256: d4a719d7b22fd2c6406aa9b3fdd01bf769342b1f03e18593c18de3ecfaff6ea4
+  scoring_rubric:
+    path: benchmarks/rubrics/scoring_rubric.md
+    sha256: ade3feab72b1c789c567fb865b5919d6442623ac4e4d3d7d94996ff1f157ca6b
+  run_protocol:
+    path: benchmarks/run_protocol.md
+    sha256: e985a23d6bf42f98b006c403cfb6616143db043fa92a125b969dcc44b0eda836

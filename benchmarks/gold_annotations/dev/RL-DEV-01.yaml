@@ -1,0 +1,95 @@
+task_id: RL-DEV-01
+source_packet_id: packet_rl_dev_offline_rl_protocol
+drafted_by_agent: true
+human_review_status: approved_with_minor_notes
+eligible_for_scoring: true
+version_verification:
+  D4RL: "Local canonical PDF begins with arXiv:2004.07219v4 [cs.LG] 6 Feb 2021."
+  CQL: "Local canonical PDF begins with arXiv:2006.04779v3 [cs.LG] 19 Aug 2020."
+must_capture:
+  - id: RL1
+    fact_or_analytical_finding: "D4RL is a benchmark suite of tasks and fixed datasets designed for offline RL; algorithms train from static datasets, while benchmark policy performance is evaluated through specified simulator-based evaluation and normalized-return conventions."
+    evidence_source: "D4RL: Datasets for Deep Data-Driven Reinforcement Learning"
+    evidence_location:
+      - "D4RL p. 1, Abstract: benchmark tasks, datasets, evaluation protocol, and offline-RL motivation."
+      - "D4RL p. 2, Introduction: D4RL as a suite of tasks and datasets for benchmarking progress in offline RL."
+      - "D4RL p. 7, Evaluation protocol and normalized-score definition."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "D4RL provides fixed datasets and normalized evaluation conventions for offline RL."
+  - id: RL2
+    fact_or_analytical_finding: "D4RL designs tasks around offline-RL-specific data and evaluation challenges, including narrow and biased data distributions, undirected and multitask data, sparse rewards, suboptimal data, and non-representable or non-Markovian behavior policies with possible partial observability."
+    evidence_source: "D4RL: Datasets for Deep Data-Driven Reinforcement Learning"
+    evidence_location:
+      - "D4RL p. 3, Section 3: fixed dataset, behavior policy, and distribution-shift framing."
+      - "D4RL pp. 3-4, Section 4 Task Design Factors: named challenge categories."
+      - "D4RL pp. 5-6, Section 5: concrete task instantiations."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "The audit must discuss offline dataset coverage and behavior-policy assumptions."
+  - id: RL3
+    fact_or_analytical_finding: "CQL is designed to mitigate offline-RL action distribution shift and value overestimation by learning conservative Q-functions; its objectives regularize Q-values under selected action distributions relative to dataset-supported behavior, yielding lower-bound guarantees under stated conditions."
+    evidence_source: "Conservative Q-Learning for Offline Reinforcement Learning"
+    evidence_location:
+      - "CQL p. 1, Abstract and Introduction: distribution shift, OOD-action overestimation, and conservative-Q motivation."
+      - "CQL p. 2, Section 2: action distribution shift between learned policy and behavior-policy data."
+      - "CQL p. 3, Section 3.1: conservative off-policy evaluation and lower-bound Q-function objective."
+      - "CQL p. 4, Section 3.2, Equations 3-4: CQL policy-learning objectives."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "CQL reduces the risk of optimistic Q estimates for learned-policy actions unsupported or weakly supported by the offline dataset by imposing a conservative Q-value regularizer."
+  - id: RL4
+    fact_or_analytical_finding: "CQL reports setup-specific performance comparisons on D4RL domains against prior offline RL methods and behavioral cloning, and separately reports lower-bound analysis on selected D4RL datasets; these results support claims within the reported benchmark and simulator-evaluation protocol, not untested real-world deployment robustness."
+    evidence_source: "Conservative Q-Learning for Offline Reinforcement Learning"
+    evidence_location:
+      - "CQL p. 7, Section 6 and Table 1: D4RL Gym-domain normalized-return comparisons, averaged over 4 seeds."
+      - "CQL p. 8, Table 2: D4RL AntMaze, Adroit, and Kitchen normalized-score comparisons, averaged over 4 seeds."
+      - "CQL p. 9, Table 4: lower-bound analysis on selected D4RL datasets, distinct from general benchmark ranking."
+      - "CQL Appendix p. 29: D4RL hyperparameter and four-seed reporting details."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "Offline benchmark scores do not automatically establish online deployment performance."
+    explicit_notes:
+      - "Table 3 concerns Atari offline RL experiments and must not be cited as D4RL performance evidence."
+      - "Table 4 concerns conservative-value/lower-bound analysis rather than general method ranking."
+protocol_audit_requirements:
+  - requirement: "A qualifying audit must identify which evaluation details are specified and which remain missing, including task/environment and version, dataset identity and collection regime, behavior-policy assumptions, offline-training versus simulator-evaluation distinction, normalized-score definition or raw-return metric, baselines, number of seeds/runs and aggregation, reported variability if any, hyperparameter or protocol comparability, and claim boundaries."
+    justification:
+      - "D4RL pp. 3-7: behavior-policy framing, task design factors, task/dataset descriptions, evaluation protocol, and normalized-score anchors."
+      - "D4RL Appendix Tables 1-3: task identities, normalized scores, raw returns, and seed reporting."
+      - "CQL pp. 7-9 and Appendix p. 29: D4RL comparisons, four-seed aggregation, lower-bound analysis, and hyperparameter details."
+critical_errors:
+  - id: RL-E1
+    error: "Treats offline RL as ordinary i.i.d. supervised prediction by ignoring sequential policy evaluation, fixed behavior-generated datasets, action-distribution shift, or the distinction between offline training and simulator-based policy evaluation."
+    penalty: major
+    allowed_claims:
+      - "May note analogies to supervised learning only if it also identifies the sequential-decision and distribution-shift differences."
+  - id: RL-E2
+    error: "Ignores distribution shift or behavior-policy assumptions."
+    penalty: major
+  - id: RL-E3
+    error: "Generalizes from D4RL simulator-evaluation results after offline training to real-world deployment robustness, untested environments, or interactive online-learning performance without supporting evidence."
+    penalty: major
+    allowed_claims:
+      - "May accurately state performance on the reported D4RL simulator-based benchmark tasks."
+      - "May state that such evidence does not establish real-world deployment robustness or broader online-learning performance."
+  - id: RL-E4
+    error: "Graded outside-corpus policy for external material."
+    penalty:
+      incidental_background_mention_not_used_for_scored_claim: no_penalty
+      clearly_marked_external_context_not_used_as_evidence: no_reward_and_at_most_minor_penalty
+      external_source_used_to_support_core_protocol_or_algorithm_conclusion: major
+      fabricated_evidence_or_false_claim_external_material_is_contained_in_packet: hard_fail
+inference_boundary_requirements:
+  - "Distinguish fixed offline training data from simulator-based policy evaluation in D4RL."
+  - "Separate reported D4RL benchmark performance from claims about real-world deployment robustness, untested environments, or interactive online-learning performance."
+  - "Identify missing environment version, dataset version, wrapper, seed/run, evaluation-episode, aggregation, and variability-reporting details rather than inferring them."
+  - "Treat normalized scores as benchmark-specific quantities whose anchors may differ by domain; do not interpret them as a universal absolute performance scale."
+  - "Separate algorithmic motivation and theoretical lower-bound claims from empirical benchmark performance claims."
+optional_high_value_findings:
+  - "Explains that D4RL normalized scores use domain-specific reference anchors and therefore should not be treated as a universal absolute scale."
+  - "Identifies how single-policy, mixed-policy, human-demonstration, or trajectory-stitching datasets change the interpretation of algorithm comparisons."
+  - "Notes that CQL Table 4 evaluates conservative value estimation separately from ordinary policy-return ranking."
+  - "Checks whether reported seed averages are accompanied by variability measures rather than assuming statistical certainty."
+ambiguities_requiring_human_review:
+  - "Minor note: scorer should enforce the difference between D4RL simulator-evaluation evidence and broader real-world or online-learning claims."

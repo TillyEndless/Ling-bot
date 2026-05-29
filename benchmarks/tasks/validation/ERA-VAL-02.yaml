@@ -1,0 +1,42 @@
+task_id: ERA-VAL-02
+split: validation
+task_type: experimental_rigor_audit
+topic: generative model evaluation
+research_question: "Does the provided generative-model evaluation section justify its quality and diversity claims?"
+input_prompt: |
+  Audit the provided generative-model experiment section using only the source packet.
+  Focus on metrics, baselines, dataset splits, sample selection, human evaluation if present, ablations, compute, and claim scope.
+  Return severity-ranked findings and a corrected evaluation protocol.
+evaluation_mode: closed_source
+source_material_required: true
+provided_materials:
+  - material_id: packet_era_ho_generative_eval
+    type: experiment_excerpt_packet
+    status: source_material_required
+    description: "A frozen excerpt describing generative-model evaluation results, metrics, baselines, and claims."
+required_outputs:
+  - rigor_audit_findings
+  - metric_claim_alignment_table
+  - baseline_and_ablation_review
+  - reproducibility_risk_list
+  - corrected_protocol
+critical_facts_to_capture:
+  - "The quality, diversity, speed, or controllability claims made in the packet."
+  - "Metrics and evaluation protocols used to support those claims."
+  - "Baselines, ablations, and sample-selection procedures."
+  - "Human-evaluation or subjective-rating details if present."
+common_failure_modes:
+  - "Accepting visual sample quality without checking selection protocol."
+  - "Ignoring metric limitations or metric gaming."
+  - "Missing absent baselines or ablations."
+  - "Overstating claims from narrow datasets."
+scoring_dimensions:
+  - factual_accuracy
+  - evidence_traceability
+  - experimental_rigor
+  - benchmark_validity
+  - inference_boundary_discipline
+  - output_usefulness
+  - efficiency
+notes_on_domain_specificity: "Generative modeling is included to broaden beyond RL and LLM post-training."
+

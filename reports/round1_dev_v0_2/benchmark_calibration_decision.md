@@ -1,0 +1,1 @@
+benchmark_ready_for_variant_implementation

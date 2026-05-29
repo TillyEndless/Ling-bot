@@ -1,0 +1,75 @@
+packet_id: packet_ls_dev_transformer_efficiency
+task_id: LS-DEV-01
+split: dev
+packet_version: 1
+packet_status: materialized_agent_drafted
+created_at: 2026-05-29
+runtime_retrieval_allowed: false
+exactly_matches_task_specification: true
+unresolved_source_or_version_issues:
+  - "DOIs and paper-level licenses were not fully verified; public arXiv PDFs are used as canonical Round 1 sources."
+model_input:
+  path: model_input_packet.md
+  sha256: c13078138079e23f025595895c33bd2b5bf482babe6a6cbbde7c871beb05cd77
+canonical_sources:
+  - title: "Efficient Transformers: A Survey"
+    authors: "Yi Tay; Mostafa Dehghani; Dara Bahri; Donald Metzler"
+    year: 2020
+    canonical_identifier:
+      arxiv: "2009.06732"
+      doi: unknown_pending_verification
+    canonical_version_used: "arXiv PDF downloaded from https://arxiv.org/pdf/2009.06732"
+    acquisition_location: https://arxiv.org/pdf/2009.06732
+    local_filename: canonical_sources/efficient_transformers_survey_arxiv_2009.06732.pdf
+    sha256: d4f2425d4487fa3097d1c0f274df161901748a40f10877cdc5447d711ea2ef35
+    sections_pages_tables_appendices_included_in_model_input:
+      - "Abstract and survey/taxonomy framing"
+      - "Comparison/taxonomy sections and tables, cited as pp. 1-6 and comparison tables pending human page verification"
+  - title: "Linformer: Self-Attention with Linear Complexity"
+    authors: "Sinong Wang; Belinda Z. Li; Madian Khabsa; Han Fang; Hao Ma"
+    year: 2020
+    canonical_identifier:
+      arxiv: "2006.04768"
+      doi: unknown_pending_verification
+    canonical_version_used: "arXiv PDF downloaded from https://arxiv.org/pdf/2006.04768"
+    acquisition_location: https://arxiv.org/pdf/2006.04768
+    local_filename: canonical_sources/linformer_arxiv_2006.04768.pdf
+    sha256: 1c4e089b6108f5ed0a2f8301ab07a64eab9851dcb471348b88739a6458e2f215
+    sections_pages_tables_appendices_included_in_model_input:
+      - "Abstract; Section 3 method; Figure 2; Table 1; experiment discussion"
+  - title: "Longformer: The Long-Document Transformer"
+    authors: "Iz Beltagy; Matthew E. Peters; Arman Cohan"
+    year: 2020
+    canonical_identifier:
+      arxiv: "2004.05150"
+      doi: unknown_pending_verification
+    canonical_version_used: "arXiv PDF downloaded from https://arxiv.org/pdf/2004.05150"
+    acquisition_location: https://arxiv.org/pdf/2004.05150
+    local_filename: canonical_sources/longformer_arxiv_2004.05150.pdf
+    sha256: 053756b54e2d3462d4690b3aed489c962f17df7c3531865e47374c4a651f526c
+    sections_pages_tables_appendices_included_in_model_input:
+      - "Abstract; Figure 1; Table 1; Section 3; Tables 7-11; implementation appendices"
+  - title: "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"
+    authors: "Tri Dao; Daniel Y. Fu; Stefano Ermon; Atri Rudra; Christopher Re"
+    year: 2022
+    canonical_identifier:
+      arxiv: "2205.14135"
+      doi: unknown_pending_verification
+    canonical_version_used: "arXiv PDF downloaded from https://arxiv.org/pdf/2205.14135"
+    acquisition_location: https://arxiv.org/pdf/2205.14135
+    local_filename: canonical_sources/flashattention_arxiv_2205.14135.pdf
+    sha256: ca7f9fda10b90fc05dd291a3accc85e9c1a4a860b99b31928dab03ed3fcb14e4
+    sections_pages_tables_appendices_included_in_model_input:
+      - "Abstract; IO-aware algorithm sections; complexity discussion; experiment tables/figures"
+  - title: "LoRA: Low-Rank Adaptation of Large Language Models"
+    authors: "Edward J. Hu; Yelong Shen; Phillip Wallis; Zeyuan Allen-Zhu; Yuanzhi Li; Shean Wang; Lu Wang; Weizhu Chen"
+    year: 2021
+    canonical_identifier:
+      arxiv: "2106.09685"
+      doi: unknown_pending_verification
+    canonical_version_used: "arXiv PDF downloaded from https://arxiv.org/pdf/2106.09685"
+    acquisition_location: https://arxiv.org/pdf/2106.09685
+    local_filename: canonical_sources/lora_arxiv_2106.09685.pdf
+    sha256: e9a0d3128767db616085dc0f4e6e455e672e89af823e8ed1282793682787395a
+    sections_pages_tables_appendices_included_in_model_input:
+      - "Abstract; Section 1; Section 4; Table 1; Table 2; GPT-3 experiment discussion; limitations paragraph"

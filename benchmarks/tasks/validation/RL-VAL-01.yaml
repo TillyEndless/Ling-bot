@@ -1,0 +1,43 @@
+task_id: RL-VAL-01
+split: validation
+task_type: rl_specific_analysis
+topic: model-based reinforcement learning
+research_question: "Is the provided model-based RL protocol sufficient to evaluate world-model planning claims?"
+input_prompt: |
+  Review the provided model-based RL protocol using only the source packet.
+  Audit environment details, model-learning objective, planning horizon, model-error controls, baselines, seeds, evaluation episodes, metrics, and claim boundaries.
+  Return an RL-specific risk register and a revised protocol.
+evaluation_mode: closed_source
+source_material_required: true
+provided_materials:
+  - material_id: packet_rl_ho_model_based_protocol
+    type: protocol_packet
+    status: source_material_required
+    description: "A frozen model-based RL or world-model planning protocol/proposal excerpt."
+required_outputs:
+  - rl_protocol_audit
+  - model_error_and_planning_risk_table
+  - environment_and_seed_checklist
+  - baseline_and_metric_review
+  - revised_protocol
+critical_facts_to_capture:
+  - "Planning setup, learned model assumptions, and environment details in the packet."
+  - "Baselines, ablations, seeds, and evaluation episode counts."
+  - "Controls for compounding model error or planning-specific confounds."
+  - "Scope of claims about sample efficiency, generalization, or planning quality."
+common_failure_modes:
+  - "Ignoring model-error accumulation."
+  - "Failing to require model-free and model-based baselines where appropriate."
+  - "Omitting environment version or wrapper details."
+  - "Treating planning success as proof of learned world-model fidelity."
+scoring_dimensions:
+  - factual_accuracy
+  - evidence_traceability
+  - experimental_rigor
+  - benchmark_validity
+  - rl_specific_correctness
+  - inference_boundary_discipline
+  - output_usefulness
+  - efficiency
+notes_on_domain_specificity: "Validation RL task emphasizing model-based RL and world-model evaluation."
+

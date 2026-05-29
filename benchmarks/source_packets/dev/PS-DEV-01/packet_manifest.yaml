@@ -1,0 +1,61 @@
+packet_id: packet_ps_dev_representation_probing
+task_id: PS-DEV-01
+split: dev
+packet_version: 1
+packet_status: materialized_agent_drafted
+created_at: 2026-05-29
+runtime_retrieval_allowed: false
+exactly_matches_task_specification: true
+unresolved_source_or_version_issues:
+  - "DOIs and paper-level licenses were not fully verified; public arXiv/ACL PDFs are used as canonical Round 1 sources."
+model_input:
+  path: model_input_packet.md
+  sha256: 4cd8323980d2bdf31ddceeaddad3f8dc007fb7c048564ac59d6e780471cfa45c
+canonical_sources:
+  - title: "BERT Rediscovers the Classical NLP Pipeline"
+    authors: "Ian Tenney; Dipanjan Das; Ellie Pavlick"
+    year: 2019
+    canonical_identifier:
+      arxiv: "1905.05950"
+      doi: unknown_pending_verification
+    canonical_version_used: "arXiv PDF downloaded from https://arxiv.org/pdf/1905.05950"
+    acquisition_location: https://arxiv.org/pdf/1905.05950
+    local_filename: canonical_sources/bert_rediscovers_arxiv_1905.05950.pdf
+    sha256: 3e5214dacf51eeeef5490a4699fa79b2c162145e673d98e817101412b91e5d5e
+    sections_pages_tables_appendices_included_in_model_input:
+      - "Abstract; Section 2 probing tasks; Section 3 scalar mixing/cumulative scoring; Figures 1-3; limitations paragraph"
+  - title: "A Primer in BERTology: What we know about how BERT works"
+    authors: "Anna Rogers; Olga Kovaleva; Anna Rumshisky"
+    year: 2020
+    canonical_identifier:
+      arxiv: "2002.12327"
+      doi: unknown_pending_verification
+    canonical_version_used: "arXiv PDF downloaded from https://arxiv.org/pdf/2002.12327"
+    acquisition_location: https://arxiv.org/pdf/2002.12327
+    local_filename: canonical_sources/bertology_arxiv_2002.12327.pdf
+    sha256: c4b5b7bffb63b2276515d91d5579a33dbd93f2e1b5a93e106c576d5de7d1a8d0
+    sections_pages_tables_appendices_included_in_model_input:
+      - "Abstract; survey sections on representations, attention, probing, methodological cautions"
+  - title: "A Structural Probe for Finding Syntax in Word Representations"
+    authors: "John Hewitt; Christopher D. Manning"
+    year: 2019
+    canonical_identifier:
+      acl_anthology: "N19-1419"
+      doi: unknown_pending_verification
+    canonical_version_used: "ACL Anthology PDF downloaded from https://aclanthology.org/N19-1419.pdf"
+    acquisition_location: https://aclanthology.org/N19-1419.pdf
+    local_filename: canonical_sources/structural_probe_acl_N19-1419.pdf
+    sha256: d571e76c926d158417715c9379499f6031f6dc4eda1ff4e336194e0ab1ec1ffd
+    sections_pages_tables_appendices_included_in_model_input:
+      - "Abstract; Section 2 method; Table 1; Figures 1-5; Section 5 limitations/discussion"
+  - title: "Development seed idea brief for representation probing"
+    authors: "Local benchmark author"
+    year: 2026
+    canonical_identifier:
+      local: "PS-DEV-01-seed-idea"
+    canonical_version_used: "Local markdown artifact"
+    acquisition_location: canonical_sources/local_seed_idea_representation_probing.md
+    local_filename: canonical_sources/local_seed_idea_representation_probing.md
+    sha256: 807070e7c6f9edbcfeb52f8b3b885ec0084fcbbfafdf371efe4a9bdef8575264
+    sections_pages_tables_appendices_included_in_model_input:
+      - "Full local seed idea brief"

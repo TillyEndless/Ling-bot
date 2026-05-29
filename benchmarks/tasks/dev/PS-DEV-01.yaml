@@ -1,0 +1,42 @@
+task_id: PS-DEV-01
+split: dev
+task_type: evidence_grounded_proposal_support
+topic: representation learning
+research_question: "Can a vague representation-probing idea be turned into evidence-grounded, testable research hypotheses?"
+input_prompt: |
+  Using only the provided source packet, turn the seed idea into a small research proposal.
+  Produce scoped research questions, evidence-grounded hypotheses, falsification criteria, required experiments, baselines, ablations, and a risk register.
+  Clearly separate facts from the packet, synthesis, and your own proposed hypotheses.
+evaluation_mode: closed_source
+source_material_required: true
+provided_materials:
+  - material_id: packet_ps_dev_representation_probing
+    type: seed_literature_and_idea_packet
+    status: source_material_required
+    description: "A frozen packet with a short idea brief plus source excerpts from BERT Rediscovers the Classical NLP Pipeline, A Primer in BERTology, and A Structural Probe for Finding Syntax in Word Representations."
+required_outputs:
+  - scoped_research_questions
+  - hypothesis_table
+  - evidence_map
+  - experiment_plan
+  - risk_register
+critical_facts_to_capture:
+  - "What the source packet actually establishes about the phenomenon or method."
+  - "Which gaps are supported by the packet and which are speculative."
+  - "Falsifiable predictions and disconfirming evidence for each hypothesis."
+  - "Controls, baselines, and alternative explanations."
+  - "Required source locations include each paper's motivation, method/probe definition, evaluation setup, result evidence, and caveats or limitations when available."
+common_failure_modes:
+  - "Generating attractive but untestable ideas."
+  - "Inventing literature gaps not supported by the packet."
+  - "Failing to specify negative or disconfirming outcomes."
+  - "Ignoring feasibility and measurement validity."
+scoring_dimensions:
+  - factual_accuracy
+  - evidence_traceability
+  - hypothesis_quality
+  - experimental_rigor
+  - inference_boundary_discipline
+  - output_usefulness
+  - efficiency
+notes_on_domain_specificity: "Representation learning is used as a proposal-support task, not as the organizing theme of the benchmark."

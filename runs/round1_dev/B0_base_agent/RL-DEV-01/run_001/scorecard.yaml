@@ -1,0 +1,37 @@
+run_id: round1_dev_v0.1__B0_base_agent__RL-DEV-01__run001
+variant: B0_base_agent
+task_id: RL-DEV-01
+reviewer: codex_agent_draft
+benchmark_version: round1_dev_v0.1
+scores:
+  factual_accuracy: 3
+  evidence_traceability: 3
+  citation_validity: 4
+  literature_coverage: null
+  comparison_fairness: 4
+  experimental_rigor: 4
+  benchmark_validity: 4
+  inference_boundary_discipline: 4
+  hypothesis_quality: null
+  rl_specific_correctness: 3
+  output_usefulness: 4
+  efficiency: 4
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: major
+  dimension: calibration
+  description: Strong general offline-RL protocol audit with fixed-data, behavior-policy, metric, seed, and online-claim boundaries.
+  evidence: raw_output.md
+- severity: minor
+  dimension: calibration
+  description: Does not capture approved CQL table-role corrections, four-seed reporting detail, or the precise lower-bound/table
+    distinction.
+  evidence: raw_output.md
+- severity: minor
+  dimension: calibration
+  description: Uses a simplified OOD-action formulation and treats Atari-style experiments too loosely relative to the approved
+    D4RL/CQL gold.
+  evidence: raw_output.md
+summary: Draft calibration score; review recommended before using as final comparative score.

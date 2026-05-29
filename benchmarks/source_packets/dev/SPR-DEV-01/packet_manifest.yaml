@@ -1,0 +1,31 @@
+packet_id: packet_spr_dev_lora
+task_id: SPR-DEV-01
+split: dev
+packet_version: 1
+packet_status: materialized_agent_drafted
+created_at: 2026-05-29
+runtime_retrieval_allowed: false
+exactly_matches_task_specification: true
+unresolved_source_or_version_issues:
+  - "DOI and paper-level license were not fully verified; public arXiv PDF is used as canonical Round 1 source."
+model_input:
+  path: model_input_packet.md
+  sha256: 88c35c6bab01d76400e18045edf4ced0c215804570ff0df865e0b7d75f774732
+canonical_sources:
+  - title: "LoRA: Low-Rank Adaptation of Large Language Models"
+    authors: "Edward J. Hu; Yelong Shen; Phillip Wallis; Zeyuan Allen-Zhu; Yuanzhi Li; Shean Wang; Lu Wang; Weizhu Chen"
+    year: 2021
+    canonical_identifier:
+      arxiv: "2106.09685"
+      doi: unknown_pending_verification
+    canonical_version_used: "arXiv PDF downloaded from https://arxiv.org/pdf/2106.09685"
+    acquisition_location: https://arxiv.org/pdf/2106.09685
+    local_filename: canonical_sources/lora_arxiv_2106.09685.pdf
+    sha256: e9a0d3128767db616085dc0f4e6e455e672e89af823e8ed1282793682787395a
+    sections_pages_tables_appendices_included_in_model_input:
+      - "Abstract"
+      - "Introduction/contributions"
+      - "Section 4 method and limitations paragraph"
+      - "Section 5 experiment setup"
+      - "Table 1 and Table 2"
+      - "Appendix material only where needed for implementation/reproducibility details"

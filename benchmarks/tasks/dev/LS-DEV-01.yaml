@@ -1,0 +1,48 @@
+task_id: LS-DEV-01
+split: dev
+task_type: literature_mapping
+topic: transformer efficiency
+research_question: "Within the fixed source packet, what are the main research lines for making transformer computation more efficient, and what evidence does each paper provide?"
+input_prompt: |
+  Produce a fixed-corpus literature map on transformer efficiency for AI/ML research.
+  Use only the provided source packet. Do not perform external retrieval.
+  Return a corpus coverage table, taxonomy of efficiency approaches, method-difference matrix, evidence-grounded synthesis, unsupported-synthesis warnings, and research gaps visible within the corpus.
+  Distinguish paper claims from your synthesis. If a method, metric, or conclusion is not supported by the packet, mark it as unsupported.
+evaluation_mode: closed_source
+source_material_required: true
+provided_materials:
+  - material_id: packet_ls_dev_transformer_efficiency
+    type: fixed_corpus_packet
+    status: source_material_required
+    description: "A frozen candidate corpus of transformer-efficiency papers with metadata, abstracts, method sections, experiment summaries, key tables/figures, and limitation excerpts."
+required_outputs:
+  - corpus_coverage_table
+  - literature_taxonomy
+  - method_difference_matrix
+  - core_paper_identification
+  - evidence_grounded_gap_list
+  - unsupported_synthesis_warnings
+critical_facts_to_capture:
+  - "Every candidate corpus paper must be accounted for as core, supporting, background, or out-of-scope within the fixed packet."
+  - "Coverage means correct use of the supplied corpus, not discovery of external papers."
+  - "Core papers are those that introduce or centrally define a distinct efficiency line represented in the packet."
+  - "Research lines should distinguish approximate/sparse attention, exact IO-aware attention, long-context architecture, survey/taxonomy, distillation/compression, and parameter-efficient adaptation only when supported by packet evidence."
+  - "Claims about speed, memory, quality, or compute must be linked to packet evidence and evaluation settings."
+  - "Unsupported synthesis includes any claim that requires papers, benchmarks, hardware details, or results not present in the fixed packet."
+common_failure_modes:
+  - "Treating all efficiency methods as interchangeable."
+  - "Reporting speedups without hardware, model size, task, or quality tradeoff context."
+  - "Listing papers without organizing method differences."
+  - "Using outside papers or remembered facts not present in the packet."
+  - "Calling a line of work complete or dominant when the packet only contains a sample."
+scoring_dimensions:
+  - literature_coverage
+  - factual_accuracy
+  - evidence_traceability
+  - citation_validity
+  - comparison_fairness
+  - inference_boundary_discipline
+  - output_usefulness
+  - efficiency
+notes_on_domain_specificity: "General AI/ML fixed-corpus mapping task. It should not assume LLM-only efficiency unless the packet evidence justifies that scope."
+

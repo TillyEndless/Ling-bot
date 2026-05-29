@@ -1,0 +1,43 @@
+task_id: MC-DEV-01
+split: dev
+task_type: method_comparison
+topic: LLM post-training
+research_question: "How should DPO-style preference optimization and PPO-style RLHF be compared without overstating either method?"
+input_prompt: |
+  Using only the provided source packet, compare DPO-style preference optimization and PPO-style RLHF.
+  Produce a comparison matrix covering objectives, assumptions, data requirements, optimization dynamics, baselines, evaluation protocols, and evidence limits.
+  Mark any claim not supported by the packet as unknown or speculative.
+evaluation_mode: closed_source
+source_material_required: true
+provided_materials:
+  - material_id: packet_mc_dev_dpo_ppo_rlhf
+    type: paper_set_packet
+    status: source_material_required
+    description: "A frozen packet containing Direct Preference Optimization: Your Language Model is Secretly a Reward Model; Training language models to follow instructions with human feedback; Proximal Policy Optimization Algorithms; and relevant excerpts needed to compare DPO-style and PPO/RLHF-style preference optimization."
+required_outputs:
+  - method_comparison_matrix
+  - assumptions_table
+  - evidence_strength_summary
+  - fairness_caveats
+  - scoped_conclusions
+critical_facts_to_capture:
+  - "Objective functions and training signals described in the packet."
+  - "Preference data assumptions and reward-model or reference-policy assumptions."
+  - "Evaluation settings and whether comparisons are direct, indirect, or not comparable."
+  - "Limits on causal or general superiority claims."
+  - "Required source locations include method/objective sections, algorithm descriptions, experiment setup, result tables, and limitation or discussion sections where available."
+common_failure_modes:
+  - "Declaring one method better without normalizing data, model, and evaluation setup."
+  - "Confusing preference optimization with online RL when the packet does not support that."
+  - "Ignoring baseline strength and implementation differences."
+  - "Using external knowledge in a closed-source task."
+scoring_dimensions:
+  - factual_accuracy
+  - evidence_traceability
+  - comparison_fairness
+  - experimental_rigor
+  - inference_boundary_discipline
+  - output_usefulness
+  - efficiency
+notes_on_domain_specificity: "LLM post-training is one evaluation topic only; the rubric should reward comparison discipline, not familiarity with a single method family."
+

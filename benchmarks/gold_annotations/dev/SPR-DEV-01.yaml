@@ -1,0 +1,102 @@
+task_id: SPR-DEV-01
+source_packet_id: packet_spr_dev_lora
+drafted_by_agent: true
+human_review_status: approved_with_minor_notes
+eligible_for_scoring: true
+version_verification:
+  LoRA: "Local canonical PDF begins with arXiv:2106.09685v2 [cs.CL] 16 Oct 2021 and states Version 2."
+must_capture:
+  - id: SPR1
+    fact_or_analytical_finding: "LoRA freezes a pretrained weight matrix W0 and parameterizes its task-specific update as a trainable low-rank product ΔW = BA; the method is generally applicable to dense layers, while the paper's Transformer experiments focus on selected weight matrices."
+    evidence_source: "LoRA: Low-Rank Adaptation of Large Language Models"
+    evidence_location:
+      - "p. 1, Abstract and Figure 1: frozen pretrained weights and trainable low-rank matrices."
+      - "p. 4, Section 4.1, Equation 3: W0 is frozen while A and B are trainable and ΔW = BA."
+      - "p. 4, Section 4.2: general applicability to weight matrices and experimental focus in Transformer modules."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "The adapted weight is represented as the frozen weight plus a low-rank update."
+  - id: SPR2
+    fact_or_analytical_finding: "LoRA is motivated by the hypothesis that task-adaptation weight updates have low intrinsic rank; the paper investigates this hypothesis empirically in selected GPT-3 settings rather than establishing it universally for all tasks or models."
+    evidence_source: "LoRA: Low-Rank Adaptation of Large Language Models"
+    evidence_location:
+      - "p. 2, Introduction: hypothesis that adaptation weight changes have low intrinsic rank."
+      - "pp. 9-10, Sections 7.1-7.2, Tables 5-6: empirical analysis of adapted weight types and rank r on GPT-3 tasks."
+      - "p. 10, footnote 6: explicit caveat that a small r is not expected to work for every task or dataset."
+    scoring_weight: medium
+    acceptable_equivalent_formulations:
+      - "The method assumes/investigates that task-specific weight changes can be low-rank."
+  - id: SPR3
+    fact_or_analytical_finding: "The paper evaluates LoRA across RoBERTa, DeBERTa, GPT-2, and GPT-3 settings, spanning NLU and generation tasks under distinct experimental protocols."
+    evidence_source: "LoRA: Low-Rank Adaptation of Large Language Models"
+    evidence_location:
+      - "p. 1, Abstract: named model families in the empirical scope."
+      - "p. 5, Table 2: RoBERTa and DeBERTa results on GLUE."
+      - "p. 6, Table 3: GPT-2 medium and large on E2E NLG Challenge."
+      - "p. 7, Table 4 and Section 5.5: GPT-3 175B on WikiSQL, MultiNLI-matched, and SAMSum."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "The paper evaluates both encoder and decoder language-model families in its reported settings."
+  - id: SPR4
+    fact_or_analytical_finding: "The paper reports distinct efficiency claims that must be separated and attributed to their settings: parameter-count and GPU-memory reductions for GPT-3 175B relative to full fine-tuning with Adam; a reported GPT-3 training-speed benefit; and no additional inference latency relative to fully fine-tuned inference when LoRA updates are merged into the base weights."
+    evidence_source: "LoRA: Low-Rank Adaptation of Large Language Models"
+    evidence_location:
+      - "p. 1, Abstract: GPT-3 175B trainable-parameter and GPU-memory claims, plus broad model-quality and latency summary."
+      - "p. 2, Introduction: hardware-barrier and no-additional-inference-latency claims."
+      - "p. 3, Table 1: GPT-2 medium forward-pass latency comparison; Fine-Tune/LoRA share the baseline latency row while adapters add latency."
+      - "pp. 3-4, Section 4.1, No Additional Inference Latency: merging BA into W0 for deployment."
+      - "p. 4, paragraph before Section 5: paper-reported 25% training speedup on GPT-3 175B relative to full fine-tuning."
+      - "p. 7, Table 4: GPT-3 trainable-parameter and task-performance comparison."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "A strong answer distinguishes trainable parameters, GPU-memory requirement, training throughput, inference latency, and task quality rather than treating them as one universal efficiency claim."
+  - id: SPR5
+    fact_or_analytical_finding: "The paper states a deployment limitation: when LoRA updates are merged into the base weights to eliminate additional inference latency, batching samples from different tasks that require different LoRA modules is not straightforward; dynamic module selection remains possible when latency is not critical."
+    evidence_source: "LoRA: Low-Rank Adaptation of Large Language Models"
+    evidence_location:
+      - "p. 4, paragraph immediately before Section 5: stated limitation and qualification about dynamic module selection."
+    scoring_weight: medium
+    acceptable_equivalent_formulations:
+      - "LoRA introduces multi-task batching/deployment complications when different adapters are needed."
+  - id: SPR6
+    fact_or_analytical_finding: "The paper includes setting-specific analyses of which Transformer attention weight matrices to adapt and how LoRA rank r affects performance in selected GPT-3 tasks; these analyses support a limited empirical low-rank account rather than a universal rank prescription."
+    evidence_source: "LoRA: Low-Rank Adaptation of Large Language Models"
+    evidence_location:
+      - "p. 9, Section 7.1 and Table 5: adapting different attention weight matrices under an 18M-parameter budget."
+      - "p. 9, Section 7.2 and Table 6: effect of rank r on WikiSQL and MultiNLI."
+      - "p. 10, footnote 6: small r is not expected to work for every task or dataset."
+    scoring_weight: medium
+    acceptable_equivalent_formulations:
+      - "Tables 5-6 are setting-specific analyses of matrix choice and rank, not universal prescriptions."
+critical_errors:
+  - id: SPR-E1
+    error: "Claims that LoRA is universally superior to full fine-tuning across models, tasks, data regimes, or efficiency objectives."
+    penalty: major
+    allowed_claims:
+      - "May state that LoRA matches or exceeds full fine-tuning in specified reported settings when tied to the corresponding table and task."
+      - "May state that the paper reports strong parameter-efficiency results without generalizing beyond its experiments."
+  - id: SPR-E2
+    error: "Graded outside-corpus policy for LoRA variants and later ecosystem facts."
+    penalty:
+      incidental_external_mention_explicitly_excluded_from_scored_evidence_base: no_penalty
+      external_lora_variant_or_later_ecosystem_fact_named_only_as_future_extension: no_reward_and_at_most_minor_penalty
+      external_variant_or_ecosystem_fact_used_to_support_core_paper_reading_conclusion: major
+      fabricated_evidence_or_false_claim_external_material_appears_in_packet: hard_fail
+  - id: SPR-E3
+    error: "Fails to identify principal experimental evidence required by the task, such as the evaluated model families, major baseline-comparison type, the distinction among efficiency dimensions, or the packet-provided ablation on matrix choice/rank when requested."
+    penalty: major
+    allowed_omission:
+      - "Need not enumerate every table entry, appendix hyperparameter, or secondary metric unless explicitly required by the task prompt."
+inference_boundary_requirements:
+  - "Distinguish method definition, author motivation or hypothesis, experimental evidence, deployment properties, and stated limitations."
+  - "Do not universalize results from reported model/task configurations to all fine-tuning settings."
+  - "Separate trainable-parameter reduction, GPU-memory requirement, training throughput, inference latency, and downstream quality as distinct claim dimensions."
+  - "Describe low intrinsic rank as a hypothesis supported by selected empirical analyses, not as a universal theorem about adaptation."
+  - "Mark absent details as unknown rather than filling them with later LoRA ecosystem knowledge."
+optional_high_value_findings:
+  - "Separates trainable parameter count, GPU memory, training throughput, inference latency, and model quality."
+  - "Correctly attributes the GPT-3 175B efficiency magnitudes to the paper's stated full-fine-tuning comparison rather than treating them as universal."
+  - "Identifies Tables 5-6 as setting-specific analyses of adapted weight matrices and rank rather than universal prescriptions."
+  - "Identifies what would need reproduction to validate efficiency claims in a new model, task, optimizer, or deployment setting."
+ambiguities_requiring_human_review:
+  - "Minor note: scorer should enforce separation among efficiency dimensions and prevent later LoRA ecosystem facts from filling packet gaps."

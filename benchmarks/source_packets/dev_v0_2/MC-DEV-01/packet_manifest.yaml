@@ -1,0 +1,29 @@
+packet_id: packet_mc_dev_dpo_ppo_rlhf
+task_id: MC-DEV-01
+split: dev
+packet_version: 2
+packet_status: sanitized_from_v0.1_for_v0.2
+created_at: 2026-05-29
+supersedes_benchmark_packet_version: round1_dev_v0.1
+runtime_retrieval_allowed: false
+gold_annotations_included: false
+skill_instructions_included: false
+model_input:
+  path: model_input_packet.md
+  sha256: b090660e1e2d28fe0816940f357e4ed7b5c2a5f611db6387d241f9123fb41ee3
+  previous_v0_1_sha256: 811f34eb8d3f3f51dfabb99c16bb65c6ade364c2b0fd626eb6b346a76460f5be
+canonical_sources:
+  - title: "Direct Preference Optimization: Your Language Model is Secretly a Reward Model"
+    local_filename: ../../dev/MC-DEV-01/canonical_sources/dpo_arxiv_2305.18290.pdf
+    sha256: 92cb3a2b71362acda98a789b03d88688fd33cf5fcf13f81d2b1de30ee7d3b67a
+  - title: "Training language models to follow instructions with human feedback"
+    local_filename: ../../dev/MC-DEV-01/canonical_sources/instructgpt_arxiv_2203.02155.pdf
+    sha256: c1984bb50a5b90fddb895fdc3a0f72e5bc977148c9f63ef6040cbe7a3e1f0d98
+  - title: "Proximal Policy Optimization Algorithms"
+    local_filename: ../../dev/MC-DEV-01/canonical_sources/ppo_arxiv_1707.06347.pdf
+    sha256: e78feadadbdbb0b601b3c2bcc81404722cd431a489b307545f9b7bea1e8c4f5b
+sanitization_actions:
+  - "Removed task/runtime instructions from the evidence packet."
+  - "Removed Required Comparison Boundaries section."
+  - "Replaced role-boundary wording about PPO with neutral source experiment-scope wording."
+human_review_required: true

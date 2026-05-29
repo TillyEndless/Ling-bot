@@ -1,0 +1,42 @@
+task_id: ERA-VAL-01
+split: validation
+task_type: experimental_rigor_audit
+topic: LLM benchmark contamination
+research_question: "Does the provided LLM evaluation evidence support the claimed model capability, given possible benchmark contamination and protocol issues?"
+input_prompt: |
+  Audit the provided LLM evaluation excerpt or proposal for experimental rigor.
+  Focus on contamination risk, benchmark saturation, prompt protocol, baseline selection, statistical reporting, evaluation leakage, and claim scope.
+  Return severity-ranked findings and a corrected evaluation protocol.
+evaluation_mode: closed_source
+source_material_required: true
+provided_materials:
+  - material_id: packet_era_ho_llm_contamination
+    type: experiment_excerpt_packet
+    status: source_material_required
+    description: "A frozen excerpt or proposal describing LLM benchmark results, evaluation setup, and capability claims."
+required_outputs:
+  - rigor_audit_findings
+  - contamination_and_leakage_risk_table
+  - baseline_and_metric_review
+  - claim_scope_assessment
+  - corrected_protocol
+critical_facts_to_capture:
+  - "The claimed capability and benchmark evidence in the packet."
+  - "Training/evaluation separation, prompt protocol, and contamination controls if present."
+  - "Baseline selection and metric appropriateness."
+  - "Statistical uncertainty and reproducibility details."
+common_failure_modes:
+  - "Treating benchmark scores as self-validating."
+  - "Ignoring contamination or benchmark saturation."
+  - "Failing to inspect prompt and evaluation protocol."
+  - "Overgeneralizing benchmark performance to broad capability."
+scoring_dimensions:
+  - factual_accuracy
+  - evidence_traceability
+  - experimental_rigor
+  - benchmark_validity
+  - inference_boundary_discipline
+  - output_usefulness
+  - efficiency
+notes_on_domain_specificity: "LLM evaluation task. It tests benchmark skepticism rather than LLM enthusiasm."
+

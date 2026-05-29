@@ -1,0 +1,44 @@
+task_id: LS-VAL-02
+split: validation
+task_type: literature_mapping
+topic: latent reasoning in language models
+research_question: "Within the fixed source packet, what literature supports or challenges the idea that language models perform useful latent or internal reasoning?"
+input_prompt: |
+  Produce a balanced fixed-corpus literature map on latent or internal reasoning in language models.
+  Use only the provided source packet. Do not perform external retrieval.
+  Return a corpus coverage table, taxonomy of evidence types, representative papers, skeptical counter-evidence, unsupported-synthesis warnings, and open gaps visible within the corpus.
+  Treat latent reasoning as one possible topic, not as an assumed fact.
+evaluation_mode: closed_source
+source_material_required: true
+provided_materials:
+  - material_id: packet_ls_ho_latent_reasoning
+    type: fixed_corpus_packet
+    status: evaluator_workspace_only
+    description: "Validation fixed corpus on latent/internal reasoning evidence and counter-evidence, with metadata, selected sections, result excerpts, and limitations. Must be isolated from development workspace."
+required_outputs:
+  - corpus_coverage_table
+  - evidence_type_taxonomy
+  - representative_paper_table
+  - counter_evidence_summary
+  - unsupported_synthesis_warnings
+  - gap_and_hypothesis_list
+critical_facts_to_capture:
+  - "Coverage means correct use of the supplied corpus, not discovery of external papers."
+  - "Distinguish behavioral evidence, mechanistic evidence, probing evidence, intervention evidence, and speculative interpretation."
+  - "Include skeptical or alternative-explanation evidence when present in the packet."
+  - "Avoid treating internal reasoning as established without direct evidence."
+common_failure_modes:
+  - "Organizing the survey around a preferred thesis instead of evidence types."
+  - "Conflating chain-of-thought text with latent computation."
+  - "Using mechanistic interpretability observations as causal proof without controls."
+  - "Ignoring negative, skeptical, or alternative-explanation material in the packet."
+  - "Importing external papers or remembered facts into a closed-source task."
+scoring_dimensions:
+  - literature_coverage
+  - factual_accuracy
+  - evidence_traceability
+  - citation_validity
+  - inference_boundary_discipline
+  - output_usefulness
+  - efficiency
+notes_on_domain_specificity: "Latent reasoning appears once as a validation survey topic and must not define the core skill architecture."

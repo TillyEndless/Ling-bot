@@ -1,0 +1,44 @@
+task_id: PS-VAL-01
+split: validation
+task_type: evidence_grounded_proposal_support
+topic: world-model planning
+research_question: "Can the provided world-model planning idea be converted into a feasible, evidence-grounded research proposal?"
+input_prompt: |
+  Using only the provided source packet, turn the seed idea into a small research proposal.
+  Produce scoped research questions, evidence-grounded hypotheses, falsification criteria, required experiments, baselines, ablations, RL-specific evaluation details, and a risk register.
+  Separate packet facts, synthesis, and proposed hypotheses.
+evaluation_mode: closed_source
+source_material_required: true
+provided_materials:
+  - material_id: packet_ps_ho_world_model_planning
+    type: seed_literature_and_idea_packet
+    status: source_material_required
+    description: "A frozen packet with a world-model planning idea brief and seed literature/excerpts."
+required_outputs:
+  - scoped_research_questions
+  - hypothesis_table
+  - evidence_map
+  - experiment_plan
+  - rl_evaluation_protocol
+  - risk_register
+critical_facts_to_capture:
+  - "What the packet establishes about world models, planning, or evaluation."
+  - "Which gaps are supported by source evidence and which are speculative."
+  - "Falsifiable predictions, negative outcomes, and alternative explanations."
+  - "Environment, baseline, seed, metric, and model-error controls needed for execution."
+common_failure_modes:
+  - "Turning the idea into an implementation plan without evidence grounding."
+  - "Ignoring model-error or planning-specific confounds."
+  - "Failing to specify disconfirming outcomes."
+  - "Overgeneralizing beyond the seed literature."
+scoring_dimensions:
+  - factual_accuracy
+  - evidence_traceability
+  - hypothesis_quality
+  - experimental_rigor
+  - rl_specific_correctness
+  - inference_boundary_discipline
+  - output_usefulness
+  - efficiency
+notes_on_domain_specificity: "Proposal task with RL/world-model content; it evaluates research planning discipline."
+

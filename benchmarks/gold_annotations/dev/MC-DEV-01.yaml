@@ -1,0 +1,96 @@
+task_id: MC-DEV-01
+source_packet_id: packet_mc_dev_dpo_ppo_rlhf
+drafted_by_agent: true
+human_review_status: approved_with_minor_notes
+eligible_for_scoring: true
+must_capture:
+  - id: MC1
+    fact_or_analytical_finding: "DPO trains a policy directly from preference data without a separate explicit reward-model-training stage followed by an RL optimization loop; it can still be interpreted as fitting an implicit reward under its policy parameterization."
+    evidence_source: "Direct Preference Optimization"
+    evidence_location:
+      - "DPO p. 2, Figure 1 and accompanying introduction: RLHF versus DPO pipeline contrast."
+      - "DPO p. 4, Section 4: direct policy optimization and implicit-reward interpretation."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "DPO reparameterizes preference learning into a direct policy objective."
+  - id: MC2
+    fact_or_analytical_finding: "DPO uses a preference model such as Bradley-Terry and a KL-constrained reward-maximization framing."
+    evidence_source: "Direct Preference Optimization"
+    evidence_location:
+      - "DPO p. 3, Section 3: Bradley-Terry preference model and KL-constrained RLHF objective."
+      - "DPO p. 4, Section 4, Equations 4-7: policy/reward reparameterization and DPO loss."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "The comparison must mention preference-model and KL/reference-policy assumptions."
+      - "DPO relies on preference-model assumptions such as Bradley-Terry but does not separately train an explicit reward model before policy optimization."
+  - id: MC3
+    fact_or_analytical_finding: "InstructGPT/RLHF uses a staged pipeline: supervised fine-tuning, reward modeling from preferences, and PPO-based policy optimization."
+    evidence_source: "Training language models to follow instructions with human feedback"
+    evidence_location:
+      - "InstructGPT p. 2: introduction description of reward-model training followed by PPO."
+      - "InstructGPT p. 3, Figure 2: three-stage SFT -> RM -> PPO pipeline."
+      - "InstructGPT p. 6, Section 3.1: explicit descriptions of Steps 1-3."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "The RLHF comparison must separate SFT, RM, and PPO stages."
+  - id: MC4
+    fact_or_analytical_finding: "The original PPO paper establishes PPO as a general reinforcement-learning policy optimization algorithm, centered on clipped surrogate objectives and also discussing KL-penalty variants; its empirical evidence comes from continuous-control and Atari tasks, not LLM preference learning or RLHF."
+    evidence_source: "Proximal Policy Optimization Algorithms"
+    evidence_location:
+      - "PPO p. 1, Abstract and Introduction: general RL scope and continuous-control/Atari experiments."
+      - "PPO p. 3, Section 3, Equation 7: clipped surrogate objective."
+      - "PPO p. 4, Section 4: adaptive KL-penalty alternative."
+      - "PPO p. 5, Algorithm 1: PPO actor-critic procedure."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "The PPO paper provides algorithmic foundation but not direct language-model RLHF evidence."
+  - id: MC5
+    fact_or_analytical_finding: "The DPO paper provides direct, setup-specific comparisons between DPO and PPO-based baselines in its own experiments, but these findings do not establish universal superiority over PPO or RLHF systems evaluated under different models, datasets, reward pipelines, or protocols."
+    evidence_source: "DPO Section 6; InstructGPT evaluation sections; PPO experiment sections"
+    evidence_location:
+      - "DPO p. 7, Figure 2 and Section 6: within-paper comparisons on sentiment generation and TL;DR summarization."
+      - "DPO p. 9, Sections 6.2-6.3 and Table 1: setup-specific DPO/PPO comparisons and distribution-shift evaluation."
+      - "InstructGPT pp. 2-3 and p. 6: a separate PPO-based RLHF system pipeline, not a DPO comparison."
+      - "PPO pp. 1 and 5-12: generic RL algorithm evidence outside LLM preference-learning settings."
+    scoring_weight: high
+    acceptable_equivalent_formulations:
+      - "Avoid universal method ranking without normalized assumptions."
+      - "DPO directly outperforms its PPO baselines in specified DPO experiments, but this packet does not justify a universal DPO-over-RLHF claim."
+critical_errors:
+  - id: MC-E1
+    error: "Declares DPO or PPO/RLHF universally superior without normalizing assumptions."
+    penalty: major
+    allowed_claims:
+      - "A response may state that DPO outperforms the PPO baseline in specified DPO experiments when tied to the exact task and setup."
+      - "A response may not generalize this to all PPO-based RLHF systems or all preference-learning tasks."
+  - id: MC-E2
+    error: "Confuses reward modeling, preference optimization, and policy optimization."
+    penalty: major
+  - id: MC-E3
+    error: "Treats PPO's Atari/continuous-control evidence as direct evidence about RLHF."
+    penalty: major
+  - id: MC-E4
+    error: "Graded outside-corpus policy for post-training facts."
+    penalty:
+      incidental_external_background_mention_not_used_for_scored_claim: no_penalty
+      outside_packet_post_training_fact_clearly_marked_external_and_not_used_for_core_comparison: no_reward_and_at_most_minor_penalty
+      external_evidence_used_to_support_core_method_ranking_conclusion: major
+      fabricated_external_evidence_or_false_claim_it_was_contained_in_packet: hard_fail
+inference_boundary_requirements:
+  - "Label direct, indirect, and non-comparable evidence."
+  - "Separate algorithmic objectives from empirical claims."
+  - "Treat DPO's within-paper PPO comparisons as direct but setup-specific evidence."
+  - "Do not infer universal DPO-over-PPO/RLHF or PPO/RLHF-over-DPO superiority from this packet."
+corpus_roles:
+  - source: "Direct Preference Optimization"
+    role: primary_method_and_direct_comparison_source
+  - source: "Training language models to follow instructions with human feedback"
+    role: rlhf_system_pipeline_source
+  - source: "Proximal Policy Optimization Algorithms"
+    role: algorithmic_foundation_and_boundary_source
+    expected_treatment: "Use to explain PPO objective and original experiment scope; do not treat Atari or continuous-control findings as direct RLHF evidence."
+optional_high_value_findings:
+  - "Identifies missing apples-to-apples experiments."
+  - "Separates data, reward, optimization, and evaluation assumptions."
+ambiguities_requiring_human_review:
+  - "Minor note: scorer should enforce the distinction between DPO's direct within-paper PPO comparisons and unsupported cross-paper universal rankings."

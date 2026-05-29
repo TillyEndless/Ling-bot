@@ -1,0 +1,43 @@
+task_id: RL-VAL-02
+split: validation
+task_type: rl_specific_analysis
+topic: reward modeling and post-training RL
+research_question: "Does the provided reward-modeling or post-training RL protocol support its alignment or preference-learning claims?"
+input_prompt: |
+  Review the provided reward-modeling or post-training RL protocol using only the source packet.
+  Audit preference data, reward model validation, policy optimization setup, evaluation metrics, baseline policies, human or automated evaluation, reward hacking risks, and claim boundaries.
+  Return an RL-specific risk register and a revised protocol.
+evaluation_mode: closed_source
+source_material_required: true
+provided_materials:
+  - material_id: packet_rl_ho_reward_modeling_protocol
+    type: protocol_packet
+    status: source_material_required
+    description: "A frozen reward-modeling, RLHF, or post-training RL protocol/proposal excerpt."
+required_outputs:
+  - rl_protocol_audit
+  - reward_model_validation_review
+  - policy_evaluation_checklist
+  - reward_hacking_and_proxy_risk_register
+  - revised_protocol
+critical_facts_to_capture:
+  - "Preference-data collection, reward-model training/validation, and policy-optimization setup described in the packet."
+  - "Evaluation metrics, baselines, and human/automated evaluation procedures."
+  - "Risks of proxy mismatch, reward hacking, evaluator bias, and train/eval leakage."
+  - "Limits on alignment, helpfulness, or general capability claims."
+common_failure_modes:
+  - "Treating reward-model score improvements as direct alignment evidence."
+  - "Ignoring preference-data bias and reward hacking."
+  - "Missing policy baseline and evaluation protocol details."
+  - "Overstating conclusions from narrow evaluator judgments."
+scoring_dimensions:
+  - factual_accuracy
+  - evidence_traceability
+  - experimental_rigor
+  - benchmark_validity
+  - rl_specific_correctness
+  - inference_boundary_discipline
+  - output_usefulness
+  - efficiency
+notes_on_domain_specificity: "Bridges RL and LLM post-training while preserving RL-specific evaluation concerns."
+

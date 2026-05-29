@@ -1,0 +1,61 @@
+repositories:
+  - name: kdense-scientific-agent-skills
+    url: https://github.com/K-Dense-AI/scientific-agent-skills.git
+    commit_sha: effb57c5699c1d400ef461a7aa80fc6693939805
+    retrieved_at: 2026-05-29
+    observed_last_commit_at: 2026-05-28T15:52:12-07:00
+    observed_last_commit_subject: Update scvi-tools
+    repository_license: MIT
+    local_audit_path: /tmp/ling-bot-upstream-audit/scientific-agent-skills
+    inspected_skills:
+      - skills/literature-review
+      - skills/paper-lookup
+      - skills/research-lookup
+      - skills/exa-search
+      - skills/bgpt-paper-search
+      - skills/citation-management
+      - skills/pyzotero
+      - skills/hypothesis-generation
+      - skills/scientific-brainstorming
+      - skills/scientific-critical-thinking
+      - skills/peer-review
+      - skills/scholar-evaluation
+      - skills/statistical-analysis
+      - skills/scientific-writing
+      - skills/scientific-slides
+    notes:
+      - Individual skill licenses must be checked before reuse.
+      - Treat upstream as read-only benchmark baseline.
+      - Do not execute upstream scripts unless separately audited.
+
+  - name: orchestra-ai-research-skills
+    url: https://github.com/Orchestra-Research/AI-Research-SKILLs.git
+    commit_sha: 28f2d29236f2bade2eb92cadb2585189589a5828
+    retrieved_at: 2026-05-29
+    observed_last_commit_at: 2026-04-27T22:09:23-07:00
+    observed_last_commit_subject: "feat: add Agent-Native Research Artifact (ARA) category — 23rd, 3 skills"
+    repository_license: MIT
+    local_audit_path: /tmp/ling-bot-upstream-audit/AI-Research-SKILLs
+    inspected_skills:
+      - 0-autoresearch-skill
+      - 20-ml-paper-writing/ml-paper-writing
+      - 20-ml-paper-writing/systems-paper-writing
+      - 20-ml-paper-writing/academic-plotting
+      - 20-ml-paper-writing/presenting-conference-talks
+      - 21-research-ideation/brainstorming-research-ideas
+      - 21-research-ideation/creative-thinking-for-research
+      - 22-agent-native-research-artifact/ara-compiler
+      - 22-agent-native-research-artifact/research-manager
+      - 22-agent-native-research-artifact/rigor-reviewer
+      - 10-optimization/ml-training-recipes
+      - 11-evaluation/lm-evaluation-harness
+      - 11-evaluation/bigcode-evaluation-harness
+      - 11-evaluation/nemo-evaluator
+      - 04-mechanistic-interpretability/transformer-lens
+      - 04-mechanistic-interpretability/saelens
+      - 04-mechanistic-interpretability/pyvene
+      - 04-mechanistic-interpretability/nnsight
+    notes:
+      - Relevant inspected skills declare MIT in frontmatter.
+      - Treat upstream as read-only benchmark baseline.
+      - Disable autonomous experiment execution in subset baselines.

@@ -1,0 +1,43 @@
+task_id: MC-VAL-02
+split: validation
+task_type: method_comparison
+topic: visual representation learning
+research_question: "How should ViT-style architectures and ConvNet-style architectures be compared given differences in data scale, inductive bias, compute, and evaluation?"
+input_prompt: |
+  Using only the provided source packet, compare ViT-style and ConvNet-style evidence claims.
+  Produce a comparison matrix covering assumptions, data scale, compute, augmentation/training recipe, benchmarks, metrics, and scope limits.
+  Do not use external retrieval.
+evaluation_mode: closed_source
+source_material_required: true
+provided_materials:
+  - material_id: packet_mc_ho_vit_convnet
+    type: paper_set_packet
+    status: source_material_required
+    description: "A frozen packet containing representative ViT-style, ConvNet-style, and evaluation-context source documents or excerpts."
+required_outputs:
+  - method_comparison_matrix
+  - assumption_and_inductive_bias_table
+  - data_compute_evaluation_caveats
+  - evidence_strength_summary
+  - scoped_conclusions
+critical_facts_to_capture:
+  - "Architecture and inductive-bias differences stated in the packet."
+  - "Dataset scale, pretraining, augmentation, compute, and training-recipe differences."
+  - "Benchmark settings and whether comparisons are controlled."
+  - "Scope limits for transfer, robustness, or scaling claims."
+common_failure_modes:
+  - "Attributing performance differences only to architecture."
+  - "Ignoring data scale, pretraining, augmentation, and compute."
+  - "Using external canonical narratives instead of packet evidence."
+  - "Making universal claims from narrow benchmarks."
+scoring_dimensions:
+  - factual_accuracy
+  - evidence_traceability
+  - comparison_fairness
+  - experimental_rigor
+  - benchmark_validity
+  - inference_boundary_discipline
+  - output_usefulness
+  - efficiency
+notes_on_domain_specificity: "General representation/vision comparison task. It complements RL and LLM topics."
+

@@ -1,0 +1,45 @@
+task_id: LS-VAL-01
+split: validation
+task_type: literature_mapping
+topic: diffusion and generative modeling efficiency
+research_question: "Within the fixed source packet, what are the main approaches for improving diffusion-model sampling or training efficiency, and what tradeoffs do they introduce?"
+input_prompt: |
+  Produce a fixed-corpus literature map on efficiency methods for diffusion or related generative models.
+  Use only the provided source packet. Do not perform external retrieval.
+  Return a corpus coverage table, approach taxonomy, representative paper table, tradeoff analysis, unsupported-synthesis warnings, and open research gaps visible within the corpus.
+  Do not invent citations or unsupported performance claims.
+evaluation_mode: closed_source
+source_material_required: true
+provided_materials:
+  - material_id: packet_ls_ho_diffusion_efficiency
+    type: fixed_corpus_packet
+    status: evaluator_workspace_only
+    description: "Validation fixed corpus of diffusion/generative efficiency papers, metadata, selected sections, result tables, and limitations. Must be isolated from development workspace."
+required_outputs:
+  - corpus_coverage_table
+  - approach_taxonomy
+  - representative_paper_table
+  - tradeoff_analysis
+  - unsupported_synthesis_warnings
+  - evidence_grounded_gap_list
+critical_facts_to_capture:
+  - "Coverage means correct use of the supplied corpus, not discovery of external papers."
+  - "Separate sampling acceleration, distillation, solver design, architecture changes, latent-space modeling, and training-efficiency methods when supported by packet evidence."
+  - "Link speed/quality tradeoff claims to specific metrics, datasets, and model settings."
+  - "State coverage limits and unresolved evaluation issues."
+common_failure_modes:
+  - "Treating all generative-model efficiency methods as diffusion-specific."
+  - "Reporting speedups without quality metrics or evaluation setup."
+  - "Ignoring tradeoffs between sample quality, diversity, compute, and controllability."
+  - "Importing external papers or remembered facts into a closed-source task."
+scoring_dimensions:
+  - literature_coverage
+  - factual_accuracy
+  - evidence_traceability
+  - citation_validity
+  - comparison_fairness
+  - inference_boundary_discipline
+  - output_usefulness
+  - efficiency
+notes_on_domain_specificity: "Validation generative-model topic. It tests whether survey behavior generalizes beyond transformers and RL."
+

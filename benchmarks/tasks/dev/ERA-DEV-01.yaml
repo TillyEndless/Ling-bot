@@ -1,0 +1,43 @@
+task_id: ERA-DEV-01
+split: dev
+task_type: experimental_rigor_audit
+topic: agent evaluation
+research_question: "Does the provided AgentBench-style agent-evaluation evidence support its claimed conclusion?"
+input_prompt: |
+  Audit the provided experiment plan or paper excerpt for experimental rigor.
+  Focus on baselines, ablations, task selection, metrics, contamination risk, statistical reporting, reproducibility details, and claim scope.
+  Return severity-ranked findings and a corrected evaluation protocol.
+evaluation_mode: closed_source
+source_material_required: true
+provided_materials:
+  - material_id: packet_era_dev_agent_eval
+    type: experiment_excerpt_packet
+    status: source_material_required
+    description: "A frozen packet centered on AgentBench: Evaluating LLMs as Agents, canonical arXiv 2308.03688 or official version, with benchmark description, environment/task suite description, evaluation protocol, result tables, and limitation/discussion excerpts."
+required_outputs:
+  - rigor_audit_findings
+  - missing_baselines_and_ablations
+  - metric_claim_alignment_table
+  - reproducibility_risk_list
+  - corrected_protocol
+critical_facts_to_capture:
+  - "The exact conclusion the source claims the experiment supports."
+  - "Task suite, metrics, baselines, and evaluation protocol described in the packet."
+  - "Evidence gaps that weaken the conclusion."
+  - "Whether contamination, prompt leakage, or benchmark saturation risks are addressed."
+  - "Required source locations include benchmark/task description, evaluation setup, models/baselines, main results, and limitation/discussion material."
+common_failure_modes:
+  - "Praising the experiment without checking whether metrics support the claim."
+  - "Ignoring missing baselines or weak ablations."
+  - "Treating benchmark scores as sufficient evidence of general agent capability."
+  - "Failing to separate fixable reporting gaps from fatal design flaws."
+scoring_dimensions:
+  - factual_accuracy
+  - evidence_traceability
+  - experimental_rigor
+  - benchmark_validity
+  - inference_boundary_discipline
+  - output_usefulness
+  - efficiency
+notes_on_domain_specificity: "Agent evaluation is included to test benchmark-validity reasoning, not to make agent research the benchmark center."
+

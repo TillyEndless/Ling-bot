@@ -1,0 +1,31 @@
+packet_id: packet_era_dev_agent_eval
+task_id: ERA-DEV-01
+split: dev
+packet_version: 1
+packet_status: materialized_agent_drafted
+created_at: 2026-05-29
+runtime_retrieval_allowed: false
+exactly_matches_task_specification: true
+unresolved_source_or_version_issues:
+  - "DOI and paper-level license were not fully verified; public arXiv PDF is used as canonical Round 1 source."
+  - "Benchmark/data repository licenses were not separately audited."
+model_input:
+  path: model_input_packet.md
+  sha256: 864038d23703d73d6d0b834b4670fc44c2a06edb3633df3e2b4d777e3994addb
+canonical_sources:
+  - title: "AgentBench: Evaluating LLMs as Agents"
+    authors: "Xiao Liu; Hao Yu; Hanchen Zhang; Yifan Xu; Xuanyu Lei; Hanyu Lai; Yu Gu; Yuxian Gu; Hangliang Ding; Kaiwen Men; Kejuan Yang; Shudan Zhang; Xiang Deng; Aohan Zeng; Zhengxiao Du; Chenhui Zhang; Sheng Shen; Tianjun Zhang; Yu Su; Huan Sun; Minlie Huang; Yuxiao Dong; Jie Tang"
+    year: 2023
+    canonical_identifier:
+      arxiv: "2308.03688"
+      doi: unknown_pending_verification
+    canonical_version_used: "arXiv PDF downloaded from https://arxiv.org/pdf/2308.03688"
+    acquisition_location: https://arxiv.org/pdf/2308.03688
+    local_filename: canonical_sources/agentbench_arxiv_2308.03688.pdf
+    sha256: 9c780e35fc0b2de6c2e21e0572f6aaaadcf7ecdd56d63cfaae2b415bc0dc83c3
+    sections_pages_tables_appendices_included_in_model_input:
+      - "Abstract"
+      - "Figure 2"
+      - "Sections 1-4 benchmark setup and evaluation"
+      - "Table 1, Table 2, Table 3, Table 4"
+      - "Appendices B-I for task details"

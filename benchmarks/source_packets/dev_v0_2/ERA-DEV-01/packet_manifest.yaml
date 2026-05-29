@@ -1,0 +1,38 @@
+packet_id: packet_era_dev_agent_eval
+task_id: ERA-DEV-01
+split: dev
+packet_version: 2
+packet_status: draft_pending_human_review
+created_at: 2026-05-29
+supersedes_benchmark_packet_version: round1_dev_v0.1
+runtime_retrieval_allowed: false
+gold_annotations_included: false
+skill_instructions_included: false
+model_input:
+  path: model_input_packet.md
+  sha256: 219d5e7b48be10c00f23af9d7b30ffd6fec27cdde1d20d4c9425405b992b6bff
+  previous_v0_1_sha256: 864038d23703d73d6d0b834b4670fc44c2a06edb3633df3e2b4d777e3994addb
+canonical_sources:
+  - title: "AgentBench: Evaluating LLMs as Agents"
+    local_filename: ../../dev/ERA-DEV-01/canonical_sources/agentbench_arxiv_2308.03688.pdf
+    sha256: 9c780e35fc0b2de6c2e21e0572f6aaaadcf7ecdd56d63cfaae2b415bc0dc83c3
+    added_evidence:
+      - location: "p. 1, first page and Abstract"
+        reason_included: "Expose pinned ICLR 2024 / arXiv v3 identity and 29 API/OSS model count."
+      - location: "p. 2, Figure 2 and Introduction"
+        reason_included: "Expose eight environments and grounding categories."
+      - location: "p. 3, Table 1"
+        reason_included: "Expose pinned model roster."
+      - location: "p. 4, Section 2"
+        reason_included: "Expose execution-outcome categories."
+      - location: "pp. 4-5, Section 3"
+        reason_included: "Expose individual environment descriptions."
+      - location: "p. 6, Section 4.1 and Table 2"
+        reason_included: "Expose environment-specific metrics, toolkit, isolation, prompt setup, and inverse-weight statistics."
+      - location: "p. 7, Section 4.1 Overall Score Calculation and Table 3"
+        reason_included: "Expose weighted aggregation and environment-specific/overall scores."
+      - location: "p. 8, Section 4.3 and Table 4"
+        reason_included: "Expose execution-outcome proportions and failure-category interpretation."
+human_review_required: true
+notes:
+  - "Draft v0.2 packet expands AgentBench evidence for benchmark-validity audit while preserving no-gold generation inputs."

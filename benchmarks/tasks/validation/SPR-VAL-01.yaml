@@ -1,0 +1,43 @@
+task_id: SPR-VAL-01
+split: validation
+task_type: single_paper_deep_reading
+topic: world models
+research_question: "What does the provided Dreamer-style world-model paper claim, and what evidence in the paper supports or limits those claims?"
+input_prompt: |
+  Read only the provided source packet. Produce a structured paper card, claim ledger, evidence ledger, experiment summary, reproducibility notes, and limitation summary.
+  Do not use external retrieval. Mark absent details as unknown.
+evaluation_mode: closed_source
+source_material_required: true
+provided_materials:
+  - material_id: packet_spr_ho_dreamer_world_model
+    type: paper_packet
+    status: source_material_required
+    description: "A Dreamer-style world-model paper packet with PDF or markdown plus metadata."
+required_outputs:
+  - paper_card
+  - claim_ledger
+  - evidence_ledger
+  - experiment_summary
+  - reproducibility_notes
+  - limitations_and_open_questions
+critical_facts_to_capture:
+  - "The world-model objective, policy-learning setup, and evaluation environments described in the packet."
+  - "Baselines, metrics, ablations, and reported limitations."
+  - "Environment/version and stochastic-evaluation details if present."
+  - "Which claims are empirical, comparative, or mechanistic."
+common_failure_modes:
+  - "Inferring details from other Dreamer versions not in the packet."
+  - "Ignoring RL evaluation details such as seeds, environments, wrappers, or episodes."
+  - "Conflating model-based planning, latent dynamics learning, and policy optimization."
+  - "Overstating generality beyond the reported environments."
+scoring_dimensions:
+  - factual_accuracy
+  - evidence_traceability
+  - citation_validity
+  - experimental_rigor
+  - rl_specific_correctness
+  - inference_boundary_discipline
+  - output_usefulness
+  - efficiency
+notes_on_domain_specificity: "World models test both paper-reading and RL awareness without making world models the benchmark center."
+

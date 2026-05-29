@@ -1,0 +1,52 @@
+packet_id: packet_rl_dev_offline_rl_protocol
+task_id: RL-DEV-01
+split: dev
+packet_version: 2
+packet_status: draft_pending_human_review
+created_at: 2026-05-29
+supersedes_benchmark_packet_version: round1_dev_v0.1
+runtime_retrieval_allowed: false
+gold_annotations_included: false
+skill_instructions_included: false
+model_input:
+  path: model_input_packet.md
+  sha256: d6e27f84723787f9e658966d0e250a1864063c0ad00aa85a81d64a85f82b70e7
+  previous_v0_1_sha256: 042acef2f135d640c4fc62f0fd0add4dc8452bf50dd6f37fb6857306a4994d12
+canonical_sources:
+  - title: "D4RL: Datasets for Deep Data-Driven Reinforcement Learning"
+    local_filename: ../../dev/RL-DEV-01/canonical_sources/d4rl_arxiv_2004.07219.pdf
+    sha256: 8a7b164dda59674366520aabbd6717b1049b489af383cb9b17b505b861799f5f
+    added_evidence:
+      - location: "p. 1, Abstract and p. 2, Introduction"
+        reason_included: "Expose fixed offline datasets and benchmark evaluation framing."
+      - location: "Section 3"
+        reason_included: "Expose fixed dataset, behavior policy, and distribution-shift framing."
+      - location: "Sections 4-5"
+        reason_included: "Expose task design factors and concrete task instantiations."
+      - location: "p. 7, evaluation protocol and normalized-score definition"
+        reason_included: "Expose simulator-based evaluation and benchmark-specific normalized scores."
+      - location: "Appendix Tables 1-3"
+        reason_included: "Expose task identities, normalized scores, raw returns, and seed-reporting anchors."
+  - title: "Conservative Q-Learning for Offline Reinforcement Learning"
+    local_filename: ../../dev/RL-DEV-01/canonical_sources/cql_arxiv_2006.04779.pdf
+    sha256: 2bae51a0b45635ab714df39446cd656a9f4f1c503f512d6d0ce1eec3198d1716
+    added_evidence:
+      - location: "p. 1, Abstract and Introduction"
+        reason_included: "Expose distribution-shift, OOD-action overestimation, and conservative-Q motivation."
+      - location: "p. 2, Section 2"
+        reason_included: "Expose action-distribution shift between learned policy and behavior-policy data."
+      - location: "p. 3, Section 3.1"
+        reason_included: "Expose conservative off-policy evaluation and lower-bound Q objective."
+      - location: "p. 4, Section 3.2, Equations 3-4"
+        reason_included: "Expose CQL policy-learning objectives."
+      - location: "p. 7, Section 6 and Table 1"
+        reason_included: "Expose D4RL Gym-domain comparisons and four-seed aggregation."
+      - location: "p. 8, Table 2"
+        reason_included: "Expose D4RL AntMaze, Adroit, and Kitchen comparisons."
+      - location: "p. 9, Tables 3-4"
+        reason_included: "Expose Atari boundary and conservative-value/lower-bound analysis distinction."
+      - location: "Appendix p. 29"
+        reason_included: "Expose D4RL hyperparameter and four-seed reporting details."
+human_review_required: true
+notes:
+  - "Draft v0.2 packet expands offline-RL protocol evidence only."

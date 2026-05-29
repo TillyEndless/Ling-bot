@@ -1,0 +1,42 @@
+task_id: SPR-DEV-01
+split: dev
+task_type: single_paper_deep_reading
+topic: parameter-efficient fine-tuning
+research_question: "What exactly does the provided LoRA-style paper claim, what evidence supports those claims, and what limitations remain?"
+input_prompt: |
+  Read only the provided source packet. Produce a structured paper card, claim ledger, evidence ledger, reproducibility notes, and limitation summary.
+  Do not use external retrieval. If a fact is not in the packet, mark it as unknown.
+evaluation_mode: closed_source
+source_material_required: true
+provided_materials:
+  - material_id: packet_spr_dev_lora
+    type: paper_packet
+    status: source_material_required
+    description: "LoRA: Low-Rank Adaptation of Large Language Models, canonical arXiv 2106.09685 or official publication version, with full PDF or markdown plus metadata."
+required_outputs:
+  - paper_card
+  - claim_ledger
+  - evidence_ledger
+  - reproducibility_notes
+  - limitations_and_open_questions
+critical_facts_to_capture:
+  - "The method's stated contribution and the exact low-rank adaptation mechanism described in the packet."
+  - "Datasets, baselines, metrics, and model families used in the reported evidence."
+  - "Any ablations or implementation details that affect reproducibility."
+  - "Scope boundaries and limitations stated by the authors or implied by the evidence."
+  - "Required source locations include abstract, introduction/contribution framing, method section, experiment setup, main result tables, ablations, and limitations or appendix material if present."
+common_failure_modes:
+  - "Importing facts from memory rather than the provided packet."
+  - "Confusing author claims with independently demonstrated evidence."
+  - "Omitting baselines, metrics, or reproducibility details."
+  - "Overgeneralizing from the paper to all fine-tuning settings."
+scoring_dimensions:
+  - factual_accuracy
+  - evidence_traceability
+  - citation_validity
+  - experimental_rigor
+  - inference_boundary_discipline
+  - output_usefulness
+  - efficiency
+notes_on_domain_specificity: "General ML/LLM adaptation task. Topic should not dominate the benchmark beyond this single reading item."
+

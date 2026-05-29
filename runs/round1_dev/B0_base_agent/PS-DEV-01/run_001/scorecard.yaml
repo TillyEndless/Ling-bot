@@ -1,0 +1,36 @@
+run_id: round1_dev_v0.1__B0_base_agent__PS-DEV-01__run001
+variant: B0_base_agent
+task_id: PS-DEV-01
+reviewer: codex_agent_draft
+benchmark_version: round1_dev_v0.1
+scores:
+  factual_accuracy: 4
+  evidence_traceability: 3
+  citation_validity: 4
+  literature_coverage: null
+  comparison_fairness: null
+  experimental_rigor: 4
+  benchmark_validity: null
+  inference_boundary_discipline: 5
+  hypothesis_quality: 5
+  rl_specific_correctness: null
+  output_usefulness: 4
+  efficiency: 4
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: major
+  dimension: calibration
+  description: Strong separation of packet facts, synthesis, and hypotheses.
+  evidence: raw_output.md
+- severity: minor
+  dimension: calibration
+  description: Correctly treats probing evidence as non-causal and proposes falsifiable controls.
+  evidence: raw_output.md
+- severity: minor
+  dimension: calibration
+  description: Evidence locations are coarse packet-note references rather than exact approved page locations; local seed
+    is handled as motivation rather than literature evidence.
+  evidence: raw_output.md
+summary: Draft calibration score; review recommended before using as final comparative score.

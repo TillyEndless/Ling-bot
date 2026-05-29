@@ -1,0 +1,44 @@
+task_id: RL-DEV-01
+split: dev
+task_type: rl_specific_analysis
+topic: offline reinforcement learning
+research_question: "Is the provided offline RL evaluation protocol sufficient to support the proposed claims?"
+input_prompt: |
+  Review the provided offline RL protocol using only the source packet.
+  Audit dataset coverage, behavior policy assumptions, train/eval separation, environment details, metrics, baselines, seeds, uncertainty reporting, and offline-to-online claim boundaries.
+  Return an RL-specific risk register and a revised protocol.
+evaluation_mode: closed_source
+source_material_required: true
+provided_materials:
+  - material_id: packet_rl_dev_offline_rl_protocol
+    type: protocol_packet
+    status: source_material_required
+    description: "A frozen packet using D4RL: Datasets for Deep Data-Driven Reinforcement Learning and Conservative Q-Learning for Offline Reinforcement Learning, with dataset/environment descriptions, offline RL protocol, baselines, metrics, result tables, and limitation excerpts."
+required_outputs:
+  - rl_protocol_audit
+  - dataset_and_environment_checklist
+  - baseline_and_metric_review
+  - claim_scope_assessment
+  - revised_protocol
+critical_facts_to_capture:
+  - "Offline dataset source, behavior-policy assumptions, and evaluation setting described in the packet."
+  - "Environment names, versions, wrappers, seeds, and evaluation episodes if present."
+  - "Whether offline evaluation supports any online performance or generalization claim."
+  - "Missing uncertainty, variance, or robustness reporting."
+  - "Required source locations include dataset/task definitions, offline RL setup, evaluation protocol, main result tables, ablations, and discussion/limitations."
+common_failure_modes:
+  - "Treating offline RL like supervised learning."
+  - "Ignoring distribution shift between logged data and learned policy."
+  - "Omitting environment version, wrapper, or evaluation episode requirements."
+  - "Accepting best-seed or best-checkpoint reporting without disclosure."
+scoring_dimensions:
+  - factual_accuracy
+  - evidence_traceability
+  - experimental_rigor
+  - benchmark_validity
+  - rl_specific_correctness
+  - inference_boundary_discipline
+  - output_usefulness
+  - efficiency
+notes_on_domain_specificity: "RL-specific item. It tests whether a research skill has genuinely useful RL rigor rather than generic ML critique."
+

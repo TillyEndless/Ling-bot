@@ -1,0 +1,43 @@
+task_id: PS-VAL-02
+split: validation
+task_type: evidence_grounded_proposal_support
+topic: mechanistic interpretability
+research_question: "Can the provided mechanistic-interpretability claim be turned into a cautious, testable research proposal?"
+input_prompt: |
+  Using only the provided source packet, develop a small proposal to test the mechanistic-interpretability claim.
+  Produce scoped research questions, evidence-grounded hypotheses, causal tests or interventions, controls, falsification criteria, alternative explanations, and a risk register.
+  Do not treat correlational evidence as causal proof.
+evaluation_mode: closed_source
+source_material_required: true
+provided_materials:
+  - material_id: packet_ps_ho_mech_interp_claim
+    type: claim_and_evidence_packet
+    status: source_material_required
+    description: "A frozen packet containing a mechanistic-interpretability claim, evidence summary, and source excerpts."
+required_outputs:
+  - scoped_research_questions
+  - hypothesis_table
+  - evidence_map
+  - causal_test_plan
+  - alternative_explanations
+  - risk_register
+critical_facts_to_capture:
+  - "What the packet directly shows versus what it merely suggests."
+  - "Whether evidence is correlational, interventional, causal, descriptive, or speculative."
+  - "Controls and interventions needed to test the claim."
+  - "Scope boundaries for model family, task, layer, feature, or behavior."
+common_failure_modes:
+  - "Converting activation observations into causal claims without intervention evidence."
+  - "Ignoring alternative explanations."
+  - "Proposing tests that cannot falsify the claim."
+  - "Overstating scope beyond the provided model or task."
+scoring_dimensions:
+  - factual_accuracy
+  - evidence_traceability
+  - hypothesis_quality
+  - experimental_rigor
+  - inference_boundary_discipline
+  - output_usefulness
+  - efficiency
+notes_on_domain_specificity: "Mechanistic interpretability is an optional extension topic; this task evaluates causal-evidence discipline."
+

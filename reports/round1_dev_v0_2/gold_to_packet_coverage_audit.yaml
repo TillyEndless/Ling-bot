@@ -1,0 +1,327 @@
+benchmark_version_under_audit: round1_dev_v0.1
+target_revision: round1_dev_v0.2
+audit_scope: approved dev gold annotations versus B0-facing model_input_packet.md files
+decision_rule: "Revise packets only where gold-relevant evidence is absent or materially incomplete in the actual model input; do not infer insufficiency merely from B0 omissions."
+tasks:
+  - task_id: LS-DEV-01
+    overall_packet_status: needs_expansion
+    items:
+      - gold_item_id: LS1
+        item_type: must_capture
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: fully_supported_in_packet
+        packet_location: "Efficient Transformers survey bullets: taxonomy/background, not empirical proof that one method is best."
+        proposed_action: no_change
+        rationale: "The packet directly states the survey/taxonomy role and warns against using it as a best-method proof."
+      - gold_item_id: LS2
+        item_type: must_capture
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: fully_supported_in_packet
+        packet_location: "Linformer bullets: key/value projection, linear self-attention under assumptions, Table 1 O(n)."
+        proposed_action: no_change
+        rationale: "The gold-relevant Linformer complexity and method-line evidence is present."
+      - gold_item_id: LS3
+        item_type: must_capture
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: fully_supported_in_packet
+        packet_location: "Longformer bullets: local windowed attention plus global attention; linear scaling; long-context role."
+        proposed_action: no_change
+        rationale: "The packet supports sparse long-context classification and boundary against exact-attention kernels."
+      - gold_item_id: LS4
+        item_type: must_capture
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: false
+        coverage_status: partially_supported_in_packet
+        packet_location: "FlashAttention bullets: IO-aware exact attention and not approximate/sparse attention; block-sparse extension absent."
+        proposed_action: add_raw_source_excerpt
+        rationale: "The core exact-method part is present, but the approved distinction from the paper's block-sparse approximate extension is missing."
+      - gold_item_id: LS5
+        item_type: must_capture
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: fully_supported_in_packet
+        packet_location: "LoRA bullets: freezes pretrained weights; low-rank update matrices; adaptation efficiency not attention-computation efficiency."
+        proposed_action: no_change
+        rationale: "The boundary-paper role is directly present, though v0.2 may keep a source location for clarity."
+      - gold_item_id: LS-E1
+        item_type: major_critical_error
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: fully_supported_in_packet
+        packet_location: "Expected Literature-Mapping Boundaries: external papers only as not-in-packet limitations; no external retrieval."
+        proposed_action: no_change
+        rationale: "The fixed-corpus evidence policy is already present as generation-facing instruction."
+      - gold_item_id: LS-E2
+        item_type: major_critical_error
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: fully_supported_in_packet
+        packet_location: "Expected Literature-Mapping Boundaries: do not compare speedups across papers without same hardware/model/benchmark."
+        proposed_action: no_change
+        rationale: "The packet explicitly supports this fairness rule."
+      - gold_item_id: LS-E3
+        item_type: major_critical_error
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: requires_reasoning_but_evidence_present
+        packet_location: "Separate paper bullets for Linformer, Longformer, FlashAttention, survey, and LoRA."
+        proposed_action: no_change
+        rationale: "The packet gives enough evidence to separate method families; the agent must organize it."
+      - gold_item_id: LS-IB1_to_LS-IB4
+        item_type: inference_boundary
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: fully_supported_in_packet
+        packet_location: "Expected Literature-Mapping Boundaries section."
+        proposed_action: no_change
+        rationale: "The fixed-corpus, unsupported-synthesis, and no-global-best boundaries are directly stated."
+  - task_id: SPR-DEV-01
+    overall_packet_status: needs_expansion
+    items:
+      - gold_item_id: SPR1
+        item_type: must_capture
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: partially_supported_in_packet
+        packet_location: "Core method bullets: frozen weights, rank-decomposition matrices, W0 + BA."
+        proposed_action: add_raw_source_excerpt
+        rationale: "The method is present, but Section 4.2 general dense-layer applicability and selected Transformer-module focus should be added for the approved nuance."
+      - gold_item_id: SPR2
+        item_type: must_capture
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: false
+        coverage_status: partially_supported_in_packet
+        packet_location: "Core method bullet: low intrinsic rank hypothesis; Tables 5-6 and footnote caveat absent."
+        proposed_action: add_raw_table_or_figure
+        rationale: "The v0.1 packet lacks the empirical rank/matrix analysis and caveat needed to bound the low-rank claim."
+      - gold_item_id: SPR3
+        item_type: must_capture
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: partially_supported_in_packet
+        packet_location: "Claims and evidence bullets: Section 5 evaluates RoBERTa, DeBERTa, GPT-2, GPT-3; Table 2 GLUE."
+        proposed_action: add_raw_table_or_figure
+        rationale: "Model families are present, but GPT-2 Table 3 and GPT-3 Table 4 task scope should be added for full approved coverage."
+      - gold_item_id: SPR4
+        item_type: must_capture
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: partially_supported_in_packet
+        packet_location: "Claims/boundaries mention trainable parameters, GPU memory, inference latency, task quality."
+        proposed_action: add_raw_source_excerpt
+        rationale: "The separation is present, but training-speed and merge/no-latency deployment mechanics need direct packet evidence."
+      - gold_item_id: SPR5
+        item_type: must_capture
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: fully_supported_in_packet
+        packet_location: "Reproducibility and limitations: batching inputs for different tasks can be nontrivial with different LoRA modules."
+        proposed_action: no_change
+        rationale: "The deployment limitation is already included."
+      - gold_item_id: SPR6
+        item_type: must_capture
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: false
+        coverage_status: absent_from_packet
+        packet_location: "Not present except generic appendix pointer."
+        proposed_action: add_raw_table_or_figure
+        rationale: "Tables 5-6 and surrounding analysis are central approved anchors and absent from v0.1 packet."
+      - gold_item_id: SPR-E1_to_SPR-E3
+        item_type: major_critical_error
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: partially_supported_in_packet
+        packet_location: "Required Boundaries and missing-detail rule."
+        proposed_action: add_raw_table_or_figure
+        rationale: "Universal-superiority and outside-corpus policies are supported; the matrix/rank ablation failure rule needs packet evidence."
+      - gold_item_id: SPR-IB1_to_SPR-IB5
+        item_type: inference_boundary
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: partially_supported_in_packet
+        packet_location: "Required Boundaries section and Claims/Reproducibility notes."
+        proposed_action: add_raw_source_excerpt
+        rationale: "Most boundaries are present; the low-rank-as-hypothesis and distinct training-throughput dimensions need richer source-facing support."
+  - task_id: MC-DEV-01
+    overall_packet_status: no_change
+    items:
+      - gold_item_id: MC1_to_MC5
+        item_type: must_capture
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: requires_reasoning_but_evidence_present
+        packet_location: "DPO, InstructGPT/RLHF, PPO source-note sections and Required Comparison Boundaries."
+        proposed_action: no_change
+        rationale: "The direct/implicit DPO, staged RLHF, PPO-boundary, and setup-specific comparison evidence is present at task-appropriate granularity."
+      - gold_item_id: MC-E1_to_MC-E4
+        item_type: major_critical_error
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: fully_supported_in_packet
+        packet_location: "Required Comparison Boundaries."
+        proposed_action: no_change
+        rationale: "The no-universal-ranking and no-PPO-as-RLHF-evidence rules are directly stated."
+      - gold_item_id: MC-IB1_to_MC-IB4
+        item_type: inference_boundary
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: fully_supported_in_packet
+        packet_location: "Required Comparison Boundaries."
+        proposed_action: no_change
+        rationale: "Direct, indirect, and non-comparable evidence boundaries are present."
+  - task_id: ERA-DEV-01
+    overall_packet_status: needs_expansion
+    items:
+      - gold_item_id: ERA1
+        item_type: must_capture
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: partially_supported_in_packet
+        packet_location: "Benchmark setup and Evaluation details mention eight environments and examples."
+        proposed_action: add_raw_table_or_figure
+        rationale: "Eight-environment evidence is present, but the three grounding categories should be exposed for the approved classification."
+      - gold_item_id: ERA2
+        item_type: must_capture
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: false
+        coverage_status: partially_supported_in_packet
+        packet_location: "Benchmark setup mentions 29 LLMs but not pinned version marker or model-roster/version sensitivity."
+        proposed_action: add_raw_source_excerpt
+        rationale: "The pinned arXiv v3 / ICLR 2024 version and 29-model condition must be visible in the packet."
+      - gold_item_id: ERA3
+        item_type: must_capture
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: false
+        coverage_status: partially_supported_in_packet
+        packet_location: "Benchmark setup says success rate is main metric for several environments and an overall score is aggregated."
+        proposed_action: add_raw_table_or_figure
+        rationale: "The heterogeneous metric list and reciprocal-average weighting procedure are materially incomplete in v0.1."
+      - gold_item_id: ERA5
+        item_type: must_capture
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: false
+        coverage_status: partially_supported_in_packet
+        packet_location: "Audit focus mentions failure modes; no execution-outcome category names or predominant outcome evidence."
+        proposed_action: add_raw_table_or_figure
+        rationale: "Observed execution-outcome categories and Table 4 interpretation are absent."
+      - gold_item_id: ERA-AUDIT
+        item_type: protocol_or_audit_requirement
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: partially_supported_in_packet
+        packet_location: "Audit focus and Required Boundaries."
+        proposed_action: add_raw_table_or_figure
+        rationale: "Generic audit requirements are present, but metric, aggregation, isolation, prompt, and failure-category evidence need source-facing detail."
+      - gold_item_id: ERA-E1_to_ERA-E4
+        item_type: major_critical_error
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: partially_supported_in_packet
+        packet_location: "Required Boundaries; benchmark setup mentions 29 LLMs and overall score."
+        proposed_action: add_raw_source_excerpt
+        rationale: "Rules are mostly supported; version-sensitive count/roster errors need pinned version evidence."
+      - gold_item_id: ERA-IB1_to_ERA-IB5
+        item_type: inference_boundary
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: partially_supported_in_packet
+        packet_location: "Required Boundaries and Audit focus."
+        proposed_action: add_raw_table_or_figure
+        rationale: "General boundaries are present; observed-outcome versus causal-explanation and metric/aggregation boundaries need richer packet evidence."
+  - task_id: RL-DEV-01
+    overall_packet_status: needs_expansion
+    items:
+      - gold_item_id: RL1
+        item_type: must_capture
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: partially_supported_in_packet
+        packet_location: "D4RL bullets: benchmark suite, normalized-score conventions."
+        proposed_action: add_raw_source_excerpt
+        rationale: "Offline training versus simulator evaluation and normalized-score definition need direct packet evidence."
+      - gold_item_id: RL2
+        item_type: must_capture
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: fully_supported_in_packet
+        packet_location: "D4RL bullets list narrow, biased, multitask, suboptimal, non-representable behavior policies."
+        proposed_action: no_change
+        rationale: "The challenge categories are visible enough for the audit."
+      - gold_item_id: RL3
+        item_type: must_capture
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: partially_supported_in_packet
+        packet_location: "CQL bullets: conservative Q-functions and OOD value overestimation."
+        proposed_action: add_raw_source_excerpt
+        rationale: "The simplified wording risks 'penalizes all OOD actions'; v0.2 should expose action-distribution and lower-bound framing."
+      - gold_item_id: RL4
+        item_type: must_capture
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: false
+        coverage_status: partially_supported_in_packet
+        packet_location: "CQL bullets: evaluates on D4RL and reports normalized scores; table roles not distinguished."
+        proposed_action: add_raw_table_or_figure
+        rationale: "D4RL table roles, Table 3 Atari boundary, Table 4 lower-bound analysis, and four-seed detail are materially incomplete."
+      - gold_item_id: RL-PROTOCOL
+        item_type: protocol_or_audit_requirement
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: partially_supported_in_packet
+        packet_location: "RL audit focus and Required Boundaries."
+        proposed_action: add_raw_source_excerpt
+        rationale: "The audit checklist is present; source-backed normalized-score and simulator-evaluation details need expansion."
+      - gold_item_id: RL-E1_to_RL-E4
+        item_type: major_critical_error
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: partially_supported_in_packet
+        packet_location: "Required Boundaries and D4RL/CQL notes."
+        proposed_action: add_raw_table_or_figure
+        rationale: "Core boundaries are present, but table-role and simulator-evaluation evidence must be visible to support stricter scoring."
+      - gold_item_id: RL-IB1_to_RL-IB5
+        item_type: inference_boundary
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: partially_supported_in_packet
+        packet_location: "RL audit focus; Required Boundaries."
+        proposed_action: add_raw_source_excerpt
+        rationale: "Most inference boundaries are present, but normalized-score anchors and theory-versus-empirical boundary require more source-facing support."
+  - task_id: PS-DEV-01
+    overall_packet_status: no_change
+    items:
+      - gold_item_id: PS1_to_PS5
+        item_type: must_capture
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: requires_reasoning_but_evidence_present
+        packet_location: "BERT Rediscovers, BERTology, Structural Probe, and Local seed idea sections."
+        proposed_action: no_change
+        rationale: "The packet gives the probing/correlation/causal-use distinction, BERTology survey role, structural-probe hypothesis, and seed motivation."
+      - gold_item_id: PS-PROPOSAL
+        item_type: protocol_or_audit_requirement
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: fully_supported_in_packet
+        packet_location: "Required Boundaries: every hypothesis must include falsification criteria, controls, and alternative explanations."
+        proposed_action: no_change
+        rationale: "The proposal-quality requirement is directly represented as task-facing output constraint."
+      - gold_item_id: PS-E1_to_PS-E4
+        item_type: major_critical_error
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: fully_supported_in_packet
+        packet_location: "Runtime rule, Required Boundaries, and Local seed idea section."
+        proposed_action: no_change
+        rationale: "The fixed-source and no-causal-probing policies are present."
+      - gold_item_id: PS-IB1_to_PS-IB5
+        item_type: inference_boundary
+        central_to_task: true
+        sufficient_direct_evidence_in_v0_1_packet: true
+        coverage_status: fully_supported_in_packet
+        packet_location: "Required Boundaries."
+        proposed_action: no_change
+        rationale: "The packet directly instructs fact/synthesis/hypothesis separation, falsification, controls, and no causal-use overclaiming."

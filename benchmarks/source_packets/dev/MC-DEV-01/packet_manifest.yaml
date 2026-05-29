@@ -1,0 +1,53 @@
+packet_id: packet_mc_dev_dpo_ppo_rlhf
+task_id: MC-DEV-01
+split: dev
+packet_version: 1
+packet_status: materialized_agent_drafted
+created_at: 2026-05-29
+runtime_retrieval_allowed: false
+exactly_matches_task_specification: true
+unresolved_source_or_version_issues:
+  - "DOIs and paper-level licenses were not fully verified; public arXiv PDFs are used as canonical Round 1 sources."
+model_input:
+  path: model_input_packet.md
+  sha256: 811f34eb8d3f3f51dfabb99c16bb65c6ade364c2b0fd626eb6b346a76460f5be
+canonical_sources:
+  - title: "Direct Preference Optimization: Your Language Model is Secretly a Reward Model"
+    authors: "Rafael Rafailov; Archit Sharma; Eric Mitchell; Christopher D. Manning; Stefano Ermon; Chelsea Finn"
+    year: 2023
+    canonical_identifier:
+      arxiv: "2305.18290"
+      doi: unknown_pending_verification
+    canonical_version_used: "arXiv PDF downloaded from https://arxiv.org/pdf/2305.18290"
+    acquisition_location: https://arxiv.org/pdf/2305.18290
+    local_filename: canonical_sources/dpo_arxiv_2305.18290.pdf
+    sha256: 92cb3a2b71362acda98a789b03d88688fd33cf5fcf13f81d2b1de30ee7d3b67a
+    sections_pages_tables_appendices_included_in_model_input:
+      - "Abstract; Sections 3-4 objective/derivation; Section 6 experiments; Figure 2; Table 1; appendix derivation references"
+  - title: "Training language models to follow instructions with human feedback"
+    authors: "Long Ouyang; Jeffrey Wu; Xu Jiang; Diogo Almeida; Carroll Wainwright; Pamela Mishkin; Chong Zhang; Sandhini Agarwal; Katarina Slama; Alex Ray; John Schulman; Jacob Hilton; Fraser Kelton; Luke Miller; Maddie Simens; Amanda Askell; Peter Welinder; Paul Christiano; Jan Leike; Ryan Lowe"
+    year: 2022
+    canonical_identifier:
+      arxiv: "2203.02155"
+      doi: unknown_pending_verification
+    canonical_version_used: "arXiv PDF downloaded from https://arxiv.org/pdf/2203.02155"
+    acquisition_location: https://arxiv.org/pdf/2203.02155
+    local_filename: canonical_sources/instructgpt_arxiv_2203.02155.pdf
+    sha256: c1984bb50a5b90fddb895fdc3a0f72e5bc977148c9f63ef6040cbe7a3e1f0d98
+    sections_pages_tables_appendices_included_in_model_input:
+      - "Method sections for SFT, reward modeling, and PPO/RLHF"
+      - "Data collection description"
+      - "Evaluation protocol"
+      - "Main result tables and limitations/discussion"
+  - title: "Proximal Policy Optimization Algorithms"
+    authors: "John Schulman; Filip Wolski; Prafulla Dhariwal; Alec Radford; Oleg Klimov"
+    year: 2017
+    canonical_identifier:
+      arxiv: "1707.06347"
+      doi: unknown_pending_verification
+    canonical_version_used: "arXiv PDF downloaded from https://arxiv.org/pdf/1707.06347"
+    acquisition_location: https://arxiv.org/pdf/1707.06347
+    local_filename: canonical_sources/ppo_arxiv_1707.06347.pdf
+    sha256: e78feadadbdbb0b601b3c2bcc81404722cd431a489b307545f9b7bea1e8c4f5b
+    sections_pages_tables_appendices_included_in_model_input:
+      - "Abstract; clipped and KL-penalized objective sections; Algorithm 1; Section 6 experiments; Tables 1-6"

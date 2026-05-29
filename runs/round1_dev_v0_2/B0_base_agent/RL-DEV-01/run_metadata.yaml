@@ -1,0 +1,34 @@
+run_id: round1_dev_v0.2__B0_base_agent__RL-DEV-01__run001
+variant: B0_base_agent
+benchmark_version: round1_dev_v0.2
+task_id: RL-DEV-01
+model: gpt-5.5
+agent_environment: Codex CLI v0.133.0-alpha.1
+tool_permissions: none_dynamic
+tool_access_detail:
+  plugins: false
+  browser: false
+  computer_use: false
+  image_generation: false
+  apps: false
+  multi_agent: false
+  shell_tool: false
+  external_retrieval: false
+  external_apis: false
+source_packet_sha256: d6e27f84723787f9e658966d0e250a1864063c0ad00aa85a81d64a85f82b70e7
+prompt_sha256: cd652defbbf3a4b7ea8c78cfc732880200b81100cf8d4c2a7764daabfffd7ea6
+raw_output_sha256: e689f4d269a6a09591b7b8456e8faacc25cec0a07f2163b05df8b499e3611851
+fresh_context_confirmation: true
+generation_settings:
+  approval: never
+  sandbox: read-only
+  reasoning_effort: none
+  reasoning_summaries: none
+  ephemeral: true
+  ignore_user_config: true
+  ignore_rules: true
+  working_directory: /private/tmp/ling_bot_round1_dev_v0_2/B0_base_agent_execution_20260529_retry
+scoring_after_generation: true
+scored_against:
+  gold_annotation_sha256: 986404c7cf0b3c9a476173f89450195f59f7122b868b00e8209cb6991d20673e
+  rubric_sha256: ade3feab72b1c789c567fb865b5919d6442623ac4e4d3d7d94996ff1f157ca6b
