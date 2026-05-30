@@ -1,0 +1,45 @@
+task_id: ERA-VAL-01
+source_packet_id: validation_ERA-VAL-01_packet_v0_draft
+drafted_by_agent: true
+human_review_status: pending
+eligible_for_scoring: false
+must_capture:
+- id: ERA-VAL-01-M1
+  finding: Identifies benchmark scores as protocol-bound evidence rather than self-validating capability proof.
+  evidence_locations_to_verify:
+  - GPT-3 PDF p.1 Abstract; evaluation/result sections; test-set contamination analysis section/appendix; MMLU PDF p.1 Abstract
+    and benchmark/evaluation sections.
+  scoring_weight: high
+- id: ERA-VAL-01-M2
+  finding: Audits contamination, benchmark exposure, prompt protocol, baseline choice, uncertainty, and reproducibility controls.
+  evidence_locations_to_verify:
+  - GPT-3 contamination analysis section/appendix; MMLU evaluation protocol and benchmark construction sections.
+  scoring_weight: high
+- id: ERA-VAL-01-M3
+  finding: Separates source-reported contamination analysis from additional contamination risks requiring follow-up evidence.
+  evidence_locations_to_verify:
+  - GPT-3 and MMLU result tables/figures and limitations/discussion sections.
+  scoring_weight: medium
+acceptable_equivalent_formulations:
+- Equivalent wording is acceptable if it remains grounded in the supplied validation packet and preserves claim scope.
+critical_errors:
+- id: E1
+  error: Uses external sources or remembered facts as evidence for a core claim in the closed-source task.
+  penalty: major
+- id: E2
+  error: Presents a broad superiority, deployment, causality, or field-gap claim beyond packet evidence.
+  penalty: major
+- id: E3
+  error: Invents missing metrics, seeds, versions, baselines, or numeric results.
+  penalty: major
+inference_boundary_requirements:
+- Use only the packet as evidence.
+- Separate direct source facts, within-packet synthesis, critique, and proposed hypotheses.
+- Mark broader literature, deployment, causal, or superiority claims as requiring external review unless directly evidenced.
+optional_high_value_findings:
+- Identifies missing reproducibility details without treating absence from the packet as proof of source failure.
+- Separates direct evidence from synthesis and proposed follow-up checks.
+- Reports source/page/table grounding where the packet or canonical source supplies it.
+ambiguities_requiring_human_review:
+- Exact page, section, table, and figure locations must be verified against the acquired canonical sources.
+- Some packet notes are compressed source summaries and should be checked against full PDFs before scoring approval.

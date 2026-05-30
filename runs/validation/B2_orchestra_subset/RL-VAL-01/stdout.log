@@ -1,0 +1,66 @@
+## rl_protocol_audit
+
+The source packet is not sufficient to fully evaluate broad world-model planning claims. It supports only a scoped audit: PETS uses probabilistic dynamics models plus model predictive control for sample-efficient continuous-control RL, and PlaNet learns latent dynamics from pixels and plans in latent space for control tasks. Those are source-derived claims, but the packet omits most protocol details needed to judge validity.
+
+| Claim / protocol element | Provenance | Evidence in packet | Support status | Audit consequence |
+|---|---|---|---|---|
+| PETS evaluates probabilistic dynamics models with MPC | source-derived | Controlled source notes | Supported at high level | Enough to identify model-based planning setup, not enough to validate implementation fairness |
+| PlaNet evaluates latent dynamics planning from pixels | source-derived | Controlled source notes | Supported at high level | Enough to identify pixel-based world-model planning, not enough to audit representation/model training details |
+| Protocol can support sample-efficiency claims | agent-inferred | PETS note mentions sample-efficient continuous control | Partially supported | Needs exact trial counts, environment steps, baselines, and uncertainty |
+| Protocol can support world-model planning superiority claims | unsupported | No compatible direct comparison across methods in packet | Not supported | Requires controlled baselines, ablations, model-error diagnostics, and planning-vs-model-learning separation |
+| Protocol generalizes across RL domains | unsupported | Only continuous-control and DeepMind Control are noted | Not supported | Needs heterogeneous tasks, domains, seeds, and failure cases |
+
+Major missing details: environment names and versions, observation/action spaces, reward definitions, episode length, dataset collection policy, model-learning loss, ensemble size, uncertainty handling, planning horizon, MPC optimizer, replanning frequency, seeds, number of evaluation episodes, metric definitions, aggregation method, compute/tuning budgets, and ablations.
+
+## model_error_and_planning_risk_table
+
+| Risk | Severity | Evidence issue | Consequence | Minimal fix |
+|---|---:|---|---|---|
+| Model-error compounding is not directly audited | High | Packet says models are used for planning, but gives no rollout-error or calibration diagnostics | Planning gains may reflect short-horizon luck, simulator simplicity, or hidden tuning | Report one-step and multi-step prediction error, uncertainty calibration, and performance by planning horizon |
+| Planning horizon is unspecified | High | MPC/latent planning are named, but horizon and replanning settings are omitted | Cannot tell whether claims concern long-horizon world modeling or short-horizon control | Pre-register horizon values, optimizer budget, replanning frequency, and horizon ablations |
+| Model learning objective is underspecified | High | “Probabilistic dynamics” and “latent dynamics” are described only broadly | Cannot separate representation quality, likelihood fit, reward prediction, and control utility | State losses, targets, latent variables, reward/value terms, training schedule, and validation criteria |
+| Model/planner contribution is not isolated | High | No ablation details included | Strong planning claims may actually depend on ensemble uncertainty, action optimizer, data collection, or representation | Add ablations: no planning, random-shooting/CEM variants, deterministic model, oracle/state model where appropriate |
+| Pixel versus state inputs may make comparisons incompatible | Medium | PETS appears continuous-control dynamics; PlaNet plans from pixels | Cross-paper conclusions may conflate observation modality with method quality | Compare only within matched observation settings, or label cross-method comparison as non-equivalent |
+| Evaluation variance is unknown | Medium | Seeds and repeated runs not included | Sample-efficiency and final-return rankings may be unstable | Use multiple seeds, confidence intervals, per-task results, and learning-curve variability |
+| Baseline strength is unclear | Medium | Baselines are listed as evidence objects but not specified in packet | Reported gains may depend on weak or unfairly tuned baselines | Specify baseline algorithms, tuning budgets, input modality, compute, and data access |
+
+## environment_and_seed_checklist
+
+| Item | Required for audit | Status from packet |
+|---|---|---|
+| Environment/task names | Needed to assess task coverage and comparability | Missing |
+| Simulator/version | Needed for reproducibility | Missing |
+| Observation modality | Critical because PETS and PlaNet may differ on state vs pixel inputs | Partially present |
+| Action space and reward definition | Needed to interpret control difficulty and metrics | Missing |
+| Episode length/termination | Needed for return comparability | Missing |
+| Training interaction budget | Needed for sample-efficiency claims | Missing |
+| Evaluation episodes per checkpoint | Needed for variance control | Missing |
+| Random seeds | Needed for uncertainty and reproducibility | Missing |
+| Train/eval split or task sampling | Needed to avoid overfitting claims | Missing |
+| Failure cases/negative tasks | Needed for claim boundaries | Missing |
+
+## baseline_and_metric_review
+
+The packet does not provide enough detail to judge whether baselines and metrics are fair. A valid comparison would need compatible observation modality, data budget, environment steps, compute budget, hyperparameter search, and evaluation protocol.
+
+Metrics should include at minimum average episodic return, sample-efficiency curves versus real environment steps, final performance at fixed budgets, per-task results before aggregation, and uncertainty across seeds. For world-model planning specifically, the protocol should also report model prediction error, uncertainty calibration, planning-horizon sensitivity, and real-environment performance after executing planned actions.
+
+The claim boundary should be tightened: the packet can support “these papers study model-based RL systems that learn dynamics models and use planning for continuous-control or pixel-control tasks.” It does not support a general claim that world-model planning is superior, robust, or broadly general without further protocol evidence.
+
+## revised_protocol
+
+1. Define environments exactly: task names, versions, observation modality, action space, reward, episode length, termination, and train/evaluation budgets.
+
+2. Specify the learned world model: inputs, targets, probabilistic or latent variables, loss function, reward prediction, validation split, training frequency, ensemble or uncertainty method, and stopping criteria.
+
+3. Specify planning: MPC or latent-space planner, horizon, action optimizer, number of candidate sequences/iterations, replanning frequency, terminal value use, and compute budget.
+
+4. Add model-error controls: one-step and multi-step prediction error, calibration curves for probabilistic models, latent reconstruction or prediction diagnostics where applicable, and correlation between model error and control return.
+
+5. Add planning ablations: no-planning policy baseline, deterministic model, shorter/longer horizons, planner budget sweep, uncertainty disabled, reward-model ablation, and model-free baseline under matched environment-step budgets.
+
+6. Use fair baselines: same observation modality, same real-environment interaction budget, comparable tuning budget, reported hyperparameters, and identical evaluation episodes where possible.
+
+7. Use robust evaluation: at least multiple random seeds, fixed evaluation intervals, enough episodes per checkpoint to estimate variance, confidence intervals or standard errors, and per-task results before aggregate summaries.
+
+8. Bound claims explicitly: state whether conclusions apply to sample efficiency, final return, pixel-based control, continuous-control state tasks, short-horizon MPC, latent planning, or uncertainty-aware planning. Do not generalize beyond the evaluated tasks and protocols.

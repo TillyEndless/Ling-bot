@@ -1,0 +1,37 @@
+run_id: validation_v0.1__B2_orchestra_subset__ERA-VAL-01__run001
+variant: B2_orchestra_subset
+task_id: ERA-VAL-01
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 4
+  evidence_traceability: 4
+  citation_validity: null
+  literature_coverage: null
+  comparison_fairness: 4
+  experimental_rigor: 4
+  benchmark_validity: 4
+  inference_boundary_discipline: 4
+  hypothesis_quality: null
+  rl_specific_correctness: null
+  output_usefulness: 4
+  efficiency: 4
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: factual_accuracy
+  description: Some recommended checks mention benchmark release dates and model training data cutoff. As corrective protocol
+    this is appropriate, but it should be clearly framed as required metadata rather than implying the packet contains or
+    establishes those facts.
+  evidence: Gold requires using only packet evidence and separating proposed follow-up checks from source facts.
+- severity: minor
+  dimension: output_usefulness
+  description: The audit is detailed and well structured, but table density makes it slightly less direct than B1/B3 for a
+    review artifact.
+  evidence: Required outputs are all present, but the format has some repetition across findings, risk table, and baseline
+    review.
+summary: B2 is a strong audit that captures the central benchmark-contamination skepticism and gives a solid corrected protocol.
+  It handles baselines, metrics, uncertainty, prompt protocol, leakage, and claim scope well. It remains within the closed-source
+  boundary.

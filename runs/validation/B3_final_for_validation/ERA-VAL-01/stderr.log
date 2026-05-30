@@ -1,0 +1,611 @@
+2026-05-30T04:58:32.428047Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:58:32.453066Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+OpenAI Codex v0.133.0-alpha.1
+--------
+workdir: /private/tmp/ling_bot_validation_v0_1_execution/B3_final_for_validation
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: none
+reasoning summaries: none
+session id: 019e773f-864b-7890-aefa-c50b180740e9
+--------
+user
+# Variant Runtime Instructions
+
+You are running benchmark variant `B3_final_for_validation` for the `literature_analysis_and_research_rigor` module. Follow only the variant skill/reference content included below. Do not use external retrieval or dynamic tools. Do not use knowledge outside the supplied source packet as evidence.
+
+# Variant Skill And References
+
+## Variant File: variant/CHANGELOG.md
+
+# B3 Final For Validation Changelog
+
+Base: `B3_your_v1_original`.
+
+Accepted changes:
+
+- Added concise source inventory discipline before analysis.
+- Added evidence-burden labels for direct packet evidence, within-packet synthesis, method background, limited critique, speculative proposal, and unsupported claims requiring external review.
+- Added general comparison, benchmark-audit, and inference-boundary guidance for provenance and claim scope.
+
+Rejected change:
+
+- `B3_iter1` label-economy and compact-placement tuning was rejected because it did not reliably improve efficiency and risked dev-style overfitting.
+
+Status: dev-trained and validation-ready. Validation has not been run.
+
+
+## Variant File: variant/ai_ml_rl_literature_analysis/SKILL.md
+
+---
+name: ai-ml-rl-literature-analysis-and-research-rigor
+description: Revised instruction-only skill for AI/ML/RL literature mapping, paper reading, method comparison, benchmark audit, RL protocol analysis, and evidence-grounded proposal support.
+license: project-original
+---
+
+# AI/ML/RL Literature Analysis And Research Rigor
+
+Use this skill for fixed-source research analysis in artificial intelligence, machine learning, and reinforcement learning. It is a literature-analysis and research-rigor module only. It does not schedule projects, manage repositories, execute experiments, monitor runs, retrieve papers, call APIs, parse PDFs, or maintain persistent state.
+
+## Non-Negotiable Rules
+
+1. Use only the task prompt and supplied source packet.
+2. Do not import facts, citations, identifiers, numbers, or conclusions from memory.
+3. Separate source-stated claims, extracted evidence, cross-source synthesis, proposed hypotheses, and unsupported speculation.
+4. Prefer page, section, figure, table, appendix, or excerpt-level grounding when the packet provides it.
+5. Label the evidence burden for important claims using the vocabulary in `references/evidence_traceability.md`.
+6. Extract experimental details before interpreting results: task, data, model, baseline, metric, protocol, seed/run count, uncertainty, ablation, compute or hardware when supplied, and limitations.
+7. Do not infer global method superiority from incompatible setups.
+8. For RL, distinguish dataset collection, behavior policy, offline or online training, policy evaluation, reward/environment details, distribution shift, and deployment claims.
+9. For representation or mechanism proposals, distinguish information recoverability, correlation, intervention evidence, causal use, and mechanism claims.
+
+## Mode Selection
+
+Choose the closest mode from the task:
+
+- literature mapping
+- single-paper structured reading
+- method comparison
+- benchmark or experimental rigor audit
+- RL protocol analysis
+- evidence-grounded proposal support
+
+Load the relevant reference file and then produce the requested output sections. If the task requests a format, honor it while applying the evidence rules.
+
+## Default Work Pattern
+
+1. Source inventory: before analysis, concisely identify supplied source titles, paper versions when provided, sections, tables, figures, appendices, and other evidence objects. Keep this short; it supports the analysis but does not replace it.
+2. Claim extraction: list major claims before synthesis.
+3. Evidence ledger: attach each important claim to the most specific available source location and an evidence-burden label.
+4. Rigor pass: check baselines, metrics, protocol, ablations, variability, reproducibility, and scope.
+5. Boundary pass: label unsupported, speculative, or out-of-packet claims.
+6. Final answer: concise, structured, and directly useful for research decisions.
+
+Reference files:
+
+- `references/workflow_modes.md`
+- `references/evidence_traceability.md`
+- `references/paper_reading_schema.md`
+- `references/comparative_analysis_schema.md`
+- `references/benchmark_and_experiment_audit.md`
+- `references/rl_analysis_guidance.md`
+- `references/inference_boundary_policy.md`
+
+
+## Variant File: variant/ai_ml_rl_literature_analysis/references/benchmark_and_experiment_audit.md
+
+# Benchmark And Experiment Audit
+
+## Benchmark Validity
+
+Assess whether the benchmark supports the intended claim.
+
+| Audit area | Questions |
+|---|---|
+| Construct | What capability or property is the benchmark supposed to measure? |
+| Task coverage | Are tasks representative or narrow? |
+| Metric alignment | Do metrics measure the claimed property? |
+| Aggregation | Are heterogeneous metrics combined transparently and defensibly? |
+| Baselines | Are baseline systems relevant, strong, and fairly tuned? |
+| Protocol | Are prompts, data splits, sampling, environment versions, and evaluation rules clear? |
+| Leakage | Could train/test contamination, public benchmark exposure, or prompt leakage affect results? |
+| Uncertainty | Are repeated runs, seeds, confidence intervals, or variance reported? |
+| Reproducibility | Are artifacts, scripts, configs, model versions, data, and raw outputs available or specified? |
+
+## Experimental Rigor
+
+For experiments, extract:
+
+- independent variable or intervention;
+- controlled variables;
+- datasets or environments;
+- baselines;
+- metrics;
+- ablations;
+- statistical or multi-run reporting;
+- missing information;
+- claim boundaries.
+
+## Audit Language
+
+State risks as risks unless the packet directly establishes a flaw. A missing detail weakens support; it is not proof that the original study failed to do the thing.
+
+Use evidence-burden labels in audit findings:
+
+- `DIRECT_PACKET_EVIDENCE` for source-stated design choices, metrics, reported results, and limitations.
+- `WITHIN_PACKET_SYNTHESIS` for relations among packet-supplied tasks, metrics, baselines, or result tables.
+- `LIMITED_CRITIQUE` for grounded audit concerns inferred from packet evidence or missing protocol detail.
+- `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` for claims about contamination, reproducibility, deployment robustness, or external validity that require evidence beyond the packet.
+
+
+## Variant File: variant/ai_ml_rl_literature_analysis/references/comparative_analysis_schema.md
+
+# Comparative Analysis Schema
+
+## Method Comparison Matrix
+
+| Dimension | Method or source A | Method or source B | Comparable as stated? | Evidence-burden label | Evidence | Boundary |
+|---|---|---|---|---|---|---|
+
+Recommended dimensions:
+
+- objective;
+- input data and supervision;
+- optimization procedure;
+- model or policy class;
+- assumptions;
+- baselines;
+- datasets, environments, or tasks;
+- metrics;
+- compute or hardware when available;
+- ablations;
+- limitations and failure modes.
+
+## Fairness Rules
+
+- Compare within the same experimental setup when possible.
+- If comparisons cross papers, state differences in data, model size, metrics, training budget, implementation, and evaluation protocol.
+- A method can be better in a reported setup without being universally better.
+- A result from one domain does not automatically transfer to another domain.
+- If a source is an algorithmic foundation rather than a direct comparison, use it for mechanism/objective explanation, not direct empirical ranking.
+- Label setup-specific comparisons as direct evidence only for the reported setup.
+- Label cross-paper relations as synthesis unless the packet contains a direct shared evaluation.
+
+## Output Checks
+
+- Have all methods/sources been represented fairly?
+- Are assumptions visible?
+- Are incompatible protocols called out?
+- Are claims limited to supported settings?
+- Are unsupported ranking or transfer claims explicitly marked as needing external review?
+
+
+## Variant File: variant/ai_ml_rl_literature_analysis/references/evidence_traceability.md
+
+# Evidence Traceability
+
+## Claim-Evidence Ledger
+
+Use a ledger whenever the task has more than one substantive claim.
+
+| Claim | Claim type | Evidence-burden label | Source location | Evidence directness | Supported scope | Missing detail |
+|---|---|---|---|---|---|---|
+
+Claim types include method definition, assumption, empirical result, benchmark result, comparison, limitation, mechanism claim, causal claim, reproducibility claim, and proposal hypothesis.
+
+## Evidence-Burden Labels
+
+Use these labels to make provenance and uncertainty visible:
+
+- `DIRECT_PACKET_EVIDENCE`: directly stated in the provided source packet.
+- `WITHIN_PACKET_SYNTHESIS`: synthesized from multiple packet-provided sources.
+- `METHOD_BACKGROUND`: general method context from the provided materials.
+- `LIMITED_CRITIQUE`: critique grounded in packet evidence but not directly stated by the source.
+- `SPECULATIVE_PROPOSAL`: proposed hypothesis or future work, explicitly not established fact.
+- `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW`: claim requiring literature search or external evidence beyond the packet.
+
+Prefer the narrowest label that fits. A claim may be useful even when it is not direct evidence, but its burden must be visible.
+
+## Source Location Granularity
+
+Use the most precise available location:
+
+1. page plus section/table/figure/appendix;
+2. section/table/figure/appendix without page;
+3. source note or excerpt name;
+4. source-level citation only when no finer location is supplied.
+
+If the packet supplies exact locations, use them. If it does not, state that the packet does not provide finer grounding.
+
+## Evidence Directness
+
+- Direct: the source explicitly states the claim.
+- Indirect: the claim follows from supplied details but is not directly stated.
+- Partial: evidence supports only part of the claim.
+- Comparative: evidence supports a relation between methods under a specific setup.
+- Absent: the packet does not establish the claim.
+
+## Citation Hygiene
+
+Do not invent missing metadata. Do not cite absent papers. Do not use external memory as evidence. A citation is valid only if the supplied source supports the statement being made.
+
+
+## Variant File: variant/ai_ml_rl_literature_analysis/references/inference_boundary_policy.md
+
+# Inference Boundary Policy
+
+## Claim Classes
+
+- Source fact: directly stated in supplied material; usually `DIRECT_PACKET_EVIDENCE`.
+- Extracted observation: result or detail read from supplied evidence; usually `DIRECT_PACKET_EVIDENCE`.
+- Cross-source synthesis: relation among supplied sources; usually `WITHIN_PACKET_SYNTHESIS`.
+- Method background: general method context supplied by the packet; usually `METHOD_BACKGROUND`.
+- Grounded critique: audit concern based on packet evidence but not directly stated by the source; usually `LIMITED_CRITIQUE`.
+- Proposed hypothesis: new testable idea grounded in supplied evidence; usually `SPECULATIVE_PROPOSAL`.
+- Speculation: plausible but not established by supplied material; usually `SPECULATIVE_PROPOSAL` or `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW`.
+- Unsupported claim: not justified by the packet; use `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW`.
+
+## Boundary Rules
+
+- Mark unsupported synthesis explicitly.
+- Use evidence-burden labels to distinguish direct evidence, synthesis, grounded critique, proposal, and unsupported claims.
+- Do not infer a field-wide literature gap from a small packet.
+- Do not infer causality from correlation, probing, association, or representation recoverability alone.
+- Do not infer mechanism from performance unless intervention or ablation evidence supports it.
+- Do not infer deployment robustness from benchmark performance alone.
+- Do not infer global superiority from setup-specific comparisons.
+- Do not fill absent numbers, versions, metrics, seeds, or tables from memory.
+
+## Proposal Rules
+
+A useful proposal must state:
+
+- a falsifiable hypothesis;
+- observable outcomes that would support it;
+- observations that would count against it;
+- controls and baselines;
+- feasibility and reproducibility requirements;
+- the evidence still needed before making stronger claims.
+
+
+## Variant File: variant/ai_ml_rl_literature_analysis/references/paper_reading_schema.md
+
+# Paper Reading Schema
+
+## Paper Card
+
+| Field | Notes |
+|---|---|
+| Problem | What question or bottleneck the paper addresses. |
+| Core method | Exact intervention or algorithmic idea. |
+| Assumptions | Modeling, data, optimization, or evaluation assumptions. |
+| Evidence | Experiments, theory, analysis, or benchmarks supplied. |
+| Baselines | What the paper compares against. |
+| Metrics | What outcomes are measured and how. |
+| Ablations | Components, settings, or mechanisms tested separately. |
+| Reproducibility | Code, configs, seeds, datasets, hardware, prompts, or missing details. |
+| Limitations | Author-stated and evidence-implied boundaries. |
+
+## Reading Order
+
+1. Identify the paper's own contribution claim.
+2. Extract the method definition before interpreting results.
+3. Extract each evidence table or figure by role: main result, ablation, analysis, resource cost, failure mode, or limitation.
+4. Separate what is demonstrated in the paper from what is plausible beyond it.
+5. Mark absent details as unknown.
+
+## Experimental Detail Checklist
+
+- Models or systems evaluated.
+- Datasets, tasks, environments, prompts, or benchmark suites.
+- Baselines and whether they are strong and comparable.
+- Metrics and aggregation.
+- Number of seeds, runs, samples, trials, or evaluation episodes.
+- Variability or uncertainty.
+- Hyperparameters and tuning budget.
+- Compute, hardware, or implementation details when supplied.
+- Ablations and sensitivity analyses.
+
+
+## Variant File: variant/ai_ml_rl_literature_analysis/references/rl_analysis_guidance.md
+
+# RL Analysis Guidance
+
+Use this reference for reinforcement learning and sequential-decision tasks.
+
+## Core Distinctions
+
+- Data collection policy versus learned policy.
+- Offline training from fixed data versus online interaction.
+- Simulator evaluation versus real-world deployment.
+- Reward function, return metric, success metric, and normalized benchmark score.
+- Behavior-policy support and learned-policy distribution shift.
+- Environment version, wrappers, stochasticity, horizon, termination, and evaluation episodes.
+- Policy value estimates versus actual rollout returns.
+
+## Offline RL Checklist
+
+| Item | What to extract |
+|---|---|
+| Dataset identity | Task, domain, version, collection regime, size if supplied. |
+| Behavior policy | Known, unknown, mixture, expert, suboptimal, scripted, human, or generated. |
+| Training mode | Fixed dataset only, online rollouts, model-based augmentation, or unclear. |
+| Evaluation mode | Simulator rollout, logged-policy evaluation, off-policy estimate, real deployment, or unclear. |
+| Metrics | Raw return, normalized score, success, regret, value estimate, or other. |
+| Baselines | Behavior cloning, offline RL methods, online RL, random, expert, or task-specific baselines. |
+| Variability | Seeds, runs, episodes, confidence intervals, or missing uncertainty. |
+| Claim boundary | Benchmark performance, algorithmic property, deployment robustness, or generalization. |
+
+## RL Failure Modes
+
+- Treating trajectories as independent supervised examples while ignoring policy evaluation.
+- Ignoring action-distribution shift or support mismatch.
+- Equating normalized benchmark scores with universal absolute performance.
+- Using offline value estimates as if they were verified returns.
+- Generalizing simulator results to deployment without evidence.
+
+
+## Variant File: variant/ai_ml_rl_literature_analysis/references/workflow_modes.md
+
+# Workflow Modes
+
+Begin every mode with a concise source inventory: source titles, versions when supplied, sections, tables, figures, appendices, and other packet-provided evidence objects. Use the inventory to avoid missing sources, not as a substitute for analysis.
+
+## Literature Mapping
+
+Goal: organize a fixed corpus into research lines and evidence boundaries.
+
+Minimum steps:
+
+1. Account for every source in the packet.
+2. Assign source role using evidence only: method paper, survey, benchmark, empirical study, theory, systems artifact, boundary case, or motivation.
+3. Group by technical mechanism, research question, evidence type, and evaluation target.
+4. Compare claims only where setup compatibility is clear.
+5. List unsupported syntheses and corpus coverage limits.
+6. Mark broad synthesis or coverage claims with evidence-burden labels.
+
+## Single-Paper Structured Reading
+
+Goal: recover exactly what the paper claims and what supports it.
+
+Minimum steps: method definition, author motivation, assumptions, experiment setup, baselines, metrics, ablations, limitations, reproducibility details, and unknowns.
+
+## Method Comparison
+
+Goal: compare methods without laundering setup differences into universal rankings.
+
+Minimum steps: objectives, assumptions, data, optimization, baselines, metrics, evaluation protocols, evidence strength, and fair scope.
+
+Label direct within-source comparisons separately from cross-source synthesis or limited critique.
+
+## Benchmark Or Experimental Rigor Audit
+
+Goal: decide whether a protocol supports a stated claim.
+
+Minimum steps: construct validity, metric alignment, task selection, aggregation, baselines, ablations, uncertainty, leakage, reproducibility, and claim scope.
+
+Separate source-stated protocol details from audit risks inferred from missing or incomplete details.
+
+## RL Protocol Analysis
+
+Goal: audit sequential decision evidence.
+
+Minimum steps: environment, reward, behavior policy, data collection, train/eval separation, policy evaluation, return metric, stochasticity, distribution shift, seeds, and deployment boundaries.
+
+## Evidence-Grounded Proposal Support
+
+Goal: convert a vague idea into testable hypotheses without inventing field-wide novelty.
+
+Minimum steps: packet facts, synthesis, hypotheses, predictions, disconfirming observations, experiments, controls, baselines, ablations, risks, and evidence needed for stronger claims.
+
+Label new hypotheses as proposals and mark field-wide novelty claims as needing external review unless the packet directly supports them.
+
+
+## Variant File: variant/ai_ml_rl_literature_analysis/variant_manifest.yaml
+
+variant_id: B3_final_for_validation
+module_scope: literature_analysis_and_research_rigor
+implementation_type: instruction_reference_only
+runtime_tools_enabled: false
+external_services_enabled: false
+dynamic_retrieval_enabled: false
+scripts_enabled: false
+originality: project-original general AI/ML/RL research-analysis guidance
+skill_directory: variants/B3_final_for_validation/ai_ml_rl_literature_analysis
+revision_scope:
+- concise source inventory discipline
+- evidence-burden labeling for provenance and uncertainty
+- general comparison, audit, and inference-boundary refinements
+supported_modes:
+- literature_mapping
+- single_paper_structured_reading
+- method_comparison
+- benchmark_experimental_rigor_audit
+- rl_protocol_analysis
+- evidence_grounded_proposal_support
+runtime_exclusions:
+- no upstream repository text copied
+- no task identifiers
+- no expected answer content
+- no dynamic tools
+- no Research OS orchestration
+dev_training_status: dev-trained on round1_dev_v0.2 comparisons; validation-ready;
+  validation not run
+
+
+## Variant File: variant/final_variant_manifest.yaml
+
+variant_id: B3_final_for_validation
+source_variant: B3_your_v1_revised
+provenance_status: clean
+implementation_type: instruction_reference_only
+dynamic_tools_enabled: false
+external_services_enabled: false
+retrieval_enabled: false
+pdf_parsers_enabled: false
+citation_services_enabled: false
+experiment_tools_enabled: false
+benchmark_specific_contamination: none_detected
+validation_specific_content: none_detected
+depends_on_dev_scorecards_at_runtime: false
+files:
+- path: variants/B3_final_for_validation/CHANGELOG.md
+  sha256: 91cf4cbf08a89dea8259f5ba9913ec8f76831760a84bc567fbf7b7af0d5fc2df
+- path: variants/B3_final_for_validation/ai_ml_rl_literature_analysis/SKILL.md
+  sha256: 06cde76f6b4ac58b8561332c82bbc5e7cf310809830f40cd5bc704ef171fcb19
+- path: variants/B3_final_for_validation/ai_ml_rl_literature_analysis/references/benchmark_and_experiment_audit.md
+  sha256: 37f5bd4cc63ffd12aa7cd49a6f89d13cf3cd3f4213a0562a979be82f0430654a
+- path: variants/B3_final_for_validation/ai_ml_rl_literature_analysis/references/comparative_analysis_schema.md
+  sha256: ba2702c71061540f966f0043f26ce46fcdd376ff47304f067780876a61065191
+- path: variants/B3_final_for_validation/ai_ml_rl_literature_analysis/references/evidence_traceability.md
+  sha256: 79c49006faa102d270637ce8491112a23fd01a9b8ecf431d32c40438841f1a82
+- path: variants/B3_final_for_validation/ai_ml_rl_literature_analysis/references/inference_boundary_policy.md
+  sha256: 64b9603550c8a1319b886a200585705aa9c5661e2672b1774a3bd4e57624ffa7
+- path: variants/B3_final_for_validation/ai_ml_rl_literature_analysis/references/paper_reading_schema.md
+  sha256: 21fca374bdbbe08ab8b37f1c4c90674fe970abd6cda16f3a8d7812fc40f6edfe
+- path: variants/B3_final_for_validation/ai_ml_rl_literature_analysis/references/rl_analysis_guidance.md
+  sha256: 5a2eb2b77469a4e52ae7f0f653f84a70a4a3951afe8e6141c765db9689d6ca13
+- path: variants/B3_final_for_validation/ai_ml_rl_literature_analysis/references/workflow_modes.md
+  sha256: dfa0a2c47fee69cf00bd884f91ff6bb218f06716ca467f092edbeda1f2b909b3
+- path: variants/B3_final_for_validation/ai_ml_rl_literature_analysis/variant_manifest.yaml
+  sha256: f417cc65ae01a240cdb09430de6c7b5dff8e8257e2f98d715e3a84a151a064cd
+
+
+# Task
+
+- Task ID: `ERA-VAL-01`
+- Split: `validation`
+- Task type: `experimental_rigor_audit`
+- Topic: LLM benchmark contamination
+- Research question: Does the provided LLM evaluation evidence support the claimed model capability, given possible benchmark contamination and protocol issues?
+
+## Input Prompt
+
+Audit the provided LLM evaluation excerpt or proposal for experimental rigor.
+Focus on contamination risk, benchmark saturation, prompt protocol, baseline selection, statistical reporting, evaluation leakage, and claim scope.
+Return severity-ranked findings and a corrected evaluation protocol.
+
+
+## Required Outputs
+
+- rigor_audit_findings
+- contamination_and_leakage_risk_table
+- baseline_and_metric_review
+- claim_scope_assessment
+- corrected_protocol
+
+# Source Packet
+
+# ERA-VAL-01 Model Input Packet
+## Sources
+- Language Models are Few-Shot Learners (arXiv:2005.14165; 2020). Local file: `brown_2020_language_models_are_few_shot_learners.pdf`. Included evidence: Abstract; evaluation/benchmark descriptions; contamination discussion; limitations.
+- Measuring Massive Multitask Language Understanding (arXiv:2009.03300; 2021). Local file: `hendrycks_2021_measuring_massive_multitask_language_understanding.pdf`. Included evidence: Abstract; benchmark/task design; evaluation protocol; limitations.
+
+## Controlled Source Notes
+- GPT-3 paper: reports few-shot, one-shot, and zero-shot benchmark evaluation across many NLP tasks and includes a contamination analysis discussion for test-set overlap risk.
+- MMLU paper: introduces a multitask benchmark for measuring knowledge and reasoning across many subjects and reports model results under defined evaluation settings.
+- Evidence objects: GPT-3 abstract, evaluation sections, contamination analysis appendix/section, benchmark result tables; MMLU abstract, benchmark construction sections, evaluation protocol, result tables, limitations.
+
+## Packet Scope
+- This packet contains source metadata and neutral source notes prepared from the listed canonical files.
+- Some exact numeric values, full tables, appendix details, and implementation settings are not included in this model input packet.
+
+
+2026-05-30T04:58:32.476915Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:58:32.498574Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:58:32.498581Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:58:32.499103Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:58:32.499107Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:58:32.499446Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:58:32.499451Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:58:32.499789Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:58:32.499792Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:58:32.500123Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:58:32.500128Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:58:32.500967Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:58:32.500970Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:58:34.179296Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:58:34.179308Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:58:34.179795Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:58:34.179801Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:58:34.180309Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:58:34.180313Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:58:34.180720Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:58:34.180724Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:58:34.181128Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:58:34.181134Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:58:34.182013Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:58:34.182018Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+codex
+**Source Inventory**
+
+Sources supplied: GPT-3 “Language Models are Few-Shot Learners” and MMLU “Measuring Massive Multitask Language Understanding.” Evidence objects named in the packet: abstracts, evaluation/benchmark descriptions, GPT-3 contamination discussion, benchmark result tables, MMLU benchmark construction, evaluation protocol, result tables, and limitations. Exact numeric results, full tables, appendix details, prompts, seeds, and implementation settings are not included.
+
+## rigor_audit_findings
+
+1. **High: Contamination risk is acknowledged but not resolvable from the packet.**  
+   `DIRECT_PACKET_EVIDENCE`: The GPT-3 source includes a contamination analysis discussion for test-set overlap risk.  
+   `LIMITED_CRITIQUE`: Because the packet omits exact overlap rates, affected benchmarks, decontamination procedure, and result deltas, the evidence cannot fully establish whether reported benchmark performance reflects capability rather than memorization or benchmark exposure.
+
+2. **High: Capability claims are vulnerable to benchmark saturation and public-test exposure concerns.**  
+   `WITHIN_PACKET_SYNTHESIS`: GPT-3 evaluates across many NLP benchmarks; MMLU is introduced to measure broad knowledge and reasoning across many subjects.  
+   `LIMITED_CRITIQUE`: If benchmarks are public or widely used, performance alone may not isolate general capability. The packet does not provide enough detail to assess whether tasks were novel, held out, or resistant to training-set exposure.
+
+3. **Medium: Prompt protocol is under-specified in the provided packet.**  
+   `DIRECT_PACKET_EVIDENCE`: GPT-3 reports zero-shot, one-shot, and few-shot evaluations; MMLU reports defined evaluation settings.  
+   `LIMITED_CRITIQUE`: The packet does not include full prompt templates, example selection rules, ordering, sampling settings, decoding parameters, or whether prompts were tuned per benchmark. This weakens reproducibility and fairness assessment.
+
+4. **Medium: Baseline strength and comparability cannot be fully audited.**  
+   `DIRECT_PACKET_EVIDENCE`: Both sources include result tables and evaluations.  
+   `LIMITED_CRITIQUE`: The packet omits full baseline lists, tuning budgets, model versions, and whether baselines used equivalent prompting or supervision. Cross-source comparisons should not be treated as direct rankings.
+
+5. **Medium: Statistical reporting appears insufficient from the packet.**  
+   `LIMITED_CRITIQUE`: The packet does not provide seeds, repeated runs, confidence intervals, variance, bootstrap intervals, or per-task uncertainty. Missing uncertainty does not prove the studies lacked it, but it limits support for fine-grained performance claims.
+
+6. **Low-to-medium: Aggregation across heterogeneous tasks may obscure failure modes.**  
+   `WITHIN_PACKET_SYNTHESIS`: Both evaluations involve many tasks or subjects.  
+   `LIMITED_CRITIQUE`: Aggregate scores can mask uneven performance across domains unless per-task results, weighting, and aggregation rules are visible.
+
+## contamination_and_leakage_risk_table
+
+| Risk | Evidence-burden label | Packet evidence | Severity | Audit judgment |
+|---|---:|---|---:|---|
+| Train/test overlap | `DIRECT_PACKET_EVIDENCE` + `LIMITED_CRITIQUE` | GPT-3 includes contamination analysis discussion | High | Acknowledged risk, but unresolved without overlap rates, affected tasks, and corrected scores |
+| Public benchmark exposure | `LIMITED_CRITIQUE` | Many NLP benchmarks and MMLU tasks are used for evaluation | High | Requires external or dataset-lineage evidence; packet alone cannot clear exposure risk |
+| Prompt leakage through examples | `LIMITED_CRITIQUE` | GPT-3 uses few-shot/one-shot settings | Medium | Example selection protocol is needed to rule out label or answer-pattern leakage |
+| Evaluation-set tuning | `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` | Not specified in packet | Medium | Cannot determine whether prompts/model choices were tuned against test performance |
+| Benchmark saturation | `LIMITED_CRITIQUE` | Evaluations rely on benchmark result tables | Medium | Saturation cannot be measured from packet because historical score distributions are absent |
+| Cross-benchmark leakage | `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` | Not specified | Medium | Needs dataset provenance and overlap checks beyond packet |
+
+## baseline_and_metric_review
+
+Baselines: The packet says both papers report model results and benchmark tables, but it does not provide full baseline identities, model sizes, training data exposure, tuning procedures, or inference protocols. Baseline adequacy is therefore only partially auditable. `LIMITED_CRITIQUE`
+
+Metrics: The packet establishes benchmark-style evaluation across many NLP tasks and MMLU subject areas. It does not provide exact metrics, aggregation rules, weighting, confidence intervals, or per-domain breakdowns. Metric alignment is plausible for benchmark performance, but insufficiently grounded for broad claims about general language understanding or robust reasoning. `WITHIN_PACKET_SYNTHESIS` / `LIMITED_CRITIQUE`
+
+Comparability: GPT-3 benchmark results and MMLU results should be interpreted within their own evaluation settings. Cross-paper or cross-benchmark claims require matching data exposure, prompt format, model size, decoding, scoring, and task composition. `WITHIN_PACKET_SYNTHESIS`
+
+## claim_scope_assessment
+
+Supported scope: The packet supports the narrow claim that the sources report LLM benchmark evaluations under zero-shot/one-shot/few-shot or defined benchmark settings, and that GPT-3 discusses contamination risk. `DIRECT_PACKET_EVIDENCE`
+
+Partially supported scope: The evidence can support setup-specific benchmark performance claims if tied to the original reported protocols, but exact strength cannot be audited here because full numeric tables and implementation details are omitted. `LIMITED_CRITIQUE`
+
+Unsupported stronger claims: The packet does not establish uncontaminated general capability, deployment robustness, durable reasoning ability, or field-wide superiority over other models. Those claims require external review, stronger held-out evaluations, contamination audits, and uncertainty reporting. `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW`
+
+## corrected_protocol
+
+1. Use sealed or newly constructed test sets with documented provenance, creation date, and access controls.
+2. Run exact-deduplication and near-deduplication checks between training data, prompt examples, development data, and test items.
+3. Report contamination rates by benchmark, subject, and item type, plus performance before and after removing contaminated items.
+4. Freeze prompt templates, few-shot example pools, example ordering, decoding settings, scoring rules, and model checkpoints before evaluation.
+5. Separate development, validation, and final test sets; prohibit tuning prompts or model-selection decisions on the final test set.
+6. Include strong baselines: prior LMs under matched prompting, supervised task-specific baselines where relevant, retrieval or closed-book variants if the claim concerns knowledge, and simple controls such as random/majority baselines.
+7. Report per-task and aggregate metrics, with transparent weighting and confidence intervals or bootstrap uncertainty.
+8. Use multiple random seeds or prompt-example samples for few-shot settings and report variance.
+9. Include ablations for prompt format, number of shots, example selection, contaminated-item removal, and subject/task category.
+10. Scope claims to the tested setting: benchmark performance under the frozen protocol, not uncontaminated general intelligence or deployment robustness unless separately evaluated.
+tokens used
+6,791

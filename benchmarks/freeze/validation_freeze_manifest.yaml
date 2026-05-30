@@ -1,0 +1,149 @@
+benchmark_version: validation_v0.1_agent_reviewed_internal
+created_at: '2026-05-30T11:36:43'
+split: validation
+approval_policy: agent_review_sufficient_for_internal_validation
+reviewer: codex_independent_reviewer
+agent_review_layer:
+  path: reports/validation/validation_agent_review_decision.yaml
+  sha256: 2425c5df56d9ba44061da7db570aa2fd603139a65d403f5ba097680bdf08aa04
+note: Validation gold files remain agent-reviewed, not human-approved; do not edit gold files to mark human approval.
+fixed_source_equal_input_condition: true
+no_dynamic_tools_condition: true
+generation_inputs_exclude_gold_rubric_and_agent_review_reports: true
+no_b4_exists: true
+b3_final_for_validation_frozen_no_post_validation_revision: true
+scoring_rubric:
+  path: benchmarks/rubrics/scoring_rubric.md
+  sha256: ade3feab72b1c789c567fb865b5919d6442623ac4e4d3d7d94996ff1f157ca6b
+run_protocol:
+  path: benchmarks/run_protocol.md
+  sha256: e985a23d6bf42f98b006c403cfb6616143db043fa92a125b969dcc44b0eda836
+variants:
+  B0_base_agent:
+    manifest: null
+    hash_manifest: null
+    notes: No skill files; no variant manifest by design.
+  B1_kdense_subset:
+    manifest: variants/B1_kdense_subset/variant_manifest.yaml
+    hash_manifest: reports/round1_dev_v0_2/variant_hash_manifest.yaml
+    manifest_sha256: 33a7ba399a2bd9a99f6944680b29fc3de21124daabe4507c410aa2e0ec391e9d
+    hash_manifest_sha256: ed089053ce6a6f6405d9747c5c8710d067f95b6f592feb4deb9327a1b4289bab
+  B2_orchestra_subset:
+    manifest: variants/B2_orchestra_subset/variant_manifest.yaml
+    hash_manifest: reports/round1_dev_v0_2/variant_hash_manifest.yaml
+    manifest_sha256: 0e0cf9e855494b8fdb3a1ee1e547dc707d71bafe34ad6f146397a179623f4630
+    hash_manifest_sha256: ed089053ce6a6f6405d9747c5c8710d067f95b6f592feb4deb9327a1b4289bab
+  B3_final_for_validation:
+    manifest: variants/B3_final_for_validation/final_variant_manifest.yaml
+    hash_manifest: reports/validation/B3_final_hash_manifest.yaml
+    manifest_sha256: a74af6878ec3f941c9a9c5473fb108a0448c056ed0bc5557f97d8cbe57022ec6
+    hash_manifest_sha256: b6d475e1e2fd8f5f50b3f8e89c5a1cb59470673af9d5b0bf5fe60fa881ee0144
+tasks:
+- task_id: ERA-VAL-01
+  task_yaml_sha256: 6c3fbe31dc27431c80e91737f30c25cb3c78c7e9de98d23e52bbd01edb4aff36
+  source_packet_manifest_sha256: ffc97ac78e506e9668dd4064f4b2d05fbd5cd2e0bee88984bc6c768220072d2a
+  model_input_packet_sha256: 3971f83b133cab61fd5d1790e0a5f29196e58694e4aae87a4beca62d9ffa43be
+  gold_annotation_sha256: 52c249debe70d3292a238a8eb3b9576674587938e0f9b3f688653e0aaf06bb3a
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  approval_policy: agent_review_sufficient_for_internal_validation
+  note: agent_reviewed_not_human_approved
+- task_id: ERA-VAL-02
+  task_yaml_sha256: da714a9cb13a14f08f654a6b640f491daa953f046790684c373590983169a8b1
+  source_packet_manifest_sha256: f743aec4a5434079cefe376bbc884eecb259de60415deb467feaf817b6e554d3
+  model_input_packet_sha256: f22de88e98cec3fec8b5d07af17faebb9033a3d1fcc141e3ea563deacb99bb03
+  gold_annotation_sha256: f88e32c11eef95c543310a46468df285bde4b349222bd5470c8798d87aea6d20
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  approval_policy: agent_review_sufficient_for_internal_validation
+  note: agent_reviewed_not_human_approved
+- task_id: LS-VAL-01
+  task_yaml_sha256: 76c93ed550eee418a01a6ff23c90354e3a8b902e2837de50a021d7ffd5398b4a
+  source_packet_manifest_sha256: 86e728e0b5735bed0696501d34d0774ae77eb5bc4db40adc79eb851ffa252094
+  model_input_packet_sha256: c983aaa0ff74f4e35a1b88bfa94495a3f29df8b3291b950f1c5c353f4fe382bc
+  gold_annotation_sha256: 18a86db0d37bc045ed7938145df648757ae2a6401506ec5253e3c949532e4357
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  approval_policy: agent_review_sufficient_for_internal_validation
+  note: agent_reviewed_not_human_approved
+- task_id: LS-VAL-02
+  task_yaml_sha256: 0a463f3a253b3a8bf62744417ecf342726218c12acd934ebfeeee82d593ad7a3
+  source_packet_manifest_sha256: d72e65527901c794c5a6868ff5872404fe63d14d370d1e16ac40ffde566a691a
+  model_input_packet_sha256: e7da488e2a8afe89381189cb135bbb675288c264b5f6f30ab79944e6f98a1cc0
+  gold_annotation_sha256: f47ef597e5185959cb146d06c4ef3b37b53297e0d10f88e21b3401feaf6f0455
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  approval_policy: agent_review_sufficient_for_internal_validation
+  note: agent_reviewed_not_human_approved
+- task_id: MC-VAL-01
+  task_yaml_sha256: b489e63aa556c0f6c060247e6a5257662f63adde97cd8ec7826ec3577ed72979
+  source_packet_manifest_sha256: 9133dc4b79348ef2520ebb4db791fbcf967a62265b6fbc8e4f9463bee2f258bc
+  model_input_packet_sha256: 2a8127477cbef027c55c711c8ce1571e8133d2c177f1c7105f1ccf3394108f3f
+  gold_annotation_sha256: 5a0b66a9829bee7fc74a57650ba8aa4be0c9cfde72f6890f9049fefa96096a8e
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  approval_policy: agent_review_sufficient_for_internal_validation
+  note: agent_reviewed_not_human_approved
+- task_id: MC-VAL-02
+  task_yaml_sha256: 945b70633d5dfc538d7395ad7ca96c9f7228bcf481e61cfb9b28dc042ab39c16
+  source_packet_manifest_sha256: 069b37513635848b6335c93523c195bc0efe5cea17bc8b04b2222e0b6f3a3c7f
+  model_input_packet_sha256: 00dfb387438a1aaff7414ad8425f05a29fe83ff783d8a87e79ed368503993f94
+  gold_annotation_sha256: af976f0d0b63c882f0f05ce67bf2cf8b4851ff0b57ed1ffd3de17c0331f45d93
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  approval_policy: agent_review_sufficient_for_internal_validation
+  note: agent_reviewed_not_human_approved
+- task_id: PS-VAL-01
+  task_yaml_sha256: eb6eb27255bef02fc85af2491eda16296555d67883da62e68fce339a4731f815
+  source_packet_manifest_sha256: 7dd6d70cc87bc59b494f64f141f5ed9ca1db3c2008f1c5f98691716441c82de0
+  model_input_packet_sha256: 639a3ded022f65b05ad2e7b645c3ba2151ad80b2c24931861242dd2c8385e51e
+  gold_annotation_sha256: d83b7b2180b3496b281daf939eb9ed56b7af4614daa399f175b6948eadff7da3
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  approval_policy: agent_review_sufficient_for_internal_validation
+  note: agent_reviewed_not_human_approved
+- task_id: PS-VAL-02
+  task_yaml_sha256: acd26e34e3e873ed979bde77119a1cc9a7d7660f57e5bd96261be47a5ace88dd
+  source_packet_manifest_sha256: 5d6e9d687c3ac7d6531d82a2d9d6d8ad342446155afb023ff5979a780a773f8f
+  model_input_packet_sha256: 8f34e5e11bfa480afa1b11ba11103d5e63a4c52c0f2aa26fe6d010c71807924a
+  gold_annotation_sha256: 381c37cad11f492cfa4eebf0ce1b3898c2aaf6cb2b3060cc0cdfc0687a5635ff
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  approval_policy: agent_review_sufficient_for_internal_validation
+  note: agent_reviewed_not_human_approved
+- task_id: RL-VAL-01
+  task_yaml_sha256: 529c8dc5a3efc4b06f47311e81b9fdc99a4a869cd412453b1dc1ba7bd0d64dbc
+  source_packet_manifest_sha256: 2ae02936e7236d6664b7e6b343d320df421faedf3274fc8c52f8316bd51790a7
+  model_input_packet_sha256: f6feb751d0a172d0850e4f5053885cddc11ee5440e1e666b7f9a247332364ede
+  gold_annotation_sha256: 0c503ea06515db4d1bdcf2b353738b215a9bb69492892176bae5008e27102aa4
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  approval_policy: agent_review_sufficient_for_internal_validation
+  note: agent_reviewed_not_human_approved
+- task_id: RL-VAL-02
+  task_yaml_sha256: fe8a37d17f606c38d6080165dc421407ab8f70b2343c2b86c26ae56f6ef4ff30
+  source_packet_manifest_sha256: 4be640900bc88fbb420eac0c58f3aad6043a5763708253e6c9314f28e48e2699
+  model_input_packet_sha256: b34c16746a3bd15742d4533f0115d1935b59b26b26c43d1d21deac45720557a2
+  gold_annotation_sha256: 9a0227f29875acf408c14b7f9c3d91b858a8c71ebe3a850d90067bb6876e0234
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  approval_policy: agent_review_sufficient_for_internal_validation
+  note: agent_reviewed_not_human_approved
+- task_id: SPR-VAL-01
+  task_yaml_sha256: dae4da6dff17424961d423cd7cc59e0637a65be207db032973e1b87f8da7d818
+  source_packet_manifest_sha256: afe9d23092ea0996c5441e8db678f1c6071916ec6260a159f3cc9609510bd6df
+  model_input_packet_sha256: 2ab84f36591a3e21ec6f0f33a7f5216e32973d089062904cfdafaeb1620c2983
+  gold_annotation_sha256: 8b309d8cb0b3622cdd51b3211520be605d62ddc975821ed7ed1cc8ee3aa68942
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  approval_policy: agent_review_sufficient_for_internal_validation
+  note: agent_reviewed_not_human_approved
+- task_id: SPR-VAL-02
+  task_yaml_sha256: 92156e8f42d0df522b3944bce9004271d244742c59360c41311644e224670c1a
+  source_packet_manifest_sha256: 51ee48c5e8302ba0a922bd4ec0a5ec942cd473aee5b6ef8a1d80ae30f5b881cc
+  model_input_packet_sha256: d988cff44933dc95dc4c0e446f3c1105ccc4a5bd6414f53a6fd3708027a66ffa
+  gold_annotation_sha256: 81765edce186051137a01201cb9072c18cebee5365eab70dae8f84acf59098f5
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  approval_policy: agent_review_sufficient_for_internal_validation
+  note: agent_reviewed_not_human_approved

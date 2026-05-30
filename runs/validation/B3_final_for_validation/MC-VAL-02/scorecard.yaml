@@ -1,0 +1,35 @@
+run_id: validation_v0.1__B3_final_for_validation__MC-VAL-02__run001
+variant: B3_final_for_validation
+task_id: MC-VAL-02
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 4
+  evidence_traceability: 5
+  citation_validity: 4
+  literature_coverage: null
+  comparison_fairness: 5
+  experimental_rigor: 5
+  benchmark_validity: 5
+  inference_boundary_discipline: 5
+  hypothesis_quality: null
+  rl_specific_correctness: null
+  output_usefulness: 5
+  efficiency: 4
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: factual_accuracy
+  description: The source inventory names publication years and says ablations/tables are included, which is consistent with
+    the task context but slightly more specific than the visible generated-output packet excerpts.
+  evidence: 'Opening states ''Supplied sources: ResNet 2015, ViT 2020, and ConvNeXt 2022'' and that packet evidence includes
+    result tables and ablations.'
+- severity: minor
+  dimension: efficiency
+  description: The answer is more verbose than necessary, though the extra structure mostly improves auditability rather than
+    adding fluff.
+  evidence: Includes source inventory, multiple evidence labels, caveat tables, and supported/unsupported claim tables.
+summary: Most audit-ready variant. It explicitly labels direct evidence, synthesis, critique, and unsupported claims while
+  covering data scale, compute, recipe, benchmarks, metrics, ablations, and scope limits.

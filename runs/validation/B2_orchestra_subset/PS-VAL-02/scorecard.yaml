@@ -1,0 +1,36 @@
+run_id: validation_v0.1__B2_orchestra_subset__PS-VAL-02__run001
+variant: B2_orchestra_subset
+task_id: PS-VAL-02
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 4
+  evidence_traceability: 4
+  citation_validity: null
+  literature_coverage: null
+  comparison_fairness: null
+  experimental_rigor: 5
+  benchmark_validity: null
+  inference_boundary_discipline: 5
+  hypothesis_quality: 5
+  rl_specific_correctness: null
+  output_usefulness: 5
+  efficiency: 5
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: evidence_traceability
+  description: Evidence is clearly mapped to packet notes, but source locations remain broad rather than tied to exact packet
+    excerpts or canonical page/section locations.
+  evidence: Evidence_map uses provenance labels like 'Source-derived from packet notes' but does not provide page or section
+    anchors.
+- severity: minor
+  dimension: factual_accuracy
+  description: The positive control proposal slightly implies an expected reproducible source-like effect, which should remain
+    a proposal design element because exact protocols and results are unavailable in the packet.
+  evidence: 'Causal_test_plan: ''Positive control: reproduce an effect on a source-like narrow behavior where intervention
+    methods are expected to work.'''
+summary: A very strong and efficient proposal. It cleanly distinguishes what IOI/ROME support from what they do not, gives
+  falsifiable hypotheses, and includes robust controls, specificity checks, and alternative explanations.

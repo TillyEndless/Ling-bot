@@ -1,0 +1,34 @@
+variant_id: B3_final_for_validation
+source_variant: B3_your_v1_revised
+provenance_status: clean
+implementation_type: instruction_reference_only
+dynamic_tools_enabled: false
+external_services_enabled: false
+retrieval_enabled: false
+pdf_parsers_enabled: false
+citation_services_enabled: false
+experiment_tools_enabled: false
+benchmark_specific_contamination: none_detected
+validation_specific_content: none_detected
+depends_on_dev_scorecards_at_runtime: false
+files:
+- path: variants/B3_final_for_validation/CHANGELOG.md
+  sha256: 91cf4cbf08a89dea8259f5ba9913ec8f76831760a84bc567fbf7b7af0d5fc2df
+- path: variants/B3_final_for_validation/ai_ml_rl_literature_analysis/SKILL.md
+  sha256: 06cde76f6b4ac58b8561332c82bbc5e7cf310809830f40cd5bc704ef171fcb19
+- path: variants/B3_final_for_validation/ai_ml_rl_literature_analysis/references/benchmark_and_experiment_audit.md
+  sha256: 37f5bd4cc63ffd12aa7cd49a6f89d13cf3cd3f4213a0562a979be82f0430654a
+- path: variants/B3_final_for_validation/ai_ml_rl_literature_analysis/references/comparative_analysis_schema.md
+  sha256: ba2702c71061540f966f0043f26ce46fcdd376ff47304f067780876a61065191
+- path: variants/B3_final_for_validation/ai_ml_rl_literature_analysis/references/evidence_traceability.md
+  sha256: 79c49006faa102d270637ce8491112a23fd01a9b8ecf431d32c40438841f1a82
+- path: variants/B3_final_for_validation/ai_ml_rl_literature_analysis/references/inference_boundary_policy.md
+  sha256: 64b9603550c8a1319b886a200585705aa9c5661e2672b1774a3bd4e57624ffa7
+- path: variants/B3_final_for_validation/ai_ml_rl_literature_analysis/references/paper_reading_schema.md
+  sha256: 21fca374bdbbe08ab8b37f1c4c90674fe970abd6cda16f3a8d7812fc40f6edfe
+- path: variants/B3_final_for_validation/ai_ml_rl_literature_analysis/references/rl_analysis_guidance.md
+  sha256: 5a2eb2b77469a4e52ae7f0f653f84a70a4a3951afe8e6141c765db9689d6ca13
+- path: variants/B3_final_for_validation/ai_ml_rl_literature_analysis/references/workflow_modes.md
+  sha256: dfa0a2c47fee69cf00bd884f91ff6bb218f06716ca467f092edbeda1f2b909b3
+- path: variants/B3_final_for_validation/ai_ml_rl_literature_analysis/variant_manifest.yaml
+  sha256: f417cc65ae01a240cdb09430de6c7b5dff8e8257e2f98d715e3a84a151a064cd

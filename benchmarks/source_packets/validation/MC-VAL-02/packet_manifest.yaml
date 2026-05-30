@@ -1,0 +1,45 @@
+task_id: MC-VAL-02
+packet_id: validation_MC-VAL-02_packet_v0_draft
+status: draft_pending_human_review
+sources:
+- id: resnet
+  title: Deep Residual Learning for Image Recognition
+  authors: Kaiming He et al.
+  year: 2015
+  identifier: arXiv:1512.03385
+  url: https://arxiv.org/pdf/1512.03385
+  filename: he_2015_deep_residual_learning.pdf
+  include: Abstract; architecture; ImageNet/CIFAR experiments.
+  local_filename: he_2015_deep_residual_learning.pdf
+  sha256: 1e0651b6810ecba34a3dbc5b5b0209226f889004607c1f203540a48d64e5a93a
+  page_count: '12'
+  included_in_model_packet: Abstract; architecture; ImageNet/CIFAR experiments.
+- id: vit
+  title: 'An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale'
+  authors: Alexey Dosovitskiy et al.
+  year: 2020
+  identifier: arXiv:2010.11929
+  url: https://arxiv.org/pdf/2010.11929
+  filename: dosovitskiy_2020_vit.pdf
+  include: Abstract; architecture; data scale; benchmark comparisons.
+  local_filename: dosovitskiy_2020_vit.pdf
+  sha256: 8ce7b83971a14508ca711a27c875c9b6914c4f6767cf3150fb1ca6c07aa056d6
+  page_count: '22'
+  included_in_model_packet: Abstract; architecture; data scale; benchmark comparisons.
+- id: convnext
+  title: A ConvNet for the 2020s
+  authors: Zhuang Liu et al.
+  year: 2022
+  identifier: arXiv:2201.03545
+  url: https://arxiv.org/pdf/2201.03545
+  filename: liu_2022_convnet_for_the_2020s.pdf
+  include: Abstract; modernization/training recipe; ImageNet comparisons.
+  local_filename: liu_2022_convnet_for_the_2020s.pdf
+  sha256: 1fde2340370d0eb8045bda97fc94da7adb2a7abe8e6ded1a473d22475b945e1a
+  page_count: '15'
+  included_in_model_packet: Abstract; modernization/training recipe; ImageNet comparisons.
+model_input_packet:
+  path: model_input_packet.md
+  sha256: 00dfb387438a1aaff7414ad8425f05a29fe83ff783d8a87e79ed368503993f94
+packet_matches_task_spec: true
+unresolved_source_version_issues: []

@@ -1,0 +1,34 @@
+run_id: validation_v0.1__B2_orchestra_subset__LS-VAL-02__run001
+variant: B2_orchestra_subset
+task_id: LS-VAL-02
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 4
+  evidence_traceability: 4
+  citation_validity: 5
+  literature_coverage: 4
+  comparison_fairness: null
+  experimental_rigor: 4
+  benchmark_validity: null
+  inference_boundary_discipline: 5
+  hypothesis_quality: 4
+  rl_specific_correctness: null
+  output_usefulness: 5
+  efficiency: 5
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: literature_coverage
+  description: Covers all canonical sources and evidence types, but final formatting includes an extra corrected-scope paragraph
+    outside the requested sections.
+  evidence: After the gap table, output adds '**Corrected scope:** ...'.
+- severity: minor
+  dimension: evidence_traceability
+  description: Traceability is clear at source level and sometimes labels provenance, but lacks page, table, or section-specific
+    anchors.
+  evidence: Corpus table uses 'source-derived' and 'source-derived + agent-inferred' provenance but not specific packet locations.
+summary: Strong and concise map. It is balanced, cautious, and explicitly separates source-derived claims from agent-proposed
+  gaps. It meets the required outputs despite minor formatting drift.

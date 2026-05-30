@@ -1,0 +1,42 @@
+run_id: validation_v0.1__B2_orchestra_subset__MC-VAL-01__run001
+variant: B2_orchestra_subset
+task_id: MC-VAL-01
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 4
+  evidence_traceability: 3
+  citation_validity: null
+  literature_coverage: null
+  comparison_fairness: 5
+  experimental_rigor: 5
+  benchmark_validity: 4
+  inference_boundary_discipline: 4
+  hypothesis_quality: null
+  rl_specific_correctness: 4
+  output_usefulness: 5
+  efficiency: 4
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: factual_accuracy
+  description: States PPO is commonly treated as on-policy in the PPO paper context, which captures the required distinction
+    but hedges it more than the gold expects.
+  evidence: Gold M1 requires distinguishing PPO on-policy policy-gradient assumptions from SAC off-policy maximum-entropy
+    actor-critic assumptions.
+- severity: minor
+  dimension: evidence_traceability
+  description: Evidence labels such as source-derived and agent-inferred are helpful, but no page, section, table, or figure
+    references are provided.
+  evidence: Matrix evidence column uses 'source-derived' and 'source-derived / agent-inferred' rather than specific packet
+    locations.
+- severity: minor
+  dimension: inference_boundary_discipline
+  description: Includes a plausible off-policy sample-efficiency hypothesis while clearly marking it unsupported; this is
+    acceptable but should not be confused with packet evidence.
+  evidence: Assumptions table says 'SAC may have sample-efficiency advantages because it is off-policy' with status 'Plausible
+    but unsupported as a conclusion from this packet.'
+summary: 'Best practical comparison among the first three: it captures the on-policy/off-policy distinction, avoids broad
+  rankings, and gives a rigorous benchmark protocol checklist.'

@@ -1,0 +1,22 @@
+task_id: SPR-VAL-01
+packet_id: validation_SPR-VAL-01_packet_v0_draft
+status: draft_pending_human_review
+sources:
+- id: dreamerv3
+  title: Mastering Diverse Domains through World Models
+  authors: Danijar Hafner et al.
+  year: 2023
+  identifier: arXiv:2301.04104
+  url: https://arxiv.org/pdf/2301.04104
+  filename: hafner_2023_mastering_diverse_domains_through_world_models.pdf
+  include: Abstract; method/objective; domains; baselines; experiments; limitations.
+  local_filename: hafner_2023_mastering_diverse_domains_through_world_models.pdf
+  sha256: d0385798e8bada8e81b915c1743be81d9ce8776f12ed937e09351995e099ce37
+  page_count: '40'
+  included_in_model_packet: Abstract; method/objective; domains; baselines; experiments;
+    limitations.
+model_input_packet:
+  path: model_input_packet.md
+  sha256: 2ab84f36591a3e21ec6f0f33a7f5216e32973d089062904cfdafaeb1620c2983
+packet_matches_task_spec: true
+unresolved_source_version_issues: []

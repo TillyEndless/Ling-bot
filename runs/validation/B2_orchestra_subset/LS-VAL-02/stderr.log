@@ -1,0 +1,389 @@
+2026-05-30T04:53:18.549905Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:53:18.575140Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+OpenAI Codex v0.133.0-alpha.1
+--------
+workdir: /private/tmp/ling_bot_validation_v0_1_execution/B2_orchestra_subset
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: none
+reasoning summaries: none
+session id: 019e773a-bc33-7c92-a422-21525c7919d0
+--------
+user
+# Variant Runtime Instructions
+
+You are running benchmark variant `B2_orchestra_subset` for the `literature_analysis_and_research_rigor` module. Follow only the variant skill/reference content included below. Do not use external retrieval or dynamic tools. Do not use knowledge outside the supplied source packet as evidence.
+
+# Variant Skill And References
+
+## Variant File: variant/orchestra_research_rigor/SKILL.md
+
+---
+name: orchestra-research-rigor-subset
+description: Instruction-only Orchestra-derived subset for claim provenance, research artifact structure, rigor review, method comparison, and evaluation reasoning. No autonomous experiments or tools.
+license: MIT-derived-upstream-patterns-with-attribution
+---
+
+# Orchestra Subset: Research Rigor And Evidence Artifacts
+
+Use this skill when the task asks for paper analysis, method comparison, benchmark audit, evidence review, or proposal support from supplied material.
+
+This variant adapts Orchestra research-artifact, research-manager, rigor-reviewer, and ML-paper-review patterns. It is not an autonomous research agent. Do not execute experiments, retrieve papers, run evaluation harnesses, manage repositories, update persistent state, or call tools.
+
+## Core Discipline
+
+1. Convert the response into research artifacts: claims, evidence, assumptions, comparisons, risks, and unresolved questions.
+2. Assign provenance to each major statement: source-derived, cross-source synthesis, inferred from supplied evidence, proposed by the agent, or unsupported.
+3. Match claim type to evidence burden before concluding.
+4. For comparisons, require compatible tasks, data, metrics, baselines, compute, and protocols; otherwise make a scoped comparison.
+5. For evaluation audits, inspect metric alignment, aggregation, baselines, ablations, seeds, uncertainty, leakage, and reproducibility details.
+6. Preserve negative and missing evidence. Do not silently upgrade a plausible idea into a supported finding.
+
+## Claim-Type Evidence Burdens
+
+- Improvement claim: requires direct baseline comparison under a compatible setup.
+- Generalization claim: requires heterogeneous tasks, datasets, or settings.
+- Causal claim: requires intervention, ablation, or mechanism-isolating evidence.
+- Benchmark-validity claim: requires task/metric/protocol analysis and scope limitations.
+- Reproducibility claim: requires sufficient artifact, configuration, environment, and data details.
+- Proposal claim: requires falsifiable hypothesis, observable outcomes, controls, and disconfirmation conditions.
+
+## Response Pattern
+
+1. Artifact inventory: sources, claims, assumptions, evidence, and missing details.
+2. Claim ledger: claim, type, provenance, evidence, scope, evidence burden, support status.
+3. Rigor review: severity-ranked issues tied to claim validity.
+4. Corrected scope: what the packet supports, what is unknown, and what would be needed next.
+5. Final output in the user-requested format.
+
+References:
+
+- `references/provenance_and_artifacts.md`
+- `references/rigor_review_workflow.md`
+- `references/evaluation_reasoning.md`
+- `references/method_and_claim_audit.md`
+
+
+## Variant File: variant/orchestra_research_rigor/references/evaluation_reasoning.md
+
+# Evaluation Reasoning
+
+Adapted from Orchestra ML evaluation and rigor-review patterns, without evaluation harness execution.
+
+## Benchmark Audit Questions
+
+- What construct does the benchmark claim to measure?
+- Are tasks representative of that construct?
+- Are metrics aligned with the claim?
+- Is aggregation across tasks meaningful and transparent?
+- Are baselines appropriate and fairly tuned?
+- Are repeated runs, uncertainty, and variance reported?
+- Could contamination, leakage, prompt sensitivity, or protocol overfitting affect conclusions?
+- Are per-task results preserved before aggregate claims?
+
+## Experiment Audit Questions
+
+- What exact intervention or method differs between compared systems?
+- Are training data, evaluation data, compute, and tuning budgets compatible?
+- Which variables are controlled and which confounds remain?
+- Are ablations sufficient to support mechanism claims?
+- Are negative results or failure modes reported?
+
+Report benchmark and experiment concerns as risks unless the supplied packet directly establishes a failure.
+
+
+## Variant File: variant/orchestra_research_rigor/references/method_and_claim_audit.md
+
+# Method And Claim Audit
+
+Adapted from Orchestra claim-centered artifact patterns and ML writing/reviewer criteria.
+
+## Method Comparison Schema
+
+| Dimension | Method A | Method B | Comparable? | Evidence | Caveat |
+|---|---|---|---|---|---|
+
+Recommended dimensions: objective, data, assumptions, model class, optimization, baselines, metrics, compute, evaluation protocol, limitations, and claim scope.
+
+## Claim Ledger Schema
+
+| Claim | Type | Evidence burden | Supplied evidence | Support status | Allowed scope |
+|---|---|---|---|---|---|
+
+## Boundary Rules
+
+- A within-paper comparison supports that paper's setup, not all possible settings.
+- A benchmark score supports performance under the benchmark protocol, not unrestricted capability.
+- A probe or correlational analysis supports recoverability or association unless stronger causal evidence is supplied.
+- A reproduction plan must list artifacts, code/config/data needs, seeds, metrics, and environment details.
+
+
+## Variant File: variant/orchestra_research_rigor/references/provenance_and_artifacts.md
+
+# Provenance And Research Artifacts
+
+Adapted from Orchestra agent-native research artifact and research-manager patterns.
+
+## Provenance Tags
+
+Use these tags internally and expose them when helpful:
+
+- source-derived: directly stated by supplied material.
+- source-located: source-derived and tied to page, section, figure, or table.
+- cross-source synthesis: a relation among supplied sources.
+- agent-inferred: inferred from supplied evidence and marked as such.
+- agent-proposed: a hypothesis, critique, or protocol improvement.
+- unsupported: not established by supplied material.
+
+## Artifact Schema
+
+| Artifact | Purpose |
+|---|---|
+| Claim ledger | Tracks claims, claim types, source support, and scope. |
+| Evidence ledger | Tracks source locations and directness of support. |
+| Assumption list | Separates method assumptions from evaluation assumptions. |
+| Risk register | Records threats to validity and reproducibility. |
+| Missing-information list | Identifies details needed before stronger conclusions. |
+
+Never silently convert an agent-proposed idea into a source-derived fact.
+
+
+## Variant File: variant/orchestra_research_rigor/references/rigor_review_workflow.md
+
+# Rigor Review Workflow
+
+Adapted from Orchestra rigor-reviewer patterns.
+
+## Review Dimensions
+
+- Evidence relevance: does the evidence actually support the claim?
+- Falsifiability: can the claim be tested or refuted?
+- Scope calibration: is the claim limited to the studied setting?
+- Argument coherence: do conclusions follow from assumptions and results?
+- Exploration integrity: are hypotheses, post-hoc analyses, and exploratory ideas separated?
+- Methodological rigor: are baselines, ablations, metrics, seeds, and reproducibility details adequate?
+
+## Severity-Ranked Finding Template
+
+| Severity | Claim affected | Evidence issue | Consequence | Minimal fix |
+|---|---|---|---|---|
+
+## Missing Detail Checklist
+
+- Baseline identity and strength.
+- Ablation presence and purpose.
+- Metric definition and aggregation.
+- Dataset split, task sampling, or environment setup.
+- Number of seeds, runs, or trials.
+- Variability or confidence reporting.
+- Hyperparameter search and compute comparability.
+- Implementation and artifact availability.
+
+
+## Variant File: variant/reuse_and_license_notes.md
+
+# B2 Reuse And License Notes
+
+This variant selectively adapts Orchestra-derived ideas for claim-centered artifacts, provenance, rigor review, and evaluation reasoning. It deliberately excludes autonomous experiment execution, repository management, evaluation harnesses, training infrastructure, deployment, and tool loops.
+
+## Components Used
+
+| Upstream component | Files consulted per ledger | Adaptation decision | License status from audit |
+|---|---|---|---|
+| `Orchestra-Research/AI-Research-SKILLs/22-agent-native-research-artifact/ara-compiler` | `SKILL.md`, `references/schema.md` | Rewritten as compact claim/evidence/artifact schema | MIT observed in skill frontmatter |
+| `Orchestra-Research/AI-Research-SKILLs/22-agent-native-research-artifact/research-manager` | `SKILL.md`, `references/provenance_tags.md` | Rewritten as provenance tags and artifact discipline | MIT observed in skill frontmatter |
+| `Orchestra-Research/AI-Research-SKILLs/22-agent-native-research-artifact/rigor-reviewer` | `SKILL.md`, `references/rigor_dimensions.md` | Rewritten as type-aware rigor review workflow | MIT observed in skill frontmatter |
+| `Orchestra-Research/AI-Research-SKILLs/20-ml-paper-writing/ml-paper-writing` | `SKILL.md`, citation/reviewer references | Rewritten as claim-to-evidence and reviewer criteria patterns | MIT observed in skill frontmatter |
+
+## Explicit Runtime Exclusions
+
+- No autonomous research loop or persistent research state.
+- No scripts, APIs, retrieval tools, evaluation harnesses, training infrastructure, or code execution.
+- No K-Dense-derived material.
+- No benchmark-specific paper names, task identifiers, expected answers, or development answer-key content.
+
+
+## Variant File: variant/variant_manifest.yaml
+
+variant_id: B2_orchestra_subset
+module_scope: literature_analysis_and_research_rigor
+implementation_type: instruction_reference_only
+runtime_tools_enabled: false
+external_services_enabled: false
+dynamic_retrieval_enabled: false
+scripts_enabled: false
+upstream_basis:
+  repository: Orchestra-Research/AI-Research-SKILLs
+  components:
+    - path: 22-agent-native-research-artifact/ara-compiler/SKILL.md
+      consulted_files:
+        - 22-agent-native-research-artifact/ara-compiler/SKILL.md
+        - 22-agent-native-research-artifact/ara-compiler/references/schema.md
+      use: adapted_claim_and_artifact_schema
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: 22-agent-native-research-artifact/research-manager/SKILL.md
+      consulted_files:
+        - 22-agent-native-research-artifact/research-manager/SKILL.md
+        - 22-agent-native-research-artifact/research-manager/references/provenance_tags.md
+      use: adapted_provenance_tags
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: 22-agent-native-research-artifact/rigor-reviewer/SKILL.md
+      consulted_files:
+        - 22-agent-native-research-artifact/rigor-reviewer/SKILL.md
+        - 22-agent-native-research-artifact/rigor-reviewer/references/rigor_dimensions.md
+      use: adapted_rigor_review_dimensions
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: 20-ml-paper-writing/ml-paper-writing/SKILL.md
+      consulted_files:
+        - 20-ml-paper-writing/ml-paper-writing/SKILL.md
+        - 20-ml-paper-writing/ml-paper-writing/references/citation-management.md
+        - 20-ml-paper-writing/ml-paper-writing/references/reviewer-criteria.md
+      use: adapted_claim_to_evidence_and_reviewer_patterns
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+runtime_exclusions:
+  - no autoresearch autonomous loop
+  - no experiment execution
+  - no evaluation harnesses
+  - no training infrastructure
+  - no K-Dense-derived material
+  - no B3-original AI/ML/RL additions
+
+
+# Task
+
+- Task ID: `LS-VAL-02`
+- Split: `validation`
+- Task type: `literature_mapping`
+- Topic: latent reasoning in language models
+- Research question: Within the fixed source packet, what literature supports or challenges the idea that language models perform useful latent or internal reasoning?
+
+## Input Prompt
+
+Produce a balanced fixed-corpus literature map on latent or internal reasoning in language models.
+Use only the provided source packet. Do not perform external retrieval.
+Return a corpus coverage table, taxonomy of evidence types, representative papers, skeptical counter-evidence, unsupported-synthesis warnings, and open gaps visible within the corpus.
+Treat latent reasoning as one possible topic, not as an assumed fact.
+
+
+## Required Outputs
+
+- corpus_coverage_table
+- evidence_type_taxonomy
+- representative_paper_table
+- counter_evidence_summary
+- unsupported_synthesis_warnings
+- gap_and_hypothesis_list
+
+# Source Packet
+
+# LS-VAL-02 Model Input Packet
+## Sources
+- Chain-of-Thought Prompting Elicits Reasoning in Large Language Models (arXiv:2201.11903; 2022). Local file: `wei_2022_chain_of_thought_prompting.pdf`. Included evidence: Abstract; prompting/evaluation results; limitations.
+- Large Language Models are Zero-Shot Reasoners (arXiv:2205.11916; 2022). Local file: `kojima_2022_large_language_models_are_zero_shot_reasoners.pdf`. Included evidence: Abstract; zero-shot reasoning prompt; experiments.
+- Language Models Don't Always Say What They Think: Unfaithful Explanations in Chain-of-Thought Prompting (arXiv:2305.04388; 2023). Local file: `turpin_2023_unfaithful_explanations_cot.pdf`. Included evidence: Abstract; unfaithfulness experiments; discussion.
+- Measuring Faithfulness in Chain-of-Thought Reasoning (arXiv:2307.13702; 2023). Local file: `lanham_2023_measuring_faithfulness_cot.pdf`. Included evidence: Abstract; faithfulness tests; intervention/ablation evidence; limitations.
+
+## Controlled Source Notes
+- Chain-of-Thought Prompting: reports that chain-of-thought exemplars can improve reasoning performance in large language models on selected tasks.
+- Zero-Shot Reasoners: reports that a simple reasoning prompt can elicit step-by-step reasoning behavior without task-specific examples in selected settings.
+- Unfaithful Explanations in Chain-of-Thought Prompting: studies cases where generated rationales can be unfaithful to the model behavior or influenced by biases.
+- Measuring Faithfulness in Chain-of-Thought Reasoning: proposes tests for faithfulness of chain-of-thought rationales and studies interventions/perturbations in selected settings.
+- Evidence objects: abstracts, method/evaluation sections, result tables/figures, and discussion/limitations.
+
+## Packet Scope
+- This packet contains source metadata and neutral source notes prepared from the listed canonical files.
+- Some exact numeric values, full tables, appendix details, and implementation settings are not included in this model input packet.
+
+
+2026-05-30T04:53:18.594353Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:53:18.594366Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:53:18.594699Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:53:18.594702Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:53:18.594991Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:53:18.594995Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:53:18.595294Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:53:18.595297Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:53:18.595571Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:53:18.595574Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:53:18.596210Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:53:18.596213Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:53:18.598297Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:53:19.958121Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:53:19.958131Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:53:19.958463Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:53:19.958468Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:53:19.958822Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:53:19.958826Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:53:19.959170Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:53:19.959175Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:53:19.959505Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:53:19.959508Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:53:19.960567Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:53:19.960573Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+codex
+## corpus_coverage_table
+
+| Source | Corpus role | What it supports | What it challenges | Provenance | Scope limits |
+|---|---|---|---|---|---|
+| Wei et al. 2022, *Chain-of-Thought Prompting Elicits Reasoning in Large Language Models* | Performance-oriented support for elicited reasoning traces | Chain-of-thought exemplars can improve reasoning performance in large language models on selected tasks | Does not by itself establish that the displayed chain of thought is faithful internal reasoning | source-derived | Selected tasks; exact numeric tables and implementation details are not included |
+| Kojima et al. 2022, *Large Language Models are Zero-Shot Reasoners* | Prompting evidence for step-by-step behavior without task-specific examples | A simple prompt can elicit step-by-step reasoning behavior and improve selected zero-shot settings | Does not prove latent reasoning exists before prompting or that generated steps reflect internal computation | source-derived + agent-inferred | Selected settings; full experimental details not available in packet |
+| Turpin et al. 2023, *Language Models Don’t Always Say What They Think* | Skeptical evidence about rationale faithfulness | Generated rationales can be unfaithful to model behavior or influenced by biases | Challenges treating chain-of-thought text as transparent access to internal reasoning | source-derived | Packet gives abstract, experiments, and discussion-level evidence, not full tables |
+| Lanham et al. 2023, *Measuring Faithfulness in Chain-of-Thought Reasoning* | Methodological audit of faithfulness | Provides faithfulness tests and intervention/ablation evidence in selected settings | Shows that faithfulness must be measured rather than assumed | source-derived | Selected settings; limitations and exact implementation details are incomplete in packet |
+
+## evidence_type_taxonomy
+
+| Evidence type | Description | Sources | Relevance to latent/internal reasoning | Strength |
+|---|---|---|---|---|
+| Prompted performance improvement | Accuracy or task performance improves when chain-of-thought or reasoning prompts are used | Wei 2022; Kojima 2022 | Supports usefulness of reasoning-style prompting | Moderate for usefulness; weak for internal mechanism |
+| Generated step-by-step rationales | Model emits intermediate natural-language reasoning steps | Wei 2022; Kojima 2022 | Shows observable reasoning-like behavior | Weak for latent reasoning unless faithfulness is established |
+| Zero-shot elicitation | Reasoning behavior appears from a simple prompt without examples | Kojima 2022 | Suggests reasoning-like behavior may be latent or prompt-accessible | Suggestive, not conclusive |
+| Unfaithfulness experiments | Tests showing rationales can diverge from actual model behavior or reflect bias | Turpin 2023 | Directly challenges the assumption that rationales reveal internal reasoning | Strong skeptical evidence within selected settings |
+| Intervention and ablation tests | Perturbing or removing rationale components to assess behavioral dependence | Lanham 2023 | More directly probes whether chain-of-thought text causally matters | Stronger mechanistic evidence, but still setting-limited |
+| Discussion and limitations | Authors’ stated caveats about task scope, faithfulness, and interpretation | All sources | Prevents overgeneralizing from prompting results | Important for scope calibration |
+
+## representative_paper_table
+
+| Paper | Representative claim | Claim type | Supplied evidence | Support status | Allowed interpretation |
+|---|---|---|---|---|---|
+| Wei et al. 2022 | Chain-of-thought exemplars improve performance on selected reasoning tasks | Improvement claim | Prompting/evaluation results and limitations | Supported within packet | CoT can be useful as an elicitation technique in selected large LMs |
+| Kojima et al. 2022 | A simple zero-shot prompt can elicit step-by-step reasoning behavior | Improvement / elicitation claim | Abstract, prompt, experiments | Supported within packet | Reasoning-like behavior can sometimes be prompted without examples |
+| Turpin et al. 2023 | Chain-of-thought explanations can be unfaithful | Benchmark / mechanism challenge | Unfaithfulness experiments and discussion | Supported within packet | CoT text should not be treated as reliable evidence of internal reasoning |
+| Lanham et al. 2023 | Faithfulness of CoT reasoning can be tested with interventions and ablations | Methodological / causal-probe claim | Faithfulness tests, intervention/ablation evidence, limitations | Supported within packet | Faithfulness is an empirical question requiring targeted tests |
+
+## counter_evidence_summary
+
+The fixed corpus does not support a simple conclusion that language models “perform latent reasoning” in a transparent or reliably inspectable way. Wei 2022 and Kojima 2022 support the weaker claim that reasoning-style prompts can improve or elicit useful reasoning-like behavior in selected settings. That is evidence of usefulness, not direct evidence that the generated rationale matches the model’s internal computation.
+
+Turpin 2023 provides the clearest skeptical counterweight: generated explanations can be unfaithful or bias-influenced. Lanham 2023 reinforces this caution by treating faithfulness as something to measure with interventions and ablations, not something to infer from fluent rationales alone.
+
+## unsupported_synthesis_warnings
+
+| Warning | Why unsupported in this packet |
+|---|---|
+| “Chain of thought reveals the model’s latent reasoning.” | The packet includes faithfulness challenges and does not provide universal mechanism evidence |
+| “Performance gains prove internal reasoning.” | Improvement claims require only compatible baseline comparisons; mechanism claims require intervention or ablation evidence |
+| “Zero-shot reasoning proves latent reasoning was already present.” | Kojima 2022 supports elicitation in selected settings, but latent preexistence is an inference |
+| “Unfaithfulness means CoT is useless.” | Turpin 2023 challenges explanation faithfulness, not necessarily task usefulness |
+| “Faithfulness findings generalize to all models and tasks.” | The packet describes selected settings and lacks complete task/model/protocol coverage |
+| “These sources settle whether LMs reason internally.” | The corpus is small and focused on prompting/rationale faithfulness, with missing numeric and implementation details |
+
+## gap_and_hypothesis_list
+
+| Gap | Visible from corpus | Testable hypothesis or next evidence needed | Provenance |
+|---|---|---|---|
+| Direct internal mechanism evidence | The packet mostly covers prompts, rationales, and behavioral tests | Compare hidden-state or causal interventions with rationale text and task outcomes | agent-proposed |
+| Faithfulness across task types | Existing evidence is selected-setting specific | Run faithfulness interventions across heterogeneous reasoning, factual, bias-sensitive, and adversarial tasks | agent-proposed |
+| Model scale and architecture effects | Packet does not provide complete coverage of model families or sizes | Test whether CoT usefulness and faithfulness vary systematically with scale/model class | agent-proposed |
+| Robust baseline comparability | Full tables, exact numeric values, tuning, and compute details are omitted | Recover full baseline identities, prompts, seeds, metrics, and compute budgets from original papers | agent-proposed |
+| Distinguishing useful reasoning from useful formatting | Prompted step-by-step text may help via decomposition, formatting, or other effects | Ablate rationale content, order, validity, and visibility to isolate mechanism | agent-proposed |
+| Aggregate versus per-task behavior | Packet does not include full per-task results | Preserve task-level results before making broad latent-reasoning claims | agent-proposed |
+
+**Corrected scope:** Within this fixed packet, the literature supports a cautious map: chain-of-thought and zero-shot reasoning prompts can be useful in selected settings, but generated rationales are not automatically faithful evidence of latent or internal reasoning. The strongest supported position is that latent/internal reasoning is a hypothesis requiring faithfulness, intervention, and mechanism-focused evidence, not an established fact from performance gains alone.
+tokens used
+2,868

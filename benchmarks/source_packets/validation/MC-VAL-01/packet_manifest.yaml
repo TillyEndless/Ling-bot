@@ -1,0 +1,36 @@
+task_id: MC-VAL-01
+packet_id: validation_MC-VAL-01_packet_v0_draft
+status: draft_pending_human_review
+sources:
+- id: ppo
+  title: Proximal Policy Optimization Algorithms
+  authors: John Schulman et al.
+  year: 2017
+  identifier: arXiv:1707.06347
+  url: https://arxiv.org/pdf/1707.06347
+  filename: schulman_2017_proximal_policy_optimization_algorithms.pdf
+  include: Abstract; clipped objective; adaptive KL; experiments.
+  local_filename: schulman_2017_proximal_policy_optimization_algorithms.pdf
+  sha256: e78feadadbdbb0b601b3c2bcc81404722cd431a489b307545f9b7bea1e8c4f5b
+  page_count: '12'
+  included_in_model_packet: Abstract; clipped objective; adaptive KL; experiments.
+- id: sac
+  title: 'Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning
+    with a Stochastic Actor'
+  authors: Tuomas Haarnoja et al.
+  year: 2018
+  identifier: arXiv:1801.01290
+  url: https://arxiv.org/pdf/1801.01290
+  filename: haarnoja_2018_soft_actor_critic.pdf
+  include: Abstract; maximum entropy objective; off-policy setup; continuous-control
+    experiments.
+  local_filename: haarnoja_2018_soft_actor_critic.pdf
+  sha256: 5c33fae017d02f7025730f05198d4a6b103402822c8bbf48cbc5d8a0474c336a
+  page_count: '14'
+  included_in_model_packet: Abstract; maximum entropy objective; off-policy setup;
+    continuous-control experiments.
+model_input_packet:
+  path: model_input_packet.md
+  sha256: 2a8127477cbef027c55c711c8ce1571e8133d2c177f1c7105f1ccf3394108f3f
+packet_matches_task_spec: true
+unresolved_source_version_issues: []

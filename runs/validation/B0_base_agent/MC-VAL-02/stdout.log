@@ -1,0 +1,54 @@
+## method_comparison_matrix
+
+| Dimension | ViT-style evidence claim | ConvNet-style evidence claim | Comparison caveat |
+|---|---|---|---|
+| Core method | ViT treats an image as a sequence of patches and applies a Transformer-style architecture for image recognition. | ResNet uses deep convolutional networks with residual learning; ConvNeXt modernizes ConvNet architecture and training for Transformer-era comparison. | The architectural families differ in input representation, locality assumptions, and optimization history. |
+| Main assumption | Strong performance is tied to Transformer capacity plus large-scale pretraining/evaluation conditions. | Convolutional inductive bias remains competitive, especially when ConvNets are modernized and trained with contemporary recipes. | Claims should not compare “plain old ConvNet” against “fully modern ViT” without controlling recipe and scale. |
+| Data scale | ViT evidence explicitly emphasizes image recognition “at scale” and data/pretraining conditions. | ResNet reports ImageNet/CIFAR object-recognition results; ConvNeXt focuses on modern ImageNet-era comparisons. | Data scale is a central confound: ViT-style claims appear more dependent on large-scale pretraining conditions. |
+| Compute | ViT comparisons depend on large-scale training regimes; compute is implied as important through scale. | ResNet/ConvNeXt evidence includes deep ConvNet training and modernization, but packet lacks exact compute budgets. | Without matched compute, parameter count, training length, and pretraining data, superiority claims are weak. |
+| Augmentation/training recipe | ViT evidence includes architecture, data scale, benchmark comparisons, and evaluation protocol sections. | ConvNeXt specifically studies modernization and training recipe changes for ConvNets. | Training recipe is not incidental; ConvNeXt exists partly to show recipe/design updates change the comparison. |
+| Benchmarks | ViT reports benchmark comparisons for image recognition under scale-aware settings. | ResNet reports ImageNet/CIFAR experiments; ConvNeXt reports ImageNet comparisons. | Benchmark overlap matters. ImageNet-only claims may not transfer to CIFAR or broader downstream settings. |
+| Metrics | Packet indicates result tables and experiments but omits exact numeric values. | Same: result tables exist, but exact values are not included in the packet. | Use qualitative comparison only unless exact table values are provided. |
+| Scope limits | Evidence supports ViT as a strong vision architecture under appropriate scale/pretraining conditions. | Evidence supports ConvNets as strong baselines, especially with residual learning and modernized ConvNeXt-style design/training. | The packet does not justify universal claims that either family is always better. |
+
+## assumption_and_inductive_bias_table
+
+| Architecture family | Inductive bias / assumption | Evidence basis in packet | Implication for comparison |
+|---|---|---|---|
+| ResNet-style ConvNet | Uses convolutional structure and residual learning to train deep networks for visual recognition. | ResNet abstract, architecture, ImageNet/CIFAR experiments. | Strong baseline for object recognition, but older recipe/design should not be treated as the final ConvNet form. |
+| ViT-style Transformer | Represents images as patch sequences and relies less on built-in convolutional locality bias. | ViT abstract, architecture, data scale, benchmark comparisons. | Needs evaluation under data-scale-aware conditions; may benefit more from large pretraining regimes. |
+| ConvNeXt-style ConvNet | Retains ConvNet family while modernizing design and training recipes for fairer Transformer-era comparison. | ConvNeXt abstract, modernization/training recipe, ImageNet comparisons. | Shows that architecture comparisons are entangled with training recipe and contemporary design choices. |
+
+## data_compute_evaluation_caveats
+
+| Caveat | Why it matters |
+|---|---|
+| Data scale must be controlled or explicitly reported. | ViT evidence emphasizes large-scale recognition; comparing it to ConvNets trained on smaller or older regimes can overstate architectural advantage. |
+| Compute budgets should be matched or normalized. | Packet does not provide exact compute values, so claims about efficiency or dominance are underdetermined. |
+| Training recipe is a confound. | ConvNeXt specifically modernizes ConvNet recipes, suggesting older ConvNet results are not sufficient for fair comparison. |
+| Benchmarks should overlap. | ResNet includes ImageNet/CIFAR; ConvNeXt emphasizes ImageNet; ViT reports benchmark comparisons. Conclusions depend on which benchmark is being compared. |
+| Metrics need exact source tables. | The packet notes result tables but omits exact numbers, so only qualitative evidence strength can be assessed. |
+| Pretraining and evaluation protocol matter. | ViT-style claims are especially tied to pretraining/data scale; protocol mismatch can change the interpretation. |
+
+## evidence_strength_summary
+
+| Evidence claim | Strength from supplied packet | Reason |
+|---|---|---|
+| Residual learning made very deep ConvNets effective for image recognition. | Strong | Directly supported by ResNet’s stated contribution and ImageNet/CIFAR experiments. |
+| ViT is a viable image-recognition architecture when images are represented as patch sequences. | Strong | Directly supported by ViT architecture and benchmark-comparison evidence. |
+| ViT-style models require careful treatment of data scale in comparison. | Strong | The packet explicitly highlights data scale/pretraining conditions for ViT. |
+| Modern ConvNets can be competitive with Transformer-era models when updated. | Moderate to strong | ConvNeXt directly addresses modernization and ImageNet comparisons, but exact results are not included. |
+| One family is universally superior. | Weak / unsupported | The packet lacks exact numeric tables, compute normalization, and broad benchmark coverage. |
+| Architecture alone explains performance differences. | Weak / unsupported | Data scale, compute, augmentation, and recipe are all identified as comparison confounds. |
+
+## scoped_conclusions
+
+1. ViT-style and ConvNet-style architectures should be compared under matched or clearly reported data scale, compute, training recipe, benchmark, and metric conditions.
+
+2. The fair comparison is not “Transformer versus old ConvNet.” ConvNeXt indicates that ConvNet baselines need modern architecture and training recipes before drawing Transformer-era conclusions.
+
+3. ViT evidence supports patch-sequence Transformers as strong image-recognition models, especially under scale-aware pretraining and evaluation settings.
+
+4. ConvNet evidence supports convolutional models as strong visual-recognition baselines, from ResNet’s residual deep networks through ConvNeXt’s modernized ConvNet design.
+
+5. Based only on the supplied packet, the defensible conclusion is conditional: ViT-style models and ConvNet-style models have different assumptions and comparison requirements; neither should be declared categorically superior without matched scale, compute, recipe, and evaluation protocol.

@@ -1,0 +1,64 @@
+**Source Inventory**
+
+The fixed packet contains five sources: DDIM (2020), Progressive Distillation (2022), DPM-Solver (2022), Latent Diffusion Models (2022), and Consistency Models (2023). Evidence objects are described at source-note level: abstracts, method sections, experiment sections, result tables/figures, and stated limitations/discussion. The packet does not include exact tables, numeric results, appendix details, or full implementation settings.
+
+## corpus_coverage_table
+
+| Source | Role in Corpus | Efficiency Target | Main Mechanism | Evidence Available | Coverage Limits |
+|---|---|---|---|---|---|
+| DDIM | Method paper | Sampling efficiency | Implicit sampling formulation enabling fewer denoising steps | `DIRECT_PACKET_EVIDENCE`: source note says it introduces implicit sampling and reports faster sampling with fewer steps | Exact step counts, metrics, datasets, and limitations not supplied |
+| Progressive Distillation | Method paper | Sampling efficiency | Repeatedly distills a diffusion sampler into fewer sampling steps | `DIRECT_PACKET_EVIDENCE`: source note says it compresses sampler steps and reports quality/speed tradeoffs | Missing numeric tradeoff curves, teacher/student details, compute cost |
+| DPM-Solver | Method paper | Sampling efficiency | Treats sampling as ODE solving with fast solver design | `DIRECT_PACKET_EVIDENCE`: source note says it reports few-step sampling in selected settings | Exact solver orders, datasets, quality metrics, robustness details absent |
+| Latent Diffusion Models | Method / systems paper | Training and sampling compute for high-resolution generation | Moves diffusion into learned latent space | `DIRECT_PACKET_EVIDENCE`: source note says it reports high-resolution synthesis with computational tradeoffs | Packet does not specify compression ratios, autoencoder costs, or task-specific metrics |
+| Consistency Models | Method paper | One/few-step generation | Trains or distills models to map noisy states toward samples consistently | `DIRECT_PACKET_EVIDENCE`: source note says it supports one/few-step generation and reports comparisons | Missing exact training recipe, baselines, numeric quality comparisons |
+
+## approach_taxonomy
+
+| Approach Family | Representative Sources | Efficiency Lever | What It Optimizes | Main Tradeoff |
+|---|---|---|---|---|
+| Non-Markovian / implicit sampler acceleration | DDIM | Reduce sampling steps without retraining the base diffusion model, as described in packet notes | Faster inference | `WITHIN_PACKET_SYNTHESIS`: may trade sample quality, diversity, or fidelity against fewer steps, but exact effects are not quantified in the packet |
+| Distillation-based step reduction | Progressive Distillation; Consistency Models | Train a new model or student process for fewer sampling steps | Very low-step or one/few-step generation | `WITHIN_PACKET_SYNTHESIS`: shifts cost from inference to training/distillation; packet does not quantify total compute |
+| Numerical solver acceleration | DPM-Solver | Improve the integration procedure for the diffusion sampling ODE | Few-step sampling under selected settings | `DIRECT_PACKET_EVIDENCE` for ODE framing; `LIMITED_CRITIQUE`: solver performance may depend on noise schedule/model assumptions not detailed here |
+| Latent-space diffusion | Latent Diffusion Models | Run diffusion in compressed learned representation | High-resolution generation with lower pixel-space compute | `WITHIN_PACKET_SYNTHESIS`: introduces representation bottleneck and autoencoder dependency; exact degradation or savings not supplied |
+| Direct consistency training / consistency distillation | Consistency Models | Learn direct mappings usable in one or few steps | Sampling speed | `DIRECT_PACKET_EVIDENCE` for one/few-step aim; tradeoff details require full result tables not in packet |
+
+## representative_paper_table
+
+| Paper | Main Claim in Packet | Efficiency Method | Experimental Evidence in Packet | Evidence-Burden Label | Boundary |
+|---|---|---|---|---|---|
+| DDIM | Faster sampling with fewer steps in reported settings | Implicit sampling formulation | Experiments are included, but exact numbers are absent | `DIRECT_PACKET_EVIDENCE` | Supports setup-specific faster sampling, not universal superiority |
+| Progressive Distillation | Diffusion sampler can be compressed into fewer sampling steps | Repeated sampler distillation | Reports sample-quality/speed tradeoffs | `DIRECT_PACKET_EVIDENCE` | Does not establish net compute savings without training/distillation cost details |
+| DPM-Solver | ODE solver enables sampling around few steps in selected settings | Fast ODE solver for diffusion sampling | Experiments and step/quality tradeoffs included | `DIRECT_PACKET_EVIDENCE` | “Selected settings” limits generalization |
+| Latent Diffusion Models | Latent-space diffusion supports high-resolution synthesis with computational tradeoffs | Learned latent representation plus diffusion | Experiments included | `DIRECT_PACKET_EVIDENCE` | Packet does not establish which tradeoffs dominate across domains |
+| Consistency Models | One/few-step generation is possible via consistency training or distillation | Consistency objective and/or distillation | Generation-quality comparisons included | `DIRECT_PACKET_EVIDENCE` | Exact comparison strength depends on omitted baselines and metrics |
+
+## tradeoff_analysis
+
+| Tradeoff | Sources | Analysis |
+|---|---|---|
+| Sampling speed vs sample quality | DDIM, Progressive Distillation, DPM-Solver, Consistency Models | `WITHIN_PACKET_SYNTHESIS`: all four target fewer sampling steps. The packet states reported tradeoffs or comparisons, but not exact quality metrics, so no ranking should be inferred. |
+| Inference cost vs training/distillation cost | Progressive Distillation, Consistency Models | `LIMITED_CRITIQUE`: distillation can reduce sampling steps but likely adds training burden. The packet supports the use of distillation but does not quantify total compute. |
+| Pixel-space fidelity/control vs latent compression | Latent Diffusion Models | `LIMITED_CRITIQUE`: latent diffusion improves computational feasibility for high-resolution synthesis, but a learned latent space can introduce reconstruction or representation constraints. The packet mentions computational tradeoffs but not exact failure modes. |
+| Solver sophistication vs robustness across settings | DPM-Solver | `LIMITED_CRITIQUE`: ODE-solver acceleration may be sensitive to solver assumptions, schedules, or model parameterization. The packet establishes ODE framing and selected-setting results, but not broad robustness. |
+| Few-step convenience vs method-specific retraining | DDIM, DPM-Solver vs Progressive Distillation, Consistency Models | `WITHIN_PACKET_SYNTHESIS`: sampler/solver methods appear more like sampling-procedure changes, while distillation/consistency approaches require additional training or model changes. Exact implementation burden is not provided. |
+
+## unsupported_synthesis_warnings
+
+| Warning | Label | Reason |
+|---|---|---|
+| Do not rank these methods by absolute speed or quality. | `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` | Packet omits exact numeric results, datasets, metrics, and hardware. |
+| Do not claim one approach is generally superior across image domains or resolutions. | `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` | The packet gives setup-specific reports only. |
+| Do not infer total compute savings from faster sampling alone. | `LIMITED_CRITIQUE` | Distillation and latent modeling may add training or representation costs not quantified here. |
+| Do not treat one-step generation as matching full diffusion quality in all settings. | `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` | Packet only says comparisons are reported, not that parity holds universally. |
+| Do not infer deployment robustness from benchmark experiments. | `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` | No deployment evidence is included. |
+
+## evidence_grounded_gap_list
+
+| Gap Visible Within Corpus | Evidence-Burden Label | Why It Matters |
+|---|---|---|
+| Need comparable evaluations across methods under shared datasets, metrics, hardware, and step budgets | `WITHIN_PACKET_SYNTHESIS` | The packet spans multiple efficiency mechanisms but does not provide a common benchmark table. |
+| Need total compute accounting, including training, distillation, autoencoder training, and inference | `LIMITED_CRITIQUE` | Faster sampling may not equal lower end-to-end cost. |
+| Need clearer quality-speed frontier reporting | `DIRECT_PACKET_EVIDENCE` / `LIMITED_CRITIQUE` | Several sources report tradeoffs, but exact curves and numbers are absent from the packet. |
+| Need ablations separating solver/sampler design from model architecture and training choices | `LIMITED_CRITIQUE` | The packet identifies method differences but lacks detailed ablations. |
+| Need robustness analysis across resolutions, domains, and generation tasks | `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` | The corpus includes high-resolution and general sampling methods, but the packet does not establish cross-domain robustness. |
+| Need failure-mode comparisons for latent compression, distillation collapse, and few-step artifacts | `SPECULATIVE_PROPOSAL` | These are plausible evaluation targets grounded in the method families, but the packet does not directly report them. |

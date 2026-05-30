@@ -1,0 +1,177 @@
+{
+  "task_id": "MC-VAL-01",
+  "scorecards": [
+    {
+      "variant": "B0_base_agent",
+      "scores": {
+        "factual_accuracy": 3,
+        "evidence_traceability": 3,
+        "citation_validity": null,
+        "literature_coverage": null,
+        "comparison_fairness": 4,
+        "experimental_rigor": 4,
+        "benchmark_validity": 4,
+        "inference_boundary_discipline": 4,
+        "hypothesis_quality": null,
+        "rl_specific_correctness": 3,
+        "output_usefulness": 4,
+        "efficiency": 5
+      },
+      "hard_fail": {
+        "triggered": false,
+        "reasons": []
+      },
+      "findings": [
+        {
+          "severity": "major",
+          "dimension": "factual_accuracy",
+          "description": "Fails to capture the gold-critical PPO on-policy assumption, instead saying the packet does not explicitly state PPO on/off-policy status.",
+          "evidence": "Gold M1 requires distinguishing PPO on-policy policy-gradient assumptions from SAC off-policy maximum-entropy actor-critic assumptions."
+        },
+        {
+          "severity": "minor",
+          "dimension": "evidence_traceability",
+          "description": "Uses generic packet references rather than page, section, table, or figure grounding; still identifies which claims are supported or unknown.",
+          "evidence": "Examples include 'Supported by packet' and 'Packet says exact numeric values and full tables are not included' without specific source locations."
+        },
+        {
+          "severity": "minor",
+          "dimension": "output_usefulness",
+          "description": "Provides all requested sections and useful caveats, but many comparison entries are marked unknown because it underuses the supplied critical PPO on-policy detail.",
+          "evidence": "Required outputs are present, including matrix, assumptions table, protocol review, evidence summary, and recommendations."
+        }
+      ],
+      "summary": "Strongly scoped and avoids unfair superiority claims, but materially misses the required PPO on-policy distinction, reducing RL-specific correctness and factual accuracy.",
+      "scoring_notes": "Calibrated as reliable for benchmark-caveat reasoning but incomplete on a high-weight method assumption. No hard fail because it does not invent results or make broad unsupported superiority claims."
+    },
+    {
+      "variant": "B1_kdense_subset",
+      "scores": {
+        "factual_accuracy": 3,
+        "evidence_traceability": 3,
+        "citation_validity": null,
+        "literature_coverage": null,
+        "comparison_fairness": 4,
+        "experimental_rigor": 4,
+        "benchmark_validity": 4,
+        "inference_boundary_discipline": 4,
+        "hypothesis_quality": null,
+        "rl_specific_correctness": 3,
+        "output_usefulness": 4,
+        "efficiency": 5
+      },
+      "hard_fail": {
+        "triggered": false,
+        "reasons": []
+      },
+      "findings": [
+        {
+          "severity": "major",
+          "dimension": "rl_specific_correctness",
+          "description": "Does not state PPO is on-policy and instead marks PPO data usage as not explicitly stated, missing a required RL-specific distinction.",
+          "evidence": "Gold M1 requires correctly distinguishing PPO on-policy policy-gradient assumptions from SAC off-policy maximum-entropy actor-critic assumptions."
+        },
+        {
+          "severity": "minor",
+          "dimension": "evidence_traceability",
+          "description": "Traceability is mostly by controlled notes and packet-supported labels rather than precise source locations.",
+          "evidence": "Evidence phrases include 'Directly supported by controlled notes' and 'PPO controlled source notes' without page or section identifiers."
+        },
+        {
+          "severity": "minor",
+          "dimension": "experimental_rigor",
+          "description": "Good recognition of missing seeds, metrics, tuning, environment versions, and compute, but lacks details of any reported comparison because the output treats most benchmark information as omitted.",
+          "evidence": "Assumptions table lists same tasks, metrics, seeds, architectures, environment versions, tuning budget, compute, and evaluation protocol as unknown."
+        }
+      ],
+      "summary": "Clear and fair closed-source comparison with strong boundary discipline, but it misses the high-weight PPO on-policy fact and remains only moderately traceable.",
+      "scoring_notes": "Similar to B0 but a bit denser and better organized around fairness. No hard fail because unsupported rankings are consistently marked absent or unknown."
+    },
+    {
+      "variant": "B2_orchestra_subset",
+      "scores": {
+        "factual_accuracy": 4,
+        "evidence_traceability": 3,
+        "citation_validity": null,
+        "literature_coverage": null,
+        "comparison_fairness": 5,
+        "experimental_rigor": 5,
+        "benchmark_validity": 4,
+        "inference_boundary_discipline": 4,
+        "hypothesis_quality": null,
+        "rl_specific_correctness": 4,
+        "output_usefulness": 5,
+        "efficiency": 4
+      },
+      "hard_fail": {
+        "triggered": false,
+        "reasons": []
+      },
+      "findings": [
+        {
+          "severity": "minor",
+          "dimension": "factual_accuracy",
+          "description": "States PPO is commonly treated as on-policy in the PPO paper context, which captures the required distinction but hedges it more than the gold expects.",
+          "evidence": "Gold M1 requires distinguishing PPO on-policy policy-gradient assumptions from SAC off-policy maximum-entropy actor-critic assumptions."
+        },
+        {
+          "severity": "minor",
+          "dimension": "evidence_traceability",
+          "description": "Evidence labels such as source-derived and agent-inferred are helpful, but no page, section, table, or figure references are provided.",
+          "evidence": "Matrix evidence column uses 'source-derived' and 'source-derived / agent-inferred' rather than specific packet locations."
+        },
+        {
+          "severity": "minor",
+          "dimension": "inference_boundary_discipline",
+          "description": "Includes a plausible off-policy sample-efficiency hypothesis while clearly marking it unsupported; this is acceptable but should not be confused with packet evidence.",
+          "evidence": "Assumptions table says 'SAC may have sample-efficiency advantages because it is off-policy' with status 'Plausible but unsupported as a conclusion from this packet.'"
+        }
+      ],
+      "summary": "Best practical comparison among the first three: it captures the on-policy/off-policy distinction, avoids broad rankings, and gives a rigorous benchmark protocol checklist.",
+      "scoring_notes": "High scores reflect strong fairness and experimental-rigor handling. Traceability remains limited because citations are coarse packet labels rather than source locations."
+    },
+    {
+      "variant": "B3_final_for_validation",
+      "scores": {
+        "factual_accuracy": 3,
+        "evidence_traceability": 4,
+        "citation_validity": 4,
+        "literature_coverage": null,
+        "comparison_fairness": 5,
+        "experimental_rigor": 5,
+        "benchmark_validity": 4,
+        "inference_boundary_discipline": 5,
+        "hypothesis_quality": null,
+        "rl_specific_correctness": 3,
+        "output_usefulness": 5,
+        "efficiency": 4
+      },
+      "hard_fail": {
+        "triggered": false,
+        "reasons": []
+      },
+      "findings": [
+        {
+          "severity": "major",
+          "dimension": "rl_specific_correctness",
+          "description": "Does not cleanly state PPO is on-policy; it says on-policy is implied or method-background, leaving a required high-weight distinction under-specified.",
+          "evidence": "Gold M1 requires correctly distinguishing PPO on-policy policy-gradient assumptions from SAC off-policy maximum-entropy actor-critic assumptions."
+        },
+        {
+          "severity": "minor",
+          "dimension": "citation_validity",
+          "description": "Identifies supplied arXiv papers and packet evidence objects without apparent hallucinated citations, but exact source locations are still absent.",
+          "evidence": "Source Inventory lists PPO arXiv:1707.06347 and SAC arXiv:1801.01290 as supplied sources."
+        },
+        {
+          "severity": "minor",
+          "dimension": "benchmark_validity",
+          "description": "Strong protocol critique, including metrics, baselines, uncertainty, reproducibility, and leakage, though some labels such as leakage are necessarily unknown from the packet.",
+          "evidence": "Benchmark protocol review marks metric alignment, baselines, uncertainty, reproducibility, and leakage as unknown or limited critique."
+        }
+      ],
+      "summary": "Very usable and disciplined artifact with explicit evidence-burden labels and strong recommendations, but it still weakens the required PPO on-policy fact enough to lose factual and RL-specific credit.",
+      "scoring_notes": "Best boundary discipline and traceability structure, but not clearly best overall because of the same high-weight PPO on-policy omission. No hard fail: it marks unsupported claims unknown and does not make an unfair broad superiority claim."
+    }
+  ]
+}

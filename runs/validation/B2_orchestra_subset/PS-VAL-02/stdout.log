@@ -1,0 +1,71 @@
+## scoped_research_questions
+
+1. Can a localized internal circuit or representation be shown to be necessary for a narrowly defined model behavior under controlled prompts?
+2. Does intervening on the proposed component change the target behavior more than matched interventions on control components?
+3. Is the apparent localization specific to one behavior family, or does it reflect a broader prompt, dataset, or activation-distribution artifact?
+4. Can evidence from causal tracing, ablation, and editing converge on the same internal mechanism without treating correlation as causal proof?
+
+## hypothesis_table
+
+| Hypothesis | Provenance | Evidence basis | Testable prediction | Falsification criteria | Support status |
+|---|---|---|---|---|---|
+| H1: A small set of localized components contributes causally to a narrowly specified behavior. | Agent-proposed, grounded in supplied sources | IOI source note reports circuit analysis with intervention/ablation-style evidence; ROME source note reports causal tracing and editing experiments. | Targeted activation/path/component interventions reduce or alter the behavior more than matched controls. | Matched controls produce equal or larger effects, or target effects vanish across prompt variants/seeds. | Plausible proposal, not established for the new claim. |
+| H2: Localization evidence will be behavior-specific rather than globally explanatory. | Agent-inferred | Packet notes both papers have defined scopes and limitations. | Effects are strongest on the target behavior and weaker on unrelated behaviors. | Intervention causes broad nonspecific degradation or improves/harms many unrelated tasks similarly. | Cautiously supported as a design expectation. |
+| H3: Editing or activation replacement can provide stronger evidence than passive probing alone. | Cross-source synthesis | IOI includes interventions/ablations; ROME includes causal tracing and editing. | Causal interventions predictably change behavior, while probes alone do not justify causal claims. | Probe accuracy fails to align with intervention effects, or edits do not produce targeted behavioral changes. | Supported as a methodological principle, not as an outcome. |
+
+## evidence_map
+
+| Evidence item | Provenance | What it supports | What it does not support |
+|---|---|---|---|
+| IOI paper analyzes an indirect-object-identification circuit in GPT-2 small. | Source-derived from packet notes | Mechanistic circuit analysis can be applied to a narrow language-model behavior. | Does not show that any arbitrary behavior has a localized circuit. |
+| IOI reports intervention/ablation-style analyses. | Source-derived | Causal-style tests are relevant for moving beyond correlational attribution. | Exact strength, robustness, and implementation details are unavailable in the packet. |
+| ROME uses causal tracing for factual associations. | Source-derived | Localization claims can be tested with causal tracing-style methods. | Does not prove the same localization pattern applies to non-factual behaviors. |
+| ROME includes model-editing experiments. | Source-derived | Editing interventions can test whether changing localized representations changes outputs. | Does not guarantee edits are clean, isolated, or free of side effects. |
+| Packet omits exact numeric values, full tables, appendices, and implementation settings. | Source-derived | Any proposal must remain scoped and avoid quantitative claims. | Prevents strong claims about effect size, reproducibility, or benchmark-level reliability. |
+
+## causal_test_plan
+
+1. Define the target behavior narrowly.
+   Use a controlled prompt set where the behavior is clearly observable, plus matched counterfactual prompts that preserve surface form while changing the required answer.
+
+2. Identify candidate components.
+   Use causal tracing or activation-patching-style localization to find layers, heads, MLPs, or representations whose restoration changes the target output after corruption. Treat this as candidate generation, not proof.
+
+3. Run targeted interventions.
+   Ablate, patch, or edit the candidate component and measure whether the target behavior changes predictably. Compare against random components, same-layer noncandidate components, frequency-matched tokens, and unrelated prompt families.
+
+4. Add positive and negative controls.
+   Positive control: reproduce an effect on a source-like narrow behavior where intervention methods are expected to work.
+   Negative control: intervene on components not implicated by tracing and verify that effects are smaller or nonspecific.
+
+5. Test specificity.
+   Measure whether the intervention affects only the target behavior or causes broad language-model degradation. Include unrelated factual, syntactic, and continuation-quality checks.
+
+6. Test robustness.
+   Repeat across prompt templates, entity/token substitutions, random seeds where applicable, and multiple corruption baselines. Report per-condition results before aggregates.
+
+7. Evaluate falsification.
+   The localized-circuit claim should be rejected or weakened if effects are not larger than controls, do not replicate across prompt variants, or are explained by broad distribution shift rather than targeted mechanism change.
+
+## alternative_explanations
+
+| Alternative explanation | Why it matters | How to test |
+|---|---|---|
+| Prompt artifact | The component may track a template feature rather than the behavior. | Use diverse templates and counterfactual prompt pairs. |
+| Token-frequency or lexical cue | Localization may reflect common token statistics. | Match entities/tokens by frequency and lexical properties. |
+| General performance degradation | Ablation may harm the model broadly rather than target the mechanism. | Include unrelated behavior and fluency controls. |
+| Distributed mechanism | No single localized circuit may be responsible. | Test multi-component interventions and compare with single-component effects. |
+| Method artifact | Causal tracing or patching may create off-distribution activations. | Use multiple intervention types and check consistency. |
+| Editing side effects | Model editing may alter nearby associations or unrelated outputs. | Measure locality, specificity, and unrelated task behavior after edits. |
+
+## risk_register
+
+| Risk | Severity | Claim affected | Consequence | Minimal mitigation |
+|---|---:|---|---|---|
+| Correlational localization is overstated as causal. | High | Localized representation is responsible for behavior. | Proposal would overclaim mechanism evidence. | Require intervention effects and matched controls. |
+| Controls are too weak or unmatched. | High | Candidate component is special. | Apparent effect may reflect layer position, activation scale, or prompt sensitivity. | Use same-layer, random, and behavior-negative controls. |
+| Prompt set is too narrow. | High | Mechanism generalizes beyond examples. | Findings may only hold for a template artifact. | Use template and entity variation; report scoped conclusions. |
+| Missing implementation details from packet. | Medium | Reproducibility of proposed tests. | Exact setup cannot be specified from sources alone. | Mark implementation choices as proposal details to be preregistered. |
+| Intervention creates off-distribution states. | Medium | Causal interpretation of patching/editing. | Behavioral changes may be artifacts of unnatural activations. | Compare ablation, patching, and editing; monitor unrelated degradation. |
+| Aggregate metrics hide failures. | Medium | Intervention works reliably. | Strong average effects may mask per-template failures. | Preserve per-task and per-condition results before aggregation. |
+| Editing effects are not local. | Medium | Representation encodes specific association or behavior. | Changes may spread to unrelated outputs. | Include locality checks and unrelated behavior probes. |

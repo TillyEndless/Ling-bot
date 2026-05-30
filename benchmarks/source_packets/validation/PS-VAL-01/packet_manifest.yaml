@@ -1,0 +1,47 @@
+task_id: PS-VAL-01
+packet_id: validation_PS-VAL-01_packet_v0_draft
+status: draft_pending_human_review
+sources:
+- id: dreamer
+  title: 'Dream to Control: Learning Behaviors by Latent Imagination'
+  authors: Danijar Hafner et al.
+  year: 2019
+  identifier: arXiv:1912.01603
+  url: https://arxiv.org/pdf/1912.01603
+  filename: hafner_2019_dream_to_control.pdf
+  include: Abstract; latent world model; imagination/planning/control; experiments.
+  local_filename: hafner_2019_dream_to_control.pdf
+  sha256: 318891d59ba0065f57eb0e735735700e5eb528f53bf08b81c773437385586c64
+  page_count: '20'
+  included_in_model_packet: Abstract; latent world model; imagination/planning/control;
+    experiments.
+- id: dreamerv2
+  title: Mastering Atari with Discrete World Models
+  authors: Danijar Hafner et al.
+  year: 2020
+  identifier: arXiv:2010.02193
+  url: https://arxiv.org/pdf/2010.02193
+  filename: hafner_2020_mastering_atari_discrete_world_models.pdf
+  include: Abstract; discrete world model; Atari evaluation; baselines.
+  local_filename: hafner_2020_mastering_atari_discrete_world_models.pdf
+  sha256: 037dce26de328dd86ce4ab71dfb54f44513fef49a02f2995a1c05848ccef158f
+  page_count: '26'
+  included_in_model_packet: Abstract; discrete world model; Atari evaluation; baselines.
+- id: local_seed_world_model_planning
+  title: local_seed_world_model_planning.md
+  authors: local validation seed brief
+  year: 2026
+  identifier: local_seed_brief
+  url: local
+  filename: local_seed_world_model_planning.md
+  include: User/evaluator-provided seed idea or claim brief for proposal construction.
+  local_filename: local_seed_world_model_planning.md
+  sha256: 15e9e882373534bb2dd0721b9f98237a356db98c8d0b71f665dcf144a2f4efcd
+  page_count: null
+  included_in_model_packet: User/evaluator-provided seed idea or claim brief for proposal
+    construction.
+model_input_packet:
+  path: model_input_packet.md
+  sha256: 639a3ded022f65b05ad2e7b645c3ba2151ad80b2c24931861242dd2c8385e51e
+packet_matches_task_spec: true
+unresolved_source_version_issues: []

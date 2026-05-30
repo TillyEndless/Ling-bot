@@ -1,0 +1,43 @@
+run_id: validation_v0.1__B2_orchestra_subset__PS-VAL-01__run001
+variant: B2_orchestra_subset
+task_id: PS-VAL-01
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 4
+  evidence_traceability: 4
+  citation_validity: null
+  literature_coverage: null
+  comparison_fairness: 4
+  experimental_rigor: 4
+  benchmark_validity: 4
+  inference_boundary_discipline: 4
+  hypothesis_quality: 4
+  rl_specific_correctness: 4
+  output_usefulness: 4
+  efficiency: 4
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: factual_accuracy
+  description: The output introduces concrete horizon values and action-repeat/frame preprocessing as examples despite the
+    packet not supplying such settings.
+  evidence: E3 lists horizons '1, 5, 15, 30 imagined steps' and E2 mentions action-repeat/frame preprocessing if relevant.
+    These are design suggestions, not stated source facts, so the penalty is minor.
+- severity: minor
+  dimension: hypothesis_quality
+  description: H2 frames model-error accumulation as a causal mechanism proposal and uses correlation with degradation as
+    a falsification criterion, which is slightly loose without intervention-level causal tests.
+  evidence: H2 is labeled 'Causal/mechanism proposal' and is falsified if model error does not correlate with degradation;
+    the gold emphasizes separating model-learning quality, planner quality, and policy performance claims.
+- severity: minor
+  dimension: experimental_rigor
+  description: The success condition for model-error accumulation relies on a predefined threshold but does not specify how
+    the threshold would be chosen without post hoc tuning.
+  evidence: E3 success condition says performance degrades when measured rollout error exceeds a predefined threshold, while
+    the protocol later warns against tuning budgets post hoc but does not define threshold selection.
+summary: Strong and usable proposal. It includes provenance separation, falsification, fair baselines, seeds, leakage controls,
+  aggregation cautions, and risk analysis. Minor invented design specifics and slightly loose causal wording prevent a top
+  score.

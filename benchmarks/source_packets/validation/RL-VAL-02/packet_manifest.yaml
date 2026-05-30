@@ -1,0 +1,35 @@
+task_id: RL-VAL-02
+packet_id: validation_RL-VAL-02_packet_v0_draft
+status: draft_pending_human_review
+sources:
+- id: human_preferences
+  title: Deep Reinforcement Learning from Human Preferences
+  authors: Paul F. Christiano et al.
+  year: 2017
+  identifier: arXiv:1706.03741
+  url: https://arxiv.org/pdf/1706.03741
+  filename: christiano_2017_deep_rl_from_human_preferences.pdf
+  include: Abstract; preference data; reward predictor; policy optimization; experiments.
+  local_filename: christiano_2017_deep_rl_from_human_preferences.pdf
+  sha256: 4c2b5a0ff6f9cd6696d3e9c8263efbbe701123d4fa09f22bf28d6ef861b73a2a
+  page_count: '17'
+  included_in_model_packet: Abstract; preference data; reward predictor; policy optimization;
+    experiments.
+- id: hh_rlhf
+  title: Training a Helpful and Harmless Assistant with Reinforcement Learning from
+    Human Feedback
+  authors: Yuntao Bai et al.
+  year: 2022
+  identifier: arXiv:2204.05862
+  url: https://arxiv.org/pdf/2204.05862
+  filename: bai_2022_training_helpful_harmless_assistant_rlhf.pdf
+  include: Abstract; preference models; RLHF; evaluations; limitations.
+  local_filename: bai_2022_training_helpful_harmless_assistant_rlhf.pdf
+  sha256: 26e390d4f76938d2e2591225603637c643cc108e94afb756c65f5d2e0fc9037b
+  page_count: '74'
+  included_in_model_packet: Abstract; preference models; RLHF; evaluations; limitations.
+model_input_packet:
+  path: model_input_packet.md
+  sha256: b34c16746a3bd15742d4533f0115d1935b59b26b26c43d1d21deac45720557a2
+packet_matches_task_spec: true
+unresolved_source_version_issues: []

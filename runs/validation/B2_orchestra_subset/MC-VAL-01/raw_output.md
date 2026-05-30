@@ -1,0 +1,58 @@
+## method_comparison_matrix
+
+| Dimension | PPO | SAC | Comparable? | Evidence | Caveat |
+|---|---|---|---|---|---|
+| Objective | Optimizes a policy-gradient surrogate with a clipped objective; also discusses adaptive KL variants. | Optimizes an off-policy maximum-entropy actor-critic objective with stochastic policies. | Partly | source-derived | Objectives differ in both optimization style and regularization target, so direct “better method” claims need matched experiments. |
+| Learning setup | Policy-gradient method, commonly treated as on-policy in the PPO paper context. | Off-policy actor-critic setup. | Partly | source-derived | Sample-efficiency comparisons require equal accounting of environment steps, replay use, updates, and compute. Packet does not provide full implementation settings. |
+| Policy form | Policy optimization method using surrogate objectives; stochasticity details are not fully specified in packet. | Stochastic actor under maximum-entropy RL. | Partly | source-derived | Exact policy parameterization details are unknown from the provided notes. |
+| Target domain in packet | Continuous-control and Atari experiments. | Continuous-control benchmark experiments. | Yes, scoped to continuous control | source-derived | Only continuous-control overlap should be compared here; Atari evidence does not support SAC comparison from this packet. |
+| Exploration mechanism | Clipped surrogate/KL constraints are intended to stabilize updates; exploration-specific claim is unknown. | Maximum-entropy objective explicitly encourages stochastic policies and entropy. | Partly | source-derived / agent-inferred | Any claim that SAC “explores better” than PPO is unsupported without direct matched evidence. |
+| Stability mechanism | Clipping and KL-penalty variants constrain policy updates. | Actor-critic plus entropy-regularized off-policy learning. | Partly | source-derived | Stability across tasks/seeds is unknown because variance and full experiment details are not included. |
+| Data reuse | Unknown from packet beyond PPO being policy-gradient. | Off-policy setup implies reuse of prior experience. | Partly | source-derived / agent-inferred | Quantitative sample-efficiency claims are unsupported without matched protocol evidence. |
+| Benchmark evidence | PPO paper includes continuous-control experiments. | SAC paper includes continuous-control benchmark experiments. | Yes, but only at high level | source-derived | Exact tasks, scores, seeds, tuning, and compute are omitted. |
+| General claim scope | Supports claims about PPO under the PPO paper’s evaluated settings. | Supports claims about SAC under the SAC paper’s evaluated settings. | Limited | source-derived / agent-inferred | Cross-paper general rankings are unsupported. |
+
+## assumptions_table
+
+| Assumption | Applies to | Provenance | Status |
+|---|---|---|---|
+| Continuous-control tasks are the relevant comparison domain. | PPO and SAC | source-derived | Supported within packet scope. |
+| PPO and SAC can be compared meaningfully only under compatible tasks, metrics, baselines, compute, and protocols. | Comparison design | agent-proposed from supplied rigor rules | Supported as evaluation principle, not as a paper finding. |
+| PPO’s clipped objective/KL variants are central to its method identity. | PPO | source-derived | Supported. |
+| SAC’s maximum-entropy off-policy actor-critic formulation is central to its method identity. | SAC | source-derived | Supported. |
+| SAC may have sample-efficiency advantages because it is off-policy. | SAC vs PPO | agent-inferred | Plausible but unsupported as a conclusion from this packet. |
+| PPO may be simpler or more robust in practice. | PPO | unsupported | Unknown; packet does not provide enough implementation or robustness evidence. |
+| Either method is generally superior for continuous control. | PPO vs SAC | unsupported | Unknown. |
+
+## benchmark_protocol_review
+
+| Issue | Severity | Claim affected | Evidence issue | Consequence | Minimal fix |
+|---|---:|---|---|---|---|
+| Missing exact benchmark tasks and numeric results | High | Any performance ranking | Packet notes experiments but omits full tables/figures and exact values. | Cannot rank PPO vs SAC fairly. | Use matched task list and report per-task scores. |
+| Unknown seeds, runs, and variance | High | Stability and reliability claims | Packet does not include uncertainty reporting details. | Apparent differences may be noise. | Report seeds, confidence intervals, standard errors, and per-run results. |
+| Unknown compute and tuning budgets | High | Efficiency and fairness claims | Packet omits implementation settings and hyperparameter search. | One method may benefit from more tuning or compute. | Equalize or disclose compute, update counts, search budget, and wall-clock cost. |
+| Cross-paper protocol mismatch risk | High | General comparison between PPO and SAC | Evidence comes from separate papers with different methods and likely different experiment protocols. | Direct superiority claims are not supported. | Re-run both methods in one evaluation harness with shared protocol. |
+| Metric alignment unclear | Medium | Continuous-control performance claims | Packet does not specify exact metrics or aggregation. | Aggregate claims may hide task-specific failures. | Preserve per-task metrics and define aggregation before comparison. |
+| Baseline strength unknown | Medium | Relative improvement claims | Packet does not include all baselines or tuning details. | Improvement claims may depend on weak or uneven baselines. | Include strong contemporary baselines with comparable tuning. |
+| Leakage or protocol overfitting not assessed | Low/Medium | Benchmark validity | Packet gives no contamination or protocol-sensitivity evidence. | Benchmark conclusions may not generalize. | Audit task selection, evaluation frequency, and protocol sensitivity. |
+
+## evidence_strength_summary
+
+| Claim | Type | Evidence burden | Supplied evidence | Support status | Allowed scope |
+|---|---|---|---|---|---|
+| PPO uses clipped surrogate objectives and discusses KL-penalty variants. | Method description | Objective/method evidence | Controlled notes cite clipped objective and adaptive KL. | Supported | PPO paper method description. |
+| SAC is an off-policy maximum-entropy actor-critic method with stochastic policies. | Method description | Objective/method evidence | Controlled notes cite maximum entropy objective, off-policy setup, stochastic actor. | Supported | SAC paper method description. |
+| Both papers evaluate on continuous-control benchmarks. | Evaluation description | Experiment-section evidence | Controlled notes cite continuous-control experiments for both. | Supported | Existence of continuous-control experiments only. |
+| SAC is more sample-efficient than PPO. | Improvement claim | Direct compatible baseline comparison | Packet does not provide matched numeric results, task details, compute, or seeds. | Unknown | Unsupported from packet. |
+| PPO is more stable than SAC. | Improvement/generalization claim | Direct comparison plus variance evidence | Packet lacks direct matched comparison and uncertainty evidence. | Unknown | Unsupported from packet. |
+| SAC is generally better for continuous-control research. | Generalization claim | Heterogeneous matched evidence | Packet lacks compatible protocol and broad evidence. | Unknown | Unsupported. |
+| PPO is preferable when a stable clipped policy-gradient baseline is desired. | Recommendation | Method-fit evidence | PPO method identity is supported; preference is agent-proposed. | Partly supported | Reasonable as scoped design choice, not performance claim. |
+| SAC is preferable when studying off-policy maximum-entropy continuous-control methods. | Recommendation | Method-fit evidence | SAC method identity is supported. | Supported within scope | Method-selection recommendation, not superiority claim. |
+
+## scoped_recommendations
+
+Use **PPO** when the research goal is to study or use a clipped policy-gradient method, compare against a widely used policy-optimization baseline, or examine update constraints such as clipping or KL penalties. From this packet, do not claim PPO is generally more stable, simpler, or better unless a matched evaluation supplies that evidence.
+
+Use **SAC** when the research goal is continuous-control learning with an off-policy maximum-entropy actor-critic method, stochastic policies, or entropy-regularized objectives. From this packet, do not claim SAC is generally more sample-efficient or higher-performing than PPO without compatible direct comparisons.
+
+For a fair PPO vs SAC comparison, evaluate both under the same continuous-control tasks, environment-step budget, compute budget, hyperparameter search policy, metrics, seeds, and reporting format. Report per-task results before aggregates, include uncertainty, preserve negative results, and distinguish method-fit conclusions from performance superiority claims.

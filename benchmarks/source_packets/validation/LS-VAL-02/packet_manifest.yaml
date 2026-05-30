@@ -1,0 +1,59 @@
+task_id: LS-VAL-02
+packet_id: validation_LS-VAL-02_packet_v0_draft
+status: draft_pending_human_review
+sources:
+- id: cot
+  title: Chain-of-Thought Prompting Elicits Reasoning in Large Language Models
+  authors: Jason Wei et al.
+  year: 2022
+  identifier: arXiv:2201.11903
+  url: https://arxiv.org/pdf/2201.11903
+  filename: wei_2022_chain_of_thought_prompting.pdf
+  include: Abstract; prompting/evaluation results; limitations.
+  local_filename: wei_2022_chain_of_thought_prompting.pdf
+  sha256: 7d9f878c23b460e4566aa4ec9201b1abfb3b8faefb2b1356e411cb90fef72a12
+  page_count: '43'
+  included_in_model_packet: Abstract; prompting/evaluation results; limitations.
+- id: zero_shot_cot
+  title: Large Language Models are Zero-Shot Reasoners
+  authors: Takeshi Kojima et al.
+  year: 2022
+  identifier: arXiv:2205.11916
+  url: https://arxiv.org/pdf/2205.11916
+  filename: kojima_2022_large_language_models_are_zero_shot_reasoners.pdf
+  include: Abstract; zero-shot reasoning prompt; experiments.
+  local_filename: kojima_2022_large_language_models_are_zero_shot_reasoners.pdf
+  sha256: 43a3d73c77c7f3e115bb85522a4d94aaa54cdb55a0d9e17eb6af3117f39111c7
+  page_count: '42'
+  included_in_model_packet: Abstract; zero-shot reasoning prompt; experiments.
+- id: unfaithful_cot
+  title: 'Language Models Don''t Always Say What They Think: Unfaithful Explanations
+    in Chain-of-Thought Prompting'
+  authors: Miles Turpin et al.
+  year: 2023
+  identifier: arXiv:2305.04388
+  url: https://arxiv.org/pdf/2305.04388
+  filename: turpin_2023_unfaithful_explanations_cot.pdf
+  include: Abstract; unfaithfulness experiments; discussion.
+  local_filename: turpin_2023_unfaithful_explanations_cot.pdf
+  sha256: f68cfafe59e7acef0f03ec0bdcfe34fb64154db8c354e17b0ee11e0c2c4bb708
+  page_count: '32'
+  included_in_model_packet: Abstract; unfaithfulness experiments; discussion.
+- id: faithfulness
+  title: Measuring Faithfulness in Chain-of-Thought Reasoning
+  authors: Tamera Lanham et al.
+  year: 2023
+  identifier: arXiv:2307.13702
+  url: https://arxiv.org/pdf/2307.13702
+  filename: lanham_2023_measuring_faithfulness_cot.pdf
+  include: Abstract; faithfulness tests; intervention/ablation evidence; limitations.
+  local_filename: lanham_2023_measuring_faithfulness_cot.pdf
+  sha256: 98bd5d514a25af073c382e87e9b230d81c74f024db5c8b5388769dc8e4dcca2c
+  page_count: '14'
+  included_in_model_packet: Abstract; faithfulness tests; intervention/ablation evidence;
+    limitations.
+model_input_packet:
+  path: model_input_packet.md
+  sha256: e7da488e2a8afe89381189cb135bbb675288c264b5f6f30ab79944e6f98a1cc0
+packet_matches_task_spec: true
+unresolved_source_version_issues: []

@@ -1,0 +1,405 @@
+2026-05-30T04:57:52.486808Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:57:52.511691Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+OpenAI Codex v0.133.0-alpha.1
+--------
+workdir: /private/tmp/ling_bot_validation_v0_1_execution/B2_orchestra_subset
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: none
+reasoning summaries: none
+session id: 019e773e-ea45-7242-a224-6e9231e9abdc
+--------
+user
+# Variant Runtime Instructions
+
+You are running benchmark variant `B2_orchestra_subset` for the `literature_analysis_and_research_rigor` module. Follow only the variant skill/reference content included below. Do not use external retrieval or dynamic tools. Do not use knowledge outside the supplied source packet as evidence.
+
+# Variant Skill And References
+
+## Variant File: variant/orchestra_research_rigor/SKILL.md
+
+---
+name: orchestra-research-rigor-subset
+description: Instruction-only Orchestra-derived subset for claim provenance, research artifact structure, rigor review, method comparison, and evaluation reasoning. No autonomous experiments or tools.
+license: MIT-derived-upstream-patterns-with-attribution
+---
+
+# Orchestra Subset: Research Rigor And Evidence Artifacts
+
+Use this skill when the task asks for paper analysis, method comparison, benchmark audit, evidence review, or proposal support from supplied material.
+
+This variant adapts Orchestra research-artifact, research-manager, rigor-reviewer, and ML-paper-review patterns. It is not an autonomous research agent. Do not execute experiments, retrieve papers, run evaluation harnesses, manage repositories, update persistent state, or call tools.
+
+## Core Discipline
+
+1. Convert the response into research artifacts: claims, evidence, assumptions, comparisons, risks, and unresolved questions.
+2. Assign provenance to each major statement: source-derived, cross-source synthesis, inferred from supplied evidence, proposed by the agent, or unsupported.
+3. Match claim type to evidence burden before concluding.
+4. For comparisons, require compatible tasks, data, metrics, baselines, compute, and protocols; otherwise make a scoped comparison.
+5. For evaluation audits, inspect metric alignment, aggregation, baselines, ablations, seeds, uncertainty, leakage, and reproducibility details.
+6. Preserve negative and missing evidence. Do not silently upgrade a plausible idea into a supported finding.
+
+## Claim-Type Evidence Burdens
+
+- Improvement claim: requires direct baseline comparison under a compatible setup.
+- Generalization claim: requires heterogeneous tasks, datasets, or settings.
+- Causal claim: requires intervention, ablation, or mechanism-isolating evidence.
+- Benchmark-validity claim: requires task/metric/protocol analysis and scope limitations.
+- Reproducibility claim: requires sufficient artifact, configuration, environment, and data details.
+- Proposal claim: requires falsifiable hypothesis, observable outcomes, controls, and disconfirmation conditions.
+
+## Response Pattern
+
+1. Artifact inventory: sources, claims, assumptions, evidence, and missing details.
+2. Claim ledger: claim, type, provenance, evidence, scope, evidence burden, support status.
+3. Rigor review: severity-ranked issues tied to claim validity.
+4. Corrected scope: what the packet supports, what is unknown, and what would be needed next.
+5. Final output in the user-requested format.
+
+References:
+
+- `references/provenance_and_artifacts.md`
+- `references/rigor_review_workflow.md`
+- `references/evaluation_reasoning.md`
+- `references/method_and_claim_audit.md`
+
+
+## Variant File: variant/orchestra_research_rigor/references/evaluation_reasoning.md
+
+# Evaluation Reasoning
+
+Adapted from Orchestra ML evaluation and rigor-review patterns, without evaluation harness execution.
+
+## Benchmark Audit Questions
+
+- What construct does the benchmark claim to measure?
+- Are tasks representative of that construct?
+- Are metrics aligned with the claim?
+- Is aggregation across tasks meaningful and transparent?
+- Are baselines appropriate and fairly tuned?
+- Are repeated runs, uncertainty, and variance reported?
+- Could contamination, leakage, prompt sensitivity, or protocol overfitting affect conclusions?
+- Are per-task results preserved before aggregate claims?
+
+## Experiment Audit Questions
+
+- What exact intervention or method differs between compared systems?
+- Are training data, evaluation data, compute, and tuning budgets compatible?
+- Which variables are controlled and which confounds remain?
+- Are ablations sufficient to support mechanism claims?
+- Are negative results or failure modes reported?
+
+Report benchmark and experiment concerns as risks unless the supplied packet directly establishes a failure.
+
+
+## Variant File: variant/orchestra_research_rigor/references/method_and_claim_audit.md
+
+# Method And Claim Audit
+
+Adapted from Orchestra claim-centered artifact patterns and ML writing/reviewer criteria.
+
+## Method Comparison Schema
+
+| Dimension | Method A | Method B | Comparable? | Evidence | Caveat |
+|---|---|---|---|---|---|
+
+Recommended dimensions: objective, data, assumptions, model class, optimization, baselines, metrics, compute, evaluation protocol, limitations, and claim scope.
+
+## Claim Ledger Schema
+
+| Claim | Type | Evidence burden | Supplied evidence | Support status | Allowed scope |
+|---|---|---|---|---|---|
+
+## Boundary Rules
+
+- A within-paper comparison supports that paper's setup, not all possible settings.
+- A benchmark score supports performance under the benchmark protocol, not unrestricted capability.
+- A probe or correlational analysis supports recoverability or association unless stronger causal evidence is supplied.
+- A reproduction plan must list artifacts, code/config/data needs, seeds, metrics, and environment details.
+
+
+## Variant File: variant/orchestra_research_rigor/references/provenance_and_artifacts.md
+
+# Provenance And Research Artifacts
+
+Adapted from Orchestra agent-native research artifact and research-manager patterns.
+
+## Provenance Tags
+
+Use these tags internally and expose them when helpful:
+
+- source-derived: directly stated by supplied material.
+- source-located: source-derived and tied to page, section, figure, or table.
+- cross-source synthesis: a relation among supplied sources.
+- agent-inferred: inferred from supplied evidence and marked as such.
+- agent-proposed: a hypothesis, critique, or protocol improvement.
+- unsupported: not established by supplied material.
+
+## Artifact Schema
+
+| Artifact | Purpose |
+|---|---|
+| Claim ledger | Tracks claims, claim types, source support, and scope. |
+| Evidence ledger | Tracks source locations and directness of support. |
+| Assumption list | Separates method assumptions from evaluation assumptions. |
+| Risk register | Records threats to validity and reproducibility. |
+| Missing-information list | Identifies details needed before stronger conclusions. |
+
+Never silently convert an agent-proposed idea into a source-derived fact.
+
+
+## Variant File: variant/orchestra_research_rigor/references/rigor_review_workflow.md
+
+# Rigor Review Workflow
+
+Adapted from Orchestra rigor-reviewer patterns.
+
+## Review Dimensions
+
+- Evidence relevance: does the evidence actually support the claim?
+- Falsifiability: can the claim be tested or refuted?
+- Scope calibration: is the claim limited to the studied setting?
+- Argument coherence: do conclusions follow from assumptions and results?
+- Exploration integrity: are hypotheses, post-hoc analyses, and exploratory ideas separated?
+- Methodological rigor: are baselines, ablations, metrics, seeds, and reproducibility details adequate?
+
+## Severity-Ranked Finding Template
+
+| Severity | Claim affected | Evidence issue | Consequence | Minimal fix |
+|---|---|---|---|---|
+
+## Missing Detail Checklist
+
+- Baseline identity and strength.
+- Ablation presence and purpose.
+- Metric definition and aggregation.
+- Dataset split, task sampling, or environment setup.
+- Number of seeds, runs, or trials.
+- Variability or confidence reporting.
+- Hyperparameter search and compute comparability.
+- Implementation and artifact availability.
+
+
+## Variant File: variant/reuse_and_license_notes.md
+
+# B2 Reuse And License Notes
+
+This variant selectively adapts Orchestra-derived ideas for claim-centered artifacts, provenance, rigor review, and evaluation reasoning. It deliberately excludes autonomous experiment execution, repository management, evaluation harnesses, training infrastructure, deployment, and tool loops.
+
+## Components Used
+
+| Upstream component | Files consulted per ledger | Adaptation decision | License status from audit |
+|---|---|---|---|
+| `Orchestra-Research/AI-Research-SKILLs/22-agent-native-research-artifact/ara-compiler` | `SKILL.md`, `references/schema.md` | Rewritten as compact claim/evidence/artifact schema | MIT observed in skill frontmatter |
+| `Orchestra-Research/AI-Research-SKILLs/22-agent-native-research-artifact/research-manager` | `SKILL.md`, `references/provenance_tags.md` | Rewritten as provenance tags and artifact discipline | MIT observed in skill frontmatter |
+| `Orchestra-Research/AI-Research-SKILLs/22-agent-native-research-artifact/rigor-reviewer` | `SKILL.md`, `references/rigor_dimensions.md` | Rewritten as type-aware rigor review workflow | MIT observed in skill frontmatter |
+| `Orchestra-Research/AI-Research-SKILLs/20-ml-paper-writing/ml-paper-writing` | `SKILL.md`, citation/reviewer references | Rewritten as claim-to-evidence and reviewer criteria patterns | MIT observed in skill frontmatter |
+
+## Explicit Runtime Exclusions
+
+- No autonomous research loop or persistent research state.
+- No scripts, APIs, retrieval tools, evaluation harnesses, training infrastructure, or code execution.
+- No K-Dense-derived material.
+- No benchmark-specific paper names, task identifiers, expected answers, or development answer-key content.
+
+
+## Variant File: variant/variant_manifest.yaml
+
+variant_id: B2_orchestra_subset
+module_scope: literature_analysis_and_research_rigor
+implementation_type: instruction_reference_only
+runtime_tools_enabled: false
+external_services_enabled: false
+dynamic_retrieval_enabled: false
+scripts_enabled: false
+upstream_basis:
+  repository: Orchestra-Research/AI-Research-SKILLs
+  components:
+    - path: 22-agent-native-research-artifact/ara-compiler/SKILL.md
+      consulted_files:
+        - 22-agent-native-research-artifact/ara-compiler/SKILL.md
+        - 22-agent-native-research-artifact/ara-compiler/references/schema.md
+      use: adapted_claim_and_artifact_schema
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: 22-agent-native-research-artifact/research-manager/SKILL.md
+      consulted_files:
+        - 22-agent-native-research-artifact/research-manager/SKILL.md
+        - 22-agent-native-research-artifact/research-manager/references/provenance_tags.md
+      use: adapted_provenance_tags
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: 22-agent-native-research-artifact/rigor-reviewer/SKILL.md
+      consulted_files:
+        - 22-agent-native-research-artifact/rigor-reviewer/SKILL.md
+        - 22-agent-native-research-artifact/rigor-reviewer/references/rigor_dimensions.md
+      use: adapted_rigor_review_dimensions
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: 20-ml-paper-writing/ml-paper-writing/SKILL.md
+      consulted_files:
+        - 20-ml-paper-writing/ml-paper-writing/SKILL.md
+        - 20-ml-paper-writing/ml-paper-writing/references/citation-management.md
+        - 20-ml-paper-writing/ml-paper-writing/references/reviewer-criteria.md
+      use: adapted_claim_to_evidence_and_reviewer_patterns
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+runtime_exclusions:
+  - no autoresearch autonomous loop
+  - no experiment execution
+  - no evaluation harnesses
+  - no training infrastructure
+  - no K-Dense-derived material
+  - no B3-original AI/ML/RL additions
+
+
+# Task
+
+- Task ID: `SPR-VAL-02`
+- Split: `validation`
+- Task type: `single_paper_deep_reading`
+- Topic: sequence modeling for reinforcement learning
+- Research question: What does the provided Decision-Transformer-style paper demonstrate, and where are its evidence boundaries?
+
+## Input Prompt
+
+Read only the provided source packet. Produce a structured paper card, claim ledger, evidence ledger, baseline/metric summary, reproducibility notes, and limitation summary.
+Do not use external retrieval. If the packet does not contain a detail, say so.
+
+
+## Required Outputs
+
+- paper_card
+- claim_ledger
+- evidence_ledger
+- baseline_metric_summary
+- reproducibility_notes
+- limitations_and_open_questions
+
+# Source Packet
+
+# SPR-VAL-02 Model Input Packet
+## Sources
+- Decision Transformer: Reinforcement Learning via Sequence Modeling (arXiv:2106.01345; 2021). Local file: `chen_2021_decision_transformer.pdf`. Included evidence: Abstract; method formulation; datasets/environments; baselines; experiments; limitations.
+
+## Controlled Source Notes
+- Decision Transformer paper: formulates offline reinforcement learning as conditional sequence modeling over trajectories and returns.
+- Evidence objects: abstract, method formulation, datasets/environments, baseline/metric sections, experiments, reproducibility details, and limitations.
+
+## Packet Scope
+- This packet contains source metadata and neutral source notes prepared from the listed canonical files.
+- Some exact numeric values, full tables, appendix details, and implementation settings are not included in this model input packet.
+
+
+2026-05-30T04:57:52.535057Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:57:52.546262Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:57:52.546271Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:57:52.546885Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:57:52.546890Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:57:52.547216Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:57:52.547219Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:57:52.547544Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:57:52.547548Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:57:52.547868Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:57:52.547871Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:57:52.548649Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:57:52.548652Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:57:53.890717Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:57:53.890728Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:57:53.891065Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:57:53.891068Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:57:53.891379Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:57:53.891382Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:57:53.891710Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:57:53.891715Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:57:53.892036Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:57:53.892039Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:57:53.892815Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:57:53.892819Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+codex
+## paper_card
+
+| Field | Content |
+|---|---|
+| Paper | *Decision Transformer: Reinforcement Learning via Sequence Modeling* |
+| Identifier/year | arXiv:2106.01345; 2021 |
+| Topic | Offline reinforcement learning framed as sequence modeling |
+| Core idea | The paper formulates offline RL as conditional sequence modeling over trajectories and returns. |
+| Method family | Decision-Transformer-style sequence model for RL trajectories |
+| Evidence available in packet | Abstract, method formulation, datasets/environments, baselines, experiments, reproducibility details, and limitations are said to be included. |
+| Evidence unavailable in packet | Exact numeric values, full tables, appendix details, and implementation settings are not included. |
+| Supported high-level takeaway | The paper demonstrates that an RL problem can be cast as return-conditioned trajectory sequence modeling and evaluated against offline RL baselines in reported datasets/environments. |
+| Scope caution | The packet does not provide enough detail to verify exact performance margins, implementation fidelity, statistical uncertainty, or broad generalization beyond the included experiments. |
+
+## claim_ledger
+
+| Claim | Type | Evidence burden | Supplied evidence | Support status | Allowed scope |
+|---|---|---|---|---|---|
+| The paper formulates offline RL as conditional sequence modeling over trajectories and returns. | Method/formulation | Clear method description | Controlled source notes directly state this. | Supported, source-derived | Applies to the paper’s stated formulation. |
+| Decision Transformer is a sequence-modeling approach to reinforcement learning. | Method characterization | Method formulation tying RL trajectories to sequence modeling | Source notes describe “Reinforcement Learning via Sequence Modeling” and conditional sequence modeling. | Supported, source-derived | Applies to this paper’s proposed method framing. |
+| The paper evaluates the method on datasets/environments with baselines and metrics. | Evaluation existence | Description of experiments, baselines, metrics, datasets/environments | Packet says datasets/environments, baselines, experiments, and baseline/metric sections are included. | Supported, source-derived | Existence of evaluation only; not exact results. |
+| The paper demonstrates empirical competitiveness or improvement over baselines. | Improvement claim | Direct baseline comparison under compatible setup, with metrics and results | Packet indicates baselines and experiments are included, but exact numeric values and full tables are absent. | Partially supported only at a coarse level | Can say the paper reports comparisons; cannot verify exact magnitude or robustness from packet. |
+| The method generalizes broadly across RL tasks or settings. | Generalization claim | Heterogeneous tasks/datasets/settings plus transparent per-task results | Packet mentions datasets/environments but omits full tables and exact results. | Weakly supported / evidence-bound | Only within the unspecified included datasets/environments. |
+| The method’s performance is causally due to the sequence-modeling formulation. | Causal/mechanism claim | Ablations or mechanism-isolating evidence | Packet does not mention ablations or mechanism tests. | Unsupported from packet | Cannot conclude causal mechanism. |
+| The work is reproducible from the packet alone. | Reproducibility claim | Code/config/data/environment/seeds/hyperparameters sufficient for rerun | Packet says reproducibility details are included, but implementation settings and appendix details are not included. | Not supported from packet alone | Reproducibility cannot be fully assessed. |
+| The paper acknowledges limitations. | Limitation claim | Limitations section or stated caveats | Source packet says limitations are included. | Supported, source-derived | Only existence of limitations; exact limitations are not detailed in packet. |
+
+## evidence_ledger
+
+| Evidence item | Provenance | Directness | Supports | Missing detail |
+|---|---|---|---|---|
+| Paper metadata: *Decision Transformer: Reinforcement Learning via Sequence Modeling*, arXiv:2106.01345, 2021 | source-derived | Direct | Identification and topic | None for basic citation metadata |
+| Controlled note: “formulates offline reinforcement learning as conditional sequence modeling over trajectories and returns” | source-derived | Direct | Core method claim | Architecture details, tokenization, training objective specifics not included |
+| Included evidence: abstract and method formulation | source-derived | Direct but summarized | Method characterization | Exact text and equations absent |
+| Included evidence: datasets/environments | source-derived | Direct but summarized | Evaluation scope exists | Dataset names, task counts, train/test splits, environment versions absent |
+| Included evidence: baselines and baseline/metric sections | source-derived | Direct but summarized | Comparisons were made | Baseline identities, tuning, metric definitions, aggregation absent |
+| Included evidence: experiments | source-derived | Direct but summarized | Empirical evaluation exists | Exact scores, variance, full tables, negative results absent |
+| Included evidence: reproducibility details | source-derived | Direct but summarized | Some reproducibility information exists | Code/configs/seeds/hardware/hyperparameters not specified in packet |
+| Included evidence: limitations | source-derived | Direct but summarized | Limitations exist | Exact limitation statements absent |
+| Packet note: exact numeric values, full tables, appendix details, and implementation settings are not included | source-derived | Direct | Evidence boundary | Prevents detailed quantitative audit |
+
+## baseline_metric_summary
+
+| Dimension | Packet-supported summary | Evidence boundary |
+|---|---|---|
+| Baselines | The paper includes baselines. | Baseline names, strength, tuning budget, and fairness controls are not provided. |
+| Metrics | The paper includes baseline/metric sections. | Metric definitions, normalization, aggregation, and uncertainty reporting are not provided. |
+| Datasets/environments | The paper includes datasets/environments. | Specific tasks, environment versions, dataset quality levels, and split protocols are not provided. |
+| Experimental results | Experiments are included. | Exact scores, full tables, per-task results, confidence intervals, seeds, and variance are absent. |
+| Improvement assessment | Comparisons appear to be part of the paper. | The packet is insufficient to verify magnitude, statistical reliability, or whether comparisons are fully compatible. |
+| Generalization assessment | The method is evaluated in included environments. | The packet does not establish broad generalization beyond those environments. |
+
+## reproducibility_notes
+
+| Item | Status from packet |
+|---|---|
+| Code availability | Not specified. |
+| Data availability | Datasets/environments are included as evidence, but exact dataset names and acquisition details are not in the packet. |
+| Environment setup | Not specified. |
+| Model architecture details | Method formulation is included, but exact implementation settings are absent. |
+| Hyperparameters | Not included. |
+| Training objective/configuration | Only the high-level conditional sequence modeling formulation is supported. |
+| Compute budget | Not specified. |
+| Seeds/runs | Not specified. |
+| Variability/confidence intervals | Not specified. |
+| Appendix details | Not included. |
+| Reproducibility conclusion | The packet supports that the paper contains some reproducibility details, but it does not provide enough information to reproduce or fully audit the experiments. |
+
+## limitations_and_open_questions
+
+| Issue | Severity | Why it matters | Minimal information needed |
+|---|---|---|---|
+| Exact quantitative results are absent. | High | Prevents verification of performance margins and aggregate claims. | Full result tables with per-task scores. |
+| Baseline identities and tuning details are absent. | High | Improvement claims require fair, compatible baseline comparisons. | Baseline list, hyperparameters, compute budgets, and tuning protocol. |
+| Metric definitions and aggregation are absent. | High | Benchmark claims depend on whether metrics align with the claimed construct. | Metric formulas, normalization rules, aggregation method, and per-task results. |
+| Seeds, variance, and uncertainty are not specified. | Medium | Without repeated runs or uncertainty, robustness of empirical claims is unclear. | Number of seeds/runs, variance, confidence intervals, or error bars. |
+| Implementation settings are omitted. | Medium | Limits reproducibility and makes exact comparison difficult. | Architecture, optimizer, batch size, context length, training steps, hardware. |
+| Ablation or mechanism evidence is not specified. | Medium | The packet does not support causal claims that sequence modeling itself explains performance. | Ablations isolating return conditioning, architecture, context length, and training objective. |
+| Dataset/environment details are summarized only. | Medium | Limits assessment of generalization and possible dataset-specific effects. | Environment names, dataset construction, quality levels, splits, and evaluation protocol. |
+| Limitations are said to exist but not quoted or summarized. | Low to medium | The paper’s own caveats cannot be evaluated from this packet. | Exact limitation section content. |
+
+**Corrected scope:** From the supplied packet, the paper demonstrates a Decision-Transformer-style reframing of offline RL as return-conditioned trajectory sequence modeling and reports empirical evaluations against baselines. The packet does not support precise claims about performance magnitude, statistical robustness, causal mechanism, full reproducibility, or unrestricted generalization.
+tokens used
+2,780

@@ -1,0 +1,147 @@
+tasks:
+- task_id: ERA-VAL-01
+  task_type: experimental_rigor_audit
+  topic: LLM benchmark contamination
+  required_source_materials: A frozen excerpt or proposal describing LLM benchmark
+    results, evaluation setup, and capability claims.
+  material_status_in_task_spec: source_material_required
+  source_material_already_available: false
+  executable_after_packet_construction: true
+  ambiguity_requiring_human_decision: false
+  scope_assessment: within_literature_analysis_and_research_rigor
+  planned_packet_basis: canonical public papers plus neutral local seed/protocol excerpt
+    where the task explicitly requires an excerpt or seed idea
+- task_id: ERA-VAL-02
+  task_type: experimental_rigor_audit
+  topic: generative model evaluation
+  required_source_materials: A frozen excerpt describing generative-model evaluation
+    results, metrics, baselines, and claims.
+  material_status_in_task_spec: source_material_required
+  source_material_already_available: false
+  executable_after_packet_construction: true
+  ambiguity_requiring_human_decision: false
+  scope_assessment: within_literature_analysis_and_research_rigor
+  planned_packet_basis: canonical public papers plus neutral local seed/protocol excerpt
+    where the task explicitly requires an excerpt or seed idea
+- task_id: LS-VAL-01
+  task_type: literature_mapping
+  topic: diffusion and generative modeling efficiency
+  required_source_materials: Validation fixed corpus of diffusion/generative efficiency
+    papers, metadata, selected sections, result tables, and limitations. Must be isolated
+    from development workspace.
+  material_status_in_task_spec: evaluator_workspace_only
+  source_material_already_available: false
+  executable_after_packet_construction: true
+  ambiguity_requiring_human_decision: true
+  scope_assessment: within_literature_analysis_and_research_rigor
+  planned_packet_basis: canonical public papers plus neutral local seed/protocol excerpt
+    where the task explicitly requires an excerpt or seed idea
+- task_id: LS-VAL-02
+  task_type: literature_mapping
+  topic: latent reasoning in language models
+  required_source_materials: Validation fixed corpus on latent/internal reasoning
+    evidence and counter-evidence, with metadata, selected sections, result excerpts,
+    and limitations. Must be isolated from development workspace.
+  material_status_in_task_spec: evaluator_workspace_only
+  source_material_already_available: false
+  executable_after_packet_construction: true
+  ambiguity_requiring_human_decision: true
+  scope_assessment: within_literature_analysis_and_research_rigor
+  planned_packet_basis: canonical public papers plus neutral local seed/protocol excerpt
+    where the task explicitly requires an excerpt or seed idea
+- task_id: MC-VAL-01
+  task_type: method_comparison
+  topic: policy optimization
+  required_source_materials: A frozen packet containing PPO, SAC, and benchmark/evaluation
+    source documents or excerpts.
+  material_status_in_task_spec: source_material_required
+  source_material_already_available: false
+  executable_after_packet_construction: true
+  ambiguity_requiring_human_decision: false
+  scope_assessment: within_literature_analysis_and_research_rigor
+  planned_packet_basis: canonical public papers plus neutral local seed/protocol excerpt
+    where the task explicitly requires an excerpt or seed idea
+- task_id: MC-VAL-02
+  task_type: method_comparison
+  topic: visual representation learning
+  required_source_materials: A frozen packet containing representative ViT-style,
+    ConvNet-style, and evaluation-context source documents or excerpts.
+  material_status_in_task_spec: source_material_required
+  source_material_already_available: false
+  executable_after_packet_construction: true
+  ambiguity_requiring_human_decision: false
+  scope_assessment: within_literature_analysis_and_research_rigor
+  planned_packet_basis: canonical public papers plus neutral local seed/protocol excerpt
+    where the task explicitly requires an excerpt or seed idea
+- task_id: PS-VAL-01
+  task_type: evidence_grounded_proposal_support
+  topic: world-model planning
+  required_source_materials: A frozen packet with a world-model planning idea brief
+    and seed literature/excerpts.
+  material_status_in_task_spec: source_material_required
+  source_material_already_available: false
+  executable_after_packet_construction: true
+  ambiguity_requiring_human_decision: false
+  scope_assessment: within_literature_analysis_and_research_rigor
+  planned_packet_basis: canonical public papers plus neutral local seed/protocol excerpt
+    where the task explicitly requires an excerpt or seed idea
+- task_id: PS-VAL-02
+  task_type: evidence_grounded_proposal_support
+  topic: mechanistic interpretability
+  required_source_materials: A frozen packet containing a mechanistic-interpretability
+    claim, evidence summary, and source excerpts.
+  material_status_in_task_spec: source_material_required
+  source_material_already_available: false
+  executable_after_packet_construction: true
+  ambiguity_requiring_human_decision: false
+  scope_assessment: within_literature_analysis_and_research_rigor
+  planned_packet_basis: canonical public papers plus neutral local seed/protocol excerpt
+    where the task explicitly requires an excerpt or seed idea
+- task_id: RL-VAL-01
+  task_type: rl_specific_analysis
+  topic: model-based reinforcement learning
+  required_source_materials: A frozen model-based RL or world-model planning protocol/proposal
+    excerpt.
+  material_status_in_task_spec: source_material_required
+  source_material_already_available: false
+  executable_after_packet_construction: true
+  ambiguity_requiring_human_decision: false
+  scope_assessment: within_literature_analysis_and_research_rigor
+  planned_packet_basis: canonical public papers plus neutral local seed/protocol excerpt
+    where the task explicitly requires an excerpt or seed idea
+- task_id: RL-VAL-02
+  task_type: rl_specific_analysis
+  topic: reward modeling and post-training RL
+  required_source_materials: A frozen reward-modeling, RLHF, or post-training RL protocol/proposal
+    excerpt.
+  material_status_in_task_spec: source_material_required
+  source_material_already_available: false
+  executable_after_packet_construction: true
+  ambiguity_requiring_human_decision: false
+  scope_assessment: within_literature_analysis_and_research_rigor
+  planned_packet_basis: canonical public papers plus neutral local seed/protocol excerpt
+    where the task explicitly requires an excerpt or seed idea
+- task_id: SPR-VAL-01
+  task_type: single_paper_deep_reading
+  topic: world models
+  required_source_materials: A Dreamer-style world-model paper packet with PDF or
+    markdown plus metadata.
+  material_status_in_task_spec: source_material_required
+  source_material_already_available: false
+  executable_after_packet_construction: true
+  ambiguity_requiring_human_decision: false
+  scope_assessment: within_literature_analysis_and_research_rigor
+  planned_packet_basis: canonical public papers plus neutral local seed/protocol excerpt
+    where the task explicitly requires an excerpt or seed idea
+- task_id: SPR-VAL-02
+  task_type: single_paper_deep_reading
+  topic: sequence modeling for reinforcement learning
+  required_source_materials: A Decision-Transformer-style paper packet with PDF or
+    markdown plus metadata.
+  material_status_in_task_spec: source_material_required
+  source_material_already_available: false
+  executable_after_packet_construction: true
+  ambiguity_requiring_human_decision: false
+  scope_assessment: within_literature_analysis_and_research_rigor
+  planned_packet_basis: canonical public papers plus neutral local seed/protocol excerpt
+    where the task explicitly requires an excerpt or seed idea

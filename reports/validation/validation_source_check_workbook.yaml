@@ -1,0 +1,756 @@
+tasks:
+- task_id: ERA-VAL-01
+  task_type: experimental_rigor_audit
+  topic: LLM benchmark contamination
+  source_packet_id: validation_ERA-VAL-01_packet_v0_draft
+  manual_source_check_required:
+  - ERA-VAL-01-M1
+  - ERA-VAL-01-M2
+  - ERA-VAL-01-M3
+  source_check_rows:
+  - item_id: ERA-VAL-01-M1
+    gold_claim: Identifies benchmark scores as protocol-bound evidence rather than self-validating capability proof.
+    canonical_source: Language Models are Few-Shot Learners; Measuring Massive Multitask Language Understanding
+    exact_page_section_table_figure: GPT-3 PDF p.1 Abstract; evaluation/result sections; test-set contamination analysis section/appendix; MMLU
+      PDF p.1 Abstract and benchmark/evaluation sections.
+    packet_excerpt_or_source_excerpt_if_available: 'Language Models are Few-Shot Learners (arXiv:2005.14165; 2020). Local file: `brown_2020_language_models_are_few_shot_learners.pdf`.
+      Included evidence: Abstract; evaluation/benchmark descriptions; contamination discussion; limitations. Measuring Massive Multitask Language
+      Understanding (arXiv:2009.03300; 2021). Local file: `hendrycks_2021_measuring_massive_mu'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: ERA-VAL-01-M2
+    gold_claim: Audits contamination, benchmark exposure, prompt protocol, baseline choice, uncertainty, and reproducibility controls.
+    canonical_source: Language Models are Few-Shot Learners; Measuring Massive Multitask Language Understanding
+    exact_page_section_table_figure: GPT-3 contamination analysis section/appendix; MMLU evaluation protocol and benchmark construction sections.
+    packet_excerpt_or_source_excerpt_if_available: 'Language Models are Few-Shot Learners (arXiv:2005.14165; 2020). Local file: `brown_2020_language_models_are_few_shot_learners.pdf`.
+      Included evidence: Abstract; evaluation/benchmark descriptions; contamination discussion; limitations. Measuring Massive Multitask Language
+      Understanding (arXiv:2009.03300; 2021). Local file: `hendrycks_2021_measuring_massive_mu'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: ERA-VAL-01-M3
+    gold_claim: Separates source-reported contamination analysis from additional contamination risks requiring follow-up evidence.
+    canonical_source: Language Models are Few-Shot Learners; Measuring Massive Multitask Language Understanding
+    exact_page_section_table_figure: GPT-3 and MMLU result tables/figures and limitations/discussion sections.
+    packet_excerpt_or_source_excerpt_if_available: 'Language Models are Few-Shot Learners (arXiv:2005.14165; 2020). Local file: `brown_2020_language_models_are_few_shot_learners.pdf`.
+      Included evidence: Abstract; evaluation/benchmark descriptions; contamination discussion; limitations. Measuring Massive Multitask Language
+      Understanding (arXiv:2009.03300; 2021). Local file: `hendrycks_2021_measuring_massive_mu'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  review_questions:
+  - item_id: E1
+    question: Is this critical-error rule fair for core scored claims only? Uses external sources or remembered facts as evidence for a core claim
+      in the closed-source task.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E2
+    question: Is this critical-error rule fair for core scored claims only? Presents a broad superiority, deployment, causality, or field-gap
+      claim beyond packet evidence.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E3
+    question: Is this critical-error rule fair for core scored claims only? Invents missing metrics, seeds, versions, baselines, or numeric results.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: B1
+    question: Is this boundary rule appropriately scoped rather than too strict? Use only the packet as evidence.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B2
+    question: Is this boundary rule appropriately scoped rather than too strict? Separate direct source facts, within-packet synthesis, critique,
+      and proposed hypotheses.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B3
+    question: Is this boundary rule appropriately scoped rather than too strict? Mark broader literature, deployment, causal, or superiority claims
+      as requiring external review unless directly evidenced.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+- task_id: ERA-VAL-02
+  task_type: experimental_rigor_audit
+  topic: generative model evaluation
+  source_packet_id: validation_ERA-VAL-02_packet_v0_draft
+  manual_source_check_required:
+  - ERA-VAL-02-M1
+  - ERA-VAL-02-M2
+  - ERA-VAL-02-M3
+  source_check_rows:
+  - item_id: ERA-VAL-02-M1
+    gold_claim: Identifies quality/diversity/likelihood/speed claims and ties them to the metrics actually reported.
+    canonical_source: Denoising Diffusion Probabilistic Models; Improved Denoising Diffusion Probabilistic Models
+    exact_page_section_table_figure: DDPM PDF p.1 Abstract and experiments section; Improved DDPM PDF p.1 Abstract and evaluation sections.
+    packet_excerpt_or_source_excerpt_if_available: 'Denoising Diffusion Probabilistic Models (arXiv:2006.11239; 2020). Local file: `ho_2020_denoising_diffusion_probabilistic_models.pdf`.
+      Included evidence: Abstract; experiments; sample quality/likelihood discussion; limitations. Improved Denoising Diffusion Probabilistic
+      Models (arXiv:2102.09672; 2021). Local file: `nichol_2021_improved_ddpm.pdf`. Included ev'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: ERA-VAL-02-M2
+    gold_claim: Audits baselines, sample selection, human/subjective evaluation if present, ablations, compute, and dataset scope.
+    canonical_source: Denoising Diffusion Probabilistic Models; Improved Denoising Diffusion Probabilistic Models
+    exact_page_section_table_figure: Improved DDPM metric/result tables and precision/recall or sample-quality discussion; DDPM sample-quality/likelihood
+      result sections.
+    packet_excerpt_or_source_excerpt_if_available: 'Denoising Diffusion Probabilistic Models (arXiv:2006.11239; 2020). Local file: `ho_2020_denoising_diffusion_probabilistic_models.pdf`.
+      Included evidence: Abstract; experiments; sample quality/likelihood discussion; limitations. Improved Denoising Diffusion Probabilistic
+      Models (arXiv:2102.09672; 2021). Local file: `nichol_2021_improved_ddpm.pdf`. Included ev'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: ERA-VAL-02-M3
+    gold_claim: Separates visual sample evidence from quantitative metric evidence and stated limitations.
+    canonical_source: Denoising Diffusion Probabilistic Models; Improved Denoising Diffusion Probabilistic Models
+    exact_page_section_table_figure: DDPM and Improved DDPM experiment sections, ablation/result tables, sample figures, and discussion/limitations.
+    packet_excerpt_or_source_excerpt_if_available: 'Denoising Diffusion Probabilistic Models (arXiv:2006.11239; 2020). Local file: `ho_2020_denoising_diffusion_probabilistic_models.pdf`.
+      Included evidence: Abstract; experiments; sample quality/likelihood discussion; limitations. Improved Denoising Diffusion Probabilistic
+      Models (arXiv:2102.09672; 2021). Local file: `nichol_2021_improved_ddpm.pdf`. Included ev'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  review_questions:
+  - item_id: E1
+    question: Is this critical-error rule fair for core scored claims only? Uses external sources or remembered facts as evidence for a core claim
+      in the closed-source task.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E2
+    question: Is this critical-error rule fair for core scored claims only? Presents a broad superiority, deployment, causality, or field-gap
+      claim beyond packet evidence.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E3
+    question: Is this critical-error rule fair for core scored claims only? Invents missing metrics, seeds, versions, baselines, or numeric results.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: B1
+    question: Is this boundary rule appropriately scoped rather than too strict? Use only the packet as evidence.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B2
+    question: Is this boundary rule appropriately scoped rather than too strict? Separate direct source facts, within-packet synthesis, critique,
+      and proposed hypotheses.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B3
+    question: Is this boundary rule appropriately scoped rather than too strict? Mark broader literature, deployment, causal, or superiority claims
+      as requiring external review unless directly evidenced.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+- task_id: LS-VAL-01
+  task_type: literature_mapping
+  topic: diffusion and generative modeling efficiency
+  source_packet_id: validation_LS-VAL-01_packet_v0_draft
+  manual_source_check_required:
+  - LS-VAL-01-M1
+  - LS-VAL-01-M2
+  - LS-VAL-01-M3
+  source_check_rows:
+  - item_id: LS-VAL-01-M1
+    gold_claim: Accounts for every paper in the fixed corpus.
+    canonical_source: 'Denoising Diffusion Implicit Models; Progressive Distillation for Fast Sampling of Diffusion Models; DPM-Solver: A Fast
+      ODE Solver for Diffusion Probabilistic Model Sampling in Around 10 Steps; High-Resolution Image Synthesis with Latent Diffusion Models;
+      Consistency Models'
+    exact_page_section_table_figure: All five canonical PDFs p.1 Abstracts and method overview sections.
+    packet_excerpt_or_source_excerpt_if_available: 'Denoising Diffusion Implicit Models (arXiv:2010.02502; 2020). Local file: `song_2020_denoising_diffusion_implicit_models.pdf`.
+      Included evidence: Abstract; sampling acceleration method; experiments; limitations. Progressive Distillation for Fast Sampling of Diffusion
+      Models (arXiv:2202.00512; 2022). Local file: `salimans_2022_progressive_distillation.pdf`. I'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: LS-VAL-01-M2
+    gold_claim: Separates solver/sampler acceleration, distillation, latent-space modeling, and consistency/few-step generation lines where supported.
+    canonical_source: 'Denoising Diffusion Implicit Models; Progressive Distillation for Fast Sampling of Diffusion Models; DPM-Solver: A Fast
+      ODE Solver for Diffusion Probabilistic Model Sampling in Around 10 Steps; High-Resolution Image Synthesis with Latent Diffusion Models;
+      Consistency Models'
+    exact_page_section_table_figure: DDIM method/experiment sections; Progressive Distillation method/experiment sections; DPM-Solver method/experiment
+      sections; Latent Diffusion method/experiment sections; Consistency Models method/experiment sections.
+    packet_excerpt_or_source_excerpt_if_available: 'Denoising Diffusion Implicit Models (arXiv:2010.02502; 2020). Local file: `song_2020_denoising_diffusion_implicit_models.pdf`.
+      Included evidence: Abstract; sampling acceleration method; experiments; limitations. Progressive Distillation for Fast Sampling of Diffusion
+      Models (arXiv:2202.00512; 2022). Local file: `salimans_2022_progressive_distillation.pdf`. I'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: LS-VAL-01-M3
+    gold_claim: Links speed-quality tradeoffs to metrics, datasets, sampling steps, model settings, and scope.
+    canonical_source: 'Denoising Diffusion Implicit Models; Progressive Distillation for Fast Sampling of Diffusion Models; DPM-Solver: A Fast
+      ODE Solver for Diffusion Probabilistic Model Sampling in Around 10 Steps; High-Resolution Image Synthesis with Latent Diffusion Models;
+      Consistency Models'
+    exact_page_section_table_figure: Result tables/figures reporting sampling steps, quality metrics, speed, or compute tradeoffs in each canonical
+      source.
+    packet_excerpt_or_source_excerpt_if_available: 'Denoising Diffusion Implicit Models (arXiv:2010.02502; 2020). Local file: `song_2020_denoising_diffusion_implicit_models.pdf`.
+      Included evidence: Abstract; sampling acceleration method; experiments; limitations. Progressive Distillation for Fast Sampling of Diffusion
+      Models (arXiv:2202.00512; 2022). Local file: `salimans_2022_progressive_distillation.pdf`. I'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  review_questions:
+  - item_id: E1
+    question: Is this critical-error rule fair for core scored claims only? Uses external sources or remembered facts as evidence for a core claim
+      in the closed-source task.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E2
+    question: Is this critical-error rule fair for core scored claims only? Presents a broad superiority, deployment, causality, or field-gap
+      claim beyond packet evidence.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E3
+    question: Is this critical-error rule fair for core scored claims only? Invents missing metrics, seeds, versions, baselines, or numeric results.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: B1
+    question: Is this boundary rule appropriately scoped rather than too strict? Use only the packet as evidence.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B2
+    question: Is this boundary rule appropriately scoped rather than too strict? Separate direct source facts, within-packet synthesis, critique,
+      and proposed hypotheses.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B3
+    question: Is this boundary rule appropriately scoped rather than too strict? Mark broader literature, deployment, causal, or superiority claims
+      as requiring external review unless directly evidenced.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+- task_id: LS-VAL-02
+  task_type: literature_mapping
+  topic: latent reasoning in language models
+  source_packet_id: validation_LS-VAL-02_packet_v0_draft
+  manual_source_check_required:
+  - LS-VAL-02-M1
+  - LS-VAL-02-M2
+  - LS-VAL-02-M3
+  source_check_rows:
+  - item_id: LS-VAL-02-M1
+    gold_claim: Accounts for supportive and skeptical papers in the fixed corpus.
+    canonical_source: 'Chain-of-Thought Prompting Elicits Reasoning in Large Language Models; Large Language Models are Zero-Shot Reasoners; Language
+      Models Don''t Always Say What They Think: Unfaithful Explanations in Chain-of-Thought Prompting; Measuring Faithfulness in Chain-of-Thought
+      Reasoning'
+    exact_page_section_table_figure: All four canonical PDFs p.1 Abstracts and evaluation/method sections.
+    packet_excerpt_or_source_excerpt_if_available: 'Chain-of-Thought Prompting Elicits Reasoning in Large Language Models (arXiv:2201.11903; 2022).
+      Local file: `wei_2022_chain_of_thought_prompting.pdf`. Included evidence: Abstract; prompting/evaluation results; limitations. Large Language
+      Models are Zero-Shot Reasoners (arXiv:2205.11916; 2022). Local file: `kojima_2022_large_language_models_are_zero_shot_reas'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: LS-VAL-02-M2
+    gold_claim: Distinguishes behavioral reasoning performance, rationale generation, faithfulness evidence, intervention/perturbation evidence,
+      and speculative internal reasoning claims.
+    canonical_source: 'Chain-of-Thought Prompting Elicits Reasoning in Large Language Models; Large Language Models are Zero-Shot Reasoners; Language
+      Models Don''t Always Say What They Think: Unfaithful Explanations in Chain-of-Thought Prompting; Measuring Faithfulness in Chain-of-Thought
+      Reasoning'
+    exact_page_section_table_figure: CoT and Zero-shot CoT evaluation sections; Unfaithful Explanations experiment sections; Measuring Faithfulness
+      experiment/intervention sections.
+    packet_excerpt_or_source_excerpt_if_available: 'Chain-of-Thought Prompting Elicits Reasoning in Large Language Models (arXiv:2201.11903; 2022).
+      Local file: `wei_2022_chain_of_thought_prompting.pdf`. Included evidence: Abstract; prompting/evaluation results; limitations. Large Language
+      Models are Zero-Shot Reasoners (arXiv:2205.11916; 2022). Local file: `kojima_2022_large_language_models_are_zero_shot_reas'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: LS-VAL-02-M3
+    gold_claim: Includes skeptical or alternative-explanation evidence rather than organizing around an assumed latent-reasoning thesis.
+    canonical_source: 'Chain-of-Thought Prompting Elicits Reasoning in Large Language Models; Large Language Models are Zero-Shot Reasoners; Language
+      Models Don''t Always Say What They Think: Unfaithful Explanations in Chain-of-Thought Prompting; Measuring Faithfulness in Chain-of-Thought
+      Reasoning'
+    exact_page_section_table_figure: Unfaithful Explanations discussion/results; Measuring Faithfulness results and limitations/discussion.
+    packet_excerpt_or_source_excerpt_if_available: 'Chain-of-Thought Prompting Elicits Reasoning in Large Language Models (arXiv:2201.11903; 2022).
+      Local file: `wei_2022_chain_of_thought_prompting.pdf`. Included evidence: Abstract; prompting/evaluation results; limitations. Large Language
+      Models are Zero-Shot Reasoners (arXiv:2205.11916; 2022). Local file: `kojima_2022_large_language_models_are_zero_shot_reas'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  review_questions:
+  - item_id: E1
+    question: Is this critical-error rule fair for core scored claims only? Uses external sources or remembered facts as evidence for a core claim
+      in the closed-source task.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E2
+    question: Is this critical-error rule fair for core scored claims only? Presents a broad superiority, deployment, causality, or field-gap
+      claim beyond packet evidence.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E3
+    question: Is this critical-error rule fair for core scored claims only? Invents missing metrics, seeds, versions, baselines, or numeric results.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: B1
+    question: Is this boundary rule appropriately scoped rather than too strict? Use only the packet as evidence.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B2
+    question: Is this boundary rule appropriately scoped rather than too strict? Separate direct source facts, within-packet synthesis, critique,
+      and proposed hypotheses.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B3
+    question: Is this boundary rule appropriately scoped rather than too strict? Mark broader literature, deployment, causal, or superiority claims
+      as requiring external review unless directly evidenced.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+- task_id: MC-VAL-01
+  task_type: method_comparison
+  topic: policy optimization
+  source_packet_id: validation_MC-VAL-01_packet_v0_draft
+  manual_source_check_required:
+  - MC-VAL-01-M1
+  - MC-VAL-01-M2
+  - MC-VAL-01-M3
+  source_check_rows:
+  - item_id: MC-VAL-01-M1
+    gold_claim: Correctly distinguishes PPO on-policy policy-gradient assumptions from SAC off-policy maximum-entropy actor-critic assumptions.
+    canonical_source: 'Proximal Policy Optimization Algorithms; Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with
+      a Stochastic Actor'
+    exact_page_section_table_figure: PPO PDF p.1 Abstract, Section 3 clipped surrogate objective, Section 4 KL variant, Algorithm 1; SAC PDF p.1
+      Abstract and method/objective sections.
+    packet_excerpt_or_source_excerpt_if_available: 'Proximal Policy Optimization Algorithms (arXiv:1707.06347; 2017). Local file: `schulman_2017_proximal_policy_optimization_algorithms.pdf`.
+      Included evidence: Abstract; clipped objective; adaptive KL; experiments. Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement
+      Learning with a Stochastic Actor (arXiv:1801.01290; 2018). Local file: `haarnoja_2'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: MC-VAL-01-M2
+    gold_claim: Compares continuous-control evidence only within compatible environment, metric, seed, and tuning settings.
+    canonical_source: 'Proximal Policy Optimization Algorithms; Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with
+      a Stochastic Actor'
+    exact_page_section_table_figure: PPO and SAC experiment sections, continuous-control benchmark tables/figures, and implementation/details
+      sections where supplied.
+    packet_excerpt_or_source_excerpt_if_available: 'Proximal Policy Optimization Algorithms (arXiv:1707.06347; 2017). Local file: `schulman_2017_proximal_policy_optimization_algorithms.pdf`.
+      Included evidence: Abstract; clipped objective; adaptive KL; experiments. Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement
+      Learning with a Stochastic Actor (arXiv:1801.01290; 2018). Local file: `haarnoja_2'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: MC-VAL-01-M3
+    gold_claim: Avoids universal PPO-over-SAC or SAC-over-PPO claims.
+    canonical_source: 'Proximal Policy Optimization Algorithms; Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with
+      a Stochastic Actor'
+    exact_page_section_table_figure: PPO and SAC result tables, benchmark protocol descriptions, and discussion/limitations.
+    packet_excerpt_or_source_excerpt_if_available: 'Proximal Policy Optimization Algorithms (arXiv:1707.06347; 2017). Local file: `schulman_2017_proximal_policy_optimization_algorithms.pdf`.
+      Included evidence: Abstract; clipped objective; adaptive KL; experiments. Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement
+      Learning with a Stochastic Actor (arXiv:1801.01290; 2018). Local file: `haarnoja_2'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  review_questions:
+  - item_id: E1
+    question: Is this critical-error rule fair for core scored claims only? Uses external sources or remembered facts as evidence for a core claim
+      in the closed-source task.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E2
+    question: Is this critical-error rule fair for core scored claims only? Presents a broad superiority, deployment, causality, or field-gap
+      claim beyond packet evidence.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E3
+    question: Is this critical-error rule fair for core scored claims only? Invents missing metrics, seeds, versions, baselines, or numeric results.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: B1
+    question: Is this boundary rule appropriately scoped rather than too strict? Use only the packet as evidence.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B2
+    question: Is this boundary rule appropriately scoped rather than too strict? Separate direct source facts, within-packet synthesis, critique,
+      and proposed hypotheses.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B3
+    question: Is this boundary rule appropriately scoped rather than too strict? Mark broader literature, deployment, causal, or superiority claims
+      as requiring external review unless directly evidenced.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+- task_id: MC-VAL-02
+  task_type: method_comparison
+  topic: visual representation learning
+  source_packet_id: validation_MC-VAL-02_packet_v0_draft
+  manual_source_check_required:
+  - MC-VAL-02-M1
+  - MC-VAL-02-M2
+  - MC-VAL-02-M3
+  source_check_rows:
+  - item_id: MC-VAL-02-M1
+    gold_claim: Identifies architecture and inductive-bias differences without attributing all performance differences to architecture alone.
+    canonical_source: 'Deep Residual Learning for Image Recognition; An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale;
+      A ConvNet for the 2020s'
+    exact_page_section_table_figure: ResNet PDF p.1 Abstract and architecture sections; ViT PDF p.1 Abstract and architecture/data-scale sections;
+      ConvNeXt PDF p.1 Abstract and modernization/training-recipe sections.
+    packet_excerpt_or_source_excerpt_if_available: 'Deep Residual Learning for Image Recognition (arXiv:1512.03385; 2015). Local file: `he_2015_deep_residual_learning.pdf`.
+      Included evidence: Abstract; architecture; ImageNet/CIFAR experiments. An Image is Worth 16x16 Words: Transformers for Image Recognition
+      at Scale (arXiv:2010.11929; 2020). Local file: `dosovitskiy_2020_vit.pdf`. Included evidence: Abstract'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: MC-VAL-02-M2
+    gold_claim: Audits data scale, pretraining, augmentation, compute, training recipe, and benchmark comparability.
+    canonical_source: 'Deep Residual Learning for Image Recognition; An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale;
+      A ConvNet for the 2020s'
+    exact_page_section_table_figure: ViT data/pretraining/evaluation sections; ConvNeXt training recipe and ablation sections; ResNet ImageNet/CIFAR
+      experiment sections.
+    packet_excerpt_or_source_excerpt_if_available: 'Deep Residual Learning for Image Recognition (arXiv:1512.03385; 2015). Local file: `he_2015_deep_residual_learning.pdf`.
+      Included evidence: Abstract; architecture; ImageNet/CIFAR experiments. An Image is Worth 16x16 Words: Transformers for Image Recognition
+      at Scale (arXiv:2010.11929; 2020). Local file: `dosovitskiy_2020_vit.pdf`. Included evidence: Abstract'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: MC-VAL-02-M3
+    gold_claim: Limits conclusions about transfer, robustness, or scaling to packet-supported settings.
+    canonical_source: 'Deep Residual Learning for Image Recognition; An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale;
+      A ConvNet for the 2020s'
+    exact_page_section_table_figure: Result tables/figures and discussion/limitations from ResNet, ViT, and ConvNeXt canonical PDFs.
+    packet_excerpt_or_source_excerpt_if_available: 'Deep Residual Learning for Image Recognition (arXiv:1512.03385; 2015). Local file: `he_2015_deep_residual_learning.pdf`.
+      Included evidence: Abstract; architecture; ImageNet/CIFAR experiments. An Image is Worth 16x16 Words: Transformers for Image Recognition
+      at Scale (arXiv:2010.11929; 2020). Local file: `dosovitskiy_2020_vit.pdf`. Included evidence: Abstract'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  review_questions:
+  - item_id: E1
+    question: Is this critical-error rule fair for core scored claims only? Uses external sources or remembered facts as evidence for a core claim
+      in the closed-source task.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E2
+    question: Is this critical-error rule fair for core scored claims only? Presents a broad superiority, deployment, causality, or field-gap
+      claim beyond packet evidence.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E3
+    question: Is this critical-error rule fair for core scored claims only? Invents missing metrics, seeds, versions, baselines, or numeric results.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: B1
+    question: Is this boundary rule appropriately scoped rather than too strict? Use only the packet as evidence.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B2
+    question: Is this boundary rule appropriately scoped rather than too strict? Separate direct source facts, within-packet synthesis, critique,
+      and proposed hypotheses.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B3
+    question: Is this boundary rule appropriately scoped rather than too strict? Mark broader literature, deployment, causal, or superiority claims
+      as requiring external review unless directly evidenced.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+- task_id: PS-VAL-01
+  task_type: evidence_grounded_proposal_support
+  topic: world-model planning
+  source_packet_id: validation_PS-VAL-01_packet_v0_draft
+  manual_source_check_required:
+  - PS-VAL-01-M1
+  - PS-VAL-01-M2
+  - PS-VAL-01-M3
+  source_check_rows:
+  - item_id: PS-VAL-01-M1
+    gold_claim: Grounds proposal hypotheses in world-model/planning packet facts and the local seed brief.
+    canonical_source: 'Dream to Control: Learning Behaviors by Latent Imagination; Mastering Atari with Discrete World Models; local_seed_world_model_planning.md'
+    exact_page_section_table_figure: Dream to Control PDF p.1 Abstract and latent world-model/imagination sections; DreamerV2 PDF p.1 Abstract
+      and Atari/world-model sections; local seed brief.
+    packet_excerpt_or_source_excerpt_if_available: 'Dream to Control: Learning Behaviors by Latent Imagination (arXiv:1912.01603; 2019). Local
+      file: `hafner_2019_dream_to_control.pdf`. Included evidence: Abstract; latent world model; imagination/planning/control; experiments. Mastering
+      Atari with Discrete World Models (arXiv:2010.02193; 2020). Local file: `hafner_2020_mastering_atari_discrete_world_models.pdf'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: PS-VAL-01-M2
+    gold_claim: Specifies falsifiable predictions, disconfirming outcomes, model-error controls, planning baselines, RL metrics, seeds, and environment
+      details.
+    canonical_source: 'Dream to Control: Learning Behaviors by Latent Imagination; Mastering Atari with Discrete World Models; local_seed_world_model_planning.md'
+    exact_page_section_table_figure: Dream to Control and DreamerV2 experiment sections, baseline tables/figures, and local seed brief.
+    packet_excerpt_or_source_excerpt_if_available: 'Dream to Control: Learning Behaviors by Latent Imagination (arXiv:1912.01603; 2019). Local
+      file: `hafner_2019_dream_to_control.pdf`. Included evidence: Abstract; latent world model; imagination/planning/control; experiments. Mastering
+      Atari with Discrete World Models (arXiv:2010.02193; 2020). Local file: `hafner_2020_mastering_atari_discrete_world_models.pdf'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: PS-VAL-01-M3
+    gold_claim: Separates model-learning quality, planner quality, and policy performance claims.
+    canonical_source: 'Dream to Control: Learning Behaviors by Latent Imagination; Mastering Atari with Discrete World Models; local_seed_world_model_planning.md'
+    exact_page_section_table_figure: World-model method sections, planning/control sections, result tables, and discussion/limitations in the
+      two canonical PDFs.
+    packet_excerpt_or_source_excerpt_if_available: 'Dream to Control: Learning Behaviors by Latent Imagination (arXiv:1912.01603; 2019). Local
+      file: `hafner_2019_dream_to_control.pdf`. Included evidence: Abstract; latent world model; imagination/planning/control; experiments. Mastering
+      Atari with Discrete World Models (arXiv:2010.02193; 2020). Local file: `hafner_2020_mastering_atari_discrete_world_models.pdf'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  review_questions:
+  - item_id: E1
+    question: Is this critical-error rule fair for core scored claims only? Uses external sources or remembered facts as evidence for a core claim
+      in the closed-source task.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E2
+    question: Is this critical-error rule fair for core scored claims only? Presents a broad superiority, deployment, causality, or field-gap
+      claim beyond packet evidence.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E3
+    question: Is this critical-error rule fair for core scored claims only? Invents missing metrics, seeds, versions, baselines, or numeric results.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: B1
+    question: Is this boundary rule appropriately scoped rather than too strict? Use only the packet as evidence.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B2
+    question: Is this boundary rule appropriately scoped rather than too strict? Separate direct source facts, within-packet synthesis, critique,
+      and proposed hypotheses.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B3
+    question: Is this boundary rule appropriately scoped rather than too strict? Mark broader literature, deployment, causal, or superiority claims
+      as requiring external review unless directly evidenced.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+- task_id: PS-VAL-02
+  task_type: evidence_grounded_proposal_support
+  topic: mechanistic interpretability
+  source_packet_id: validation_PS-VAL-02_packet_v0_draft
+  manual_source_check_required:
+  - PS-VAL-02-M1
+  - PS-VAL-02-M2
+  - PS-VAL-02-M3
+  source_check_rows:
+  - item_id: PS-VAL-02-M1
+    gold_claim: Separates descriptive/correlational mechanistic evidence from interventional or causal evidence.
+    canonical_source: 'Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 small; Locating and Editing Factual
+      Associations in GPT; local_mech_interp_claim.md'
+    exact_page_section_table_figure: IOI PDF p.1 Abstract and circuit/intervention sections; ROME PDF p.1 Abstract and causal tracing/model editing
+      sections; local claim brief.
+    packet_excerpt_or_source_excerpt_if_available: 'Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 small
+      (arXiv:2211.00593; 2022). Local file: `wang_2022_interpretability_in_the_wild_ioi.pdf`. Included evidence: Abstract; circuit analysis; interventions/ablations;
+      limitations. Locating and Editing Factual Associations in GPT (arXiv:2202.05262; 2022). Local file: `meng_2022'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: PS-VAL-02-M2
+    gold_claim: Proposes tests with causal interventions, controls, falsification criteria, and alternative explanations.
+    canonical_source: 'Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 small; Locating and Editing Factual
+      Associations in GPT; local_mech_interp_claim.md'
+    exact_page_section_table_figure: IOI ablation/intervention figures/tables; ROME causal tracing and editing result sections.
+    packet_excerpt_or_source_excerpt_if_available: 'Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 small
+      (arXiv:2211.00593; 2022). Local file: `wang_2022_interpretability_in_the_wild_ioi.pdf`. Included evidence: Abstract; circuit analysis; interventions/ablations;
+      limitations. Locating and Editing Factual Associations in GPT (arXiv:2202.05262; 2022). Local file: `meng_2022'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: PS-VAL-02-M3
+    gold_claim: Limits claims to supplied model family, task, layer, feature, and behavior scope.
+    canonical_source: 'Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 small; Locating and Editing Factual
+      Associations in GPT; local_mech_interp_claim.md'
+    exact_page_section_table_figure: IOI and ROME limitations/discussion plus local claim brief scope.
+    packet_excerpt_or_source_excerpt_if_available: 'Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 small
+      (arXiv:2211.00593; 2022). Local file: `wang_2022_interpretability_in_the_wild_ioi.pdf`. Included evidence: Abstract; circuit analysis; interventions/ablations;
+      limitations. Locating and Editing Factual Associations in GPT (arXiv:2202.05262; 2022). Local file: `meng_2022'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  review_questions:
+  - item_id: E1
+    question: Is this critical-error rule fair for core scored claims only? Uses external sources or remembered facts as evidence for a core claim
+      in the closed-source task.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E2
+    question: Is this critical-error rule fair for core scored claims only? Presents a broad superiority, deployment, causality, or field-gap
+      claim beyond packet evidence.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E3
+    question: Is this critical-error rule fair for core scored claims only? Invents missing metrics, seeds, versions, baselines, or numeric results.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: B1
+    question: Is this boundary rule appropriately scoped rather than too strict? Use only the packet as evidence.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B2
+    question: Is this boundary rule appropriately scoped rather than too strict? Separate direct source facts, within-packet synthesis, critique,
+      and proposed hypotheses.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B3
+    question: Is this boundary rule appropriately scoped rather than too strict? Mark broader literature, deployment, causal, or superiority claims
+      as requiring external review unless directly evidenced.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+- task_id: RL-VAL-01
+  task_type: rl_specific_analysis
+  topic: model-based reinforcement learning
+  source_packet_id: validation_RL-VAL-01_packet_v0_draft
+  manual_source_check_required:
+  - RL-VAL-01-M1
+  - RL-VAL-01-M2
+  - RL-VAL-01-M3
+  source_check_rows:
+  - item_id: RL-VAL-01-M1
+    gold_claim: Audits learned dynamics assumptions, planning horizon, model-error accumulation, baselines, seeds, evaluation episodes, and metrics.
+    canonical_source: Deep Reinforcement Learning in a Handful of Trials using Probabilistic Dynamics Models; Learning Latent Dynamics for Planning
+      from Pixels
+    exact_page_section_table_figure: PETS PDF p.1 Abstract and probabilistic dynamics/model predictive control sections; PlaNet PDF p.1 Abstract
+      and latent dynamics/planning sections.
+    packet_excerpt_or_source_excerpt_if_available: 'Deep Reinforcement Learning in a Handful of Trials using Probabilistic Dynamics Models (arXiv:1805.12114;
+      2018). Local file: `chua_2018_pets.pdf`. Included evidence: Abstract; probabilistic ensembles; model predictive control; experiments. Learning
+      Latent Dynamics for Planning from Pixels (arXiv:1811.04551; 2018). Local file: `hafner_2018_planet.pdf`. Includ'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: RL-VAL-01-M2
+    gold_claim: Separates planning success, world-model fidelity, sample efficiency, and policy performance.
+    canonical_source: Deep Reinforcement Learning in a Handful of Trials using Probabilistic Dynamics Models; Learning Latent Dynamics for Planning
+      from Pixels
+    exact_page_section_table_figure: PETS and PlaNet experiment sections, baseline tables/figures, environment descriptions, and evaluation protocol
+      sections.
+    packet_excerpt_or_source_excerpt_if_available: 'Deep Reinforcement Learning in a Handful of Trials using Probabilistic Dynamics Models (arXiv:1805.12114;
+      2018). Local file: `chua_2018_pets.pdf`. Included evidence: Abstract; probabilistic ensembles; model predictive control; experiments. Learning
+      Latent Dynamics for Planning from Pixels (arXiv:1811.04551; 2018). Local file: `hafner_2018_planet.pdf`. Includ'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: RL-VAL-01-M3
+    gold_claim: Requires model-free and model-based baselines where packet evidence supports the comparison need.
+    canonical_source: Deep Reinforcement Learning in a Handful of Trials using Probabilistic Dynamics Models; Learning Latent Dynamics for Planning
+      from Pixels
+    exact_page_section_table_figure: PETS/PlaNet model-learning sections, planning horizon/control sections, result tables, and limitations/discussion.
+    packet_excerpt_or_source_excerpt_if_available: 'Deep Reinforcement Learning in a Handful of Trials using Probabilistic Dynamics Models (arXiv:1805.12114;
+      2018). Local file: `chua_2018_pets.pdf`. Included evidence: Abstract; probabilistic ensembles; model predictive control; experiments. Learning
+      Latent Dynamics for Planning from Pixels (arXiv:1811.04551; 2018). Local file: `hafner_2018_planet.pdf`. Includ'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  review_questions:
+  - item_id: E1
+    question: Is this critical-error rule fair for core scored claims only? Uses external sources or remembered facts as evidence for a core claim
+      in the closed-source task.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E2
+    question: Is this critical-error rule fair for core scored claims only? Presents a broad superiority, deployment, causality, or field-gap
+      claim beyond packet evidence.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E3
+    question: Is this critical-error rule fair for core scored claims only? Invents missing metrics, seeds, versions, baselines, or numeric results.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: B1
+    question: Is this boundary rule appropriately scoped rather than too strict? Use only the packet as evidence.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B2
+    question: Is this boundary rule appropriately scoped rather than too strict? Separate direct source facts, within-packet synthesis, critique,
+      and proposed hypotheses.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B3
+    question: Is this boundary rule appropriately scoped rather than too strict? Mark broader literature, deployment, causal, or superiority claims
+      as requiring external review unless directly evidenced.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+- task_id: RL-VAL-02
+  task_type: rl_specific_analysis
+  topic: reward modeling and post-training RL
+  source_packet_id: validation_RL-VAL-02_packet_v0_draft
+  manual_source_check_required:
+  - RL-VAL-02-M1
+  - RL-VAL-02-M2
+  - RL-VAL-02-M3
+  source_check_rows:
+  - item_id: RL-VAL-02-M1
+    gold_claim: Audits preference-data collection, reward-model training/validation, policy optimization, and policy evaluation setup.
+    canonical_source: Deep Reinforcement Learning from Human Preferences; Training a Helpful and Harmless Assistant with Reinforcement Learning
+      from Human Feedback
+    exact_page_section_table_figure: Deep RL from Human Preferences PDF p.1 Abstract and preference/reward-predictor sections; Helpful/Harmless
+      RLHF PDF p.1 Abstract and preference model/RLHF sections.
+    packet_excerpt_or_source_excerpt_if_available: 'Deep Reinforcement Learning from Human Preferences (arXiv:1706.03741; 2017). Local file: `christiano_2017_deep_rl_from_human_preferences.pdf`.
+      Included evidence: Abstract; preference data; reward predictor; policy optimization; experiments. Training a Helpful and Harmless Assistant
+      with Reinforcement Learning from Human Feedback (arXiv:2204.05862; 2022). Loc'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: RL-VAL-02-M2
+    gold_claim: Separates reward-model score improvements from human preference, alignment, helpfulness, or deployment claims.
+    canonical_source: Deep Reinforcement Learning from Human Preferences; Training a Helpful and Harmless Assistant with Reinforcement Learning
+      from Human Feedback
+    exact_page_section_table_figure: Preference data, reward model validation, policy optimization, and evaluation sections in both canonical
+      PDFs.
+    packet_excerpt_or_source_excerpt_if_available: 'Deep Reinforcement Learning from Human Preferences (arXiv:1706.03741; 2017). Local file: `christiano_2017_deep_rl_from_human_preferences.pdf`.
+      Included evidence: Abstract; preference data; reward predictor; policy optimization; experiments. Training a Helpful and Harmless Assistant
+      with Reinforcement Learning from Human Feedback (arXiv:2204.05862; 2022). Loc'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: RL-VAL-02-M3
+    gold_claim: Identifies proxy mismatch, reward hacking, evaluator bias, and train/eval leakage risks.
+    canonical_source: Deep Reinforcement Learning from Human Preferences; Training a Helpful and Harmless Assistant with Reinforcement Learning
+      from Human Feedback
+    exact_page_section_table_figure: Result tables/figures and limitations/discussion covering proxy mismatch, evaluator bias, reward hacking,
+      or evaluation scope where supplied.
+    packet_excerpt_or_source_excerpt_if_available: 'Deep Reinforcement Learning from Human Preferences (arXiv:1706.03741; 2017). Local file: `christiano_2017_deep_rl_from_human_preferences.pdf`.
+      Included evidence: Abstract; preference data; reward predictor; policy optimization; experiments. Training a Helpful and Harmless Assistant
+      with Reinforcement Learning from Human Feedback (arXiv:2204.05862; 2022). Loc'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  review_questions:
+  - item_id: E1
+    question: Is this critical-error rule fair for core scored claims only? Uses external sources or remembered facts as evidence for a core claim
+      in the closed-source task.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E2
+    question: Is this critical-error rule fair for core scored claims only? Presents a broad superiority, deployment, causality, or field-gap
+      claim beyond packet evidence.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E3
+    question: Is this critical-error rule fair for core scored claims only? Invents missing metrics, seeds, versions, baselines, or numeric results.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: B1
+    question: Is this boundary rule appropriately scoped rather than too strict? Use only the packet as evidence.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B2
+    question: Is this boundary rule appropriately scoped rather than too strict? Separate direct source facts, within-packet synthesis, critique,
+      and proposed hypotheses.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B3
+    question: Is this boundary rule appropriately scoped rather than too strict? Mark broader literature, deployment, causal, or superiority claims
+      as requiring external review unless directly evidenced.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+- task_id: SPR-VAL-01
+  task_type: single_paper_deep_reading
+  topic: world models
+  source_packet_id: validation_SPR-VAL-01_packet_v0_draft
+  manual_source_check_required:
+  - SPR-VAL-01-M1
+  - SPR-VAL-01-M2
+  - SPR-VAL-01-M3
+  source_check_rows:
+  - item_id: SPR-VAL-01-M1
+    gold_claim: Captures the world-model objective, policy-learning setup, evaluated domains, baselines, metrics, and reported limitations.
+    canonical_source: Mastering Diverse Domains through World Models
+    exact_page_section_table_figure: DreamerV3 PDF p.1 Abstract and method/objective sections.
+    packet_excerpt_or_source_excerpt_if_available: 'Mastering Diverse Domains through World Models (arXiv:2301.04104; 2023). Local file: `hafner_2023_mastering_diverse_domains_through_world_models.pdf`.
+      Included evidence: Abstract; method/objective; domains; baselines; experiments; limitations. DreamerV3 paper: presents a world-model agent
+      intended to work across diverse domains and reports benchmark performa'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: SPR-VAL-01-M2
+    gold_claim: Separates model-based learning, latent dynamics, planning or imagination, and policy optimization claims.
+    canonical_source: Mastering Diverse Domains through World Models
+    exact_page_section_table_figure: DreamerV3 experiment sections, domain/evaluation tables, baseline comparisons, and ablation sections where
+      supplied.
+    packet_excerpt_or_source_excerpt_if_available: 'Mastering Diverse Domains through World Models (arXiv:2301.04104; 2023). Local file: `hafner_2023_mastering_diverse_domains_through_world_models.pdf`.
+      Included evidence: Abstract; method/objective; domains; baselines; experiments; limitations. DreamerV3 paper: presents a world-model agent
+      intended to work across diverse domains and reports benchmark performa'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: SPR-VAL-01-M3
+    gold_claim: Marks absent environment versions, wrappers, seeds, episodes, or implementation details as unknown.
+    canonical_source: Mastering Diverse Domains through World Models
+    exact_page_section_table_figure: DreamerV3 reproducibility/implementation details, result tables/figures, and limitations/discussion.
+    packet_excerpt_or_source_excerpt_if_available: 'Mastering Diverse Domains through World Models (arXiv:2301.04104; 2023). Local file: `hafner_2023_mastering_diverse_domains_through_world_models.pdf`.
+      Included evidence: Abstract; method/objective; domains; baselines; experiments; limitations. DreamerV3 paper: presents a world-model agent
+      intended to work across diverse domains and reports benchmark performa'
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  review_questions:
+  - item_id: E1
+    question: Is this critical-error rule fair for core scored claims only? Uses external sources or remembered facts as evidence for a core claim
+      in the closed-source task.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E2
+    question: Is this critical-error rule fair for core scored claims only? Presents a broad superiority, deployment, causality, or field-gap
+      claim beyond packet evidence.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E3
+    question: Is this critical-error rule fair for core scored claims only? Invents missing metrics, seeds, versions, baselines, or numeric results.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: B1
+    question: Is this boundary rule appropriately scoped rather than too strict? Use only the packet as evidence.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B2
+    question: Is this boundary rule appropriately scoped rather than too strict? Separate direct source facts, within-packet synthesis, critique,
+      and proposed hypotheses.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B3
+    question: Is this boundary rule appropriately scoped rather than too strict? Mark broader literature, deployment, causal, or superiority claims
+      as requiring external review unless directly evidenced.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+- task_id: SPR-VAL-02
+  task_type: single_paper_deep_reading
+  topic: sequence modeling for reinforcement learning
+  source_packet_id: validation_SPR-VAL-02_packet_v0_draft
+  manual_source_check_required:
+  - SPR-VAL-02-M1
+  - SPR-VAL-02-M2
+  - SPR-VAL-02-M3
+  source_check_rows:
+  - item_id: SPR-VAL-02-M1
+    gold_claim: Captures the formulation of reinforcement learning as sequence modeling or conditional trajectory generation.
+    canonical_source: 'Decision Transformer: Reinforcement Learning via Sequence Modeling'
+    exact_page_section_table_figure: Decision Transformer PDF p.1 Abstract and method/formulation sections.
+    packet_excerpt_or_source_excerpt_if_available: 'Decision Transformer: Reinforcement Learning via Sequence Modeling (arXiv:2106.01345; 2021).
+      Local file: `chen_2021_decision_transformer.pdf`. Included evidence: Abstract; method formulation; datasets/environments; baselines; experiments;
+      limitations. Decision Transformer paper: formulates offline reinforcement learning as conditional sequence modeling over '
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: SPR-VAL-02-M2
+    gold_claim: Identifies offline datasets/environments, baselines, metrics, evaluation protocol, and reproducibility details.
+    canonical_source: 'Decision Transformer: Reinforcement Learning via Sequence Modeling'
+    exact_page_section_table_figure: Decision Transformer dataset/environment sections, baseline/metric sections, and experiment tables/figures.
+    packet_excerpt_or_source_excerpt_if_available: 'Decision Transformer: Reinforcement Learning via Sequence Modeling (arXiv:2106.01345; 2021).
+      Local file: `chen_2021_decision_transformer.pdf`. Included evidence: Abstract; method formulation; datasets/environments; baselines; experiments;
+      limitations. Decision Transformer paper: formulates offline reinforcement learning as conditional sequence modeling over '
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  - item_id: SPR-VAL-02-M3
+    gold_claim: Does not overstate online-control, planning, imitation, or general RL implications beyond packet evidence.
+    canonical_source: 'Decision Transformer: Reinforcement Learning via Sequence Modeling'
+    exact_page_section_table_figure: Decision Transformer implementation/reproducibility details and limitations/discussion.
+    packet_excerpt_or_source_excerpt_if_available: 'Decision Transformer: Reinforcement Learning via Sequence Modeling (arXiv:2106.01345; 2021).
+      Local file: `chen_2021_decision_transformer.pdf`. Included evidence: Abstract; method formulation; datasets/environments; baselines; experiments;
+      limitations. Decision Transformer paper: formulates offline reinforcement learning as conditional sequence modeling over '
+    evidence_appears_sufficient: requires_human_source_check
+    human_decision: ''
+  review_questions:
+  - item_id: E1
+    question: Is this critical-error rule fair for core scored claims only? Uses external sources or remembered facts as evidence for a core claim
+      in the closed-source task.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E2
+    question: Is this critical-error rule fair for core scored claims only? Presents a broad superiority, deployment, causality, or field-gap
+      claim beyond packet evidence.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: E3
+    question: Is this critical-error rule fair for core scored claims only? Invents missing metrics, seeds, versions, baselines, or numeric results.
+    reason: Generic closed-source scoring rule; no concrete defect proven by workbook.
+  - item_id: B1
+    question: Is this boundary rule appropriately scoped rather than too strict? Use only the packet as evidence.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B2
+    question: Is this boundary rule appropriately scoped rather than too strict? Separate direct source facts, within-packet synthesis, critique,
+      and proposed hypotheses.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.
+  - item_id: B3
+    question: Is this boundary rule appropriately scoped rather than too strict? Mark broader literature, deployment, causal, or superiority claims
+      as requiring external review unless directly evidenced.
+    reason: Generic inference-boundary rule; needs reviewer calibration, not automatic revision.

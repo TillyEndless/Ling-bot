@@ -1,0 +1,36 @@
+run_id: validation_v0.1__B1_kdense_subset__RL-VAL-01__run001
+variant: B1_kdense_subset
+task_id: RL-VAL-01
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 4
+  evidence_traceability: 4
+  citation_validity: 4
+  literature_coverage: null
+  comparison_fairness: 4
+  experimental_rigor: 4
+  benchmark_validity: 4
+  inference_boundary_discipline: 5
+  hypothesis_quality: null
+  rl_specific_correctness: 4
+  output_usefulness: 4
+  efficiency: 5
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: factual_accuracy
+  description: It is somewhat over-conservative in saying the packet only provides two source notes, while the task/gold indicates
+    packet evidence locations include abstracts, model/planning sections, experiments, baselines, figures, and limitations,
+    though exact details may be unavailable.
+  evidence: 'Opening sentence: "It only provides two source notes"; frozen gold references PETS/PlaNet experiment sections,
+    baseline tables/figures, environment descriptions, and evaluation protocol sections as evidence locations to verify.'
+- severity: minor
+  dimension: output_usefulness
+  description: The revised protocol is actionable but less complete than stronger variants on planning compute, metric detail,
+    and explicit separation of sample efficiency, policy performance, world-model fidelity, and planning success.
+  evidence: It includes core requirements but has briefer baseline and metric coverage than B0/B2/B3.
+summary: Careful and well-bounded response with good abstention from unsupported details. It covers the major RL risks, but
+  its excessive uncertainty and slightly sparse protocol reduce completeness.

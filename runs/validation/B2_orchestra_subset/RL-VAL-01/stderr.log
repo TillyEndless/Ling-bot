@@ -1,0 +1,391 @@
+2026-05-30T04:56:04.986320Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:56:05.011287Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+OpenAI Codex v0.133.0-alpha.1
+--------
+workdir: /private/tmp/ling_bot_validation_v0_1_execution/B2_orchestra_subset
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: none
+reasoning summaries: none
+session id: 019e773d-465a-70f2-bae0-4020acd14b38
+--------
+user
+# Variant Runtime Instructions
+
+You are running benchmark variant `B2_orchestra_subset` for the `literature_analysis_and_research_rigor` module. Follow only the variant skill/reference content included below. Do not use external retrieval or dynamic tools. Do not use knowledge outside the supplied source packet as evidence.
+
+# Variant Skill And References
+
+## Variant File: variant/orchestra_research_rigor/SKILL.md
+
+---
+name: orchestra-research-rigor-subset
+description: Instruction-only Orchestra-derived subset for claim provenance, research artifact structure, rigor review, method comparison, and evaluation reasoning. No autonomous experiments or tools.
+license: MIT-derived-upstream-patterns-with-attribution
+---
+
+# Orchestra Subset: Research Rigor And Evidence Artifacts
+
+Use this skill when the task asks for paper analysis, method comparison, benchmark audit, evidence review, or proposal support from supplied material.
+
+This variant adapts Orchestra research-artifact, research-manager, rigor-reviewer, and ML-paper-review patterns. It is not an autonomous research agent. Do not execute experiments, retrieve papers, run evaluation harnesses, manage repositories, update persistent state, or call tools.
+
+## Core Discipline
+
+1. Convert the response into research artifacts: claims, evidence, assumptions, comparisons, risks, and unresolved questions.
+2. Assign provenance to each major statement: source-derived, cross-source synthesis, inferred from supplied evidence, proposed by the agent, or unsupported.
+3. Match claim type to evidence burden before concluding.
+4. For comparisons, require compatible tasks, data, metrics, baselines, compute, and protocols; otherwise make a scoped comparison.
+5. For evaluation audits, inspect metric alignment, aggregation, baselines, ablations, seeds, uncertainty, leakage, and reproducibility details.
+6. Preserve negative and missing evidence. Do not silently upgrade a plausible idea into a supported finding.
+
+## Claim-Type Evidence Burdens
+
+- Improvement claim: requires direct baseline comparison under a compatible setup.
+- Generalization claim: requires heterogeneous tasks, datasets, or settings.
+- Causal claim: requires intervention, ablation, or mechanism-isolating evidence.
+- Benchmark-validity claim: requires task/metric/protocol analysis and scope limitations.
+- Reproducibility claim: requires sufficient artifact, configuration, environment, and data details.
+- Proposal claim: requires falsifiable hypothesis, observable outcomes, controls, and disconfirmation conditions.
+
+## Response Pattern
+
+1. Artifact inventory: sources, claims, assumptions, evidence, and missing details.
+2. Claim ledger: claim, type, provenance, evidence, scope, evidence burden, support status.
+3. Rigor review: severity-ranked issues tied to claim validity.
+4. Corrected scope: what the packet supports, what is unknown, and what would be needed next.
+5. Final output in the user-requested format.
+
+References:
+
+- `references/provenance_and_artifacts.md`
+- `references/rigor_review_workflow.md`
+- `references/evaluation_reasoning.md`
+- `references/method_and_claim_audit.md`
+
+
+## Variant File: variant/orchestra_research_rigor/references/evaluation_reasoning.md
+
+# Evaluation Reasoning
+
+Adapted from Orchestra ML evaluation and rigor-review patterns, without evaluation harness execution.
+
+## Benchmark Audit Questions
+
+- What construct does the benchmark claim to measure?
+- Are tasks representative of that construct?
+- Are metrics aligned with the claim?
+- Is aggregation across tasks meaningful and transparent?
+- Are baselines appropriate and fairly tuned?
+- Are repeated runs, uncertainty, and variance reported?
+- Could contamination, leakage, prompt sensitivity, or protocol overfitting affect conclusions?
+- Are per-task results preserved before aggregate claims?
+
+## Experiment Audit Questions
+
+- What exact intervention or method differs between compared systems?
+- Are training data, evaluation data, compute, and tuning budgets compatible?
+- Which variables are controlled and which confounds remain?
+- Are ablations sufficient to support mechanism claims?
+- Are negative results or failure modes reported?
+
+Report benchmark and experiment concerns as risks unless the supplied packet directly establishes a failure.
+
+
+## Variant File: variant/orchestra_research_rigor/references/method_and_claim_audit.md
+
+# Method And Claim Audit
+
+Adapted from Orchestra claim-centered artifact patterns and ML writing/reviewer criteria.
+
+## Method Comparison Schema
+
+| Dimension | Method A | Method B | Comparable? | Evidence | Caveat |
+|---|---|---|---|---|---|
+
+Recommended dimensions: objective, data, assumptions, model class, optimization, baselines, metrics, compute, evaluation protocol, limitations, and claim scope.
+
+## Claim Ledger Schema
+
+| Claim | Type | Evidence burden | Supplied evidence | Support status | Allowed scope |
+|---|---|---|---|---|---|
+
+## Boundary Rules
+
+- A within-paper comparison supports that paper's setup, not all possible settings.
+- A benchmark score supports performance under the benchmark protocol, not unrestricted capability.
+- A probe or correlational analysis supports recoverability or association unless stronger causal evidence is supplied.
+- A reproduction plan must list artifacts, code/config/data needs, seeds, metrics, and environment details.
+
+
+## Variant File: variant/orchestra_research_rigor/references/provenance_and_artifacts.md
+
+# Provenance And Research Artifacts
+
+Adapted from Orchestra agent-native research artifact and research-manager patterns.
+
+## Provenance Tags
+
+Use these tags internally and expose them when helpful:
+
+- source-derived: directly stated by supplied material.
+- source-located: source-derived and tied to page, section, figure, or table.
+- cross-source synthesis: a relation among supplied sources.
+- agent-inferred: inferred from supplied evidence and marked as such.
+- agent-proposed: a hypothesis, critique, or protocol improvement.
+- unsupported: not established by supplied material.
+
+## Artifact Schema
+
+| Artifact | Purpose |
+|---|---|
+| Claim ledger | Tracks claims, claim types, source support, and scope. |
+| Evidence ledger | Tracks source locations and directness of support. |
+| Assumption list | Separates method assumptions from evaluation assumptions. |
+| Risk register | Records threats to validity and reproducibility. |
+| Missing-information list | Identifies details needed before stronger conclusions. |
+
+Never silently convert an agent-proposed idea into a source-derived fact.
+
+
+## Variant File: variant/orchestra_research_rigor/references/rigor_review_workflow.md
+
+# Rigor Review Workflow
+
+Adapted from Orchestra rigor-reviewer patterns.
+
+## Review Dimensions
+
+- Evidence relevance: does the evidence actually support the claim?
+- Falsifiability: can the claim be tested or refuted?
+- Scope calibration: is the claim limited to the studied setting?
+- Argument coherence: do conclusions follow from assumptions and results?
+- Exploration integrity: are hypotheses, post-hoc analyses, and exploratory ideas separated?
+- Methodological rigor: are baselines, ablations, metrics, seeds, and reproducibility details adequate?
+
+## Severity-Ranked Finding Template
+
+| Severity | Claim affected | Evidence issue | Consequence | Minimal fix |
+|---|---|---|---|---|
+
+## Missing Detail Checklist
+
+- Baseline identity and strength.
+- Ablation presence and purpose.
+- Metric definition and aggregation.
+- Dataset split, task sampling, or environment setup.
+- Number of seeds, runs, or trials.
+- Variability or confidence reporting.
+- Hyperparameter search and compute comparability.
+- Implementation and artifact availability.
+
+
+## Variant File: variant/reuse_and_license_notes.md
+
+# B2 Reuse And License Notes
+
+This variant selectively adapts Orchestra-derived ideas for claim-centered artifacts, provenance, rigor review, and evaluation reasoning. It deliberately excludes autonomous experiment execution, repository management, evaluation harnesses, training infrastructure, deployment, and tool loops.
+
+## Components Used
+
+| Upstream component | Files consulted per ledger | Adaptation decision | License status from audit |
+|---|---|---|---|
+| `Orchestra-Research/AI-Research-SKILLs/22-agent-native-research-artifact/ara-compiler` | `SKILL.md`, `references/schema.md` | Rewritten as compact claim/evidence/artifact schema | MIT observed in skill frontmatter |
+| `Orchestra-Research/AI-Research-SKILLs/22-agent-native-research-artifact/research-manager` | `SKILL.md`, `references/provenance_tags.md` | Rewritten as provenance tags and artifact discipline | MIT observed in skill frontmatter |
+| `Orchestra-Research/AI-Research-SKILLs/22-agent-native-research-artifact/rigor-reviewer` | `SKILL.md`, `references/rigor_dimensions.md` | Rewritten as type-aware rigor review workflow | MIT observed in skill frontmatter |
+| `Orchestra-Research/AI-Research-SKILLs/20-ml-paper-writing/ml-paper-writing` | `SKILL.md`, citation/reviewer references | Rewritten as claim-to-evidence and reviewer criteria patterns | MIT observed in skill frontmatter |
+
+## Explicit Runtime Exclusions
+
+- No autonomous research loop or persistent research state.
+- No scripts, APIs, retrieval tools, evaluation harnesses, training infrastructure, or code execution.
+- No K-Dense-derived material.
+- No benchmark-specific paper names, task identifiers, expected answers, or development answer-key content.
+
+
+## Variant File: variant/variant_manifest.yaml
+
+variant_id: B2_orchestra_subset
+module_scope: literature_analysis_and_research_rigor
+implementation_type: instruction_reference_only
+runtime_tools_enabled: false
+external_services_enabled: false
+dynamic_retrieval_enabled: false
+scripts_enabled: false
+upstream_basis:
+  repository: Orchestra-Research/AI-Research-SKILLs
+  components:
+    - path: 22-agent-native-research-artifact/ara-compiler/SKILL.md
+      consulted_files:
+        - 22-agent-native-research-artifact/ara-compiler/SKILL.md
+        - 22-agent-native-research-artifact/ara-compiler/references/schema.md
+      use: adapted_claim_and_artifact_schema
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: 22-agent-native-research-artifact/research-manager/SKILL.md
+      consulted_files:
+        - 22-agent-native-research-artifact/research-manager/SKILL.md
+        - 22-agent-native-research-artifact/research-manager/references/provenance_tags.md
+      use: adapted_provenance_tags
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: 22-agent-native-research-artifact/rigor-reviewer/SKILL.md
+      consulted_files:
+        - 22-agent-native-research-artifact/rigor-reviewer/SKILL.md
+        - 22-agent-native-research-artifact/rigor-reviewer/references/rigor_dimensions.md
+      use: adapted_rigor_review_dimensions
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: 20-ml-paper-writing/ml-paper-writing/SKILL.md
+      consulted_files:
+        - 20-ml-paper-writing/ml-paper-writing/SKILL.md
+        - 20-ml-paper-writing/ml-paper-writing/references/citation-management.md
+        - 20-ml-paper-writing/ml-paper-writing/references/reviewer-criteria.md
+      use: adapted_claim_to_evidence_and_reviewer_patterns
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+runtime_exclusions:
+  - no autoresearch autonomous loop
+  - no experiment execution
+  - no evaluation harnesses
+  - no training infrastructure
+  - no K-Dense-derived material
+  - no B3-original AI/ML/RL additions
+
+
+# Task
+
+- Task ID: `RL-VAL-01`
+- Split: `validation`
+- Task type: `rl_specific_analysis`
+- Topic: model-based reinforcement learning
+- Research question: Is the provided model-based RL protocol sufficient to evaluate world-model planning claims?
+
+## Input Prompt
+
+Review the provided model-based RL protocol using only the source packet.
+Audit environment details, model-learning objective, planning horizon, model-error controls, baselines, seeds, evaluation episodes, metrics, and claim boundaries.
+Return an RL-specific risk register and a revised protocol.
+
+
+## Required Outputs
+
+- rl_protocol_audit
+- model_error_and_planning_risk_table
+- environment_and_seed_checklist
+- baseline_and_metric_review
+- revised_protocol
+
+# Source Packet
+
+# RL-VAL-01 Model Input Packet
+## Sources
+- Deep Reinforcement Learning in a Handful of Trials using Probabilistic Dynamics Models (arXiv:1805.12114; 2018). Local file: `chua_2018_pets.pdf`. Included evidence: Abstract; probabilistic ensembles; model predictive control; experiments.
+- Learning Latent Dynamics for Planning from Pixels (arXiv:1811.04551; 2018). Local file: `hafner_2018_planet.pdf`. Included evidence: Abstract; latent dynamics model; planning; DeepMind Control experiments.
+
+## Controlled Source Notes
+- PETS paper: uses probabilistic dynamics models and model predictive control for sample-efficient continuous-control reinforcement learning.
+- PlaNet paper: learns latent dynamics from pixels and plans in latent space for control tasks.
+- Evidence objects: abstracts, dynamics/model-learning sections, planning/control sections, experiment sections, baselines, result tables/figures, and limitations.
+
+## Packet Scope
+- This packet contains source metadata and neutral source notes prepared from the listed canonical files.
+- Some exact numeric values, full tables, appendix details, and implementation settings are not included in this model input packet.
+
+
+2026-05-30T04:56:05.029198Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:56:05.029209Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:56:05.029537Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:56:05.029540Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:56:05.029888Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:56:05.029893Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:56:05.030227Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:56:05.030232Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:56:05.030561Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:56:05.030563Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:56:05.031289Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:56:05.031292Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:56:05.036310Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:56:06.431282Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:56:06.431299Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:56:06.431728Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:56:06.431734Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:56:06.432197Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:56:06.432201Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:56:06.432620Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:56:06.432624Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:56:06.433039Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:56:06.433042Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:56:06.433937Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:56:06.433943Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+codex
+## rl_protocol_audit
+
+The source packet is not sufficient to fully evaluate broad world-model planning claims. It supports only a scoped audit: PETS uses probabilistic dynamics models plus model predictive control for sample-efficient continuous-control RL, and PlaNet learns latent dynamics from pixels and plans in latent space for control tasks. Those are source-derived claims, but the packet omits most protocol details needed to judge validity.
+
+| Claim / protocol element | Provenance | Evidence in packet | Support status | Audit consequence |
+|---|---|---|---|---|
+| PETS evaluates probabilistic dynamics models with MPC | source-derived | Controlled source notes | Supported at high level | Enough to identify model-based planning setup, not enough to validate implementation fairness |
+| PlaNet evaluates latent dynamics planning from pixels | source-derived | Controlled source notes | Supported at high level | Enough to identify pixel-based world-model planning, not enough to audit representation/model training details |
+| Protocol can support sample-efficiency claims | agent-inferred | PETS note mentions sample-efficient continuous control | Partially supported | Needs exact trial counts, environment steps, baselines, and uncertainty |
+| Protocol can support world-model planning superiority claims | unsupported | No compatible direct comparison across methods in packet | Not supported | Requires controlled baselines, ablations, model-error diagnostics, and planning-vs-model-learning separation |
+| Protocol generalizes across RL domains | unsupported | Only continuous-control and DeepMind Control are noted | Not supported | Needs heterogeneous tasks, domains, seeds, and failure cases |
+
+Major missing details: environment names and versions, observation/action spaces, reward definitions, episode length, dataset collection policy, model-learning loss, ensemble size, uncertainty handling, planning horizon, MPC optimizer, replanning frequency, seeds, number of evaluation episodes, metric definitions, aggregation method, compute/tuning budgets, and ablations.
+
+## model_error_and_planning_risk_table
+
+| Risk | Severity | Evidence issue | Consequence | Minimal fix |
+|---|---:|---|---|---|
+| Model-error compounding is not directly audited | High | Packet says models are used for planning, but gives no rollout-error or calibration diagnostics | Planning gains may reflect short-horizon luck, simulator simplicity, or hidden tuning | Report one-step and multi-step prediction error, uncertainty calibration, and performance by planning horizon |
+| Planning horizon is unspecified | High | MPC/latent planning are named, but horizon and replanning settings are omitted | Cannot tell whether claims concern long-horizon world modeling or short-horizon control | Pre-register horizon values, optimizer budget, replanning frequency, and horizon ablations |
+| Model learning objective is underspecified | High | “Probabilistic dynamics” and “latent dynamics” are described only broadly | Cannot separate representation quality, likelihood fit, reward prediction, and control utility | State losses, targets, latent variables, reward/value terms, training schedule, and validation criteria |
+| Model/planner contribution is not isolated | High | No ablation details included | Strong planning claims may actually depend on ensemble uncertainty, action optimizer, data collection, or representation | Add ablations: no planning, random-shooting/CEM variants, deterministic model, oracle/state model where appropriate |
+| Pixel versus state inputs may make comparisons incompatible | Medium | PETS appears continuous-control dynamics; PlaNet plans from pixels | Cross-paper conclusions may conflate observation modality with method quality | Compare only within matched observation settings, or label cross-method comparison as non-equivalent |
+| Evaluation variance is unknown | Medium | Seeds and repeated runs not included | Sample-efficiency and final-return rankings may be unstable | Use multiple seeds, confidence intervals, per-task results, and learning-curve variability |
+| Baseline strength is unclear | Medium | Baselines are listed as evidence objects but not specified in packet | Reported gains may depend on weak or unfairly tuned baselines | Specify baseline algorithms, tuning budgets, input modality, compute, and data access |
+
+## environment_and_seed_checklist
+
+| Item | Required for audit | Status from packet |
+|---|---|---|
+| Environment/task names | Needed to assess task coverage and comparability | Missing |
+| Simulator/version | Needed for reproducibility | Missing |
+| Observation modality | Critical because PETS and PlaNet may differ on state vs pixel inputs | Partially present |
+| Action space and reward definition | Needed to interpret control difficulty and metrics | Missing |
+| Episode length/termination | Needed for return comparability | Missing |
+| Training interaction budget | Needed for sample-efficiency claims | Missing |
+| Evaluation episodes per checkpoint | Needed for variance control | Missing |
+| Random seeds | Needed for uncertainty and reproducibility | Missing |
+| Train/eval split or task sampling | Needed to avoid overfitting claims | Missing |
+| Failure cases/negative tasks | Needed for claim boundaries | Missing |
+
+## baseline_and_metric_review
+
+The packet does not provide enough detail to judge whether baselines and metrics are fair. A valid comparison would need compatible observation modality, data budget, environment steps, compute budget, hyperparameter search, and evaluation protocol.
+
+Metrics should include at minimum average episodic return, sample-efficiency curves versus real environment steps, final performance at fixed budgets, per-task results before aggregation, and uncertainty across seeds. For world-model planning specifically, the protocol should also report model prediction error, uncertainty calibration, planning-horizon sensitivity, and real-environment performance after executing planned actions.
+
+The claim boundary should be tightened: the packet can support “these papers study model-based RL systems that learn dynamics models and use planning for continuous-control or pixel-control tasks.” It does not support a general claim that world-model planning is superior, robust, or broadly general without further protocol evidence.
+
+## revised_protocol
+
+1. Define environments exactly: task names, versions, observation modality, action space, reward, episode length, termination, and train/evaluation budgets.
+
+2. Specify the learned world model: inputs, targets, probabilistic or latent variables, loss function, reward prediction, validation split, training frequency, ensemble or uncertainty method, and stopping criteria.
+
+3. Specify planning: MPC or latent-space planner, horizon, action optimizer, number of candidate sequences/iterations, replanning frequency, terminal value use, and compute budget.
+
+4. Add model-error controls: one-step and multi-step prediction error, calibration curves for probabilistic models, latent reconstruction or prediction diagnostics where applicable, and correlation between model error and control return.
+
+5. Add planning ablations: no-planning policy baseline, deterministic model, shorter/longer horizons, planner budget sweep, uncertainty disabled, reward-model ablation, and model-free baseline under matched environment-step budgets.
+
+6. Use fair baselines: same observation modality, same real-environment interaction budget, comparable tuning budget, reported hyperparameters, and identical evaluation episodes where possible.
+
+7. Use robust evaluation: at least multiple random seeds, fixed evaluation intervals, enough episodes per checkpoint to estimate variance, confidence intervals or standard errors, and per-task results before aggregate summaries.
+
+8. Bound claims explicitly: state whether conclusions apply to sample efficiency, final return, pixel-based control, continuous-control state tasks, short-horizon MPC, latent planning, or uncertainty-aware planning. Do not generalize beyond the evaluated tasks and protocols.
+tokens used
+2,484

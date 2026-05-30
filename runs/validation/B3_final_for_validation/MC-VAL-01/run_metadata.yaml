@@ -1,0 +1,48 @@
+run_id: validation_v0.1__B3_final_for_validation__MC-VAL-01__run001
+variant: B3_final_for_validation
+task_id: MC-VAL-01
+split: validation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+runner_executable: /Applications/Codex.app/Contents/Resources/codex
+runner_version: codex-cli 0.133.0-alpha.1
+command_template: /Applications/Codex.app/Contents/Resources/codex exec --skip-git-repo-check --ephemeral --ignore-user-config
+  --ignore-rules --sandbox read-only --config model="gpt-5.5" --config model_reasoning_effort="none" --output-last-message
+  <raw_output_path> - < <input_snapshot_path>
+unsupported_homebrew_runner_avoided: /opt/homebrew/bin/codex
+model: gpt-5.5
+reasoning_effort: none
+sandbox_mode: read-only
+ignore_user_config: true
+ignore_rules: true
+ephemeral: true
+benchmark_freeze_manifest_hash: bba13883d97129c5c47617cb347e14423b2e0856426353562e11d89c10e8e3b5
+source_packet_sha256: 2a8127477cbef027c55c711c8ce1571e8133d2c177f1c7105f1ccf3394108f3f
+input_snapshot_sha256: f4ba2853b74b3cf91fdfba998387a5f3aa77ee094cc5b886e56bc6aeb615eb51
+raw_output_sha256: 7a8d28fc66d0c252b6e0c1289bcb9d76a5aae82860da83c4bf6b08fb0fc1a486
+stdout_sha256: dc55e060521b085ce511a6ecfce0b52c8469c934e57fb9c3c8b0835cda29ade5
+stderr_sha256: c2521c3cfda9125c9714526817455b97e191283168d5ce372b019c90d2edaf17
+no_gold_during_generation: true
+no_rubric_during_generation: true
+no_agent_review_reports_during_generation: true
+fresh_process: true
+dynamic_retrieval: false
+browser_tools: false
+apis: false
+citation_services: false
+pdf_parsers: false
+experiment_execution: false
+started_at: '2026-05-30T13:00:52'
+duration_seconds: 38.901
+exit_code: 0
+runtime_package: /private/tmp/ling_bot_validation_v0_1_execution/B3_final_for_validation
+scoring_after_generation: true
+scorecard_created_after_generation: true
+scorecard_sha256: fcf7fb28a88b45cb5dec4e3d95655fcac89b2b1fde39bc8b25d948b419c9b685
+scoring_notes_sha256: ce8d502c88520428a542f7523036706de722f146d3847cec5d1415bb89aa8c6f
+scored_against:
+  gold_annotation: benchmarks/gold_annotations/validation/MC-VAL-01.yaml
+  gold_annotation_sha256: 5a0b66a9829bee7fc74a57650ba8aa4be0c9cfde72f6890f9049fefa96096a8e
+  rubric: benchmarks/rubrics/scoring_rubric.md
+  rubric_sha256: ade3feab72b1c789c567fb865b5919d6442623ac4e4d3d7d94996ff1f157ca6b
+  agent_review_decision_layer: reports/validation/validation_agent_review_decision.yaml
+  agent_review_decision_sha256: 2425c5df56d9ba44061da7db570aa2fd603139a65d403f5ba097680bdf08aa04

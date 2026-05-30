@@ -1,0 +1,74 @@
+## paper_card
+
+| Field | Content |
+|---|---|
+| Source | *Mastering Diverse Domains through World Models* |
+| Identifier | arXiv:2301.04104 |
+| Year | 2023 |
+| Topic | Dreamer-style world-model reinforcement learning |
+| Packet role | Single central paper |
+| Research question addressed | Whether a world-model agent can work across diverse domains and achieve strong benchmark performance across multiple environments |
+| Main claimed artifact | A DreamerV3-style world-model agent intended to work across diverse domains |
+| Evidence available in packet | Abstract, method/objective sections, domains, baselines, experiments, baseline/result tables, ablations if supplied, reproducibility details, limitations |
+| Evidence missing from packet | Exact numeric results, full tables, appendix details, many implementation settings |
+
+## claim_ledger
+
+| Claim | Source | Location supplied | Support status | Caveat |
+|---|---|---|---|---|
+| The paper presents a world-model agent called or associated with DreamerV3. | *Mastering Diverse Domains through World Models* | Controlled source note; abstract/method noted as included | Direct | Packet does not provide full method text. |
+| The agent is intended to work across diverse domains. | Same | Controlled source note; domains/experiments noted as included | Direct | “Diverse” is not enumerated in the packet. |
+| The paper reports benchmark performance across multiple environments. | Same | Controlled source note; experiments/baseline-result tables noted as included | Direct | Exact environments, scores, and metrics are absent. |
+| The method uses a world-model approach. | Same | Title; controlled source note; method/objective noted as included | Direct | Architecture details are not supplied. |
+| The paper compares against baselines. | Same | Baselines and baseline/result tables listed as included evidence | Direct | Baseline names and comparison values are not supplied. |
+| The paper includes experiments and possibly ablations. | Same | Evidence objects list | Partial | Ablations are conditional: “if supplied”; no ablation content is included in the packet. |
+| The paper establishes that DreamerV3 is globally superior to all alternatives. | Same | Not established | Absent | The packet only says benchmark performance is reported; it does not provide sufficient comparative detail for a global ranking. |
+| The paper is fully reproducible from the packet. | Same | Reproducibility details noted as included, but settings not included | Contradicted/partial | Packet explicitly says implementation settings and appendix details are missing. |
+
+## evidence_ledger
+
+| Evidence item | Source | Location supplied | Evidence type | Supports | Limitation |
+|---|---|---|---|---|---|
+| Title: *Mastering Diverse Domains through World Models* | Paper metadata | Source listing | Bibliographic/title evidence | World-model framing and diverse-domain ambition | Title alone does not prove empirical success. |
+| “Presents a world-model agent intended to work across diverse domains” | Controlled source note | DreamerV3 paper note | Source summary | Main artifact and intended scope | No algorithmic details or domain list included. |
+| “Reports benchmark performance across multiple environments” | Controlled source note | DreamerV3 paper note | Source summary of experiments | Empirical evaluation exists | No exact scores, variance, seeds, or metric definitions. |
+| Abstract, method/objective, domains, baselines, experiments, limitations are included evidence objects | Controlled source notes | Evidence objects list | Packet inventory | The paper contains material for claims, methods, and limitations | Actual excerpted content is not present in this prompt. |
+| Exact numeric values, full tables, appendix details, and implementation settings are not included | Packet scope note | Packet Scope | Missing-evidence disclosure | Limits reproducibility and fine-grained evaluation | Prevents independent checking of effect sizes, statistical strength, and implementation fidelity. |
+
+## experiment_summary
+
+| Aspect | Packet-supported summary |
+|---|---|
+| Experimental purpose | Evaluate a DreamerV3-style world-model agent across diverse domains and multiple benchmark environments. |
+| Environments/domains | Multiple environments and diverse domains are reported, but exact names are unknown from the packet. |
+| Baselines | Baselines are included in the paper evidence objects, but their identities are unknown from the packet. |
+| Metrics | Unknown. The packet does not provide metric names or definitions. |
+| Results | The paper reports benchmark performance, but exact numeric values and full result tables are unavailable. |
+| Ablations | Unknown/partial. The packet mentions “ablations if supplied,” but provides no concrete ablation findings. |
+| Statistical reporting | Unknown. Seeds, variance, confidence intervals, and aggregation methods are not supplied. |
+
+## reproducibility_notes
+
+| Reproducibility element | Status from packet |
+|---|---|
+| Paper identity | Available: title, arXiv ID, year. |
+| Method description | Partially available: method/objective sections are said to be included, but no method details are excerpted. |
+| Domains/tasks | Partially available: diverse domains and multiple environments are claimed, but exact task list is absent. |
+| Baselines | Partially available: baselines exist, but names/configurations are absent. |
+| Results | Partially available: benchmark performance is reported, but exact numbers and full tables are absent. |
+| Implementation settings | Unknown/absent. Packet explicitly says some implementation settings are not included. |
+| Appendix details | Unknown/absent. Packet explicitly says appendix details are not included. |
+| Code, seeds, hardware, configs | Unknown. Not established by the packet. |
+
+## limitations_and_open_questions
+
+| Issue | Why it matters |
+|---|---|
+| Exact numeric results are missing. | Prevents assessing effect sizes, ranking strength, and whether gains are practically meaningful. |
+| Full result tables are missing. | Prevents checking consistency across tasks and identifying failures or uneven performance. |
+| Environment and domain names are not supplied. | Limits external-validity assessment; “diverse domains” cannot be independently characterized from the packet. |
+| Baseline identities and settings are unknown. | Prevents assessing whether comparisons are fair, current, or well tuned. |
+| Statistical details are unknown. | Seeds, uncertainty, and variability are needed to judge robustness. |
+| Implementation settings are incomplete. | Limits reproducibility and makes it unclear which details are essential to performance. |
+| Ablation evidence is not concretely supplied. | Mechanistic claims about which components matter are not established by the packet. |
+| Claim scope should remain narrow. | The packet supports that the paper presents and evaluates a cross-domain world-model agent, but not broad claims of universal superiority or general solution status. |

@@ -1,0 +1,45 @@
+task_id: PS-VAL-02
+source_packet_id: validation_PS-VAL-02_packet_v0_draft
+drafted_by_agent: true
+human_review_status: pending
+eligible_for_scoring: false
+must_capture:
+- id: PS-VAL-02-M1
+  finding: Separates descriptive/correlational mechanistic evidence from interventional or causal evidence.
+  evidence_locations_to_verify:
+  - IOI PDF p.1 Abstract and circuit/intervention sections; ROME PDF p.1 Abstract and causal tracing/model editing sections;
+    local claim brief.
+  scoring_weight: high
+- id: PS-VAL-02-M2
+  finding: Proposes tests with causal interventions, controls, falsification criteria, and alternative explanations.
+  evidence_locations_to_verify:
+  - IOI ablation/intervention figures/tables; ROME causal tracing and editing result sections.
+  scoring_weight: high
+- id: PS-VAL-02-M3
+  finding: Limits claims to supplied model family, task, layer, feature, and behavior scope.
+  evidence_locations_to_verify:
+  - IOI and ROME limitations/discussion plus local claim brief scope.
+  scoring_weight: medium
+acceptable_equivalent_formulations:
+- Equivalent wording is acceptable if it remains grounded in the supplied validation packet and preserves claim scope.
+critical_errors:
+- id: E1
+  error: Uses external sources or remembered facts as evidence for a core claim in the closed-source task.
+  penalty: major
+- id: E2
+  error: Presents a broad superiority, deployment, causality, or field-gap claim beyond packet evidence.
+  penalty: major
+- id: E3
+  error: Invents missing metrics, seeds, versions, baselines, or numeric results.
+  penalty: major
+inference_boundary_requirements:
+- Use only the packet as evidence.
+- Separate direct source facts, within-packet synthesis, critique, and proposed hypotheses.
+- Mark broader literature, deployment, causal, or superiority claims as requiring external review unless directly evidenced.
+optional_high_value_findings:
+- Identifies missing reproducibility details without treating absence from the packet as proof of source failure.
+- Separates direct evidence from synthesis and proposed follow-up checks.
+- Reports source/page/table grounding where the packet or canonical source supplies it.
+ambiguities_requiring_human_review:
+- Exact page, section, table, and figure locations must be verified against the acquired canonical sources.
+- Some packet notes are compressed source summaries and should be checked against full PDFs before scoring approval.

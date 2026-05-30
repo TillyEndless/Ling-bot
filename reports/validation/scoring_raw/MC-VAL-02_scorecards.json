@@ -1,0 +1,153 @@
+{
+  "task_id": "MC-VAL-02",
+  "scorecards": [
+    {
+      "variant": "B0_base_agent",
+      "scores": {
+        "factual_accuracy": 4,
+        "evidence_traceability": 3,
+        "citation_validity": 4,
+        "literature_coverage": null,
+        "comparison_fairness": 5,
+        "experimental_rigor": 4,
+        "benchmark_validity": 4,
+        "inference_boundary_discipline": 4,
+        "hypothesis_quality": null,
+        "rl_specific_correctness": null,
+        "output_usefulness": 4,
+        "efficiency": 5
+      },
+      "hard_fail": {
+        "triggered": false,
+        "reasons": []
+      },
+      "findings": [
+        {
+          "severity": "minor",
+          "dimension": "evidence_traceability",
+          "description": "Evidence is grounded in packet-level source names and sections but lacks explicit evidence labels or precise source-location mapping for many claims.",
+          "evidence": "Uses broad references such as ResNet abstract/architecture/ImageNet/CIFAR and ViT architecture/data-scale sections, but not source IDs, pages, or table references."
+        },
+        {
+          "severity": "minor",
+          "dimension": "factual_accuracy",
+          "description": "The answer repeatedly says exact values are omitted from the packet, which is safe from the prompt context but may overstate absence from the underlying frozen packet if tables existed there.",
+          "evidence": "Metrics row: 'result tables exist, but exact values are not included in the packet.'"
+        }
+      ],
+      "summary": "Strong, well-scoped comparison that captures the main gold requirements: architecture and inductive-bias differences, data/compute/training confounds, benchmark comparability, and no universal winner claim.",
+      "scoring_notes": "Scores are high for fairness and boundary discipline. Traceability is adequate but less explicit than the best variants because source support is mostly described at paper/section granularity."
+    },
+    {
+      "variant": "B1_kdense_subset",
+      "scores": {
+        "factual_accuracy": 4,
+        "evidence_traceability": 4,
+        "citation_validity": 4,
+        "literature_coverage": null,
+        "comparison_fairness": 5,
+        "experimental_rigor": 4,
+        "benchmark_validity": 4,
+        "inference_boundary_discipline": 5,
+        "hypothesis_quality": null,
+        "rl_specific_correctness": null,
+        "output_usefulness": 4,
+        "efficiency": 5
+      },
+      "hard_fail": {
+        "triggered": false,
+        "reasons": []
+      },
+      "findings": [
+        {
+          "severity": "minor",
+          "dimension": "evidence_traceability",
+          "description": "Traceability is improved through references to controlled notes and packet support, but still lacks precise page/table grounding.",
+          "evidence": "Rows cite 'ViT controlled note,' 'ConvNeXt controlled note,' and 'Source notes' rather than exact packet evidence IDs or locations."
+        },
+        {
+          "severity": "minor",
+          "dimension": "benchmark_validity",
+          "description": "Benchmark caveats are correct but not deeply developed around protocol mismatch or uncertainty beyond noting partial overlap and missing metrics.",
+          "evidence": "Benchmark coverage is described as uneven, with ImageNet common and CIFAR only for ResNet, but no further audit of protocol compatibility."
+        }
+      ],
+      "summary": "Very reliable closed-source answer. It is cautious, distinguishes direct packet support from inference, and refuses unsupported rankings or efficiency claims.",
+      "scoring_notes": "Among the stronger variants for inference-boundary discipline. Minor deductions reflect limited source-location granularity and only moderate detail on benchmark/experimental reliability."
+    },
+    {
+      "variant": "B2_orchestra_subset",
+      "scores": {
+        "factual_accuracy": 4,
+        "evidence_traceability": 4,
+        "citation_validity": 4,
+        "literature_coverage": null,
+        "comparison_fairness": 5,
+        "experimental_rigor": 4,
+        "benchmark_validity": 5,
+        "inference_boundary_discipline": 5,
+        "hypothesis_quality": null,
+        "rl_specific_correctness": null,
+        "output_usefulness": 5,
+        "efficiency": 5
+      },
+      "hard_fail": {
+        "triggered": false,
+        "reasons": []
+      },
+      "findings": [
+        {
+          "severity": "minor",
+          "dimension": "factual_accuracy",
+          "description": "Some inductive-bias statements are inferential rather than directly quoted from the packet, but the variant labels them as source-derived plus agent-inferred and keeps them scoped.",
+          "evidence": "Assumptions row: 'ConvNets encode stronger locality/spatial bias through convolutions' with evidence status 'source-derived + agent-inferred.'"
+        },
+        {
+          "severity": "minor",
+          "dimension": "evidence_traceability",
+          "description": "Evidence labels are useful, but the answer still does not provide concrete page, section, or table anchors.",
+          "evidence": "Uses provenance labels such as 'source-derived,' 'missing detail,' and 'cross-source synthesis' rather than exact locations."
+        }
+      ],
+      "summary": "Excellent comparison artifact for the task. It covers all required outputs, gives clear comparability judgments, separates source-derived facts from synthesis and missing detail, and avoids broad superiority claims.",
+      "scoring_notes": "Best calibrated on benchmark validity and practical usefulness. Minor traceability limits remain because no exact packet evidence IDs or source locations are provided."
+    },
+    {
+      "variant": "B3_final_for_validation",
+      "scores": {
+        "factual_accuracy": 4,
+        "evidence_traceability": 5,
+        "citation_validity": 4,
+        "literature_coverage": null,
+        "comparison_fairness": 5,
+        "experimental_rigor": 5,
+        "benchmark_validity": 5,
+        "inference_boundary_discipline": 5,
+        "hypothesis_quality": null,
+        "rl_specific_correctness": null,
+        "output_usefulness": 5,
+        "efficiency": 4
+      },
+      "hard_fail": {
+        "triggered": false,
+        "reasons": []
+      },
+      "findings": [
+        {
+          "severity": "minor",
+          "dimension": "factual_accuracy",
+          "description": "The source inventory names publication years and says ablations/tables are included, which is consistent with the task context but slightly more specific than the visible generated-output packet excerpts.",
+          "evidence": "Opening states 'Supplied sources: ResNet 2015, ViT 2020, and ConvNeXt 2022' and that packet evidence includes result tables and ablations."
+        },
+        {
+          "severity": "minor",
+          "dimension": "efficiency",
+          "description": "The answer is more verbose than necessary, though the extra structure mostly improves auditability rather than adding fluff.",
+          "evidence": "Includes source inventory, multiple evidence labels, caveat tables, and supported/unsupported claim tables."
+        }
+      ],
+      "summary": "Most audit-ready variant. It explicitly labels direct evidence, synthesis, critique, and unsupported claims while covering data scale, compute, recipe, benchmarks, metrics, ablations, and scope limits.",
+      "scoring_notes": "Highest overall reliability for this validation task. No hard fail: it does not use external facts as core evidence and avoids universal claims. Efficiency is slightly lower due to length, but still acceptable."
+    }
+  ]
+}

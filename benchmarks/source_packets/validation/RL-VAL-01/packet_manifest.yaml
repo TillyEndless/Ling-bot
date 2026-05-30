@@ -1,0 +1,36 @@
+task_id: RL-VAL-01
+packet_id: validation_RL-VAL-01_packet_v0_draft
+status: draft_pending_human_review
+sources:
+- id: pets
+  title: Deep Reinforcement Learning in a Handful of Trials using Probabilistic Dynamics
+    Models
+  authors: Kurtland Chua et al.
+  year: 2018
+  identifier: arXiv:1805.12114
+  url: https://arxiv.org/pdf/1805.12114
+  filename: chua_2018_pets.pdf
+  include: Abstract; probabilistic ensembles; model predictive control; experiments.
+  local_filename: chua_2018_pets.pdf
+  sha256: 7dbf3c65ece763384258a60f5f4b26d7b849ad80765ed77435c4861f9583219c
+  page_count: '17'
+  included_in_model_packet: Abstract; probabilistic ensembles; model predictive control;
+    experiments.
+- id: planet
+  title: Learning Latent Dynamics for Planning from Pixels
+  authors: Danijar Hafner et al.
+  year: 2018
+  identifier: arXiv:1811.04551
+  url: https://arxiv.org/pdf/1811.04551
+  filename: hafner_2018_planet.pdf
+  include: Abstract; latent dynamics model; planning; DeepMind Control experiments.
+  local_filename: hafner_2018_planet.pdf
+  sha256: abac727526e6a45669d3ab9957126587e22aacf4dc9bcd60ffe5c853108e5bcc
+  page_count: '20'
+  included_in_model_packet: Abstract; latent dynamics model; planning; DeepMind Control
+    experiments.
+model_input_packet:
+  path: model_input_packet.md
+  sha256: f6feb751d0a172d0850e4f5053885cddc11ee5440e1e666b7f9a247332364ede
+packet_matches_task_spec: true
+unresolved_source_version_issues: []

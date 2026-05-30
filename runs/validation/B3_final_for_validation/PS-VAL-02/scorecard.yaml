@@ -1,0 +1,36 @@
+run_id: validation_v0.1__B3_final_for_validation__PS-VAL-02__run001
+variant: B3_final_for_validation
+task_id: PS-VAL-02
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 5
+  evidence_traceability: 5
+  citation_validity: null
+  literature_coverage: null
+  comparison_fairness: null
+  experimental_rigor: 5
+  benchmark_validity: null
+  inference_boundary_discipline: 5
+  hypothesis_quality: 5
+  rl_specific_correctness: null
+  output_usefulness: 5
+  efficiency: 4
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: output_usefulness
+  description: The artifact is slightly more label-heavy than necessary, which may slow direct proposal use, but the labels
+    improve inference-boundary discipline.
+  evidence: Repeated evidence-burden labels such as SPECULATIVE_PROPOSAL, DIRECT_PACKET_EVIDENCE, LIMITED_CRITIQUE, and UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW
+    appear across all sections.
+- severity: minor
+  dimension: experimental_rigor
+  description: It asks to pre-register seeds/runs and model version as proposal requirements, which is appropriate, but the
+    packet itself lacks exact implementation details, so these must remain future design choices.
+  evidence: 'Risk register mitigation: ''Pre-register prompts, metrics, seeds/runs, model version, code, and raw outputs.'''
+summary: Excellent closed-source proposal support. It explicitly labels evidence burden, separates direct packet evidence
+  from proposal speculation and critique, avoids numeric invention, and supplies causal tests, controls, falsification criteria,
+  alternatives, and risks.

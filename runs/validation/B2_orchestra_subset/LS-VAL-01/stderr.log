@@ -1,0 +1,394 @@
+2026-05-30T04:52:43.508279Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:52:43.532262Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+OpenAI Codex v0.133.0-alpha.1
+--------
+workdir: /private/tmp/ling_bot_validation_v0_1_execution/B2_orchestra_subset
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: none
+reasoning summaries: none
+session id: 019e773a-3352-7910-8e3c-8d2e26179624
+--------
+user
+# Variant Runtime Instructions
+
+You are running benchmark variant `B2_orchestra_subset` for the `literature_analysis_and_research_rigor` module. Follow only the variant skill/reference content included below. Do not use external retrieval or dynamic tools. Do not use knowledge outside the supplied source packet as evidence.
+
+# Variant Skill And References
+
+## Variant File: variant/orchestra_research_rigor/SKILL.md
+
+---
+name: orchestra-research-rigor-subset
+description: Instruction-only Orchestra-derived subset for claim provenance, research artifact structure, rigor review, method comparison, and evaluation reasoning. No autonomous experiments or tools.
+license: MIT-derived-upstream-patterns-with-attribution
+---
+
+# Orchestra Subset: Research Rigor And Evidence Artifacts
+
+Use this skill when the task asks for paper analysis, method comparison, benchmark audit, evidence review, or proposal support from supplied material.
+
+This variant adapts Orchestra research-artifact, research-manager, rigor-reviewer, and ML-paper-review patterns. It is not an autonomous research agent. Do not execute experiments, retrieve papers, run evaluation harnesses, manage repositories, update persistent state, or call tools.
+
+## Core Discipline
+
+1. Convert the response into research artifacts: claims, evidence, assumptions, comparisons, risks, and unresolved questions.
+2. Assign provenance to each major statement: source-derived, cross-source synthesis, inferred from supplied evidence, proposed by the agent, or unsupported.
+3. Match claim type to evidence burden before concluding.
+4. For comparisons, require compatible tasks, data, metrics, baselines, compute, and protocols; otherwise make a scoped comparison.
+5. For evaluation audits, inspect metric alignment, aggregation, baselines, ablations, seeds, uncertainty, leakage, and reproducibility details.
+6. Preserve negative and missing evidence. Do not silently upgrade a plausible idea into a supported finding.
+
+## Claim-Type Evidence Burdens
+
+- Improvement claim: requires direct baseline comparison under a compatible setup.
+- Generalization claim: requires heterogeneous tasks, datasets, or settings.
+- Causal claim: requires intervention, ablation, or mechanism-isolating evidence.
+- Benchmark-validity claim: requires task/metric/protocol analysis and scope limitations.
+- Reproducibility claim: requires sufficient artifact, configuration, environment, and data details.
+- Proposal claim: requires falsifiable hypothesis, observable outcomes, controls, and disconfirmation conditions.
+
+## Response Pattern
+
+1. Artifact inventory: sources, claims, assumptions, evidence, and missing details.
+2. Claim ledger: claim, type, provenance, evidence, scope, evidence burden, support status.
+3. Rigor review: severity-ranked issues tied to claim validity.
+4. Corrected scope: what the packet supports, what is unknown, and what would be needed next.
+5. Final output in the user-requested format.
+
+References:
+
+- `references/provenance_and_artifacts.md`
+- `references/rigor_review_workflow.md`
+- `references/evaluation_reasoning.md`
+- `references/method_and_claim_audit.md`
+
+
+## Variant File: variant/orchestra_research_rigor/references/evaluation_reasoning.md
+
+# Evaluation Reasoning
+
+Adapted from Orchestra ML evaluation and rigor-review patterns, without evaluation harness execution.
+
+## Benchmark Audit Questions
+
+- What construct does the benchmark claim to measure?
+- Are tasks representative of that construct?
+- Are metrics aligned with the claim?
+- Is aggregation across tasks meaningful and transparent?
+- Are baselines appropriate and fairly tuned?
+- Are repeated runs, uncertainty, and variance reported?
+- Could contamination, leakage, prompt sensitivity, or protocol overfitting affect conclusions?
+- Are per-task results preserved before aggregate claims?
+
+## Experiment Audit Questions
+
+- What exact intervention or method differs between compared systems?
+- Are training data, evaluation data, compute, and tuning budgets compatible?
+- Which variables are controlled and which confounds remain?
+- Are ablations sufficient to support mechanism claims?
+- Are negative results or failure modes reported?
+
+Report benchmark and experiment concerns as risks unless the supplied packet directly establishes a failure.
+
+
+## Variant File: variant/orchestra_research_rigor/references/method_and_claim_audit.md
+
+# Method And Claim Audit
+
+Adapted from Orchestra claim-centered artifact patterns and ML writing/reviewer criteria.
+
+## Method Comparison Schema
+
+| Dimension | Method A | Method B | Comparable? | Evidence | Caveat |
+|---|---|---|---|---|---|
+
+Recommended dimensions: objective, data, assumptions, model class, optimization, baselines, metrics, compute, evaluation protocol, limitations, and claim scope.
+
+## Claim Ledger Schema
+
+| Claim | Type | Evidence burden | Supplied evidence | Support status | Allowed scope |
+|---|---|---|---|---|---|
+
+## Boundary Rules
+
+- A within-paper comparison supports that paper's setup, not all possible settings.
+- A benchmark score supports performance under the benchmark protocol, not unrestricted capability.
+- A probe or correlational analysis supports recoverability or association unless stronger causal evidence is supplied.
+- A reproduction plan must list artifacts, code/config/data needs, seeds, metrics, and environment details.
+
+
+## Variant File: variant/orchestra_research_rigor/references/provenance_and_artifacts.md
+
+# Provenance And Research Artifacts
+
+Adapted from Orchestra agent-native research artifact and research-manager patterns.
+
+## Provenance Tags
+
+Use these tags internally and expose them when helpful:
+
+- source-derived: directly stated by supplied material.
+- source-located: source-derived and tied to page, section, figure, or table.
+- cross-source synthesis: a relation among supplied sources.
+- agent-inferred: inferred from supplied evidence and marked as such.
+- agent-proposed: a hypothesis, critique, or protocol improvement.
+- unsupported: not established by supplied material.
+
+## Artifact Schema
+
+| Artifact | Purpose |
+|---|---|
+| Claim ledger | Tracks claims, claim types, source support, and scope. |
+| Evidence ledger | Tracks source locations and directness of support. |
+| Assumption list | Separates method assumptions from evaluation assumptions. |
+| Risk register | Records threats to validity and reproducibility. |
+| Missing-information list | Identifies details needed before stronger conclusions. |
+
+Never silently convert an agent-proposed idea into a source-derived fact.
+
+
+## Variant File: variant/orchestra_research_rigor/references/rigor_review_workflow.md
+
+# Rigor Review Workflow
+
+Adapted from Orchestra rigor-reviewer patterns.
+
+## Review Dimensions
+
+- Evidence relevance: does the evidence actually support the claim?
+- Falsifiability: can the claim be tested or refuted?
+- Scope calibration: is the claim limited to the studied setting?
+- Argument coherence: do conclusions follow from assumptions and results?
+- Exploration integrity: are hypotheses, post-hoc analyses, and exploratory ideas separated?
+- Methodological rigor: are baselines, ablations, metrics, seeds, and reproducibility details adequate?
+
+## Severity-Ranked Finding Template
+
+| Severity | Claim affected | Evidence issue | Consequence | Minimal fix |
+|---|---|---|---|---|
+
+## Missing Detail Checklist
+
+- Baseline identity and strength.
+- Ablation presence and purpose.
+- Metric definition and aggregation.
+- Dataset split, task sampling, or environment setup.
+- Number of seeds, runs, or trials.
+- Variability or confidence reporting.
+- Hyperparameter search and compute comparability.
+- Implementation and artifact availability.
+
+
+## Variant File: variant/reuse_and_license_notes.md
+
+# B2 Reuse And License Notes
+
+This variant selectively adapts Orchestra-derived ideas for claim-centered artifacts, provenance, rigor review, and evaluation reasoning. It deliberately excludes autonomous experiment execution, repository management, evaluation harnesses, training infrastructure, deployment, and tool loops.
+
+## Components Used
+
+| Upstream component | Files consulted per ledger | Adaptation decision | License status from audit |
+|---|---|---|---|
+| `Orchestra-Research/AI-Research-SKILLs/22-agent-native-research-artifact/ara-compiler` | `SKILL.md`, `references/schema.md` | Rewritten as compact claim/evidence/artifact schema | MIT observed in skill frontmatter |
+| `Orchestra-Research/AI-Research-SKILLs/22-agent-native-research-artifact/research-manager` | `SKILL.md`, `references/provenance_tags.md` | Rewritten as provenance tags and artifact discipline | MIT observed in skill frontmatter |
+| `Orchestra-Research/AI-Research-SKILLs/22-agent-native-research-artifact/rigor-reviewer` | `SKILL.md`, `references/rigor_dimensions.md` | Rewritten as type-aware rigor review workflow | MIT observed in skill frontmatter |
+| `Orchestra-Research/AI-Research-SKILLs/20-ml-paper-writing/ml-paper-writing` | `SKILL.md`, citation/reviewer references | Rewritten as claim-to-evidence and reviewer criteria patterns | MIT observed in skill frontmatter |
+
+## Explicit Runtime Exclusions
+
+- No autonomous research loop or persistent research state.
+- No scripts, APIs, retrieval tools, evaluation harnesses, training infrastructure, or code execution.
+- No K-Dense-derived material.
+- No benchmark-specific paper names, task identifiers, expected answers, or development answer-key content.
+
+
+## Variant File: variant/variant_manifest.yaml
+
+variant_id: B2_orchestra_subset
+module_scope: literature_analysis_and_research_rigor
+implementation_type: instruction_reference_only
+runtime_tools_enabled: false
+external_services_enabled: false
+dynamic_retrieval_enabled: false
+scripts_enabled: false
+upstream_basis:
+  repository: Orchestra-Research/AI-Research-SKILLs
+  components:
+    - path: 22-agent-native-research-artifact/ara-compiler/SKILL.md
+      consulted_files:
+        - 22-agent-native-research-artifact/ara-compiler/SKILL.md
+        - 22-agent-native-research-artifact/ara-compiler/references/schema.md
+      use: adapted_claim_and_artifact_schema
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: 22-agent-native-research-artifact/research-manager/SKILL.md
+      consulted_files:
+        - 22-agent-native-research-artifact/research-manager/SKILL.md
+        - 22-agent-native-research-artifact/research-manager/references/provenance_tags.md
+      use: adapted_provenance_tags
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: 22-agent-native-research-artifact/rigor-reviewer/SKILL.md
+      consulted_files:
+        - 22-agent-native-research-artifact/rigor-reviewer/SKILL.md
+        - 22-agent-native-research-artifact/rigor-reviewer/references/rigor_dimensions.md
+      use: adapted_rigor_review_dimensions
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: 20-ml-paper-writing/ml-paper-writing/SKILL.md
+      consulted_files:
+        - 20-ml-paper-writing/ml-paper-writing/SKILL.md
+        - 20-ml-paper-writing/ml-paper-writing/references/citation-management.md
+        - 20-ml-paper-writing/ml-paper-writing/references/reviewer-criteria.md
+      use: adapted_claim_to_evidence_and_reviewer_patterns
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+runtime_exclusions:
+  - no autoresearch autonomous loop
+  - no experiment execution
+  - no evaluation harnesses
+  - no training infrastructure
+  - no K-Dense-derived material
+  - no B3-original AI/ML/RL additions
+
+
+# Task
+
+- Task ID: `LS-VAL-01`
+- Split: `validation`
+- Task type: `literature_mapping`
+- Topic: diffusion and generative modeling efficiency
+- Research question: Within the fixed source packet, what are the main approaches for improving diffusion-model sampling or training efficiency, and what tradeoffs do they introduce?
+
+## Input Prompt
+
+Produce a fixed-corpus literature map on efficiency methods for diffusion or related generative models.
+Use only the provided source packet. Do not perform external retrieval.
+Return a corpus coverage table, approach taxonomy, representative paper table, tradeoff analysis, unsupported-synthesis warnings, and open research gaps visible within the corpus.
+Do not invent citations or unsupported performance claims.
+
+
+## Required Outputs
+
+- corpus_coverage_table
+- approach_taxonomy
+- representative_paper_table
+- tradeoff_analysis
+- unsupported_synthesis_warnings
+- evidence_grounded_gap_list
+
+# Source Packet
+
+# LS-VAL-01 Model Input Packet
+## Sources
+- Denoising Diffusion Implicit Models (arXiv:2010.02502; 2020). Local file: `song_2020_denoising_diffusion_implicit_models.pdf`. Included evidence: Abstract; sampling acceleration method; experiments; limitations.
+- Progressive Distillation for Fast Sampling of Diffusion Models (arXiv:2202.00512; 2022). Local file: `salimans_2022_progressive_distillation.pdf`. Included evidence: Abstract; distillation method; sample-step tradeoffs; experiments.
+- DPM-Solver: A Fast ODE Solver for Diffusion Probabilistic Model Sampling in Around 10 Steps (arXiv:2206.00927; 2022). Local file: `lu_2022_dpm_solver.pdf`. Included evidence: Abstract; solver design; experiments; step/quality tradeoffs.
+- High-Resolution Image Synthesis with Latent Diffusion Models (arXiv:2112.10752; 2022). Local file: `rombach_2022_latent_diffusion_models.pdf`. Included evidence: Abstract; latent-space modeling; computational tradeoffs; experiments.
+- Consistency Models (arXiv:2303.01469; 2023). Local file: `song_2023_consistency_models.pdf`. Included evidence: Abstract; one/few-step generation; distillation/training; experiments.
+
+## Controlled Source Notes
+- DDIM: introduces an implicit sampling formulation for diffusion models and reports faster sampling with fewer steps in its experimental settings.
+- Progressive Distillation: compresses a diffusion sampler into fewer sampling steps through repeated distillation and reports sample-quality/speed tradeoffs.
+- DPM-Solver: formulates diffusion sampling as solving an ODE and reports few-step sampling performance in selected settings.
+- Latent Diffusion Models: performs diffusion in a learned latent space and reports high-resolution image synthesis with computational tradeoffs.
+- Consistency Models: trains or distills models for one-step or few-step generation and reports generation-quality comparisons.
+- Evidence objects: abstracts, method sections, experiment sections, result tables/figures, and stated limitations or discussion sections.
+
+## Packet Scope
+- This packet contains source metadata and neutral source notes prepared from the listed canonical files.
+- Some exact numeric values, full tables, appendix details, and implementation settings are not included in this model input packet.
+
+
+2026-05-30T04:52:43.555236Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:43.555249Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:52:43.555577Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:43.555582Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:52:43.555891Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:43.555895Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:52:43.556177Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:43.556180Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:52:43.556470Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:43.556473Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:52:43.557094Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:43.557096Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:52:43.557324Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:52:45.249379Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:45.249392Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:52:45.249776Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:45.249780Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:52:45.250147Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:45.250152Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:52:45.250614Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:45.250620Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:52:45.251045Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:45.251051Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:52:45.251857Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:45.251861Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+codex
+## corpus_coverage_table
+
+| Source | Efficiency target | Main approach | Evidence available in packet | Coverage limits |
+|---|---:|---|---|---|
+| DDIM, 2020 | Sampling efficiency | Implicit/non-Markovian sampling formulation allowing fewer denoising steps | Abstract, sampling acceleration method, experiments, limitations; controlled note says faster sampling with fewer steps in reported settings | Exact numeric results, full tables, and implementation settings are not included |
+| Progressive Distillation, 2022 | Sampling efficiency | Repeatedly distills a multi-step sampler into a sampler requiring fewer steps | Abstract, distillation method, sample-step tradeoffs, experiments | Exact quality/speed values, teacher/student details, and tuning budgets not included |
+| DPM-Solver, 2022 | Sampling efficiency | Treats diffusion sampling as ODE solving and designs a fast solver for few-step sampling | Abstract, solver design, experiments, step/quality tradeoffs | Exact benchmark values, solver-order comparisons, and implementation details not included |
+| Latent Diffusion Models, 2022 | Training and sampling compute efficiency, especially high-resolution synthesis | Moves diffusion from pixel space to a learned latent representation | Abstract, latent-space modeling, computational tradeoffs, experiments | Compression settings, precise compute savings, and full quality tradeoffs not included |
+| Consistency Models, 2023 | One/few-step generation efficiency | Trains or distills models to map noisy states to consistent outputs for fast generation | Abstract, one/few-step generation, distillation/training, experiments | Exact comparisons, training cost, and robustness details not included |
+
+## approach_taxonomy
+
+| Approach family | Representative sources | Mechanism | Efficiency claim type | Supported scope |
+|---|---|---|---|---|
+| Faster sampler parameterization | DDIM | Change the reverse sampling process so fewer denoising steps can be used | Improvement claim | Supported only for DDIM’s reported experimental settings |
+| Sampler distillation | Progressive Distillation, Consistency Models | Transfer behavior of slower/multi-step samplers into faster/fewer-step models | Improvement claim; possible training-cost tradeoff | Supported as a sampling-efficiency strategy within reported experiments |
+| Numerical solver acceleration | DPM-Solver | Recast sampling as ODE integration and use specialized solvers for low-step sampling | Improvement claim | Supported for selected evaluated settings, not all diffusion models or all tasks |
+| Latent-space diffusion | Latent Diffusion Models | Reduce modeling cost by denoising compressed latent representations instead of pixels | Efficiency and scalability claim | Supported for high-resolution image synthesis settings in the paper |
+| Direct one/few-step generative modeling | Consistency Models | Train or distill a model for one-step or few-step generation | Improvement claim with quality tradeoff concerns | Supported for generation-quality comparisons reported in the source |
+
+## representative_paper_table
+
+| Paper | What it contributes | Efficiency route | Tradeoff introduced | Provenance |
+|---|---|---|---|---|
+| DDIM | Implicit sampling formulation for diffusion models | Fewer sampling steps | Potential quality degradation or sensitivity as steps are reduced; scope limited to experimental settings | Source-derived from controlled note; tradeoff inferred from step/quality framing |
+| Progressive Distillation | Repeated distillation of a sampler into fewer-step samplers | Compresses many-step sampling into fewer steps | Distillation adds training complexity/cost and may introduce quality-speed tradeoffs | Source-derived for method and tradeoff presence; training-cost concern is agent-inferred |
+| DPM-Solver | Fast ODE solver for diffusion sampling | Improves low-step sampling via solver design | Solver performance may depend on model/noise schedule/problem setup; low-step quality tradeoffs remain | Source-derived for ODE/few-step method; dependence is agent-inferred |
+| Latent Diffusion Models | Diffusion in learned latent space for high-resolution synthesis | Lowers compute by operating on compressed representations | Latent compression may trade detail/fidelity/control against efficiency | Source-derived for latent-space compute tradeoff; specific failure modes are agent-inferred |
+| Consistency Models | One/few-step generation through training or distillation | Reduces sampling to one or few model evaluations | May require specialized training/distillation and can trade sample quality for speed | Source-derived for one/few-step and comparisons; training/quality caveat inferred from packet scope |
+
+## tradeoff_analysis
+
+| Tradeoff theme | Sources involved | Evidence status | Analysis |
+|---|---|---|---|
+| Sampling steps vs. sample quality | DDIM, Progressive Distillation, DPM-Solver, Consistency Models | Source-derived that step/quality tradeoffs or generation-quality comparisons are included | The corpus consistently frames faster generation as reducing denoising steps or model evaluations, but the packet does not provide exact numeric frontiers. Strong rankings among these methods are unsupported. |
+| Inference speed vs. training complexity | Progressive Distillation, Consistency Models | Agent-inferred from distillation/training methods | Distillation-based approaches can shift cost from inference to training. The packet supports that distillation/training methods are used, but not exact added compute. |
+| Pixel-space fidelity/control vs. latent compression | Latent Diffusion Models | Source-derived for latent-space modeling and computational tradeoffs; specific artifact risks inferred | Latent diffusion improves efficiency by changing representation, but compression can introduce representation bottlenecks. The packet does not establish which visual attributes degrade or improve. |
+| General-purpose solver vs. task/model dependence | DPM-Solver | Agent-inferred from solver-based method and selected experiments | A numerical solver can accelerate sampling without retraining, but claims should be limited to compatible model formulations and evaluated schedules. |
+| One-step ambition vs. robustness/quality | Consistency Models | Source-derived for one/few-step generation and comparisons; robustness concerns inferred | One-step generation is the strongest speed-oriented target in the packet, but the supplied evidence does not establish universal parity with slower diffusion samplers. |
+
+## unsupported_synthesis_warnings
+
+| Warning | Why unsupported within packet |
+|---|---|
+| Do not rank the five papers by absolute speed, FID, likelihood, or compute efficiency | Exact numeric values, full result tables, and comparable protocols are not included |
+| Do not claim one method dominates another generally | The packet does not establish matched datasets, metrics, baselines, compute budgets, or tuning protocols across papers |
+| Do not convert “few-step performance in selected settings” into broad generalization | Heterogeneous tasks/datasets/settings are not detailed enough for a generalization claim |
+| Do not claim distillation is always more efficient overall | It can reduce sampling cost, but training/distillation overhead is not quantified in the packet |
+| Do not claim latent diffusion preserves all pixel-level detail | The packet supports computational tradeoffs, not lossless representation or universal fidelity |
+| Do not infer reproducibility strength | Seeds, environment, configs, implementation details, and full artifacts are not included |
+
+## evidence_grounded_gap_list
+
+| Gap | Visible from corpus | What would be needed next |
+|---|---|---|
+| Comparable speed-quality frontier across methods | Multiple papers target fewer steps or lower compute, but packet lacks harmonized metrics | Same datasets, same baselines, shared metrics, matched compute budgets, and per-step quality curves |
+| Training-cost accounting | Distillation and consistency approaches may shift cost to training | Training compute, number of distillation stages, wall-clock cost, and amortization analysis |
+| Robustness under very low step counts | Several methods aim at few-step or one-step generation | Per-task low-step failure cases, variance across seeds, and prompt/task sensitivity |
+| Representation bottlenecks in latent diffusion | Latent-space modeling is explicitly a computational tradeoff | Analysis of compression ratio, reconstruction quality, downstream controllability, and high-frequency detail |
+| Solver compatibility boundaries | DPM-Solver depends on an ODE formulation | Conditions under which solver assumptions hold, schedules tested, and failure modes outside selected settings |
+| Reproducibility and uncertainty | Packet omits full tables, appendix details, seeds, and implementation settings | Code/configs, seed counts, confidence intervals, environment details, and full benchmark protocols |
+tokens used
+5,041

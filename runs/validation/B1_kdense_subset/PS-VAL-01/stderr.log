@@ -1,0 +1,413 @@
+2026-05-30T04:47:53.948145Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:47:53.973187Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+OpenAI Codex v0.133.0-alpha.1
+--------
+workdir: /private/tmp/ling_bot_validation_v0_1_execution/B1_kdense_subset
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: none
+reasoning summaries: none
+session id: 019e7735-c83a-7640-8676-21cfb4fe81db
+--------
+user
+# Variant Runtime Instructions
+
+You are running benchmark variant `B1_kdense_subset` for the `literature_analysis_and_research_rigor` module. Follow only the variant skill/reference content included below. Do not use external retrieval or dynamic tools. Do not use knowledge outside the supplied source packet as evidence.
+
+# Variant Skill And References
+
+## Variant File: variant/kdense_literature_research_rigor/SKILL.md
+
+---
+name: kdense-literature-research-rigor-subset
+description: Instruction-only K-Dense-derived subset for fixed-source literature review, citation/evidence handling, scientific criticism, and synthesis. No tools, scripts, APIs, retrieval, or external services.
+license: MIT-derived-upstream-patterns-with-attribution
+---
+
+# K-Dense Subset: Literature Analysis And Research Rigor
+
+Use this skill when the task asks for research literature review, paper reading, citation/evidence handling, scientific criticism, or synthesis from supplied material.
+
+This variant is instruction/reference-only. It must not retrieve, search, execute scripts, call APIs, manage a citation library, parse PDFs, or use external databases. If the user asks for facts not present in the supplied material, mark them as unavailable or unsupported.
+
+## Operating Rules
+
+1. Work only from the provided source packet and task prompt.
+2. Build an evidence-first response: every important claim should point to a supplied source, section, page, figure, table, or quoted/excerpted location when available.
+3. Separate source claims, your synthesis, and unsupported possibilities.
+4. For literature reviews, account for every supplied source before synthesizing themes.
+5. For criticism, assess validity, bias, methods, evidence quality, limitations, and claim scope.
+6. For proposal or hypothesis tasks, turn observations into testable claims only when the packet supports the motivation; mark broader novelty or field-gap claims as needing external review.
+7. Do not rank methods globally unless the packet contains directly comparable evidence.
+
+## Workflow
+
+1. Scope the task: identify the research question, the fixed corpus, requested output sections, and forbidden external evidence.
+2. Inventory sources: make a source coverage table with role, evidence type, claims, methods, experiments, and limitations.
+3. Extract evidence: record claims, evidence locations, methods, datasets, metrics, baselines, comparisons, and caveats.
+4. Evaluate quality: ask whether the evidence is direct, indirect, incomplete, contradictory, or out of scope.
+5. Synthesize cautiously: group sources into themes or methods, then state what the corpus supports and what remains unresolved.
+6. Audit conclusions: remove unsupported generalizations, invented citations, prestige-based judgments, or claims that exceed the supplied evidence.
+
+## Preferred Output Moves
+
+- Use tables for source coverage, claim-evidence mapping, comparison, and limitations.
+- Use short evidence labels such as source name plus page/section/table when provided.
+- Include an explicit unsupported-or-unknown section whenever the task asks for synthesis or comparison.
+- Preserve uncertainty instead of filling missing methods, metrics, or results from memory.
+
+Load the references in this variant only as needed:
+
+- `references/literature_review_structure.md`
+- `references/evidence_and_citation_handling.md`
+- `references/scientific_criticism.md`
+- `references/synthesis_and_hypotheses.md`
+
+
+## Variant File: variant/kdense_literature_research_rigor/references/evidence_and_citation_handling.md
+
+# Evidence And Citation Handling
+
+Adapted from K-Dense citation-management and literature-review patterns, without scripts or external services.
+
+## Evidence Ledger
+
+For each important claim, record:
+
+| Claim | Source | Location supplied | Evidence type | Support status | Caveat |
+|---|---|---|---|---|---|
+
+Support status should be one of: direct, indirect, partial, contradicted, absent, or speculative.
+
+## Citation Discipline
+
+- Cite only sources supplied in the packet.
+- If metadata is incomplete, do not invent DOI, venue, version, page, or author details.
+- Prefer supplied page, section, figure, and table locations over generic source mentions.
+- If the packet gives only a general source note, cite that note and mark the granularity as limited.
+- Separate bibliographic identity from evidence support: a real source is not automatically evidence for a claim.
+
+## Unsupported Evidence Policy
+
+- Incidental background knowledge may be mentioned only if clearly outside the evidence base and not used to support a conclusion.
+- Any conclusion, method ranking, novelty claim, or causal claim must be grounded in supplied evidence.
+- If evidence is missing, write “not established by the packet” rather than guessing.
+
+
+## Variant File: variant/kdense_literature_research_rigor/references/literature_review_structure.md
+
+# Literature Review Structure
+
+Adapted from K-Dense literature-review, paper-lookup, and research-lookup workflow patterns.
+
+## Fixed-Corpus Review
+
+For a closed packet, treat literature review as mapping and synthesis rather than discovery.
+
+1. Corpus inventory: list every supplied source and its apparent role.
+2. Screening within packet: identify central, supporting, background, boundary, and unusable sources using only packet evidence.
+3. Extraction fields: research question, method, assumptions, data, experimental setup, result type, limitations, and relevance.
+4. Thematic grouping: cluster sources by problem, method family, evidence type, or claim type.
+5. Synthesis: state relationships among sources and qualify them by evidence strength.
+6. Gaps: report gaps visible in the packet, not gaps claimed for the entire field unless external review is allowed.
+
+## Literature Map Template
+
+| Source | Role in packet | Research problem | Method or artifact | Evidence type | Limitations | Use in synthesis |
+|---|---|---|---|---|---|---|
+
+## Search-Derived Workflows Disabled
+
+K-Dense search, database, and citation-chaining patterns are not active in this variant. When external retrieval is disabled, do not simulate search results or cite absent work.
+
+
+## Variant File: variant/kdense_literature_research_rigor/references/scientific_criticism.md
+
+# Scientific Criticism
+
+Adapted from K-Dense scientific-critical-thinking and peer-review patterns.
+
+## Critique Axes
+
+- Internal validity: does the method or experiment test what it claims?
+- Construct validity: do tasks, metrics, and proxies match the intended concept?
+- External validity: what populations, settings, tasks, models, or environments are covered?
+- Statistical validity: are seeds, variability, uncertainty, aggregation, and multiple comparisons handled?
+- Reproducibility: are data, code, settings, prompts, models, hardware, and configs sufficiently specified?
+- Bias and confounds: are there dataset artifacts, leakage, selection bias, or unfair baselines?
+- Claim proportionality: are conclusions limited to the actual evidence?
+
+## Review Pattern
+
+1. State the claim under review.
+2. Identify the direct evidence.
+3. List missing controls, baselines, metrics, or reporting details.
+4. Classify severity and likely effect on the claim.
+5. Suggest a corrected, narrower claim or improved protocol.
+
+Avoid prestige-based judgments and avoid treating citation count, venue, or author identity as proof of quality.
+
+
+## Variant File: variant/kdense_literature_research_rigor/references/synthesis_and_hypotheses.md
+
+# Synthesis And Hypotheses
+
+Adapted from K-Dense hypothesis-generation and scientific brainstorming patterns, constrained by evidence.
+
+## Synthesis Rules
+
+- Build synthesis from extracted evidence, not from memory.
+- Name the synthesis operation: grouping, contrast, causal conjecture, mechanism hypothesis, or gap identification.
+- Mark whether a statement is source-stated, cross-source synthesis, or proposal speculation.
+- Do not turn absence from a small fixed packet into a field-wide absence.
+
+## Hypothesis Template
+
+| Hypothesis | Evidence motivation | Prediction | Disconfirming observation | Required experiment | Feasibility caveat |
+|---|---|---|---|---|---|
+
+## Useful Checks
+
+- Is the hypothesis falsifiable?
+- Does it identify observables and controls?
+- Does it require stronger evidence than the packet provides?
+- Does it distinguish correlation, recoverability, mechanism, and causation?
+
+
+## Variant File: variant/reuse_and_license_notes.md
+
+# B1 Reuse And License Notes
+
+This variant selectively adapts K-Dense-derived instruction patterns for literature review, citation/evidence handling, scientific criticism, peer-review framing, and hypothesis formulation.
+
+No upstream scripts, APIs, database clients, generated templates, search providers, or executable services are included. The implementation is rewritten in compact form for fixed-source benchmark execution.
+
+## Components Used
+
+| Upstream component | Files consulted per ledger | Adaptation decision | License status from audit |
+|---|---|---|---|
+| `K-Dense-AI/scientific-agent-skills/skills/literature-review` | `SKILL.md`, citation/database references, review template | Rewritten into fixed-corpus review structure | MIT observed in skill frontmatter; root repository MIT |
+| `K-Dense-AI/scientific-agent-skills/skills/citation-management` | `SKILL.md`, citation/database references | Rewritten as evidence and citation discipline only | MIT observed in skill frontmatter; root repository MIT |
+| `K-Dense-AI/scientific-agent-skills/skills/scientific-critical-thinking` | `SKILL.md`, evidence, bias, validity references | Rewritten as critique axes and review pattern | MIT observed in skill frontmatter; root repository MIT |
+| `K-Dense-AI/scientific-agent-skills/skills/peer-review` | `SKILL.md`, review criteria/templates | Rewritten as criticism scaffolding | MIT observed in skill frontmatter; root repository MIT |
+| `K-Dense-AI/scientific-agent-skills/skills/hypothesis-generation` | `SKILL.md`, design/framework references | Rewritten as evidence-constrained hypothesis template | MIT observed in skill frontmatter; root repository MIT |
+
+## Explicit Runtime Exclusions
+
+- No scripts copied or enabled.
+- No API keys, external services, citation databases, PDF parsers, or search tools.
+- No Orchestra-derived material.
+- No benchmark-specific paper names, task identifiers, expected answers, or development answer-key content.
+
+
+## Variant File: variant/variant_manifest.yaml
+
+variant_id: B1_kdense_subset
+module_scope: literature_analysis_and_research_rigor
+implementation_type: instruction_reference_only
+runtime_tools_enabled: false
+external_services_enabled: false
+dynamic_retrieval_enabled: false
+scripts_enabled: false
+upstream_basis:
+  repository: K-Dense-AI/scientific-agent-skills
+  components:
+    - path: skills/literature-review/SKILL.md
+      consulted_files:
+        - skills/literature-review/SKILL.md
+        - skills/literature-review/references/citation_styles.md
+        - skills/literature-review/references/database_strategies.md
+        - skills/literature-review/assets/review_template.md
+      use: adapted_workflow_pattern
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: skills/citation-management/SKILL.md
+      consulted_files:
+        - skills/citation-management/SKILL.md
+        - skills/citation-management/references/citation_styles.md
+        - skills/citation-management/references/database_apis.md
+      use: adapted_citation_discipline_without_tools
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: skills/scientific-critical-thinking/SKILL.md
+      consulted_files:
+        - skills/scientific-critical-thinking/SKILL.md
+        - skills/scientific-critical-thinking/references/bias_detection.md
+        - skills/scientific-critical-thinking/references/evidence_evaluation.md
+        - skills/scientific-critical-thinking/references/validity_frameworks.md
+      use: adapted_critique_axes
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: skills/peer-review/SKILL.md
+      consulted_files:
+        - skills/peer-review/SKILL.md
+        - skills/peer-review/references/review_criteria.md
+        - skills/peer-review/references/review_templates.md
+      use: adapted_review_scaffolding
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: skills/hypothesis-generation/SKILL.md
+      consulted_files:
+        - skills/hypothesis-generation/SKILL.md
+        - skills/hypothesis-generation/references/experimental_design.md
+        - skills/hypothesis-generation/references/hypothesis_frameworks.md
+      use: adapted_hypothesis_template
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+runtime_exclusions:
+  - no K-Dense scripts included
+  - no APIs included
+  - no database search included
+  - no external citation validation included
+  - no Orchestra-derived rules included
+  - no B3-original AI/ML/RL guidance included
+
+
+# Task
+
+- Task ID: `PS-VAL-01`
+- Split: `validation`
+- Task type: `evidence_grounded_proposal_support`
+- Topic: world-model planning
+- Research question: Can the provided world-model planning idea be converted into a feasible, evidence-grounded research proposal?
+
+## Input Prompt
+
+Using only the provided source packet, turn the seed idea into a small research proposal.
+Produce scoped research questions, evidence-grounded hypotheses, falsification criteria, required experiments, baselines, ablations, RL-specific evaluation details, and a risk register.
+Separate packet facts, synthesis, and proposed hypotheses.
+
+
+## Required Outputs
+
+- scoped_research_questions
+- hypothesis_table
+- evidence_map
+- experiment_plan
+- rl_evaluation_protocol
+- risk_register
+
+# Source Packet
+
+# PS-VAL-01 Model Input Packet
+## Sources
+- Dream to Control: Learning Behaviors by Latent Imagination (arXiv:1912.01603; 2019). Local file: `hafner_2019_dream_to_control.pdf`. Included evidence: Abstract; latent world model; imagination/planning/control; experiments.
+- Mastering Atari with Discrete World Models (arXiv:2010.02193; 2020). Local file: `hafner_2020_mastering_atari_discrete_world_models.pdf`. Included evidence: Abstract; discrete world model; Atari evaluation; baselines.
+- local_seed_world_model_planning.md (local_seed_brief; 2026). Local file: `local_seed_world_model_planning.md`. Included evidence: User/evaluator-provided seed idea or claim brief for proposal construction.
+
+## Controlled Source Notes
+- Dream to Control: learns latent dynamics models and uses latent imagination for behavior learning in control tasks.
+- Mastering Atari with Discrete World Models: studies discrete world models for Atari and reports performance under Atari evaluation settings.
+- Local seed brief: asks whether latent world-model planning remains useful under limited real-environment interaction and accumulated model error.
+- Evidence objects: abstracts, method sections, experiment sections, baseline/result tables, and discussion/limitations.
+
+## Packet Scope
+- This packet contains source metadata and neutral source notes prepared from the listed canonical files.
+- Some exact numeric values, full tables, appendix details, and implementation settings are not included in this model input packet.
+
+
+2026-05-30T04:47:53.996964Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:47:54.019094Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:47:54.019106Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:47:54.019736Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:47:54.019741Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:47:54.020209Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:47:54.020212Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:47:54.020546Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:47:54.020550Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:47:54.020894Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:47:54.020896Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:47:54.021750Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:47:54.021752Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:47:55.391078Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:47:55.391093Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:47:55.391458Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:47:55.391462Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:47:55.391852Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:47:55.391854Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:47:55.392216Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:47:55.392219Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:47:55.392581Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:47:55.392585Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:47:55.393356Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:47:55.393360Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+codex
+**scoped_research_questions**
+
+1. Under limited real-environment interaction, does latent world-model planning improve policy learning compared with model-free or non-imagination baselines?
+2. How quickly does accumulated model error degrade planning performance as imagination horizon increases?
+3. Are discrete latent world models more robust than continuous latent world models for planning in visually complex RL settings such as Atari?
+4. Which components are necessary for gains: learned latent dynamics, imagined rollouts, actor-critic learning in imagination, or discrete latent representation?
+
+**Packet Facts vs Synthesis vs Hypotheses**
+
+| Type | Statement | Support |
+|---|---|---|
+| Packet fact | Dream to Control learns latent dynamics models and uses latent imagination for behavior learning in control tasks. | Source note: Dream to Control abstract/method/experiments |
+| Packet fact | Mastering Atari studies discrete world models for Atari and reports performance under Atari evaluation settings and baselines. | Source note: Mastering Atari abstract/experiments/baselines |
+| Packet fact | The seed asks whether latent world-model planning remains useful under limited real-environment interaction and accumulated model error. | Source note: local seed brief |
+| Synthesis | The proposal can test sample efficiency and model-error sensitivity by varying real-environment budget and imagination horizon. | Cross-source synthesis from world-model imagination plus seed concern |
+| Proposed hypothesis | Latent imagination will help most at low interaction budgets but may degrade with long imagined rollouts if model error accumulates. | Evidence-grounded proposal speculation; not established by packet |
+
+**hypothesis_table**
+
+| Hypothesis | Evidence motivation | Prediction | Falsification criteria | Required experiment | Feasibility caveat |
+|---|---|---|---|---|---|
+| H1: Latent world-model planning improves sample efficiency under limited real interaction. | Dream to Control uses latent dynamics and imagination for behavior learning; seed asks about limited interaction. | At fixed low environment-step budgets, world-model agents outperform model-free or no-imagination baselines. | No statistically meaningful improvement over baselines at low budgets, or worse performance across most tasks. | Train agents under strict environment-step budgets on control tasks and Atari-like visual tasks. | Exact budgets and variance reporting are not specified in the packet. |
+| H2: Longer imagination horizons show a non-monotonic effect because accumulated model error offsets planning benefits. | Seed explicitly raises accumulated model error; Dream to Control uses latent imagination. | Short-to-medium horizons improve returns; very long horizons reduce or fail to improve returns. | Return does not vary with horizon, or longer horizons consistently improve without degradation. | Horizon sweep with fixed real data, fixed model capacity, and repeated seeds. | Packet does not provide exact horizon settings. |
+| H3: Discrete latent world models are competitive in visually complex domains. | Mastering Atari studies discrete world models for Atari evaluation. | Discrete world-model planning performs competitively against listed Atari baselines under matched evaluation. | Discrete model fails to match relevant baselines under matched data and evaluation settings. | Atari benchmark subset with discrete latent model, continuous latent variant, and model-free baselines. | Exact Atari scores, tables, and implementation settings are unavailable. |
+| H4: Planning gains require both learned latent dynamics and imagination-based policy optimization. | Dream to Control combines latent dynamics with latent imagination for behavior learning. | Removing imagination or corrupting dynamics reduces performance more than minor architectural changes. | Ablations show no degradation when imagination or learned dynamics are removed. | Component ablations: no imagination, one-step model only, shuffled dynamics, oracle/real rollout upper bound if feasible. | Oracle rollouts may not be feasible in all benchmark settings. |
+
+**evidence_map**
+
+| Claim | Source | Location supplied | Evidence type | Support status | Caveat |
+|---|---|---|---|---|---|
+| Latent dynamics models can support behavior learning through imagination. | Dream to Control | Abstract; method; experiments per packet | Source claim/method | Direct | No exact metrics included. |
+| Discrete world models have been evaluated on Atari. | Mastering Atari | Abstract; Atari evaluation; baselines per packet | Source claim/experiment | Direct | Full result tables absent. |
+| The target concern is limited interaction plus accumulated model error. | local_seed_world_model_planning.md | Seed brief note | Problem statement | Direct | Seed is motivation, not empirical evidence. |
+| Low interaction budgets are the right stress test. | Dream to Control + seed brief | Cross-source synthesis | Proposal rationale | Partial | Packet does not prove this is the only or best stress test. |
+| Horizon sweeps can test model-error accumulation. | Seed brief + Dream to Control | Cross-source synthesis | Experimental design inference | Indirect | Model error measurement details must be designed. |
+| Discrete vs continuous latent models are relevant comparison axes. | Dream to Control + Mastering Atari | Source contrast | Synthesis | Partial | Packet does not provide a head-to-head comparison. |
+
+**experiment_plan**
+
+| Component | Design |
+|---|---|
+| Domains | Small continuous-control tasks aligned with Dream to Control’s control setting; Atari subset aligned with Mastering Atari’s evaluation setting. |
+| Main independent variables | Real-environment interaction budget, imagination horizon, latent representation type, and use of imagination. |
+| Primary agents | Latent world-model planning agent using imagined rollouts; discrete latent world-model variant for Atari-style visual domains. |
+| Baselines | Model-free RL baseline; no-imagination world-model baseline; one-step predictive model baseline; discrete-vs-continuous latent model comparison where applicable; published/source-reported baselines only when packet details are available. |
+| Ablations | No imagined rollouts; horizon sweep; reduced model capacity; frozen or stale model; corrupted/shuffled latent dynamics; policy trained on real rollouts only; discrete latent disabled for Atari variant. |
+| Measurements | Episodic return, sample efficiency at fixed environment steps, model prediction error over rollout depth, performance vs imagination horizon, variance across random seeds. |
+| Decision logic | A hypothesis is supported only if improvements hold under matched environment budgets, repeated seeds, and relevant ablations. |
+
+**rl_evaluation_protocol**
+
+| Evaluation detail | Protocol |
+|---|---|
+| Environment interaction | Report all results as a function of real-environment steps, not only gradient steps or imagined steps. |
+| Budgeting | Use low, medium, and higher real-interaction budgets to test sample efficiency. |
+| Seeds and uncertainty | Run multiple random seeds; report mean, variability, and confidence intervals or comparable uncertainty summaries. |
+| Horizon analysis | Evaluate imagination horizons separately; track both return and model error by rollout depth. |
+| Baseline fairness | Match observation preprocessing, action spaces, environment-step budgets, network capacity where possible, and evaluation frequency. |
+| Evaluation episodes | Use held-out evaluation episodes without exploration noise when appropriate; keep training and evaluation returns separate. |
+| Atari-specific details | Use the Atari evaluation setting described in the Mastering Atari packet when exact settings are available; do not invent absent frame-skip, sticky-action, or life-loss details. |
+| Failure analysis | Inspect cases where imagined performance improves while real-environment return does not, because that indicates model exploitation or compounding error. |
+
+**risk_register**
+
+| Risk | Why it matters | Evidence status | Mitigation |
+|---|---|---|---|
+| Accumulated model error makes imagined rollouts misleading. | Central seed concern; may invalidate planning gains. | Directly motivated by seed, indirectly tied to imagination methods. | Horizon sweep, rollout-depth prediction error, short-horizon controls. |
+| Baselines are unfair or under-tuned. | Could falsely attribute gains to world-model planning. | Packet notes baselines but lacks full settings. | Match budgets/settings; report tuning protocol; include simple and strong baselines. |
+| Gains come from representation learning rather than planning. | Would weaken claim that planning is useful. | Plausible but not established by packet. | No-imagination and real-rollout-only ablations. |
+| Results may not transfer from control to Atari or vice versa. | Dream to Control and Atari source cover different settings. | Direct source-domain difference. | Treat domains separately; avoid global ranking. |
+| Discrete vs continuous comparison may be confounded by architecture. | Representation type is not isolated if model sizes differ. | Packet lacks head-to-head evidence. | Capacity-matched variants and component ablations. |
+| Insufficient statistical reporting. | RL results can be seed-sensitive. | Not specified in packet. | Multiple seeds, uncertainty intervals, per-task curves. |
+| Exact implementation settings unavailable. | Reproducibility and comparison may be limited. | Packet explicitly omits some numeric values and appendix details. | Mark unspecified settings; use proposal-level design rather than claiming replication. |
+
+Overall, the seed idea can be converted into a feasible proposal, but the packet supports it as a scoped empirical test rather than as an already-established claim that latent world-model planning remains beneficial under limited interaction and model error.
+tokens used
+5,313

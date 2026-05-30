@@ -1,0 +1,592 @@
+You are scoring an internal fixed-source validation benchmark after generation is complete.
+
+Use only the task specification, frozen validation gold annotation, scoring rubric, and generated outputs below. Do not use external facts. Do not reward style over correctness. Score each variant independently but compare across variants for calibration.
+
+Return JSON matching the provided schema only. For each of the four variants, provide scores from 1-5 or null when a dimension is not applicable to this task. Include concise findings and scoring_notes. No markdown.
+
+# Task ID
+SPR-VAL-01
+
+# Task Specification
+task_id: SPR-VAL-01
+split: validation
+task_type: single_paper_deep_reading
+topic: world models
+research_question: "What does the provided Dreamer-style world-model paper claim, and what evidence in the paper supports or limits those claims?"
+input_prompt: |
+  Read only the provided source packet. Produce a structured paper card, claim ledger, evidence ledger, experiment summary, reproducibility notes, and limitation summary.
+  Do not use external retrieval. Mark absent details as unknown.
+evaluation_mode: closed_source
+source_material_required: true
+provided_materials:
+  - material_id: packet_spr_ho_dreamer_world_model
+    type: paper_packet
+    status: source_material_required
+    description: "A Dreamer-style world-model paper packet with PDF or markdown plus metadata."
+required_outputs:
+  - paper_card
+  - claim_ledger
+  - evidence_ledger
+  - experiment_summary
+  - reproducibility_notes
+  - limitations_and_open_questions
+critical_facts_to_capture:
+  - "The world-model objective, policy-learning setup, and evaluation environments described in the packet."
+  - "Baselines, metrics, ablations, and reported limitations."
+  - "Environment/version and stochastic-evaluation details if present."
+  - "Which claims are empirical, comparative, or mechanistic."
+common_failure_modes:
+  - "Inferring details from other Dreamer versions not in the packet."
+  - "Ignoring RL evaluation details such as seeds, environments, wrappers, or episodes."
+  - "Conflating model-based planning, latent dynamics learning, and policy optimization."
+  - "Overstating generality beyond the reported environments."
+scoring_dimensions:
+  - factual_accuracy
+  - evidence_traceability
+  - citation_validity
+  - experimental_rigor
+  - rl_specific_correctness
+  - inference_boundary_discipline
+  - output_usefulness
+  - efficiency
+notes_on_domain_specificity: "World models test both paper-reading and RL awareness without making world models the benchmark center."
+
+
+
+# Frozen Gold Annotation
+task_id: SPR-VAL-01
+source_packet_id: validation_SPR-VAL-01_packet_v0_draft
+drafted_by_agent: true
+human_review_status: pending
+eligible_for_scoring: false
+must_capture:
+- id: SPR-VAL-01-M1
+  finding: Captures the world-model objective, policy-learning setup, evaluated domains, baselines, metrics, and reported
+    limitations.
+  evidence_locations_to_verify:
+  - DreamerV3 PDF p.1 Abstract and method/objective sections.
+  scoring_weight: high
+- id: SPR-VAL-01-M2
+  finding: Separates model-based learning, latent dynamics, planning or imagination, and policy optimization claims.
+  evidence_locations_to_verify:
+  - DreamerV3 experiment sections, domain/evaluation tables, baseline comparisons, and ablation sections where supplied.
+  scoring_weight: high
+- id: SPR-VAL-01-M3
+  finding: Marks absent environment versions, wrappers, seeds, episodes, or implementation details as unknown.
+  evidence_locations_to_verify:
+  - DreamerV3 reproducibility/implementation details, result tables/figures, and limitations/discussion.
+  scoring_weight: medium
+acceptable_equivalent_formulations:
+- Equivalent wording is acceptable if it remains grounded in the supplied validation packet and preserves claim scope.
+critical_errors:
+- id: E1
+  error: Uses external sources or remembered facts as evidence for a core claim in the closed-source task.
+  penalty: major
+- id: E2
+  error: Presents a broad superiority, deployment, causality, or field-gap claim beyond packet evidence.
+  penalty: major
+- id: E3
+  error: Invents missing metrics, seeds, versions, baselines, or numeric results.
+  penalty: major
+inference_boundary_requirements:
+- Use only the packet as evidence.
+- Separate direct source facts, within-packet synthesis, critique, and proposed hypotheses.
+- Mark broader literature, deployment, causal, or superiority claims as requiring external review unless directly evidenced.
+optional_high_value_findings:
+- Identifies missing reproducibility details without treating absence from the packet as proof of source failure.
+- Separates direct evidence from synthesis and proposed follow-up checks.
+- Reports source/page/table grounding where the packet or canonical source supplies it.
+ambiguities_requiring_human_review:
+- Exact page, section, table, and figure locations must be verified against the acquired canonical sources.
+- Some packet notes are compressed source summaries and should be checked against full PDFs before scoring approval.
+
+
+# Agent Review Authorization Layer
+This authorizes internal scoring but is not itself a gold answer. Apply the global E/B rule: external facts or broad claims should be penalized only when used as evidence for a core scored claim; harmless background context clearly marked as non-evidence should not trigger a major penalty.
+
+# Scoring Rubric
+# Scoring Rubric
+
+Score each dimension from 1 to 5. Keep dimensions separate; do not collapse them into one total score unless a later report explicitly defines a weighted decision rule.
+
+## Scale
+
+| Score | Meaning |
+|---:|---|
+| 5 | Excellent. Expert-useful, accurate, traceable, and complete for the task scope. |
+| 4 | Strong. Minor omissions or calibration issues, but scientifically reliable. |
+| 3 | Adequate. Useful with expert cleanup; some missing detail or weak organization. |
+| 2 | Weak. Substantial omissions, unsupported reasoning, or poor task fit. |
+| 1 | Unreliable. Misleading, unsupported, materially incorrect, or unsafe for research use. |
+
+## Dimensions
+
+### Factual Accuracy
+
+Measures whether the output correctly states methods, assumptions, datasets, metrics, experimental findings, and limitations.
+
+Strong outputs separate source claims from the agent's interpretation. Weak outputs misstate paper facts, confuse versions, invent details, or generalize beyond the source.
+
+### Evidence Traceability
+
+Measures whether substantive claims link to provided sources, source locations, evidence IDs, or retrieval results.
+
+Strong outputs make it clear what each source supports and what it does not support. Weak outputs provide unsupported claims or citations that are only topically related.
+
+### Citation Validity
+
+Measures whether cited works exist, are identified correctly, and support the stated claim.
+
+For closed-source tasks, citations must come from the source packet. For retrieval tasks, citations must follow fixed retrieval rules and include enough metadata to verify.
+
+### Literature Coverage
+
+Applies primarily to retrieval and literature-survey tasks. Measures whether the output includes canonical work, recent relevant work, and important contrasting lines of research.
+
+Strong outputs document search strategy, coverage limits, and omissions. Weak outputs miss obvious core work or overfit to one source.
+
+### Comparison Fairness
+
+Measures whether methods are compared under compatible assumptions, datasets, metrics, compute, tuning effort, and evaluation protocols.
+
+Strong outputs identify non-comparable settings and normalize conclusions. Weak outputs declare winners without accounting for task setup or baseline strength.
+
+### Experimental Rigor
+
+Measures handling of baselines, ablations, metrics, seeds, statistical uncertainty, compute, data splits, hyperparameter search, and reproduction risk.
+
+Strong outputs distinguish confirmatory from exploratory evidence. Weak outputs ignore missing baselines, single-seed claims, metric mismatch, or leakage.
+
+### Benchmark Validity
+
+Measures whether benchmarks, datasets, tasks, metrics, and protocols are suitable for the claim being made.
+
+Strong outputs identify contamination, leakage, saturation, protocol mismatch, metric gaming, and train/eval mismatch. Weak outputs treat a benchmark score as automatically meaningful.
+
+### Inference-Boundary Discipline
+
+Measures whether the output distinguishes source-supported conclusions, cross-paper synthesis, hypotheses, and speculation.
+
+Strong outputs calibrate scope and uncertainty. Weak outputs launder speculation into conclusions or overstate causal/generalization claims.
+
+### Hypothesis Quality
+
+Applies primarily to proposal-support tasks. Measures whether hypotheses are grounded in evidence, falsifiable, scoped, feasible, and paired with disconfirming observations.
+
+Strong outputs specify predictions, failure criteria, required evidence, and alternative explanations. Weak outputs generate attractive but untestable ideas.
+
+### RL-Specific Correctness
+
+Applies to RL tasks. Measures correctness about environment versions, wrappers, policies, reward functions, offline data, evaluation episodes, stochasticity, train/eval mismatch, and return distributions.
+
+Strong outputs catch RL-specific failure modes. Weak outputs treat RL results like ordinary supervised-learning benchmarks.
+
+### Output Usefulness
+
+Measures whether the artifact supports a real research decision: reading, reviewing, planning, reproduction, proposal writing, or experimental design.
+
+Strong outputs are structured, actionable, and concise enough to use. Weak outputs are polished but generic.
+
+### Efficiency
+
+Measures token cost, latency, tool calls, retrieval volume, and useful-information density.
+
+High-quality but extremely inefficient outputs should be flagged. Efficient outputs must still satisfy reliability requirements.
+
+## Hard-Fail Conditions
+
+A task may receive an overall hard-fail flag if any of these occur:
+
+- A hallucinated citation is presented as real.
+- A critical claim is marked supported without direct evidence.
+- A comparative conclusion is made without adequate baseline or setting normalization.
+- An RL result is summarized from best seed/checkpoint only without disclosure.
+- A causal interpretability claim is supported only by correlational evidence.
+- A reproduction or experiment plan omits required data, environment, or evaluation protocol.
+- Held-out gold annotation content appears in the output or prompt context.
+
+## Scorecard Format
+
+```yaml
+run_id:
+variant:
+task_id:
+reviewer:
+scores:
+  factual_accuracy:
+  evidence_traceability:
+  citation_validity:
+  literature_coverage:
+  comparison_fairness:
+  experimental_rigor:
+  benchmark_validity:
+  inference_boundary_discipline:
+  hypothesis_quality:
+  rl_specific_correctness:
+  output_usefulness:
+  efficiency:
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+  - severity: major|minor
+    dimension:
+    description:
+    evidence:
+summary:
+```
+
+
+# Generated Outputs
+## OUTPUT: B0_base_agent
+
+## paper_card
+
+```yaml
+title: Mastering Diverse Domains through World Models
+arxiv_id: arXiv:2301.04104
+year: 2023
+paper_type: Dreamer-style world-model reinforcement learning paper
+topic: world models
+main_subject: DreamerV3
+source_scope_available:
+  - abstract
+  - method/objective sections
+  - domains
+  - baselines
+  - experiments
+  - limitations
+local_file: hafner_2023_mastering_diverse_domains_through_world_models.pdf
+retrieval_used: none
+```
+
+**Paper Summary**
+
+The paper presents DreamerV3, a world-model agent intended to work across diverse domains. According to the supplied packet, the paper claims that a Dreamer-style learned world model can support strong performance across multiple benchmark environments, rather than requiring domain-specific algorithmic tuning.
+
+The supplied packet states that the paper reports benchmark performance across multiple environments and includes method/objective material, domains, baselines, experiments, baseline/result tables, ablations if supplied, reproducibility details, and limitations. Exact numerical results, full tables, appendix details, and implementation settings are not included in the packet.
+
+## claim_ledger
+
+| ID | Claim | Support in Packet | Strength | Notes |
+|---|---|---|---|---|
+| C1 | DreamerV3 is a world-model agent designed to work across diverse domains. | Controlled source note says the paper “presents a world-model agent intended to work across diverse domains.” | Supported | High-level claim only; exact domain list is not supplied. |
+| C2 | The paper reports benchmark performance across multiple environments. | Controlled source note says it “reports benchmark performance across multiple environments.” | Supported | Specific benchmarks, metrics, and scores are unknown. |
+| C3 | The method is Dreamer-style and uses a learned world model. | Task topic and source note identify it as a Dreamer-style world-model paper. | Supported | Details of architecture/objective are not included in the packet. |
+| C4 | The paper compares against baselines. | Packet says included evidence covers “baselines” and “baseline/result tables.” | Supported but underspecified | Baseline identities and outcomes are unknown. |
+| C5 | The paper provides experimental evidence for generality across domains. | Packet says domains, experiments, and benchmark performance across multiple environments are included. | Partially supported | The packet does not provide exact domains or quantitative breadth. |
+| C6 | The paper includes limitations. | Packet says “limitations” are included evidence. | Supported | The actual limitations are not specified in the packet. |
+| C7 | DreamerV3 “masters” diverse domains. | Title implies this, and notes indicate benchmark performance across diverse domains. | Limited by missing data | Without exact results, this should be treated as a paper claim, not independently verified from the packet. |
+
+## evidence_ledger
+
+| Evidence ID | Evidence Type | What It Supports | Available Detail |
+|---|---|---|---|
+| E1 | Abstract | High-level motivation and claim that DreamerV3 targets diverse domains. | Mentioned as included, but exact text unavailable. |
+| E2 | Method/objective sections | The algorithmic basis for DreamerV3 as a world-model agent. | Mentioned as included, but architecture, losses, and objective details unknown. |
+| E3 | Domains | Breadth of environments used to test generality. | Mentioned, but domain names/counts unknown. |
+| E4 | Baselines | Comparative evaluation against other agents/methods. | Mentioned, but baseline names unknown. |
+| E5 | Experiments | Empirical support for benchmark performance. | Mentioned, but metrics, seeds, protocols, and results unknown. |
+| E6 | Baseline/result tables | Quantitative evidence for claims. | Mentioned, but exact numbers/full tables not included. |
+| E7 | Ablations, if supplied | Evidence about which method components matter. | Conditional; packet does not confirm specific ablations. |
+| E8 | Reproducibility details | Ability to replicate or evaluate implementation rigor. | Mentioned generally; exact settings absent. |
+| E9 | Limitations | Boundaries of the paper’s claims. | Mentioned, but limitation content unknown. |
+
+## experiment_summary
+
+The supplied packet indicates that the paper evaluates DreamerV3 on multiple benchmark environments across diverse domains and compares it with baselines using result tables. The experiments are presented as evidence that a single Dreamer-style world-model agent can perform well broadly.
+
+Known from packet:
+
+| Item | Status |
+|---|---|
+| Evaluation exists | Yes |
+| Multiple environments | Yes |
+| Diverse domains | Yes |
+| Baselines included | Yes |
+| Result tables included | Yes |
+| Ablations included | Unknown / only “if supplied” |
+| Exact benchmark names | Unknown |
+| Exact numeric scores | Unknown |
+| Number of seeds | Unknown |
+| Training budget | Unknown |
+| Evaluation metric definitions | Unknown |
+| Statistical uncertainty | Unknown |
+| Full implementation settings | Unknown |
+
+## reproducibility_notes
+
+The packet says reproducibility details are part of the included evidence scope, but it does not provide those details.
+
+Known:
+
+- Local source file: `hafner_2023_mastering_diverse_domains_through_world_models.pdf`
+- Paper metadata: arXiv:2301.04104, 2023
+- Method category: Dreamer-style world-model RL agent
+- Experiments: multiple benchmark environments with baselines
+
+Unknown:
+
+- Hyperparameters
+- Network architecture details
+- World model objective details
+- Actor/critic objective details
+- Replay buffer setup
+- Environment preprocessing
+- Training frames or environment steps
+- Hardware
+- Random seeds
+- Evaluation protocol
+- Code availability
+- Exact baseline implementations
+- Whether all domains use identical settings
+
+## limitations_and_open_questions
+
+**Limitations Supported by Packet Scope**
+
+The packet confirms that limitations exist in the paper, but it does not provide their content. Therefore, the specific limitations claimed by the authors are unknown from the supplied material.
+
+**Evidence Limits**
+
+- Exact numeric results are not included.
+- Full result tables are not included.
+- Appendix details are not included.
+- Implementation settings are not included.
+- The exact environments and domains are not listed.
+- Baseline names and comparison outcomes are unknown.
+- Ablation details are unknown.
+
+**Open Questions**
+
+| Question | Status |
+|---|---|
+| Which domains were tested? | Unknown |
+| How many environments were used? | Unknown |
+| What baselines were compared? | Unknown |
+| Did DreamerV3 outperform all baselines or only some? | Unknown |
+| Were results statistically robust across seeds? | Unknown |
+| Which components were ablated? | Unknown |
+| What are the paper’s stated failure cases? | Unknown |
+| How much domain-specific tuning was required? | Unknown |
+| Are compute costs practical relative to baselines? | Unknown |
+
+**Bottom Line**
+
+From the supplied packet, the defensible reading is: the paper claims DreamerV3 is a Dreamer-style world-model agent intended for broad use across diverse domains, and supports this with multi-environment benchmark experiments against baselines. The packet does not include enough detail to verify the magnitude, robustness, or exact scope of those empirical claims.
+## OUTPUT: B1_kdense_subset
+
+## paper_card
+
+| Field | Content |
+|---|---|
+| Source | *Mastering Diverse Domains through World Models* |
+| Identifier | arXiv:2301.04104 |
+| Year | 2023 |
+| Topic | Dreamer-style world-model reinforcement learning |
+| Packet role | Single central paper |
+| Research question addressed | Whether a world-model agent can work across diverse domains and achieve strong benchmark performance across multiple environments |
+| Main claimed artifact | A DreamerV3-style world-model agent intended to work across diverse domains |
+| Evidence available in packet | Abstract, method/objective sections, domains, baselines, experiments, baseline/result tables, ablations if supplied, reproducibility details, limitations |
+| Evidence missing from packet | Exact numeric results, full tables, appendix details, many implementation settings |
+
+## claim_ledger
+
+| Claim | Source | Location supplied | Support status | Caveat |
+|---|---|---|---|---|
+| The paper presents a world-model agent called or associated with DreamerV3. | *Mastering Diverse Domains through World Models* | Controlled source note; abstract/method noted as included | Direct | Packet does not provide full method text. |
+| The agent is intended to work across diverse domains. | Same | Controlled source note; domains/experiments noted as included | Direct | “Diverse” is not enumerated in the packet. |
+| The paper reports benchmark performance across multiple environments. | Same | Controlled source note; experiments/baseline-result tables noted as included | Direct | Exact environments, scores, and metrics are absent. |
+| The method uses a world-model approach. | Same | Title; controlled source note; method/objective noted as included | Direct | Architecture details are not supplied. |
+| The paper compares against baselines. | Same | Baselines and baseline/result tables listed as included evidence | Direct | Baseline names and comparison values are not supplied. |
+| The paper includes experiments and possibly ablations. | Same | Evidence objects list | Partial | Ablations are conditional: “if supplied”; no ablation content is included in the packet. |
+| The paper establishes that DreamerV3 is globally superior to all alternatives. | Same | Not established | Absent | The packet only says benchmark performance is reported; it does not provide sufficient comparative detail for a global ranking. |
+| The paper is fully reproducible from the packet. | Same | Reproducibility details noted as included, but settings not included | Contradicted/partial | Packet explicitly says implementation settings and appendix details are missing. |
+
+## evidence_ledger
+
+| Evidence item | Source | Location supplied | Evidence type | Supports | Limitation |
+|---|---|---|---|---|---|
+| Title: *Mastering Diverse Domains through World Models* | Paper metadata | Source listing | Bibliographic/title evidence | World-model framing and diverse-domain ambition | Title alone does not prove empirical success. |
+| “Presents a world-model agent intended to work across diverse domains” | Controlled source note | DreamerV3 paper note | Source summary | Main artifact and intended scope | No algorithmic details or domain list included. |
+| “Reports benchmark performance across multiple environments” | Controlled source note | DreamerV3 paper note | Source summary of experiments | Empirical evaluation exists | No exact scores, variance, seeds, or metric definitions. |
+| Abstract, method/objective, domains, baselines, experiments, limitations are included evidence objects | Controlled source notes | Evidence objects list | Packet inventory | The paper contains material for claims, methods, and limitations | Actual excerpted content is not present in this prompt. |
+| Exact numeric values, full tables, appendix details, and implementation settings are not included | Packet scope note | Packet Scope | Missing-evidence disclosure | Limits reproducibility and fine-grained evaluation | Prevents independent checking of effect sizes, statistical strength, and implementation fidelity. |
+
+## experiment_summary
+
+| Aspect | Packet-supported summary |
+|---|---|
+| Experimental purpose | Evaluate a DreamerV3-style world-model agent across diverse domains and multiple benchmark environments. |
+| Environments/domains | Multiple environments and diverse domains are reported, but exact names are unknown from the packet. |
+| Baselines | Baselines are included in the paper evidence objects, but their identities are unknown from the packet. |
+| Metrics | Unknown. The packet does not provide metric names or definitions. |
+| Results | The paper reports benchmark performance, but exact numeric values and full result tables are unavailable. |
+| Ablations | Unknown/partial. The packet mentions “ablations if supplied,” but provides no concrete ablation findings. |
+| Statistical reporting | Unknown. Seeds, variance, confidence intervals, and aggregation methods are not supplied. |
+
+## reproducibility_notes
+
+| Reproducibility element | Status from packet |
+|---|---|
+| Paper identity | Available: title, arXiv ID, year. |
+| Method description | Partially available: method/objective sections are said to be included, but no method details are excerpted. |
+| Domains/tasks | Partially available: diverse domains and multiple environments are claimed, but exact task list is absent. |
+| Baselines | Partially available: baselines exist, but names/configurations are absent. |
+| Results | Partially available: benchmark performance is reported, but exact numbers and full tables are absent. |
+| Implementation settings | Unknown/absent. Packet explicitly says some implementation settings are not included. |
+| Appendix details | Unknown/absent. Packet explicitly says appendix details are not included. |
+| Code, seeds, hardware, configs | Unknown. Not established by the packet. |
+
+## limitations_and_open_questions
+
+| Issue | Why it matters |
+|---|---|
+| Exact numeric results are missing. | Prevents assessing effect sizes, ranking strength, and whether gains are practically meaningful. |
+| Full result tables are missing. | Prevents checking consistency across tasks and identifying failures or uneven performance. |
+| Environment and domain names are not supplied. | Limits external-validity assessment; “diverse domains” cannot be independently characterized from the packet. |
+| Baseline identities and settings are unknown. | Prevents assessing whether comparisons are fair, current, or well tuned. |
+| Statistical details are unknown. | Seeds, uncertainty, and variability are needed to judge robustness. |
+| Implementation settings are incomplete. | Limits reproducibility and makes it unclear which details are essential to performance. |
+| Ablation evidence is not concretely supplied. | Mechanistic claims about which components matter are not established by the packet. |
+| Claim scope should remain narrow. | The packet supports that the paper presents and evaluates a cross-domain world-model agent, but not broad claims of universal superiority or general solution status. |
+## OUTPUT: B2_orchestra_subset
+
+paper_card:
+  title: "Mastering Diverse Domains through World Models"
+  source: "arXiv:2301.04104, 2023"
+  topic: "Dreamer-style world models for reinforcement learning"
+  provenance_scope: "Only the supplied packet and controlled notes; no external retrieval or PDF inspection used."
+  central_object: "DreamerV3, described as a world-model agent intended to work across diverse domains."
+  stated_evaluation_setting: "Multiple benchmark environments/domains, with baseline/result tables and experiment sections referenced by the packet."
+  main reported contribution: "A single world-model agent that reports strong benchmark performance across diverse domains."
+  key evidence available in packet: "Abstract, method/objective sections, domains, baselines, experiments, baseline/result tables, ablations if supplied, reproducibility details, and limitations are said to be included, but exact numeric values and many implementation details are absent from the model input packet."
+  confidence: "Moderate for high-level claims; low for exact performance, protocol, and reproducibility claims."
+
+claim_ledger:
+
+| Claim | Type | Provenance | Supplied evidence | Support status | Allowed scope |
+|---|---|---:|---|---|---|
+| The paper presents DreamerV3, a world-model agent. | Descriptive/method | source-derived | Controlled source note says the DreamerV3 paper presents a world-model agent. | Supported | The identity and broad method family of the paper. |
+| DreamerV3 is intended to work across diverse domains. | Generalization intent | source-derived | Controlled note says it is “intended to work across diverse domains.” | Supported as intent; not fully validated from packet alone | The paper’s stated goal or framing. |
+| The paper reports benchmark performance across multiple environments. | Evaluation/reporting | source-derived | Controlled note says it reports benchmark performance across multiple environments. | Supported | Existence of reported evaluations, not their strength. |
+| DreamerV3 masters diverse domains. | Generalization/improvement | source-derived title plus source note; evidence details absent | Title implies broad mastery; packet says diverse benchmark performance is reported. | Partially supported, scope-limited | Only under the paper’s reported benchmark protocols; exact domain breadth and success criteria are unknown. |
+| DreamerV3 outperforms or compares favorably to baselines. | Improvement | agent-inferred from “baseline/result tables” and benchmark reporting | Packet references baselines and result tables, but gives no numbers, baseline identities, or protocol details. | Unknown/insufficient in this packet | Cannot conclude relative superiority without actual table values and comparable setup details. |
+| The method’s objective supports learning from a world model. | Mechanistic/method | source-derived at high level | Packet lists method/objective sections as included evidence, but no objective text is provided. | Weakly supported at high level | Method class only; no precise objective or mechanism can be audited. |
+| Ablations support the design choices. | Causal/mechanism | unsupported/conditional | Packet says “ablations if supplied,” not that ablations are present or what they show. | Unknown | No ablation-based causal claim can be made. |
+| The paper is reproducible from the supplied packet. | Reproducibility | unsupported | Packet states exact numeric values, full tables, appendix details, and implementation settings are not included. | Not supported | Reproducibility cannot be assessed beyond noting missing details. |
+
+evidence_ledger:
+
+| Evidence item | Provenance | Supports | Directness | Limit |
+|---|---|---|---|---|
+| Source metadata: “Mastering Diverse Domains through World Models,” arXiv:2301.04104, 2023 | source-derived | Paper identity and topic | Direct | No content-level evidence beyond identification. |
+| Controlled note: “presents a world-model agent” | source-derived | DreamerV3 is a world-model agent | Direct | Does not specify architecture, latent dynamics, losses, or policy-learning details. |
+| Controlled note: “intended to work across diverse domains” | source-derived | Broad-domain goal | Direct for intent | Does not establish actual generalization strength. |
+| Controlled note: “reports benchmark performance across multiple environments” | source-derived | Existence of evaluation across environments | Direct | Does not provide scores, variance, protocol, or task list. |
+| Packet evidence list: abstract, method/objective, domains, baselines, experiments, limitations | source-derived | The paper contains relevant sections | Indirect | The actual section contents are not included here. |
+| Packet omission note: exact numeric values, full tables, appendix details, implementation settings not included | source-derived | Limits on auditability and reproducibility | Direct | Prevents quantitative or fine-grained methodological assessment. |
+
+experiment_summary:
+  reported_design: "The paper reportedly evaluates DreamerV3 across multiple benchmark environments/domains and compares against baselines using result tables."
+  intervention_or_method: "DreamerV3 world-model agent."
+  comparators: "Baselines are referenced, but their identities, tuning strength, compute budgets, and exact protocols are unknown."
+  metrics: "Unknown from the packet."
+  domains_tasks: "Multiple environments/domains are reported, but the exact task list and sampling protocol are unknown."
+  ablations: "Unknown. The packet says ablations may be supplied, but no ablation content is provided."
+  uncertainty_reporting: "Unknown. No seeds, confidence intervals, variance, or repeated-run details are included."
+  interpretation: "The packet supports that the paper reports broad benchmark experiments. It does not support a precise judgment about magnitude of improvement, fairness of comparison, or robustness across domains."
+
+reproducibility_notes:
+  artifacts_available: "Unknown."
+  code_available: "Unknown."
+  configs_hyperparameters: "Unknown; implementation settings are explicitly not included in the packet."
+  data_or_environment_versions: "Unknown."
+  seeds_runs_trials: "Unknown."
+  compute_budget: "Unknown."
+  metrics_and_aggregation: "Unknown."
+  reproduction_risk: "High from this packet alone, because exact numeric results, full tables, appendix details, and implementation settings are absent."
+
+limitations_and_open_questions:
+
+| Severity | Claim affected | Evidence issue | Consequence | Minimal fix |
+|---|---|---|---|---|
+| High | “Masters diverse domains” | No exact domains, metrics, scores, or success thresholds are provided. | The broad claim cannot be independently calibrated. | Provide per-domain results, metrics, and criteria for “mastering.” |
+| High | Improvement over baselines | Baseline identities, tuning, compute, and numeric comparisons are absent. | Relative performance claims remain unverified. | Include full baseline/result tables and protocol details. |
+| High | Reproducibility | Implementation settings, configs, seeds, and environment details are missing. | Reproduction cannot be planned reliably from the packet. | Provide code/configs, environment versions, seeds, and compute budget. |
+| Medium | Generalization across domains | Multiple environments are mentioned, but representativeness is not described. | Cross-domain conclusions may overreach the evaluated benchmark set. | Specify task diversity, selection rationale, and per-task outcomes. |
+| Medium | Mechanism/design justification | Ablation evidence is not supplied. | It is unclear which design choices are necessary. | Provide ablations tied to specific architectural or objective components. |
+| Medium | Benchmark validity | Metric alignment and aggregation are unknown. | Aggregate success could hide task-specific failures. | Preserve per-task results and explain aggregation choices. |
+
+Corrected scope: The supplied packet supports saying that the paper introduces DreamerV3 as a world-model RL agent and reports evaluations across multiple domains with baselines. It does not support exact claims about how much better it is, whether comparisons are fair, whether specific mechanisms cause the results, or whether the work is reproducible without additional paper details.
+## OUTPUT: B3_final_for_validation
+
+paper_card
+
+| Field | Reading |
+|---|---|
+| Problem | The paper addresses whether a Dreamer-style world-model agent can work across diverse domains rather than being specialized to one environment family. `DIRECT_PACKET_EVIDENCE`: title, controlled source notes, abstract/method/experiment scope listed in packet. |
+| Core method | A world-model agent, DreamerV3, intended to learn and act through a learned model of the environment. Exact architecture, loss terms, objective equations, and training schedule are unknown from this packet. `DIRECT_PACKET_EVIDENCE` for the world-model/DreamerV3 identity; finer method details absent. |
+| Contribution claim | The paper claims an agent can master diverse domains through world models and reports benchmark performance across multiple environments. `DIRECT_PACKET_EVIDENCE`: controlled notes. |
+| Domains | Multiple environments / diverse domains are included, but the packet does not list the exact domains, task versions, or environment counts. `DIRECT_PACKET_EVIDENCE` for multiplicity; exact coverage unknown. |
+| Baselines | Baseline/result tables are included in the source file, but the packet does not name the baselines or report values. `DIRECT_PACKET_EVIDENCE` for existence of baselines; details unknown. |
+| Evidence | Abstract, method/objective sections, experiment sections, baseline/result tables, possible ablations, reproducibility details, and limitations are named as evidence objects. `DIRECT_PACKET_EVIDENCE`. |
+| Metrics | The paper reports benchmark performance, but the packet omits exact metrics, aggregation rules, and numeric results. Unknown. |
+| Ablations | Ablations are included “if supplied,” but the packet does not confirm which ablations exist or what they show. Unknown. |
+| Reproducibility | The packet says reproducibility details are included in the paper, but not in this model input packet. Specific code, seeds, hardware, hyperparameters, configs, and environment versions are unknown. |
+| Limitations | The packet says limitations are included, but does not state them. Limitation content is unknown. |
+
+claim_ledger
+
+| Claim | Claim type | Evidence-burden label | Source location | Evidence directness | Supported scope | Missing detail |
+|---|---|---|---|---|---|---|
+| DreamerV3 is a world-model agent. | method definition | `DIRECT_PACKET_EVIDENCE` | Controlled source notes; source title | Direct | Identity of the method in this packet | Exact architecture and objectives |
+| The paper targets diverse domains rather than a single narrow task. | method/evaluation claim | `DIRECT_PACKET_EVIDENCE` | Title; controlled source notes | Direct | Broad evaluation intent | Exact domains and task list |
+| The paper reports benchmark performance across multiple environments. | empirical result | `DIRECT_PACKET_EVIDENCE` | Controlled source notes; experiment sections noted | Direct | Existence of benchmark reporting | Numeric scores, metrics, variance |
+| The paper compares against baselines. | empirical setup | `DIRECT_PACKET_EVIDENCE` | “baseline/result tables” in packet | Direct | Existence of baseline comparisons | Baseline names, tuning, fairness |
+| The packet is insufficient to judge global superiority over other agents. | limitation / critique | `LIMITED_CRITIQUE` | Packet scope note says numeric values, full tables, appendix details, implementation settings are omitted | Indirect | This supplied-packet reading only | Full paper details would be needed |
+| Claims about deployment robustness, contamination, or external validity are not established by the packet. | boundary claim | `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` | Packet scope and controlled notes | Absent | No such conclusion can be drawn here | External evidence and full protocol |
+
+evidence_ledger
+
+| Evidence object | What it supports | Evidence-burden label | Directness | Boundary |
+|---|---|---|---|---|
+| Title: “Mastering Diverse Domains through World Models” | The paper frames its contribution around world models and diverse domains. | `DIRECT_PACKET_EVIDENCE` | Direct | Title-level framing, not proof of performance. |
+| Metadata: arXiv:2301.04104; 2023 | Source identity and version metadata. | `DIRECT_PACKET_EVIDENCE` | Direct | No finer version details supplied. |
+| Controlled note: “presents a world-model agent intended to work across diverse domains” | Method intent and broad evaluation target. | `DIRECT_PACKET_EVIDENCE` | Direct | Does not specify mechanism or domain list. |
+| Controlled note: “reports benchmark performance across multiple environments” | Existence of empirical benchmark evidence. | `DIRECT_PACKET_EVIDENCE` | Direct | Does not supply scores, metrics, seeds, or tables. |
+| Included evidence list: abstract, method/objective, domains, baselines, experiments, limitations | Paper sections/evidence objects relevant to a deep read. | `DIRECT_PACKET_EVIDENCE` | Direct | The packet does not include their detailed contents. |
+| Packet scope note: exact numeric values, full tables, appendix details, and implementation settings are not included | Many stronger empirical and reproducibility judgments are unavailable. | `DIRECT_PACKET_EVIDENCE` / `LIMITED_CRITIQUE` | Direct for omission; indirect for audit consequence | Missing from packet, not necessarily missing from paper. |
+
+experiment_summary
+
+| Item | Extracted from packet |
+|---|---|
+| Task / environments | Multiple environments across diverse domains. Exact domains, versions, and task count unknown. |
+| Agent | DreamerV3, described as a Dreamer-style world-model agent. |
+| Training mode | Unknown from packet. Because this is a world-model RL paper, sequential-decision evaluation is implied by topic, but offline/online interaction details are not supplied. |
+| Baselines | Baselines exist in baseline/result tables, but names and configurations are unknown. |
+| Metrics | Benchmark performance metrics are reported, but metric names, normalization, aggregation, and numeric values are unknown. |
+| Protocol | Unknown: environment versions, wrappers, prompts if any, action spaces, training steps, evaluation episodes, stochasticity, and termination details are not supplied. |
+| Seeds / uncertainty | Unknown. |
+| Ablations | Unknown whether supplied and what they test. |
+| Compute / hardware | Unknown. |
+| Main result support | The packet directly supports only that benchmark results are reported across multiple environments, not the magnitude or reliability of those results. |
+
+reproducibility_notes
+
+The packet does not provide enough detail to reproduce the experiments. Unknown items include code availability, model configuration, world-model architecture, objective equations, hyperparameters, training budget, random seeds, number of runs, hardware, environment versions, evaluation episodes, baseline implementations, and raw outputs.
+
+Audit note: this is a `LIMITED_CRITIQUE` of the supplied packet, not proof that the paper itself lacks these details. The packet explicitly says some full tables, appendix details, and implementation settings are omitted.
+
+limitations_and_open_questions
+
+| Limitation / question | Label | Grounding |
+|---|---|---|
+| Exact performance claims cannot be assessed from this packet. | `LIMITED_CRITIQUE` | Numeric values and full tables are omitted. |
+| Baseline strength and fairness are unknown. | `LIMITED_CRITIQUE` | Baseline/result tables are mentioned but not detailed. |
+| Variability and statistical reliability are unknown. | `LIMITED_CRITIQUE` | Seeds, run counts, confidence intervals, and variance are not supplied. |
+| Generalization beyond the tested environments is not established by the packet. | `LIMITED_CRITIQUE` | The packet says multiple environments, but not task coverage or external validation. |
+| Deployment robustness is unsupported. | `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` | No deployment evidence is included in the packet. |
+| Mechanistic claims about why the world model succeeds are unknown. | `LIMITED_CRITIQUE` | Method/objective and possible ablations are referenced, but details are absent. |
+| Contamination or benchmark leakage cannot be judged. | `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` | Requires protocol details or external evidence not in packet. |

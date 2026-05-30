@@ -1,0 +1,41 @@
+run_id: validation_v0.1__B3_final_for_validation__MC-VAL-01__run001
+variant: B3_final_for_validation
+task_id: MC-VAL-01
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 3
+  evidence_traceability: 4
+  citation_validity: 4
+  literature_coverage: null
+  comparison_fairness: 5
+  experimental_rigor: 5
+  benchmark_validity: 4
+  inference_boundary_discipline: 5
+  hypothesis_quality: null
+  rl_specific_correctness: 3
+  output_usefulness: 5
+  efficiency: 4
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: major
+  dimension: rl_specific_correctness
+  description: Does not cleanly state PPO is on-policy; it says on-policy is implied or method-background, leaving a required
+    high-weight distinction under-specified.
+  evidence: Gold M1 requires correctly distinguishing PPO on-policy policy-gradient assumptions from SAC off-policy maximum-entropy
+    actor-critic assumptions.
+- severity: minor
+  dimension: citation_validity
+  description: Identifies supplied arXiv papers and packet evidence objects without apparent hallucinated citations, but exact
+    source locations are still absent.
+  evidence: Source Inventory lists PPO arXiv:1707.06347 and SAC arXiv:1801.01290 as supplied sources.
+- severity: minor
+  dimension: benchmark_validity
+  description: Strong protocol critique, including metrics, baselines, uncertainty, reproducibility, and leakage, though some
+    labels such as leakage are necessarily unknown from the packet.
+  evidence: Benchmark protocol review marks metric alignment, baselines, uncertainty, reproducibility, and leakage as unknown
+    or limited critique.
+summary: Very usable and disciplined artifact with explicit evidence-burden labels and strong recommendations, but it still
+  weakens the required PPO on-policy fact enough to lose factual and RL-specific credit.

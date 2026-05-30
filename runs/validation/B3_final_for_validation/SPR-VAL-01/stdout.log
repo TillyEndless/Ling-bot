@@ -1,0 +1,69 @@
+paper_card
+
+| Field | Reading |
+|---|---|
+| Problem | The paper addresses whether a Dreamer-style world-model agent can work across diverse domains rather than being specialized to one environment family. `DIRECT_PACKET_EVIDENCE`: title, controlled source notes, abstract/method/experiment scope listed in packet. |
+| Core method | A world-model agent, DreamerV3, intended to learn and act through a learned model of the environment. Exact architecture, loss terms, objective equations, and training schedule are unknown from this packet. `DIRECT_PACKET_EVIDENCE` for the world-model/DreamerV3 identity; finer method details absent. |
+| Contribution claim | The paper claims an agent can master diverse domains through world models and reports benchmark performance across multiple environments. `DIRECT_PACKET_EVIDENCE`: controlled notes. |
+| Domains | Multiple environments / diverse domains are included, but the packet does not list the exact domains, task versions, or environment counts. `DIRECT_PACKET_EVIDENCE` for multiplicity; exact coverage unknown. |
+| Baselines | Baseline/result tables are included in the source file, but the packet does not name the baselines or report values. `DIRECT_PACKET_EVIDENCE` for existence of baselines; details unknown. |
+| Evidence | Abstract, method/objective sections, experiment sections, baseline/result tables, possible ablations, reproducibility details, and limitations are named as evidence objects. `DIRECT_PACKET_EVIDENCE`. |
+| Metrics | The paper reports benchmark performance, but the packet omits exact metrics, aggregation rules, and numeric results. Unknown. |
+| Ablations | Ablations are included “if supplied,” but the packet does not confirm which ablations exist or what they show. Unknown. |
+| Reproducibility | The packet says reproducibility details are included in the paper, but not in this model input packet. Specific code, seeds, hardware, hyperparameters, configs, and environment versions are unknown. |
+| Limitations | The packet says limitations are included, but does not state them. Limitation content is unknown. |
+
+claim_ledger
+
+| Claim | Claim type | Evidence-burden label | Source location | Evidence directness | Supported scope | Missing detail |
+|---|---|---|---|---|---|---|
+| DreamerV3 is a world-model agent. | method definition | `DIRECT_PACKET_EVIDENCE` | Controlled source notes; source title | Direct | Identity of the method in this packet | Exact architecture and objectives |
+| The paper targets diverse domains rather than a single narrow task. | method/evaluation claim | `DIRECT_PACKET_EVIDENCE` | Title; controlled source notes | Direct | Broad evaluation intent | Exact domains and task list |
+| The paper reports benchmark performance across multiple environments. | empirical result | `DIRECT_PACKET_EVIDENCE` | Controlled source notes; experiment sections noted | Direct | Existence of benchmark reporting | Numeric scores, metrics, variance |
+| The paper compares against baselines. | empirical setup | `DIRECT_PACKET_EVIDENCE` | “baseline/result tables” in packet | Direct | Existence of baseline comparisons | Baseline names, tuning, fairness |
+| The packet is insufficient to judge global superiority over other agents. | limitation / critique | `LIMITED_CRITIQUE` | Packet scope note says numeric values, full tables, appendix details, implementation settings are omitted | Indirect | This supplied-packet reading only | Full paper details would be needed |
+| Claims about deployment robustness, contamination, or external validity are not established by the packet. | boundary claim | `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` | Packet scope and controlled notes | Absent | No such conclusion can be drawn here | External evidence and full protocol |
+
+evidence_ledger
+
+| Evidence object | What it supports | Evidence-burden label | Directness | Boundary |
+|---|---|---|---|---|
+| Title: “Mastering Diverse Domains through World Models” | The paper frames its contribution around world models and diverse domains. | `DIRECT_PACKET_EVIDENCE` | Direct | Title-level framing, not proof of performance. |
+| Metadata: arXiv:2301.04104; 2023 | Source identity and version metadata. | `DIRECT_PACKET_EVIDENCE` | Direct | No finer version details supplied. |
+| Controlled note: “presents a world-model agent intended to work across diverse domains” | Method intent and broad evaluation target. | `DIRECT_PACKET_EVIDENCE` | Direct | Does not specify mechanism or domain list. |
+| Controlled note: “reports benchmark performance across multiple environments” | Existence of empirical benchmark evidence. | `DIRECT_PACKET_EVIDENCE` | Direct | Does not supply scores, metrics, seeds, or tables. |
+| Included evidence list: abstract, method/objective, domains, baselines, experiments, limitations | Paper sections/evidence objects relevant to a deep read. | `DIRECT_PACKET_EVIDENCE` | Direct | The packet does not include their detailed contents. |
+| Packet scope note: exact numeric values, full tables, appendix details, and implementation settings are not included | Many stronger empirical and reproducibility judgments are unavailable. | `DIRECT_PACKET_EVIDENCE` / `LIMITED_CRITIQUE` | Direct for omission; indirect for audit consequence | Missing from packet, not necessarily missing from paper. |
+
+experiment_summary
+
+| Item | Extracted from packet |
+|---|---|
+| Task / environments | Multiple environments across diverse domains. Exact domains, versions, and task count unknown. |
+| Agent | DreamerV3, described as a Dreamer-style world-model agent. |
+| Training mode | Unknown from packet. Because this is a world-model RL paper, sequential-decision evaluation is implied by topic, but offline/online interaction details are not supplied. |
+| Baselines | Baselines exist in baseline/result tables, but names and configurations are unknown. |
+| Metrics | Benchmark performance metrics are reported, but metric names, normalization, aggregation, and numeric values are unknown. |
+| Protocol | Unknown: environment versions, wrappers, prompts if any, action spaces, training steps, evaluation episodes, stochasticity, and termination details are not supplied. |
+| Seeds / uncertainty | Unknown. |
+| Ablations | Unknown whether supplied and what they test. |
+| Compute / hardware | Unknown. |
+| Main result support | The packet directly supports only that benchmark results are reported across multiple environments, not the magnitude or reliability of those results. |
+
+reproducibility_notes
+
+The packet does not provide enough detail to reproduce the experiments. Unknown items include code availability, model configuration, world-model architecture, objective equations, hyperparameters, training budget, random seeds, number of runs, hardware, environment versions, evaluation episodes, baseline implementations, and raw outputs.
+
+Audit note: this is a `LIMITED_CRITIQUE` of the supplied packet, not proof that the paper itself lacks these details. The packet explicitly says some full tables, appendix details, and implementation settings are omitted.
+
+limitations_and_open_questions
+
+| Limitation / question | Label | Grounding |
+|---|---|---|
+| Exact performance claims cannot be assessed from this packet. | `LIMITED_CRITIQUE` | Numeric values and full tables are omitted. |
+| Baseline strength and fairness are unknown. | `LIMITED_CRITIQUE` | Baseline/result tables are mentioned but not detailed. |
+| Variability and statistical reliability are unknown. | `LIMITED_CRITIQUE` | Seeds, run counts, confidence intervals, and variance are not supplied. |
+| Generalization beyond the tested environments is not established by the packet. | `LIMITED_CRITIQUE` | The packet says multiple environments, but not task coverage or external validation. |
+| Deployment robustness is unsupported. | `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` | No deployment evidence is included in the packet. |
+| Mechanistic claims about why the world model succeeds are unknown. | `LIMITED_CRITIQUE` | Method/objective and possible ablations are referenced, but details are absent. |
+| Contamination or benchmark leakage cannot be judged. | `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` | Requires protocol details or external evidence not in packet. |

@@ -1,0 +1,41 @@
+run_id: validation_v0.1__B1_kdense_subset__MC-VAL-01__run001
+variant: B1_kdense_subset
+task_id: MC-VAL-01
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 3
+  evidence_traceability: 3
+  citation_validity: null
+  literature_coverage: null
+  comparison_fairness: 4
+  experimental_rigor: 4
+  benchmark_validity: 4
+  inference_boundary_discipline: 4
+  hypothesis_quality: null
+  rl_specific_correctness: 3
+  output_usefulness: 4
+  efficiency: 5
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: major
+  dimension: rl_specific_correctness
+  description: Does not state PPO is on-policy and instead marks PPO data usage as not explicitly stated, missing a required
+    RL-specific distinction.
+  evidence: Gold M1 requires correctly distinguishing PPO on-policy policy-gradient assumptions from SAC off-policy maximum-entropy
+    actor-critic assumptions.
+- severity: minor
+  dimension: evidence_traceability
+  description: Traceability is mostly by controlled notes and packet-supported labels rather than precise source locations.
+  evidence: Evidence phrases include 'Directly supported by controlled notes' and 'PPO controlled source notes' without page
+    or section identifiers.
+- severity: minor
+  dimension: experimental_rigor
+  description: Good recognition of missing seeds, metrics, tuning, environment versions, and compute, but lacks details of
+    any reported comparison because the output treats most benchmark information as omitted.
+  evidence: Assumptions table lists same tasks, metrics, seeds, architectures, environment versions, tuning budget, compute,
+    and evaluation protocol as unknown.
+summary: Clear and fair closed-source comparison with strong boundary discipline, but it misses the high-weight PPO on-policy
+  fact and remains only moderately traceable.

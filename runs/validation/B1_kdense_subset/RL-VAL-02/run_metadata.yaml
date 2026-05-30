@@ -1,0 +1,48 @@
+run_id: validation_v0.1__B1_kdense_subset__RL-VAL-02__run001
+variant: B1_kdense_subset
+task_id: RL-VAL-02
+split: validation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+runner_executable: /Applications/Codex.app/Contents/Resources/codex
+runner_version: codex-cli 0.133.0-alpha.1
+command_template: /Applications/Codex.app/Contents/Resources/codex exec --skip-git-repo-check --ephemeral --ignore-user-config
+  --ignore-rules --sandbox read-only --config model="gpt-5.5" --config model_reasoning_effort="none" --output-last-message
+  <raw_output_path> - < <input_snapshot_path>
+unsupported_homebrew_runner_avoided: /opt/homebrew/bin/codex
+model: gpt-5.5
+reasoning_effort: none
+sandbox_mode: read-only
+ignore_user_config: true
+ignore_rules: true
+ephemeral: true
+benchmark_freeze_manifest_hash: bba13883d97129c5c47617cb347e14423b2e0856426353562e11d89c10e8e3b5
+source_packet_sha256: b34c16746a3bd15742d4533f0115d1935b59b26b26c43d1d21deac45720557a2
+input_snapshot_sha256: 66f868788dcd4009d5e9f199348e40921e3dc8fb8b67ba76070358cc51e80f73
+raw_output_sha256: 38576d7ba3da7c47398894278d2ae14c553746ecffc291cd7a4157b04b157a15
+stdout_sha256: e6f8edf790f82b75a866c4f5d47bded00b0b060af2b9793669619596e795dbd2
+stderr_sha256: 710b9f9852891d1abc1ac273dff8a68ae35c8e3e6170591c4caaf163ffe7e5be
+no_gold_during_generation: true
+no_rubric_during_generation: true
+no_agent_review_reports_during_generation: true
+fresh_process: true
+dynamic_retrieval: false
+browser_tools: false
+apis: false
+citation_services: false
+pdf_parsers: false
+experiment_execution: false
+started_at: '2026-05-30T12:49:29'
+duration_seconds: 43.311
+exit_code: 0
+runtime_package: /private/tmp/ling_bot_validation_v0_1_execution/B1_kdense_subset
+scoring_after_generation: true
+scorecard_created_after_generation: true
+scorecard_sha256: d4b7f624bfb15f613f8ff2f86354d681001dd6c77aa5811060e7fc1d52846f7c
+scoring_notes_sha256: 0108b2f68d5ef734b0e587ed7c5689ac743c566ef21ecc57c4b26affd1ada8f1
+scored_against:
+  gold_annotation: benchmarks/gold_annotations/validation/RL-VAL-02.yaml
+  gold_annotation_sha256: 9a0227f29875acf408c14b7f9c3d91b858a8c71ebe3a850d90067bb6876e0234
+  rubric: benchmarks/rubrics/scoring_rubric.md
+  rubric_sha256: ade3feab72b1c789c567fb865b5919d6442623ac4e4d3d7d94996ff1f157ca6b
+  agent_review_decision_layer: reports/validation/validation_agent_review_decision.yaml
+  agent_review_decision_sha256: 2425c5df56d9ba44061da7db570aa2fd603139a65d403f5ba097680bdf08aa04

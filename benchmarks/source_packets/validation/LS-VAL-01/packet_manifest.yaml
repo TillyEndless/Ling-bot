@@ -1,0 +1,73 @@
+task_id: LS-VAL-01
+packet_id: validation_LS-VAL-01_packet_v0_draft
+status: draft_pending_human_review
+sources:
+- id: ddim
+  title: Denoising Diffusion Implicit Models
+  authors: Jiaming Song, Chenlin Meng, Stefano Ermon
+  year: 2020
+  identifier: arXiv:2010.02502
+  url: https://arxiv.org/pdf/2010.02502
+  filename: song_2020_denoising_diffusion_implicit_models.pdf
+  include: Abstract; sampling acceleration method; experiments; limitations.
+  local_filename: song_2020_denoising_diffusion_implicit_models.pdf
+  sha256: 07cb8796d7c100bf7c02bc575f16aab72c32630a8f85abd54ad45dc4f63e80fb
+  page_count: '22'
+  included_in_model_packet: Abstract; sampling acceleration method; experiments; limitations.
+- id: progressive_distillation
+  title: Progressive Distillation for Fast Sampling of Diffusion Models
+  authors: Tim Salimans, Jonathan Ho
+  year: 2022
+  identifier: arXiv:2202.00512
+  url: https://arxiv.org/pdf/2202.00512
+  filename: salimans_2022_progressive_distillation.pdf
+  include: Abstract; distillation method; sample-step tradeoffs; experiments.
+  local_filename: salimans_2022_progressive_distillation.pdf
+  sha256: cff438be94fd82afe02aaee34b2fb984c92861755128259ffc136a855ef60100
+  page_count: '21'
+  included_in_model_packet: Abstract; distillation method; sample-step tradeoffs;
+    experiments.
+- id: dpm_solver
+  title: 'DPM-Solver: A Fast ODE Solver for Diffusion Probabilistic Model Sampling
+    in Around 10 Steps'
+  authors: Cheng Lu et al.
+  year: 2022
+  identifier: arXiv:2206.00927
+  url: https://arxiv.org/pdf/2206.00927
+  filename: lu_2022_dpm_solver.pdf
+  include: Abstract; solver design; experiments; step/quality tradeoffs.
+  local_filename: lu_2022_dpm_solver.pdf
+  sha256: 4a14cb652bb4996c6bfdd717b0bf71d6a5c92cf9e09abdc3173106213f4fd671
+  page_count: '31'
+  included_in_model_packet: Abstract; solver design; experiments; step/quality tradeoffs.
+- id: ldm
+  title: High-Resolution Image Synthesis with Latent Diffusion Models
+  authors: Robin Rombach et al.
+  year: 2022
+  identifier: arXiv:2112.10752
+  url: https://arxiv.org/pdf/2112.10752
+  filename: rombach_2022_latent_diffusion_models.pdf
+  include: Abstract; latent-space modeling; computational tradeoffs; experiments.
+  local_filename: rombach_2022_latent_diffusion_models.pdf
+  sha256: 46ede043a8dc07ca1f0f445620523fe1ad8b2436bd83856a3835612a47e9f79e
+  page_count: '45'
+  included_in_model_packet: Abstract; latent-space modeling; computational tradeoffs;
+    experiments.
+- id: consistency
+  title: Consistency Models
+  authors: Yang Song et al.
+  year: 2023
+  identifier: arXiv:2303.01469
+  url: https://arxiv.org/pdf/2303.01469
+  filename: song_2023_consistency_models.pdf
+  include: Abstract; one/few-step generation; distillation/training; experiments.
+  local_filename: song_2023_consistency_models.pdf
+  sha256: b36df36eb96abcad5ad67173952258c34f2ba0624c15acaaf38bebf855074043
+  page_count: '42'
+  included_in_model_packet: Abstract; one/few-step generation; distillation/training;
+    experiments.
+model_input_packet:
+  path: model_input_packet.md
+  sha256: c983aaa0ff74f4e35a1b88bfa94495a3f29df8b3291b950f1c5c353f4fe382bc
+packet_matches_task_spec: true
+unresolved_source_version_issues: []

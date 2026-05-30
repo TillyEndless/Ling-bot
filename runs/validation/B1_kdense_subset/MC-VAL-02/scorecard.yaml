@@ -1,0 +1,36 @@
+run_id: validation_v0.1__B1_kdense_subset__MC-VAL-02__run001
+variant: B1_kdense_subset
+task_id: MC-VAL-02
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 4
+  evidence_traceability: 4
+  citation_validity: 4
+  literature_coverage: null
+  comparison_fairness: 5
+  experimental_rigor: 4
+  benchmark_validity: 4
+  inference_boundary_discipline: 5
+  hypothesis_quality: null
+  rl_specific_correctness: null
+  output_usefulness: 4
+  efficiency: 5
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: evidence_traceability
+  description: Traceability is improved through references to controlled notes and packet support, but still lacks precise
+    page/table grounding.
+  evidence: Rows cite 'ViT controlled note,' 'ConvNeXt controlled note,' and 'Source notes' rather than exact packet evidence
+    IDs or locations.
+- severity: minor
+  dimension: benchmark_validity
+  description: Benchmark caveats are correct but not deeply developed around protocol mismatch or uncertainty beyond noting
+    partial overlap and missing metrics.
+  evidence: Benchmark coverage is described as uneven, with ImageNet common and CIFAR only for ResNet, but no further audit
+    of protocol compatibility.
+summary: Very reliable closed-source answer. It is cautious, distinguishes direct packet support from inference, and refuses
+  unsupported rankings or efficiency claims.

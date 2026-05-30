@@ -1,0 +1,35 @@
+run_id: validation_v0.1__B1_kdense_subset__ERA-VAL-02__run001
+variant: B1_kdense_subset
+task_id: ERA-VAL-02
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 4
+  evidence_traceability: 3
+  citation_validity: null
+  literature_coverage: null
+  comparison_fairness: 4
+  experimental_rigor: 4
+  benchmark_validity: 4
+  inference_boundary_discipline: 4
+  hypothesis_quality: null
+  rl_specific_correctness: null
+  output_usefulness: 4
+  efficiency: 5
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: evidence_traceability
+  description: Traceability is adequate but coarse; claims are tied to the packet generally rather than to specific evidence
+    IDs, pages, sections, or table references.
+  evidence: Uses phrases like 'The packet only says' and 'source notes indicate' without more granular source anchors.
+- severity: minor
+  dimension: experimental_rigor
+  description: Baseline and ablation review is correct but somewhat compressed compared with stronger variants, giving fewer
+    concrete checks for ablation causality and metric-specific interpretation.
+  evidence: The baseline_and_ablation_review table states gaps but does not deeply separate visual evidence from quantitative
+    metric evidence or detail component-level ablation requirements.
+summary: Concise, accurate, and efficient. It covers all required outputs and key risks, including sample selection, baselines,
+  human evaluation, compute, and claim narrowing. It is less detailed than B0/B2/B3 but remains reliable.

@@ -1,0 +1,147 @@
+{
+  "task_id": "RL-VAL-01",
+  "scorecards": [
+    {
+      "variant": "B0_base_agent",
+      "scores": {
+        "factual_accuracy": 4,
+        "evidence_traceability": 3,
+        "citation_validity": 4,
+        "literature_coverage": null,
+        "comparison_fairness": 4,
+        "experimental_rigor": 5,
+        "benchmark_validity": 4,
+        "inference_boundary_discipline": 4,
+        "hypothesis_quality": null,
+        "rl_specific_correctness": 5,
+        "output_usefulness": 5,
+        "efficiency": 4
+      },
+      "hard_fail": {
+        "triggered": false,
+        "reasons": []
+      },
+      "findings": [
+        {
+          "severity": "minor",
+          "dimension": "evidence_traceability",
+          "description": "The audit is grounded in the packet-level PETS/PlaNet facts but does not consistently label which claims are direct packet evidence versus proposed protocol requirements.",
+          "evidence": "It states PETS uses probabilistic dynamics ensembles with MPC and PlaNet learns latent dynamics from pixels, then recommends many baselines and diagnostics without explicit evidence labels."
+        },
+        {
+          "severity": "minor",
+          "dimension": "inference_boundary_discipline",
+          "description": "Some recommendations are slightly more specific than the packet supports, such as oracle/state variants, area under learning curve, and particular planner diagnostics, though they are presented as requirements rather than source facts.",
+          "evidence": "The revised protocol proposes state-based continuous-control and pixel-based DeepMind Control-style splits plus detailed metrics not supplied in the packet."
+        }
+      ],
+      "summary": "Strong RL-specific audit that captures learned model assumptions, planning risk, model-error accumulation, baselines, seeds, metrics, and claim boundaries. It is highly useful as a revised protocol, with only moderate traceability limitations.",
+      "scoring_notes": "No hard fail. It does not invent numeric results or present broad superiority claims, but source grounding is mostly generic rather than location-specific."
+    },
+    {
+      "variant": "B1_kdense_subset",
+      "scores": {
+        "factual_accuracy": 4,
+        "evidence_traceability": 4,
+        "citation_validity": 4,
+        "literature_coverage": null,
+        "comparison_fairness": 4,
+        "experimental_rigor": 4,
+        "benchmark_validity": 4,
+        "inference_boundary_discipline": 5,
+        "hypothesis_quality": null,
+        "rl_specific_correctness": 4,
+        "output_usefulness": 4,
+        "efficiency": 5
+      },
+      "hard_fail": {
+        "triggered": false,
+        "reasons": []
+      },
+      "findings": [
+        {
+          "severity": "minor",
+          "dimension": "factual_accuracy",
+          "description": "It is somewhat over-conservative in saying the packet only provides two source notes, while the task/gold indicates packet evidence locations include abstracts, model/planning sections, experiments, baselines, figures, and limitations, though exact details may be unavailable.",
+          "evidence": "Opening sentence: \"It only provides two source notes\"; frozen gold references PETS/PlaNet experiment sections, baseline tables/figures, environment descriptions, and evaluation protocol sections as evidence locations to verify."
+        },
+        {
+          "severity": "minor",
+          "dimension": "output_usefulness",
+          "description": "The revised protocol is actionable but less complete than stronger variants on planning compute, metric detail, and explicit separation of sample efficiency, policy performance, world-model fidelity, and planning success.",
+          "evidence": "It includes core requirements but has briefer baseline and metric coverage than B0/B2/B3."
+        }
+      ],
+      "summary": "Careful and well-bounded response with good abstention from unsupported details. It covers the major RL risks, but its excessive uncertainty and slightly sparse protocol reduce completeness.",
+      "scoring_notes": "No hard fail. Good closed-source discipline and efficient structure; strongest on inference boundaries, weaker on detailed experimental design."
+    },
+    {
+      "variant": "B2_orchestra_subset",
+      "scores": {
+        "factual_accuracy": 5,
+        "evidence_traceability": 4,
+        "citation_validity": 4,
+        "literature_coverage": null,
+        "comparison_fairness": 5,
+        "experimental_rigor": 5,
+        "benchmark_validity": 5,
+        "inference_boundary_discipline": 5,
+        "hypothesis_quality": null,
+        "rl_specific_correctness": 5,
+        "output_usefulness": 5,
+        "efficiency": 5
+      },
+      "hard_fail": {
+        "triggered": false,
+        "reasons": []
+      },
+      "findings": [
+        {
+          "severity": "minor",
+          "dimension": "citation_validity",
+          "description": "Uses packet provenance descriptions rather than precise page/table citations, so citation validity is adequate for the closed-source prompt but not fully verifiable at source-location level.",
+          "evidence": "The audit table cites \"Controlled source notes\" and packet support status rather than PETS/PlaNet page, section, table, or figure locations."
+        }
+      ],
+      "summary": "Best calibrated variant. It captures all required model-based RL audit areas, separates supported facts from unsupported claims, handles model-error/planning confounds, and gives a rigorous revised protocol without overclaiming.",
+      "scoring_notes": "No hard fail. Minor traceability limitation only; otherwise excellent alignment with the gold annotation and rubric."
+    },
+    {
+      "variant": "B3_final_for_validation",
+      "scores": {
+        "factual_accuracy": 4,
+        "evidence_traceability": 5,
+        "citation_validity": 4,
+        "literature_coverage": null,
+        "comparison_fairness": 5,
+        "experimental_rigor": 5,
+        "benchmark_validity": 5,
+        "inference_boundary_discipline": 5,
+        "hypothesis_quality": null,
+        "rl_specific_correctness": 5,
+        "output_usefulness": 5,
+        "efficiency": 4
+      },
+      "hard_fail": {
+        "triggered": false,
+        "reasons": []
+      },
+      "findings": [
+        {
+          "severity": "minor",
+          "dimension": "factual_accuracy",
+          "description": "It adds bibliographic identifiers and author/year/arXiv metadata that are not necessary and may exceed the provided packet if not present there, although they are not used to support a core claim beyond identifying the known sources.",
+          "evidence": "Source inventory lists \"PETS (Chua et al., 2018, arXiv:1805.12114)\" and \"PlaNet (Hafner et al., 2018, arXiv:1811.04551)\" while the task only specifies PETS/PlaNet evidence locations."
+        },
+        {
+          "severity": "minor",
+          "dimension": "efficiency",
+          "description": "The output is longer than needed because it repeatedly labels evidence status and includes a detailed source inventory, but the density remains high.",
+          "evidence": "Multiple sections repeat that exact numeric values, appendix details, seeds, and evaluation episodes are absent from the packet."
+        }
+      ],
+      "summary": "Very strong, traceable, and disciplined audit. It explicitly labels packet evidence, limited critique, unsupported claims, and speculative protocol proposals, while covering all required RL-specific risks and revised protocol elements.",
+      "scoring_notes": "No hard fail under the authorization layer because added bibliographic metadata is harmless background and not central evidence. Slightly less efficient than B2 but strongest on evidence labeling."
+    }
+  ]
+}

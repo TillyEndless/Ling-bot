@@ -1,0 +1,61 @@
+## corpus_coverage_table
+
+| Source | Efficiency target | Main approach | Evidence available in packet | Coverage limits |
+|---|---:|---|---|---|
+| DDIM, 2020 | Sampling efficiency | Implicit/non-Markovian sampling formulation allowing fewer denoising steps | Abstract, sampling acceleration method, experiments, limitations; controlled note says faster sampling with fewer steps in reported settings | Exact numeric results, full tables, and implementation settings are not included |
+| Progressive Distillation, 2022 | Sampling efficiency | Repeatedly distills a multi-step sampler into a sampler requiring fewer steps | Abstract, distillation method, sample-step tradeoffs, experiments | Exact quality/speed values, teacher/student details, and tuning budgets not included |
+| DPM-Solver, 2022 | Sampling efficiency | Treats diffusion sampling as ODE solving and designs a fast solver for few-step sampling | Abstract, solver design, experiments, step/quality tradeoffs | Exact benchmark values, solver-order comparisons, and implementation details not included |
+| Latent Diffusion Models, 2022 | Training and sampling compute efficiency, especially high-resolution synthesis | Moves diffusion from pixel space to a learned latent representation | Abstract, latent-space modeling, computational tradeoffs, experiments | Compression settings, precise compute savings, and full quality tradeoffs not included |
+| Consistency Models, 2023 | One/few-step generation efficiency | Trains or distills models to map noisy states to consistent outputs for fast generation | Abstract, one/few-step generation, distillation/training, experiments | Exact comparisons, training cost, and robustness details not included |
+
+## approach_taxonomy
+
+| Approach family | Representative sources | Mechanism | Efficiency claim type | Supported scope |
+|---|---|---|---|---|
+| Faster sampler parameterization | DDIM | Change the reverse sampling process so fewer denoising steps can be used | Improvement claim | Supported only for DDIM’s reported experimental settings |
+| Sampler distillation | Progressive Distillation, Consistency Models | Transfer behavior of slower/multi-step samplers into faster/fewer-step models | Improvement claim; possible training-cost tradeoff | Supported as a sampling-efficiency strategy within reported experiments |
+| Numerical solver acceleration | DPM-Solver | Recast sampling as ODE integration and use specialized solvers for low-step sampling | Improvement claim | Supported for selected evaluated settings, not all diffusion models or all tasks |
+| Latent-space diffusion | Latent Diffusion Models | Reduce modeling cost by denoising compressed latent representations instead of pixels | Efficiency and scalability claim | Supported for high-resolution image synthesis settings in the paper |
+| Direct one/few-step generative modeling | Consistency Models | Train or distill a model for one-step or few-step generation | Improvement claim with quality tradeoff concerns | Supported for generation-quality comparisons reported in the source |
+
+## representative_paper_table
+
+| Paper | What it contributes | Efficiency route | Tradeoff introduced | Provenance |
+|---|---|---|---|---|
+| DDIM | Implicit sampling formulation for diffusion models | Fewer sampling steps | Potential quality degradation or sensitivity as steps are reduced; scope limited to experimental settings | Source-derived from controlled note; tradeoff inferred from step/quality framing |
+| Progressive Distillation | Repeated distillation of a sampler into fewer-step samplers | Compresses many-step sampling into fewer steps | Distillation adds training complexity/cost and may introduce quality-speed tradeoffs | Source-derived for method and tradeoff presence; training-cost concern is agent-inferred |
+| DPM-Solver | Fast ODE solver for diffusion sampling | Improves low-step sampling via solver design | Solver performance may depend on model/noise schedule/problem setup; low-step quality tradeoffs remain | Source-derived for ODE/few-step method; dependence is agent-inferred |
+| Latent Diffusion Models | Diffusion in learned latent space for high-resolution synthesis | Lowers compute by operating on compressed representations | Latent compression may trade detail/fidelity/control against efficiency | Source-derived for latent-space compute tradeoff; specific failure modes are agent-inferred |
+| Consistency Models | One/few-step generation through training or distillation | Reduces sampling to one or few model evaluations | May require specialized training/distillation and can trade sample quality for speed | Source-derived for one/few-step and comparisons; training/quality caveat inferred from packet scope |
+
+## tradeoff_analysis
+
+| Tradeoff theme | Sources involved | Evidence status | Analysis |
+|---|---|---|---|
+| Sampling steps vs. sample quality | DDIM, Progressive Distillation, DPM-Solver, Consistency Models | Source-derived that step/quality tradeoffs or generation-quality comparisons are included | The corpus consistently frames faster generation as reducing denoising steps or model evaluations, but the packet does not provide exact numeric frontiers. Strong rankings among these methods are unsupported. |
+| Inference speed vs. training complexity | Progressive Distillation, Consistency Models | Agent-inferred from distillation/training methods | Distillation-based approaches can shift cost from inference to training. The packet supports that distillation/training methods are used, but not exact added compute. |
+| Pixel-space fidelity/control vs. latent compression | Latent Diffusion Models | Source-derived for latent-space modeling and computational tradeoffs; specific artifact risks inferred | Latent diffusion improves efficiency by changing representation, but compression can introduce representation bottlenecks. The packet does not establish which visual attributes degrade or improve. |
+| General-purpose solver vs. task/model dependence | DPM-Solver | Agent-inferred from solver-based method and selected experiments | A numerical solver can accelerate sampling without retraining, but claims should be limited to compatible model formulations and evaluated schedules. |
+| One-step ambition vs. robustness/quality | Consistency Models | Source-derived for one/few-step generation and comparisons; robustness concerns inferred | One-step generation is the strongest speed-oriented target in the packet, but the supplied evidence does not establish universal parity with slower diffusion samplers. |
+
+## unsupported_synthesis_warnings
+
+| Warning | Why unsupported within packet |
+|---|---|
+| Do not rank the five papers by absolute speed, FID, likelihood, or compute efficiency | Exact numeric values, full result tables, and comparable protocols are not included |
+| Do not claim one method dominates another generally | The packet does not establish matched datasets, metrics, baselines, compute budgets, or tuning protocols across papers |
+| Do not convert “few-step performance in selected settings” into broad generalization | Heterogeneous tasks/datasets/settings are not detailed enough for a generalization claim |
+| Do not claim distillation is always more efficient overall | It can reduce sampling cost, but training/distillation overhead is not quantified in the packet |
+| Do not claim latent diffusion preserves all pixel-level detail | The packet supports computational tradeoffs, not lossless representation or universal fidelity |
+| Do not infer reproducibility strength | Seeds, environment, configs, implementation details, and full artifacts are not included |
+
+## evidence_grounded_gap_list
+
+| Gap | Visible from corpus | What would be needed next |
+|---|---|---|
+| Comparable speed-quality frontier across methods | Multiple papers target fewer steps or lower compute, but packet lacks harmonized metrics | Same datasets, same baselines, shared metrics, matched compute budgets, and per-step quality curves |
+| Training-cost accounting | Distillation and consistency approaches may shift cost to training | Training compute, number of distillation stages, wall-clock cost, and amortization analysis |
+| Robustness under very low step counts | Several methods aim at few-step or one-step generation | Per-task low-step failure cases, variance across seeds, and prompt/task sensitivity |
+| Representation bottlenecks in latent diffusion | Latent-space modeling is explicitly a computational tradeoff | Analysis of compression ratio, reconstruction quality, downstream controllability, and high-frequency detail |
+| Solver compatibility boundaries | DPM-Solver depends on an ODE formulation | Conditions under which solver assumptions hold, schedules tested, and failure modes outside selected settings |
+| Reproducibility and uncertainty | Packet omits full tables, appendix details, seeds, and implementation settings | Code/configs, seed counts, confidence intervals, environment details, and full benchmark protocols |

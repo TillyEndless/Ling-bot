@@ -1,0 +1,36 @@
+run_id: validation_v0.1__B1_kdense_subset__ERA-VAL-01__run001
+variant: B1_kdense_subset
+task_id: ERA-VAL-01
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 4
+  evidence_traceability: 4
+  citation_validity: null
+  literature_coverage: null
+  comparison_fairness: 4
+  experimental_rigor: 4
+  benchmark_validity: 4
+  inference_boundary_discipline: 4
+  hypothesis_quality: null
+  rl_specific_correctness: null
+  output_usefulness: 4
+  efficiency: 5
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: evidence_traceability
+  description: The output uses packet evidence columns and support-status labels, but still lacks exact page/table/section
+    grounding and does not explicitly distinguish source-reported contamination analysis from all follow-up risks in every
+    instance.
+  evidence: Gold M3 asks for separation of source-reported contamination analysis from additional contamination risks; B1
+    does this reasonably but not with the explicit source/critique labeling seen in B3.
+- severity: minor
+  dimension: benchmark_validity
+  description: Benchmark saturation is described as plausible from public/many-task use but remains somewhat inferred; the
+    answer correctly marks it unquantified, limiting concern.
+  evidence: Gold permits contamination and saturation skepticism but requires not overstating beyond packet evidence.
+summary: B1 is concise, well calibrated, and covers all required audit components. It is especially efficient and usable,
+  with clear tables for risks, baselines, claims, and corrected protocol. It avoids external evidence and broad claims.

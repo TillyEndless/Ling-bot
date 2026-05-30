@@ -1,0 +1,395 @@
+2026-05-30T04:46:14.930542Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:46:14.955245Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+OpenAI Codex v0.133.0-alpha.1
+--------
+workdir: /private/tmp/ling_bot_validation_v0_1_execution/B1_kdense_subset
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: none
+reasoning summaries: none
+session id: 019e7734-4570-7740-a797-ea16d23c3d1e
+--------
+user
+# Variant Runtime Instructions
+
+You are running benchmark variant `B1_kdense_subset` for the `literature_analysis_and_research_rigor` module. Follow only the variant skill/reference content included below. Do not use external retrieval or dynamic tools. Do not use knowledge outside the supplied source packet as evidence.
+
+# Variant Skill And References
+
+## Variant File: variant/kdense_literature_research_rigor/SKILL.md
+
+---
+name: kdense-literature-research-rigor-subset
+description: Instruction-only K-Dense-derived subset for fixed-source literature review, citation/evidence handling, scientific criticism, and synthesis. No tools, scripts, APIs, retrieval, or external services.
+license: MIT-derived-upstream-patterns-with-attribution
+---
+
+# K-Dense Subset: Literature Analysis And Research Rigor
+
+Use this skill when the task asks for research literature review, paper reading, citation/evidence handling, scientific criticism, or synthesis from supplied material.
+
+This variant is instruction/reference-only. It must not retrieve, search, execute scripts, call APIs, manage a citation library, parse PDFs, or use external databases. If the user asks for facts not present in the supplied material, mark them as unavailable or unsupported.
+
+## Operating Rules
+
+1. Work only from the provided source packet and task prompt.
+2. Build an evidence-first response: every important claim should point to a supplied source, section, page, figure, table, or quoted/excerpted location when available.
+3. Separate source claims, your synthesis, and unsupported possibilities.
+4. For literature reviews, account for every supplied source before synthesizing themes.
+5. For criticism, assess validity, bias, methods, evidence quality, limitations, and claim scope.
+6. For proposal or hypothesis tasks, turn observations into testable claims only when the packet supports the motivation; mark broader novelty or field-gap claims as needing external review.
+7. Do not rank methods globally unless the packet contains directly comparable evidence.
+
+## Workflow
+
+1. Scope the task: identify the research question, the fixed corpus, requested output sections, and forbidden external evidence.
+2. Inventory sources: make a source coverage table with role, evidence type, claims, methods, experiments, and limitations.
+3. Extract evidence: record claims, evidence locations, methods, datasets, metrics, baselines, comparisons, and caveats.
+4. Evaluate quality: ask whether the evidence is direct, indirect, incomplete, contradictory, or out of scope.
+5. Synthesize cautiously: group sources into themes or methods, then state what the corpus supports and what remains unresolved.
+6. Audit conclusions: remove unsupported generalizations, invented citations, prestige-based judgments, or claims that exceed the supplied evidence.
+
+## Preferred Output Moves
+
+- Use tables for source coverage, claim-evidence mapping, comparison, and limitations.
+- Use short evidence labels such as source name plus page/section/table when provided.
+- Include an explicit unsupported-or-unknown section whenever the task asks for synthesis or comparison.
+- Preserve uncertainty instead of filling missing methods, metrics, or results from memory.
+
+Load the references in this variant only as needed:
+
+- `references/literature_review_structure.md`
+- `references/evidence_and_citation_handling.md`
+- `references/scientific_criticism.md`
+- `references/synthesis_and_hypotheses.md`
+
+
+## Variant File: variant/kdense_literature_research_rigor/references/evidence_and_citation_handling.md
+
+# Evidence And Citation Handling
+
+Adapted from K-Dense citation-management and literature-review patterns, without scripts or external services.
+
+## Evidence Ledger
+
+For each important claim, record:
+
+| Claim | Source | Location supplied | Evidence type | Support status | Caveat |
+|---|---|---|---|---|---|
+
+Support status should be one of: direct, indirect, partial, contradicted, absent, or speculative.
+
+## Citation Discipline
+
+- Cite only sources supplied in the packet.
+- If metadata is incomplete, do not invent DOI, venue, version, page, or author details.
+- Prefer supplied page, section, figure, and table locations over generic source mentions.
+- If the packet gives only a general source note, cite that note and mark the granularity as limited.
+- Separate bibliographic identity from evidence support: a real source is not automatically evidence for a claim.
+
+## Unsupported Evidence Policy
+
+- Incidental background knowledge may be mentioned only if clearly outside the evidence base and not used to support a conclusion.
+- Any conclusion, method ranking, novelty claim, or causal claim must be grounded in supplied evidence.
+- If evidence is missing, write “not established by the packet” rather than guessing.
+
+
+## Variant File: variant/kdense_literature_research_rigor/references/literature_review_structure.md
+
+# Literature Review Structure
+
+Adapted from K-Dense literature-review, paper-lookup, and research-lookup workflow patterns.
+
+## Fixed-Corpus Review
+
+For a closed packet, treat literature review as mapping and synthesis rather than discovery.
+
+1. Corpus inventory: list every supplied source and its apparent role.
+2. Screening within packet: identify central, supporting, background, boundary, and unusable sources using only packet evidence.
+3. Extraction fields: research question, method, assumptions, data, experimental setup, result type, limitations, and relevance.
+4. Thematic grouping: cluster sources by problem, method family, evidence type, or claim type.
+5. Synthesis: state relationships among sources and qualify them by evidence strength.
+6. Gaps: report gaps visible in the packet, not gaps claimed for the entire field unless external review is allowed.
+
+## Literature Map Template
+
+| Source | Role in packet | Research problem | Method or artifact | Evidence type | Limitations | Use in synthesis |
+|---|---|---|---|---|---|---|
+
+## Search-Derived Workflows Disabled
+
+K-Dense search, database, and citation-chaining patterns are not active in this variant. When external retrieval is disabled, do not simulate search results or cite absent work.
+
+
+## Variant File: variant/kdense_literature_research_rigor/references/scientific_criticism.md
+
+# Scientific Criticism
+
+Adapted from K-Dense scientific-critical-thinking and peer-review patterns.
+
+## Critique Axes
+
+- Internal validity: does the method or experiment test what it claims?
+- Construct validity: do tasks, metrics, and proxies match the intended concept?
+- External validity: what populations, settings, tasks, models, or environments are covered?
+- Statistical validity: are seeds, variability, uncertainty, aggregation, and multiple comparisons handled?
+- Reproducibility: are data, code, settings, prompts, models, hardware, and configs sufficiently specified?
+- Bias and confounds: are there dataset artifacts, leakage, selection bias, or unfair baselines?
+- Claim proportionality: are conclusions limited to the actual evidence?
+
+## Review Pattern
+
+1. State the claim under review.
+2. Identify the direct evidence.
+3. List missing controls, baselines, metrics, or reporting details.
+4. Classify severity and likely effect on the claim.
+5. Suggest a corrected, narrower claim or improved protocol.
+
+Avoid prestige-based judgments and avoid treating citation count, venue, or author identity as proof of quality.
+
+
+## Variant File: variant/kdense_literature_research_rigor/references/synthesis_and_hypotheses.md
+
+# Synthesis And Hypotheses
+
+Adapted from K-Dense hypothesis-generation and scientific brainstorming patterns, constrained by evidence.
+
+## Synthesis Rules
+
+- Build synthesis from extracted evidence, not from memory.
+- Name the synthesis operation: grouping, contrast, causal conjecture, mechanism hypothesis, or gap identification.
+- Mark whether a statement is source-stated, cross-source synthesis, or proposal speculation.
+- Do not turn absence from a small fixed packet into a field-wide absence.
+
+## Hypothesis Template
+
+| Hypothesis | Evidence motivation | Prediction | Disconfirming observation | Required experiment | Feasibility caveat |
+|---|---|---|---|---|---|
+
+## Useful Checks
+
+- Is the hypothesis falsifiable?
+- Does it identify observables and controls?
+- Does it require stronger evidence than the packet provides?
+- Does it distinguish correlation, recoverability, mechanism, and causation?
+
+
+## Variant File: variant/reuse_and_license_notes.md
+
+# B1 Reuse And License Notes
+
+This variant selectively adapts K-Dense-derived instruction patterns for literature review, citation/evidence handling, scientific criticism, peer-review framing, and hypothesis formulation.
+
+No upstream scripts, APIs, database clients, generated templates, search providers, or executable services are included. The implementation is rewritten in compact form for fixed-source benchmark execution.
+
+## Components Used
+
+| Upstream component | Files consulted per ledger | Adaptation decision | License status from audit |
+|---|---|---|---|
+| `K-Dense-AI/scientific-agent-skills/skills/literature-review` | `SKILL.md`, citation/database references, review template | Rewritten into fixed-corpus review structure | MIT observed in skill frontmatter; root repository MIT |
+| `K-Dense-AI/scientific-agent-skills/skills/citation-management` | `SKILL.md`, citation/database references | Rewritten as evidence and citation discipline only | MIT observed in skill frontmatter; root repository MIT |
+| `K-Dense-AI/scientific-agent-skills/skills/scientific-critical-thinking` | `SKILL.md`, evidence, bias, validity references | Rewritten as critique axes and review pattern | MIT observed in skill frontmatter; root repository MIT |
+| `K-Dense-AI/scientific-agent-skills/skills/peer-review` | `SKILL.md`, review criteria/templates | Rewritten as criticism scaffolding | MIT observed in skill frontmatter; root repository MIT |
+| `K-Dense-AI/scientific-agent-skills/skills/hypothesis-generation` | `SKILL.md`, design/framework references | Rewritten as evidence-constrained hypothesis template | MIT observed in skill frontmatter; root repository MIT |
+
+## Explicit Runtime Exclusions
+
+- No scripts copied or enabled.
+- No API keys, external services, citation databases, PDF parsers, or search tools.
+- No Orchestra-derived material.
+- No benchmark-specific paper names, task identifiers, expected answers, or development answer-key content.
+
+
+## Variant File: variant/variant_manifest.yaml
+
+variant_id: B1_kdense_subset
+module_scope: literature_analysis_and_research_rigor
+implementation_type: instruction_reference_only
+runtime_tools_enabled: false
+external_services_enabled: false
+dynamic_retrieval_enabled: false
+scripts_enabled: false
+upstream_basis:
+  repository: K-Dense-AI/scientific-agent-skills
+  components:
+    - path: skills/literature-review/SKILL.md
+      consulted_files:
+        - skills/literature-review/SKILL.md
+        - skills/literature-review/references/citation_styles.md
+        - skills/literature-review/references/database_strategies.md
+        - skills/literature-review/assets/review_template.md
+      use: adapted_workflow_pattern
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: skills/citation-management/SKILL.md
+      consulted_files:
+        - skills/citation-management/SKILL.md
+        - skills/citation-management/references/citation_styles.md
+        - skills/citation-management/references/database_apis.md
+      use: adapted_citation_discipline_without_tools
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: skills/scientific-critical-thinking/SKILL.md
+      consulted_files:
+        - skills/scientific-critical-thinking/SKILL.md
+        - skills/scientific-critical-thinking/references/bias_detection.md
+        - skills/scientific-critical-thinking/references/evidence_evaluation.md
+        - skills/scientific-critical-thinking/references/validity_frameworks.md
+      use: adapted_critique_axes
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: skills/peer-review/SKILL.md
+      consulted_files:
+        - skills/peer-review/SKILL.md
+        - skills/peer-review/references/review_criteria.md
+        - skills/peer-review/references/review_templates.md
+      use: adapted_review_scaffolding
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: skills/hypothesis-generation/SKILL.md
+      consulted_files:
+        - skills/hypothesis-generation/SKILL.md
+        - skills/hypothesis-generation/references/experimental_design.md
+        - skills/hypothesis-generation/references/hypothesis_frameworks.md
+      use: adapted_hypothesis_template
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+runtime_exclusions:
+  - no K-Dense scripts included
+  - no APIs included
+  - no database search included
+  - no external citation validation included
+  - no Orchestra-derived rules included
+  - no B3-original AI/ML/RL guidance included
+
+
+# Task
+
+- Task ID: `LS-VAL-02`
+- Split: `validation`
+- Task type: `literature_mapping`
+- Topic: latent reasoning in language models
+- Research question: Within the fixed source packet, what literature supports or challenges the idea that language models perform useful latent or internal reasoning?
+
+## Input Prompt
+
+Produce a balanced fixed-corpus literature map on latent or internal reasoning in language models.
+Use only the provided source packet. Do not perform external retrieval.
+Return a corpus coverage table, taxonomy of evidence types, representative papers, skeptical counter-evidence, unsupported-synthesis warnings, and open gaps visible within the corpus.
+Treat latent reasoning as one possible topic, not as an assumed fact.
+
+
+## Required Outputs
+
+- corpus_coverage_table
+- evidence_type_taxonomy
+- representative_paper_table
+- counter_evidence_summary
+- unsupported_synthesis_warnings
+- gap_and_hypothesis_list
+
+# Source Packet
+
+# LS-VAL-02 Model Input Packet
+## Sources
+- Chain-of-Thought Prompting Elicits Reasoning in Large Language Models (arXiv:2201.11903; 2022). Local file: `wei_2022_chain_of_thought_prompting.pdf`. Included evidence: Abstract; prompting/evaluation results; limitations.
+- Large Language Models are Zero-Shot Reasoners (arXiv:2205.11916; 2022). Local file: `kojima_2022_large_language_models_are_zero_shot_reasoners.pdf`. Included evidence: Abstract; zero-shot reasoning prompt; experiments.
+- Language Models Don't Always Say What They Think: Unfaithful Explanations in Chain-of-Thought Prompting (arXiv:2305.04388; 2023). Local file: `turpin_2023_unfaithful_explanations_cot.pdf`. Included evidence: Abstract; unfaithfulness experiments; discussion.
+- Measuring Faithfulness in Chain-of-Thought Reasoning (arXiv:2307.13702; 2023). Local file: `lanham_2023_measuring_faithfulness_cot.pdf`. Included evidence: Abstract; faithfulness tests; intervention/ablation evidence; limitations.
+
+## Controlled Source Notes
+- Chain-of-Thought Prompting: reports that chain-of-thought exemplars can improve reasoning performance in large language models on selected tasks.
+- Zero-Shot Reasoners: reports that a simple reasoning prompt can elicit step-by-step reasoning behavior without task-specific examples in selected settings.
+- Unfaithful Explanations in Chain-of-Thought Prompting: studies cases where generated rationales can be unfaithful to the model behavior or influenced by biases.
+- Measuring Faithfulness in Chain-of-Thought Reasoning: proposes tests for faithfulness of chain-of-thought rationales and studies interventions/perturbations in selected settings.
+- Evidence objects: abstracts, method/evaluation sections, result tables/figures, and discussion/limitations.
+
+## Packet Scope
+- This packet contains source metadata and neutral source notes prepared from the listed canonical files.
+- Some exact numeric values, full tables, appendix details, and implementation settings are not included in this model input packet.
+
+
+2026-05-30T04:46:14.979040Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:46:15.011633Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:46:15.011646Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:46:15.012232Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:46:15.012239Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:46:15.012677Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:46:15.012680Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:46:15.013088Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:46:15.013093Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:46:15.013460Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:46:15.013464Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:46:15.014305Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:46:15.014308Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:46:16.802085Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:46:16.802102Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:46:16.802474Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:46:16.802479Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:46:16.802838Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:46:16.802841Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:46:16.803211Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:46:16.803216Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:46:16.803578Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:46:16.803583Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:46:16.804361Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:46:16.804365Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+codex
+## corpus_coverage_table
+
+| Source | Role in packet | Research problem | Method or artifact | Evidence type available | Main claim relevant to latent/internal reasoning | Limitations visible in packet | Use in synthesis |
+|---|---|---|---|---|---|---|---|
+| Wei et al. 2022, *Chain-of-Thought Prompting Elicits Reasoning in Large Language Models* | Supportive evidence for reasoning-like behavior | Whether prompting with chain-of-thought exemplars improves reasoning performance | Few-shot chain-of-thought prompting and evaluation on selected tasks | Abstract; prompting/evaluation results; limitations | Chain-of-thought exemplars can improve reasoning performance in large language models on selected tasks | Packet lacks exact numeric values, full tables, appendix details, and implementation settings | Supports the narrower claim that explicit rationale-style prompting can improve task performance; does not by itself prove faithful latent reasoning |
+| Kojima et al. 2022, *Large Language Models are Zero-Shot Reasoners* | Supportive evidence for elicitation without examples | Whether a simple prompt can elicit step-by-step reasoning behavior without task-specific demonstrations | Zero-shot reasoning prompt; experiments | Abstract; zero-shot reasoning prompt; experiments | A simple reasoning prompt can elicit step-by-step reasoning behavior in selected settings | Packet does not provide full result tables, exact settings, or full implementation details | Supports the idea that reasoning-like behavior may be latent enough to be elicited by generic prompting, but only behaviorally |
+| Turpin et al. 2023, *Language Models Don’t Always Say What They Think* | Skeptical counter-evidence | Whether generated chain-of-thought explanations faithfully reflect model behavior | Unfaithfulness experiments studying rationales and bias influence | Abstract; unfaithfulness experiments; discussion | Generated rationales can be unfaithful to model behavior or influenced by biases | Packet does not include exact experimental details or all quantitative results | Challenges interpreting chain-of-thought text as the model’s actual internal reasoning |
+| Lanham et al. 2023, *Measuring Faithfulness in Chain-of-Thought Reasoning* | Measurement and mixed evidence | How to test whether chain-of-thought rationales are faithful | Faithfulness tests; intervention and ablation evidence | Abstract; tests; intervention/ablation evidence; limitations | Proposes faithfulness tests and studies whether CoT rationales are causally connected to outputs in selected settings | Packet does not include full interventions, exact metrics, or complete limitations | Provides a framework for separating useful reasoning traces from post-hoc or weakly causal explanations |
+
+## evidence_type_taxonomy
+
+| Evidence type | Sources | What it can support | What it cannot establish from this packet |
+|---|---|---|---|
+| Performance improvement under reasoning prompts | Wei 2022; Kojima 2022 | Prompted reasoning formats can improve or elicit performance on selected tasks | That the written rationale is faithful, causal, or identical to internal reasoning |
+| Behavioral elicitation of step-by-step outputs | Kojima 2022; Wei 2022 | Models can produce reasoning-like intermediate text under prompting | That such text reveals hidden computations |
+| Unfaithfulness and bias tests | Turpin 2023 | Chain-of-thought explanations may misrepresent model behavior or reflect confounds | That all CoT explanations are unfaithful |
+| Intervention/ablation faithfulness tests | Lanham 2023 | Faithfulness can be empirically probed by perturbing or intervening on rationales | A general conclusion across all models, tasks, or prompting methods |
+| Discussion and limitations | All sources | Scope boundaries and caution about interpretation | Exact quantitative comparison, because full tables/settings are not included |
+
+## representative_paper_table
+
+| Representative paper | Position in the map | Evidence label | Balanced interpretation |
+|---|---|---|---|
+| Wei et al. 2022 | Core supportive paper | Controlled source note: CoT exemplars improve selected reasoning tasks | Shows useful reasoning-style prompting behavior, but the packet does not establish that the generated chain is faithful internal reasoning |
+| Kojima et al. 2022 | Core elicitation paper | Controlled source note: simple zero-shot reasoning prompt elicits step-by-step behavior | Suggests some reasoning behavior can be unlocked without demonstrations, but evidence remains behavioral and selected-setting bound |
+| Turpin et al. 2023 | Core skeptical paper | Controlled source note: rationales can be unfaithful or bias-influenced | Directly challenges the inference from “model says a rationale” to “model used that rationale” |
+| Lanham et al. 2023 | Measurement bridge | Controlled source note: faithfulness tests with interventions/perturbations | Moves the debate from surface rationales toward causal/faithfulness evaluation, while remaining limited to selected tests/settings |
+
+## counter_evidence_summary
+
+The strongest skeptical evidence in the packet comes from Turpin et al. 2023 and Lanham et al. 2023. Turpin et al. report cases where chain-of-thought rationales are unfaithful to model behavior or influenced by biases, which directly challenges treating generated rationales as transparent reports of internal reasoning. Lanham et al. likewise implies that faithfulness is not automatic: it must be tested through interventions, perturbations, or ablations.
+
+Together, these sources do not refute that reasoning prompts can be useful. They challenge a stronger claim: that visible chain-of-thought is necessarily the model’s actual latent reasoning process.
+
+## unsupported_synthesis_warnings
+
+| Warning | Status in packet |
+|---|---|
+| “Language models perform latent reasoning” as a general fact | Not established by the packet |
+| “Chain-of-thought text is faithful internal reasoning” | Challenged by Turpin 2023 and treated as testable rather than assumed by Lanham 2023 |
+| “Prompting reveals hidden reasoning mechanisms” | Only indirectly supported by behavioral elicitation evidence |
+| “Zero-shot reasoning proves internal reasoning exists” | Not established; it shows elicited step-by-step behavior in selected settings |
+| “One method is globally best” | Not supported; packet lacks direct comparable evidence across all models/tasks/settings |
+| “Findings generalize to all language models” | Not established; packet repeatedly frames results as selected tasks/settings |
+
+## gap_and_hypothesis_list
+
+| Gap or hypothesis | Evidence motivation | Prediction | Disconfirming observation | Required experiment | Feasibility caveat |
+|---|---|---|---|---|---|
+| Gap: behavioral gains are not enough to prove faithful latent reasoning | Wei 2022 and Kojima 2022 show prompting benefits; Turpin 2023 challenges rationale faithfulness | Some CoT gains may persist even when rationales are not faithful | If interventions on rationales reliably change answers in predicted ways across tasks | Controlled rationale intervention experiments across models and tasks | Packet lacks full settings and quantitative results |
+| Hypothesis: some CoT rationales are causally useful while others are post-hoc | Lanham 2023 studies faithfulness tests; Turpin 2023 finds unfaithfulness cases | Faithfulness varies by task, model, and prompt format | Uniformly faithful or uniformly unfaithful results across tested conditions | Compare intervention sensitivity across task families and prompt types | Broader novelty needs external review |
+| Gap: internal mechanisms remain under-specified | Packet evidence is mostly prompting, output behavior, and rationale faithfulness | Mechanistic evidence may diverge from textual rationale evidence | If internal-state analyses align perfectly with generated rationales | Add mechanistic or internal-state probes alongside CoT interventions | Not established by packet; no such source is included |
+| Hypothesis: simple reasoning prompts elicit latent capabilities more than they create new reasoning | Kojima 2022 reports zero-shot elicitation via a simple prompt | Prompt phrasing changes performance without changing task information | No performance difference between reasoning and non-reasoning prompts | Prompt-controlled experiments with matched information content | “Latent capability” remains an interpretation unless causally tested |
+| Gap: generality across models and tasks is unresolved | All source notes refer to selected tasks/settings | Effects will be uneven across model scale, task type, and evaluation design | Stable effects across broad models/tasks with low variance | Systematic benchmark with reporting of seeds, uncertainty, model configs, and failures | Packet omits exact numeric values and full implementation settings |
+tokens used
+3,298

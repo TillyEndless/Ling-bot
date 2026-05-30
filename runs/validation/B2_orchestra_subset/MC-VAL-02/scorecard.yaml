@@ -1,0 +1,35 @@
+run_id: validation_v0.1__B2_orchestra_subset__MC-VAL-02__run001
+variant: B2_orchestra_subset
+task_id: MC-VAL-02
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 4
+  evidence_traceability: 4
+  citation_validity: 4
+  literature_coverage: null
+  comparison_fairness: 5
+  experimental_rigor: 4
+  benchmark_validity: 5
+  inference_boundary_discipline: 5
+  hypothesis_quality: null
+  rl_specific_correctness: null
+  output_usefulness: 5
+  efficiency: 5
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: factual_accuracy
+  description: Some inductive-bias statements are inferential rather than directly quoted from the packet, but the variant
+    labels them as source-derived plus agent-inferred and keeps them scoped.
+  evidence: 'Assumptions row: ''ConvNets encode stronger locality/spatial bias through convolutions'' with evidence status
+    ''source-derived + agent-inferred.'''
+- severity: minor
+  dimension: evidence_traceability
+  description: Evidence labels are useful, but the answer still does not provide concrete page, section, or table anchors.
+  evidence: Uses provenance labels such as 'source-derived,' 'missing detail,' and 'cross-source synthesis' rather than exact
+    locations.
+summary: Excellent comparison artifact for the task. It covers all required outputs, gives clear comparability judgments,
+  separates source-derived facts from synthesis and missing detail, and avoids broad superiority claims.

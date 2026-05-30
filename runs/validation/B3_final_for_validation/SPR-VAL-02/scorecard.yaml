@@ -1,0 +1,43 @@
+run_id: validation_v0.1__B3_final_for_validation__SPR-VAL-02__run001
+variant: B3_final_for_validation
+task_id: SPR-VAL-02
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 3
+  evidence_traceability: 4
+  citation_validity: 3
+  literature_coverage: null
+  comparison_fairness: 3
+  experimental_rigor: 3
+  benchmark_validity: 3
+  inference_boundary_discipline: 5
+  hypothesis_quality: null
+  rl_specific_correctness: 4
+  output_usefulness: 3
+  efficiency: 4
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: major
+  dimension: output_usefulness
+  description: Despite strong labels and structure, it still fails to provide the actual datasets/environments, baselines,
+    metrics, evaluation protocols, numeric findings, or author-stated limitations required by the task.
+  evidence: baseline_metric_summary states datasets/environments are not named, baselines are not specified, metrics are not
+    specified, and results are omitted.
+- severity: major
+  dimension: factual_accuracy
+  description: It treats many details as unavailable from the packet, but the benchmark expected extraction from the supplied
+    Decision Transformer packet. The absence claims may be inaccurate relative to the source packet and prevent fulfillment
+    of high-weight facts.
+  evidence: paper_card says exact modeling assumptions, context length, architecture settings, optimization details, and return-conditioning
+    procedure are not provided; reproducibility_notes lists many unknowns.
+- severity: minor
+  dimension: evidence_traceability
+  description: This variant gives the clearest evidence labels and separates direct packet evidence, synthesis, limited critique,
+    and unsupported external-review claims.
+  evidence: claim_ledger and evidence_ledger use labels such as DIRECT_PACKET_EVIDENCE, WITHIN_PACKET_SYNTHESIS, LIMITED_CRITIQUE,
+    and UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW.
+summary: "Best-calibrated of the four on inference boundaries and evidence labeling, but still not a successful deep reading\
+  \ because it mostly inventories missing information rather than extracting the paper\u2019s concrete experimental content."

@@ -1,0 +1,1076 @@
+created_at: '2026-05-30T15:43:04'
+aggregate:
+  B0_base_agent:
+    overall_mean: 3.915
+    tasks: 12
+    hard_fails: 0
+    factual_accuracy: 3.75
+    evidence_traceability: 3.25
+    citation_validity: 3.857
+    literature_coverage: 4
+    comparison_fairness: 3.9
+    experimental_rigor: 3.909
+    benchmark_validity: 3.889
+    inference_boundary_discipline: 4.167
+    hypothesis_quality: 4
+    rl_specific_correctness: 3.833
+    output_usefulness: 4.083
+    efficiency: 4.333
+  B1_kdense_subset:
+    overall_mean: 4.158
+    tasks: 12
+    hard_fails: 0
+    factual_accuracy: 3.75
+    evidence_traceability: 3.75
+    citation_validity: 3.857
+    literature_coverage: 5
+    comparison_fairness: 4
+    experimental_rigor: 4.091
+    benchmark_validity: 3.889
+    inference_boundary_discipline: 4.583
+    hypothesis_quality: 5
+    rl_specific_correctness: 3.833
+    output_usefulness: 4.25
+    efficiency: 4.667
+  B2_orchestra_subset:
+    overall_mean: 4.257
+    tasks: 12
+    hard_fails: 0
+    factual_accuracy: 4
+    evidence_traceability: 3.667
+    citation_validity: 3.857
+    literature_coverage: 4.5
+    comparison_fairness: 4.3
+    experimental_rigor: 4.273
+    benchmark_validity: 4.222
+    inference_boundary_discipline: 4.583
+    hypothesis_quality: 4.333
+    rl_specific_correctness: 4
+    output_usefulness: 4.583
+    efficiency: 4.5
+  B3_final_for_validation:
+    overall_mean: 4.437
+    tasks: 12
+    hard_fails: 0
+    factual_accuracy: 4.083
+    evidence_traceability: 4.667
+    citation_validity: 3.875
+    literature_coverage: 5
+    comparison_fairness: 4.3
+    experimental_rigor: 4.455
+    benchmark_validity: 4.333
+    inference_boundary_discipline: 5
+    hypothesis_quality: 4.667
+    rl_specific_correctness: 4.167
+    output_usefulness: 4.667
+    efficiency: 4.083
+by_category:
+  experimental_rigor_audit:
+    B0_base_agent: 3.88
+    B1_kdense_subset: 4.06
+    B2_orchestra_subset: 4.375
+    B3_final_for_validation: 4.625
+  literature_mapping:
+    B0_base_agent: 4.165
+    B1_kdense_subset: 4.53
+    B2_orchestra_subset: 4.47
+    B3_final_for_validation: 4.58
+  method_comparison:
+    B0_base_agent: 3.945
+    B1_kdense_subset: 4.055
+    B2_orchestra_subset: 4.39
+    B3_final_for_validation: 4.435
+  proposal_support:
+    B0_base_agent: 4.0
+    B1_kdense_subset: 4.705
+    B2_orchestra_subset: 4.355
+    B3_final_for_validation: 4.78
+  rl_specific_analysis:
+    B0_base_agent: 4.3
+    B1_kdense_subset: 4.4
+    B2_orchestra_subset: 4.65
+    B3_final_for_validation: 4.65
+  single_paper_reading:
+    B0_base_agent: 3.2
+    B1_kdense_subset: 3.2
+    B2_orchestra_subset: 3.3
+    B3_final_for_validation: 3.55
+runs:
+- variant: B0_base_agent
+  task_id: ERA-VAL-01
+  category: experimental_rigor_audit
+  overall: 3.88
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 3
+    citation_validity: null
+    literature_coverage: null
+    comparison_fairness: 4
+    experimental_rigor: 4
+    benchmark_validity: 4
+    inference_boundary_discipline: 4
+    hypothesis_quality: null
+    rl_specific_correctness: null
+    output_usefulness: 4
+    efficiency: 4
+  hard_fail: false
+  summary: B0 is a strong closed-source rigor audit. It captures benchmark scores as protocol-bound, flags contamination,
+    prompt underspecification, baseline weakness, statistics, leakage, and claim narrowing. Its main weakness is somewhat
+    generic grounding and occasional overstatement that the packet lacks details it later acknowledges.
+- variant: B1_kdense_subset
+  task_id: ERA-VAL-01
+  category: experimental_rigor_audit
+  overall: 4.12
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 4
+    citation_validity: null
+    literature_coverage: null
+    comparison_fairness: 4
+    experimental_rigor: 4
+    benchmark_validity: 4
+    inference_boundary_discipline: 4
+    hypothesis_quality: null
+    rl_specific_correctness: null
+    output_usefulness: 4
+    efficiency: 5
+  hard_fail: false
+  summary: B1 is concise, well calibrated, and covers all required audit components. It is especially efficient and usable,
+    with clear tables for risks, baselines, claims, and corrected protocol. It avoids external evidence and broad claims.
+- variant: B2_orchestra_subset
+  task_id: ERA-VAL-01
+  category: experimental_rigor_audit
+  overall: 4.0
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 4
+    citation_validity: null
+    literature_coverage: null
+    comparison_fairness: 4
+    experimental_rigor: 4
+    benchmark_validity: 4
+    inference_boundary_discipline: 4
+    hypothesis_quality: null
+    rl_specific_correctness: null
+    output_usefulness: 4
+    efficiency: 4
+  hard_fail: false
+  summary: B2 is a strong audit that captures the central benchmark-contamination skepticism and gives a solid corrected protocol.
+    It handles baselines, metrics, uncertainty, prompt protocol, leakage, and claim scope well. It remains within the closed-source
+    boundary.
+- variant: B3_final_for_validation
+  task_id: ERA-VAL-01
+  category: experimental_rigor_audit
+  overall: 4.75
+  scores:
+    factual_accuracy: 5
+    evidence_traceability: 5
+    citation_validity: null
+    literature_coverage: null
+    comparison_fairness: 4
+    experimental_rigor: 5
+    benchmark_validity: 5
+    inference_boundary_discipline: 5
+    hypothesis_quality: null
+    rl_specific_correctness: null
+    output_usefulness: 5
+    efficiency: 4
+  hard_fail: false
+  summary: B3 is the best calibrated variant. It explicitly inventories supplied sources, separates direct packet evidence,
+    within-packet synthesis, limited critique, and unsupported claims, and fully covers contamination, saturation, prompt
+    protocol, baselines, uncertainty, leakage, and claim scope. It avoids external facts and does not invent numbers.
+- variant: B0_base_agent
+  task_id: ERA-VAL-02
+  category: experimental_rigor_audit
+  overall: 3.88
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 3
+    citation_validity: null
+    literature_coverage: null
+    comparison_fairness: 4
+    experimental_rigor: 4
+    benchmark_validity: 4
+    inference_boundary_discipline: 4
+    hypothesis_quality: null
+    rl_specific_correctness: null
+    output_usefulness: 4
+    efficiency: 4
+  hard_fail: false
+  summary: Strong audit that captures the required quality/diversity/likelihood/speed claims, metric alignment, missing baselines,
+    ablations, sample selection, human evaluation, compute, and corrected protocol. It is slightly less traceable and boundary-explicit
+    than the best variants but scientifically reliable.
+- variant: B1_kdense_subset
+  task_id: ERA-VAL-02
+  category: experimental_rigor_audit
+  overall: 4.0
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 3
+    citation_validity: null
+    literature_coverage: null
+    comparison_fairness: 4
+    experimental_rigor: 4
+    benchmark_validity: 4
+    inference_boundary_discipline: 4
+    hypothesis_quality: null
+    rl_specific_correctness: null
+    output_usefulness: 4
+    efficiency: 5
+  hard_fail: false
+  summary: Concise, accurate, and efficient. It covers all required outputs and key risks, including sample selection, baselines,
+    human evaluation, compute, and claim narrowing. It is less detailed than B0/B2/B3 but remains reliable.
+- variant: B2_orchestra_subset
+  task_id: ERA-VAL-02
+  category: experimental_rigor_audit
+  overall: 4.75
+  scores:
+    factual_accuracy: 5
+    evidence_traceability: 4
+    citation_validity: null
+    literature_coverage: null
+    comparison_fairness: 5
+    experimental_rigor: 5
+    benchmark_validity: 5
+    inference_boundary_discipline: 5
+    hypothesis_quality: null
+    rl_specific_correctness: null
+    output_usefulness: 5
+    efficiency: 4
+  hard_fail: false
+  summary: Best overall variant. It cleanly separates metric types, visual samples, human evaluation absence, baselines, ablations,
+    compute, dataset splits, sample selection, and claim scope. The corrected protocol is concrete and directly aligned with
+    the task.
+- variant: B3_final_for_validation
+  task_id: ERA-VAL-02
+  category: experimental_rigor_audit
+  overall: 4.5
+  scores:
+    factual_accuracy: 5
+    evidence_traceability: 5
+    citation_validity: null
+    literature_coverage: null
+    comparison_fairness: 4
+    experimental_rigor: 4
+    benchmark_validity: 4
+    inference_boundary_discipline: 5
+    hypothesis_quality: null
+    rl_specific_correctness: null
+    output_usefulness: 4
+    efficiency: 5
+  hard_fail: false
+  summary: Very strong boundary-aware output. It explicitly labels direct packet evidence, synthesis, critique, and unsupported
+    claims, which is excellent for the closed-source setting. It is a bit less experimentally detailed than B2.
+- variant: B0_base_agent
+  task_id: LS-VAL-01
+  category: literature_mapping
+  overall: 4.0
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 3
+    citation_validity: 4
+    literature_coverage: 4
+    comparison_fairness: 4
+    experimental_rigor: null
+    benchmark_validity: null
+    inference_boundary_discipline: 4
+    hypothesis_quality: null
+    rl_specific_correctness: null
+    output_usefulness: 4
+    efficiency: 5
+  hard_fail: false
+  summary: A reliable high-level fixed-corpus map that captures the five canonical papers and main efficiency approaches while
+    avoiding unsupported rankings. It is limited by coarse packet-level traceability and lack of detailed metric/setup linkage.
+- variant: B1_kdense_subset
+  task_id: LS-VAL-01
+  category: literature_mapping
+  overall: 4.5
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 4
+    citation_validity: 4
+    literature_coverage: 5
+    comparison_fairness: 4
+    experimental_rigor: null
+    benchmark_validity: null
+    inference_boundary_discipline: 5
+    hypothesis_quality: null
+    rl_specific_correctness: null
+    output_usefulness: 5
+    efficiency: 5
+  hard_fail: false
+  summary: The strongest variant overall. It covers all five sources, separates the required efficiency families, clearly
+    labels partial support, and avoids broad unsupported claims. Its main weakness is that it cannot provide fine-grained
+    metric and dataset grounding.
+- variant: B2_orchestra_subset
+  task_id: LS-VAL-01
+  category: literature_mapping
+  overall: 4.5
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 4
+    citation_validity: 4
+    literature_coverage: 5
+    comparison_fairness: 4
+    experimental_rigor: null
+    benchmark_validity: null
+    inference_boundary_discipline: 5
+    hypothesis_quality: null
+    rl_specific_correctness: null
+    output_usefulness: 5
+    efficiency: 5
+  hard_fail: false
+  summary: A strong and well-calibrated fixed-corpus map. It captures every canonical source, cleanly separates method families,
+    and is explicit about what is source-derived versus inferred. Missing metric-level grounding keeps it below perfect.
+- variant: B3_final_for_validation
+  task_id: LS-VAL-01
+  category: literature_mapping
+  overall: 4.38
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 4
+    citation_validity: 4
+    literature_coverage: 5
+    comparison_fairness: 4
+    experimental_rigor: null
+    benchmark_validity: null
+    inference_boundary_discipline: 5
+    hypothesis_quality: null
+    rl_specific_correctness: null
+    output_usefulness: 5
+    efficiency: 4
+  hard_fail: false
+  summary: A strong final-style answer with very good source-boundary labeling and complete canonical coverage. It is slightly
+    more verbose than necessary and still cannot provide the metric-specific tradeoff mapping requested by the gold annotation.
+- variant: B0_base_agent
+  task_id: LS-VAL-02
+  category: literature_mapping
+  overall: 4.33
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 4
+    citation_validity: 5
+    literature_coverage: 4
+    comparison_fairness: null
+    experimental_rigor: 3
+    benchmark_validity: null
+    inference_boundary_discipline: 5
+    hypothesis_quality: 4
+    rl_specific_correctness: null
+    output_usefulness: 5
+    efficiency: 5
+  hard_fail: false
+  summary: Strong fixed-corpus literature map. It captures the main supportive and skeptical papers, separates behavioral
+    prompting evidence from faithfulness and intervention evidence, and avoids asserting latent reasoning as established.
+- variant: B1_kdense_subset
+  task_id: LS-VAL-02
+  category: literature_mapping
+  overall: 4.56
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 4
+    citation_validity: 5
+    literature_coverage: 5
+    comparison_fairness: null
+    experimental_rigor: 4
+    benchmark_validity: null
+    inference_boundary_discipline: 5
+    hypothesis_quality: 5
+    rl_specific_correctness: null
+    output_usefulness: 5
+    efficiency: 4
+  hard_fail: false
+  summary: Excellent response. It covers all packet sources, distinguishes evidence types cleanly, includes skeptical counter-evidence,
+    and provides falsifiable hypotheses with disconfirming observations.
+- variant: B2_orchestra_subset
+  task_id: LS-VAL-02
+  category: literature_mapping
+  overall: 4.44
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 4
+    citation_validity: 5
+    literature_coverage: 4
+    comparison_fairness: null
+    experimental_rigor: 4
+    benchmark_validity: null
+    inference_boundary_discipline: 5
+    hypothesis_quality: 4
+    rl_specific_correctness: null
+    output_usefulness: 5
+    efficiency: 5
+  hard_fail: false
+  summary: Strong and concise map. It is balanced, cautious, and explicitly separates source-derived claims from agent-proposed
+    gaps. It meets the required outputs despite minor formatting drift.
+- variant: B3_final_for_validation
+  task_id: LS-VAL-02
+  category: literature_mapping
+  overall: 4.78
+  scores:
+    factual_accuracy: 5
+    evidence_traceability: 5
+    citation_validity: 5
+    literature_coverage: 5
+    comparison_fairness: null
+    experimental_rigor: 4
+    benchmark_validity: null
+    inference_boundary_discipline: 5
+    hypothesis_quality: 5
+    rl_specific_correctness: null
+    output_usefulness: 5
+    efficiency: 4
+  hard_fail: false
+  summary: Excellent fixed-corpus answer. It satisfies all required sections, covers all four canonical papers, sharply distinguishes
+    direct evidence from synthesis and speculation, and gives balanced skeptical treatment.
+- variant: B0_base_agent
+  task_id: MC-VAL-01
+  category: method_comparison
+  overall: 3.78
+  scores:
+    factual_accuracy: 3
+    evidence_traceability: 3
+    citation_validity: null
+    literature_coverage: null
+    comparison_fairness: 4
+    experimental_rigor: 4
+    benchmark_validity: 4
+    inference_boundary_discipline: 4
+    hypothesis_quality: null
+    rl_specific_correctness: 3
+    output_usefulness: 4
+    efficiency: 5
+  hard_fail: false
+  summary: Strongly scoped and avoids unfair superiority claims, but materially misses the required PPO on-policy distinction,
+    reducing RL-specific correctness and factual accuracy.
+- variant: B1_kdense_subset
+  task_id: MC-VAL-01
+  category: method_comparison
+  overall: 3.78
+  scores:
+    factual_accuracy: 3
+    evidence_traceability: 3
+    citation_validity: null
+    literature_coverage: null
+    comparison_fairness: 4
+    experimental_rigor: 4
+    benchmark_validity: 4
+    inference_boundary_discipline: 4
+    hypothesis_quality: null
+    rl_specific_correctness: 3
+    output_usefulness: 4
+    efficiency: 5
+  hard_fail: false
+  summary: Clear and fair closed-source comparison with strong boundary discipline, but it misses the high-weight PPO on-policy
+    fact and remains only moderately traceable.
+- variant: B2_orchestra_subset
+  task_id: MC-VAL-01
+  category: method_comparison
+  overall: 4.22
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 3
+    citation_validity: null
+    literature_coverage: null
+    comparison_fairness: 5
+    experimental_rigor: 5
+    benchmark_validity: 4
+    inference_boundary_discipline: 4
+    hypothesis_quality: null
+    rl_specific_correctness: 4
+    output_usefulness: 5
+    efficiency: 4
+  hard_fail: false
+  summary: 'Best practical comparison among the first three: it captures the on-policy/off-policy distinction, avoids broad
+    rankings, and gives a rigorous benchmark protocol checklist.'
+- variant: B3_final_for_validation
+  task_id: MC-VAL-01
+  category: method_comparison
+  overall: 4.2
+  scores:
+    factual_accuracy: 3
+    evidence_traceability: 4
+    citation_validity: 4
+    literature_coverage: null
+    comparison_fairness: 5
+    experimental_rigor: 5
+    benchmark_validity: 4
+    inference_boundary_discipline: 5
+    hypothesis_quality: null
+    rl_specific_correctness: 3
+    output_usefulness: 5
+    efficiency: 4
+  hard_fail: false
+  summary: Very usable and disciplined artifact with explicit evidence-burden labels and strong recommendations, but it still
+    weakens the required PPO on-policy fact enough to lose factual and RL-specific credit.
+- variant: B0_base_agent
+  task_id: MC-VAL-02
+  category: method_comparison
+  overall: 4.11
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 3
+    citation_validity: 4
+    literature_coverage: null
+    comparison_fairness: 5
+    experimental_rigor: 4
+    benchmark_validity: 4
+    inference_boundary_discipline: 4
+    hypothesis_quality: null
+    rl_specific_correctness: null
+    output_usefulness: 4
+    efficiency: 5
+  hard_fail: false
+  summary: 'Strong, well-scoped comparison that captures the main gold requirements: architecture and inductive-bias differences,
+    data/compute/training confounds, benchmark comparability, and no universal winner claim.'
+- variant: B1_kdense_subset
+  task_id: MC-VAL-02
+  category: method_comparison
+  overall: 4.33
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 4
+    citation_validity: 4
+    literature_coverage: null
+    comparison_fairness: 5
+    experimental_rigor: 4
+    benchmark_validity: 4
+    inference_boundary_discipline: 5
+    hypothesis_quality: null
+    rl_specific_correctness: null
+    output_usefulness: 4
+    efficiency: 5
+  hard_fail: false
+  summary: Very reliable closed-source answer. It is cautious, distinguishes direct packet support from inference, and refuses
+    unsupported rankings or efficiency claims.
+- variant: B2_orchestra_subset
+  task_id: MC-VAL-02
+  category: method_comparison
+  overall: 4.56
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 4
+    citation_validity: 4
+    literature_coverage: null
+    comparison_fairness: 5
+    experimental_rigor: 4
+    benchmark_validity: 5
+    inference_boundary_discipline: 5
+    hypothesis_quality: null
+    rl_specific_correctness: null
+    output_usefulness: 5
+    efficiency: 5
+  hard_fail: false
+  summary: Excellent comparison artifact for the task. It covers all required outputs, gives clear comparability judgments,
+    separates source-derived facts from synthesis and missing detail, and avoids broad superiority claims.
+- variant: B3_final_for_validation
+  task_id: MC-VAL-02
+  category: method_comparison
+  overall: 4.67
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 5
+    citation_validity: 4
+    literature_coverage: null
+    comparison_fairness: 5
+    experimental_rigor: 5
+    benchmark_validity: 5
+    inference_boundary_discipline: 5
+    hypothesis_quality: null
+    rl_specific_correctness: null
+    output_usefulness: 5
+    efficiency: 4
+  hard_fail: false
+  summary: Most audit-ready variant. It explicitly labels direct evidence, synthesis, critique, and unsupported claims while
+    covering data scale, compute, recipe, benchmarks, metrics, ablations, and scope limits.
+- variant: B0_base_agent
+  task_id: PS-VAL-01
+  category: proposal_support
+  overall: 4.0
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 4
+    citation_validity: null
+    literature_coverage: null
+    comparison_fairness: 4
+    experimental_rigor: 4
+    benchmark_validity: 4
+    inference_boundary_discipline: 4
+    hypothesis_quality: 4
+    rl_specific_correctness: 4
+    output_usefulness: 4
+    efficiency: 4
+  hard_fail: false
+  summary: Strong proposal support response. It separates facts, synthesis, and hypotheses; covers falsification, baselines,
+    ablations, model-error controls, seeds, and RL metrics. Minor overstrength in comparative hypotheses and some missing
+    implementation-level protocol details keep it below excellent.
+- variant: B1_kdense_subset
+  task_id: PS-VAL-01
+  category: proposal_support
+  overall: 4.7
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 4
+    citation_validity: null
+    literature_coverage: null
+    comparison_fairness: 5
+    experimental_rigor: 5
+    benchmark_validity: 4
+    inference_boundary_discipline: 5
+    hypothesis_quality: 5
+    rl_specific_correctness: 5
+    output_usefulness: 5
+    efficiency: 5
+  hard_fail: false
+  summary: Best calibrated output. It cleanly separates packet facts, synthesis, and hypotheses; avoids inventing Atari protocol
+    details; gives falsifiable hypotheses; and includes strong RL-specific fairness controls, ablations, seeds, uncertainty,
+    and model-error diagnostics.
+- variant: B2_orchestra_subset
+  task_id: PS-VAL-01
+  category: proposal_support
+  overall: 4.0
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 4
+    citation_validity: null
+    literature_coverage: null
+    comparison_fairness: 4
+    experimental_rigor: 4
+    benchmark_validity: 4
+    inference_boundary_discipline: 4
+    hypothesis_quality: 4
+    rl_specific_correctness: 4
+    output_usefulness: 4
+    efficiency: 4
+  hard_fail: false
+  summary: Strong and usable proposal. It includes provenance separation, falsification, fair baselines, seeds, leakage controls,
+    aggregation cautions, and risk analysis. Minor invented design specifics and slightly loose causal wording prevent a top
+    score.
+- variant: B3_final_for_validation
+  task_id: PS-VAL-01
+  category: proposal_support
+  overall: 4.7
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 5
+    citation_validity: null
+    literature_coverage: null
+    comparison_fairness: 5
+    experimental_rigor: 5
+    benchmark_validity: 5
+    inference_boundary_discipline: 5
+    hypothesis_quality: 4
+    rl_specific_correctness: 5
+    output_usefulness: 5
+    efficiency: 4
+  hard_fail: false
+  summary: Excellent boundary discipline and proposal mechanics. It explicitly labels direct evidence, synthesis, critique,
+    and unsupported claims; includes concrete required reporting, RL protocol details, model-error diagnostics, baselines,
+    ablations, and risk controls. Minor unstated source metadata and a compound hypothesis keep factual accuracy and hypothesis
+    quality slightly below perfect.
+- variant: B0_base_agent
+  task_id: PS-VAL-02
+  category: proposal_support
+  overall: 4.0
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 4
+    citation_validity: null
+    literature_coverage: null
+    comparison_fairness: null
+    experimental_rigor: 4
+    benchmark_validity: null
+    inference_boundary_discipline: 4
+    hypothesis_quality: 4
+    rl_specific_correctness: null
+    output_usefulness: 4
+    efficiency: 4
+  hard_fail: false
+  summary: A strong cautious proposal that separates correlational localization from causal testing, includes interventions,
+    controls, falsification criteria, alternatives, and a risk register. Minor limitations are broad source references and
+    incomplete scope binding to the unspecified target behavior.
+- variant: B1_kdense_subset
+  task_id: PS-VAL-02
+  category: proposal_support
+  overall: 4.71
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 5
+    citation_validity: null
+    literature_coverage: null
+    comparison_fairness: null
+    experimental_rigor: 5
+    benchmark_validity: null
+    inference_boundary_discipline: 5
+    hypothesis_quality: 5
+    rl_specific_correctness: null
+    output_usefulness: 5
+    efficiency: 4
+  hard_fail: false
+  summary: Best-calibrated variant overall. It is careful about direct versus speculative support, explicitly marks missing
+    behavior/model/metric details, and provides actionable causal tests with matched controls and falsification conditions.
+- variant: B2_orchestra_subset
+  task_id: PS-VAL-02
+  category: proposal_support
+  overall: 4.71
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 4
+    citation_validity: null
+    literature_coverage: null
+    comparison_fairness: null
+    experimental_rigor: 5
+    benchmark_validity: null
+    inference_boundary_discipline: 5
+    hypothesis_quality: 5
+    rl_specific_correctness: null
+    output_usefulness: 5
+    efficiency: 5
+  hard_fail: false
+  summary: A very strong and efficient proposal. It cleanly distinguishes what IOI/ROME support from what they do not, gives
+    falsifiable hypotheses, and includes robust controls, specificity checks, and alternative explanations.
+- variant: B3_final_for_validation
+  task_id: PS-VAL-02
+  category: proposal_support
+  overall: 4.86
+  scores:
+    factual_accuracy: 5
+    evidence_traceability: 5
+    citation_validity: null
+    literature_coverage: null
+    comparison_fairness: null
+    experimental_rigor: 5
+    benchmark_validity: null
+    inference_boundary_discipline: 5
+    hypothesis_quality: 5
+    rl_specific_correctness: null
+    output_usefulness: 5
+    efficiency: 4
+  hard_fail: false
+  summary: Excellent closed-source proposal support. It explicitly labels evidence burden, separates direct packet evidence
+    from proposal speculation and critique, avoids numeric invention, and supplies causal tests, controls, falsification criteria,
+    alternatives, and risks.
+- variant: B0_base_agent
+  task_id: RL-VAL-01
+  category: rl_specific_analysis
+  overall: 4.2
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 3
+    citation_validity: 4
+    literature_coverage: null
+    comparison_fairness: 4
+    experimental_rigor: 5
+    benchmark_validity: 4
+    inference_boundary_discipline: 4
+    hypothesis_quality: null
+    rl_specific_correctness: 5
+    output_usefulness: 5
+    efficiency: 4
+  hard_fail: false
+  summary: Strong RL-specific audit that captures learned model assumptions, planning risk, model-error accumulation, baselines,
+    seeds, metrics, and claim boundaries. It is highly useful as a revised protocol, with only moderate traceability limitations.
+- variant: B1_kdense_subset
+  task_id: RL-VAL-01
+  category: rl_specific_analysis
+  overall: 4.2
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 4
+    citation_validity: 4
+    literature_coverage: null
+    comparison_fairness: 4
+    experimental_rigor: 4
+    benchmark_validity: 4
+    inference_boundary_discipline: 5
+    hypothesis_quality: null
+    rl_specific_correctness: 4
+    output_usefulness: 4
+    efficiency: 5
+  hard_fail: false
+  summary: Careful and well-bounded response with good abstention from unsupported details. It covers the major RL risks,
+    but its excessive uncertainty and slightly sparse protocol reduce completeness.
+- variant: B2_orchestra_subset
+  task_id: RL-VAL-01
+  category: rl_specific_analysis
+  overall: 4.8
+  scores:
+    factual_accuracy: 5
+    evidence_traceability: 4
+    citation_validity: 4
+    literature_coverage: null
+    comparison_fairness: 5
+    experimental_rigor: 5
+    benchmark_validity: 5
+    inference_boundary_discipline: 5
+    hypothesis_quality: null
+    rl_specific_correctness: 5
+    output_usefulness: 5
+    efficiency: 5
+  hard_fail: false
+  summary: Best calibrated variant. It captures all required model-based RL audit areas, separates supported facts from unsupported
+    claims, handles model-error/planning confounds, and gives a rigorous revised protocol without overclaiming.
+- variant: B3_final_for_validation
+  task_id: RL-VAL-01
+  category: rl_specific_analysis
+  overall: 4.7
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 5
+    citation_validity: 4
+    literature_coverage: null
+    comparison_fairness: 5
+    experimental_rigor: 5
+    benchmark_validity: 5
+    inference_boundary_discipline: 5
+    hypothesis_quality: null
+    rl_specific_correctness: 5
+    output_usefulness: 5
+    efficiency: 4
+  hard_fail: false
+  summary: Very strong, traceable, and disciplined audit. It explicitly labels packet evidence, limited critique, unsupported
+    claims, and speculative protocol proposals, while covering all required RL-specific risks and revised protocol elements.
+- variant: B0_base_agent
+  task_id: RL-VAL-02
+  category: rl_specific_analysis
+  overall: 4.4
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 3
+    citation_validity: 4
+    literature_coverage: null
+    comparison_fairness: 4
+    experimental_rigor: 5
+    benchmark_validity: 5
+    inference_boundary_discipline: 5
+    hypothesis_quality: null
+    rl_specific_correctness: 5
+    output_usefulness: 5
+    efficiency: 4
+  hard_fail: false
+  summary: Strong RL-specific audit that captures preference data, reward model validation gaps, policy optimization details,
+    baselines, evaluation risks, reward hacking, and claim boundaries. It is actionable and well calibrated, with only moderate
+    traceability limitations.
+- variant: B1_kdense_subset
+  task_id: RL-VAL-02
+  category: rl_specific_analysis
+  overall: 4.6
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 4
+    citation_validity: 4
+    literature_coverage: null
+    comparison_fairness: 4
+    experimental_rigor: 5
+    benchmark_validity: 5
+    inference_boundary_discipline: 5
+    hypothesis_quality: null
+    rl_specific_correctness: 5
+    output_usefulness: 5
+    efficiency: 5
+  hard_fail: false
+  summary: Very strong, concise, and well calibrated. It cleanly separates direct packet support from partial or absent evidence,
+    captures the main RLHF risks, and produces a useful revised protocol without overclaiming.
+- variant: B2_orchestra_subset
+  task_id: RL-VAL-02
+  category: rl_specific_analysis
+  overall: 4.5
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 3
+    citation_validity: 4
+    literature_coverage: null
+    comparison_fairness: 4
+    experimental_rigor: 5
+    benchmark_validity: 5
+    inference_boundary_discipline: 5
+    hypothesis_quality: null
+    rl_specific_correctness: 5
+    output_usefulness: 5
+    efficiency: 5
+  hard_fail: false
+  summary: A strong and efficient RL-specific risk audit. It captures the required elements, especially proxy mismatch, overoptimization,
+    baseline weakness, leakage, and claim boundaries. Its main weakness is less explicit source traceability.
+- variant: B3_final_for_validation
+  task_id: RL-VAL-02
+  category: rl_specific_analysis
+  overall: 4.6
+  scores:
+    factual_accuracy: 4
+    evidence_traceability: 5
+    citation_validity: 4
+    literature_coverage: null
+    comparison_fairness: 4
+    experimental_rigor: 5
+    benchmark_validity: 5
+    inference_boundary_discipline: 5
+    hypothesis_quality: null
+    rl_specific_correctness: 5
+    output_usefulness: 5
+    efficiency: 4
+  hard_fail: false
+  summary: Best traceability and boundary discipline among the variants. It explicitly labels direct packet evidence, synthesis,
+    limited critique, and unsupported claims, and it covers all required RL audit components without inventing results.
+- variant: B0_base_agent
+  task_id: SPR-VAL-01
+  category: single_paper_reading
+  overall: 3.1
+  scores:
+    factual_accuracy: 3
+    evidence_traceability: 3
+    citation_validity: 3
+    literature_coverage: null
+    comparison_fairness: 3
+    experimental_rigor: 3
+    benchmark_validity: 3
+    inference_boundary_discipline: 4
+    hypothesis_quality: null
+    rl_specific_correctness: 2
+    output_usefulness: 3
+    efficiency: 4
+  hard_fail: false
+  summary: Cautious and mostly safe, but too skeletal for a deep-reading task. It avoids hallucinating and marks many missing
+    details unknown, yet misses the required substantive DreamerV3 objective, policy-learning setup, domains, metrics, baselines,
+    and limitations.
+- variant: B1_kdense_subset
+  task_id: SPR-VAL-01
+  category: single_paper_reading
+  overall: 3.1
+  scores:
+    factual_accuracy: 3
+    evidence_traceability: 3
+    citation_validity: 3
+    literature_coverage: null
+    comparison_fairness: 3
+    experimental_rigor: 3
+    benchmark_validity: 3
+    inference_boundary_discipline: 4
+    hypothesis_quality: null
+    rl_specific_correctness: 2
+    output_usefulness: 3
+    efficiency: 4
+  hard_fail: false
+  summary: A compact, disciplined answer that avoids overclaiming, but it is under-informative for the benchmark. It is useful
+    as a missing-evidence audit, not as the requested structured deep reading of the Dreamer-style paper.
+- variant: B2_orchestra_subset
+  task_id: SPR-VAL-01
+  category: single_paper_reading
+  overall: 3.3
+  scores:
+    factual_accuracy: 3
+    evidence_traceability: 3
+    citation_validity: 3
+    literature_coverage: null
+    comparison_fairness: 4
+    experimental_rigor: 3
+    benchmark_validity: 3
+    inference_boundary_discipline: 4
+    hypothesis_quality: null
+    rl_specific_correctness: 2
+    output_usefulness: 4
+    efficiency: 4
+  hard_fail: false
+  summary: The strongest of the incomplete subset-style answers. It gives useful calibrated critique and comparison-fairness
+    warnings, but it remains far below an expert paper card because it lacks the actual DreamerV3 objective, domains, metrics,
+    baselines, and limitations.
+- variant: B3_final_for_validation
+  task_id: SPR-VAL-01
+  category: single_paper_reading
+  overall: 3.6
+  scores:
+    factual_accuracy: 3
+    evidence_traceability: 4
+    citation_validity: 3
+    literature_coverage: null
+    comparison_fairness: 4
+    experimental_rigor: 3
+    benchmark_validity: 3
+    inference_boundary_discipline: 5
+    hypothesis_quality: null
+    rl_specific_correctness: 3
+    output_usefulness: 4
+    efficiency: 4
+  hard_fail: false
+  summary: Best calibrated variant. It is highly disciplined about inference boundaries and explicitly distinguishes packet
+    evidence from critique, but it remains substantively incomplete for the requested deep read because the key DreamerV3
+    experimental and method facts are absent.
+- variant: B0_base_agent
+  task_id: SPR-VAL-02
+  category: single_paper_reading
+  overall: 3.3
+  scores:
+    factual_accuracy: 3
+    evidence_traceability: 3
+    citation_validity: 3
+    literature_coverage: null
+    comparison_fairness: 3
+    experimental_rigor: 3
+    benchmark_validity: 3
+    inference_boundary_discipline: 4
+    hypothesis_quality: null
+    rl_specific_correctness: 4
+    output_usefulness: 3
+    efficiency: 4
+  hard_fail: false
+  summary: Cautious and RL-aware, but substantially incomplete. It captures the high-level return-conditioned sequence-modeling
+    framing and avoids overclaiming, yet fails the deep-reading requirement by not extracting actual experimental and reproducibility
+    details.
+- variant: B1_kdense_subset
+  task_id: SPR-VAL-02
+  category: single_paper_reading
+  overall: 3.3
+  scores:
+    factual_accuracy: 3
+    evidence_traceability: 3
+    citation_validity: 3
+    literature_coverage: null
+    comparison_fairness: 3
+    experimental_rigor: 3
+    benchmark_validity: 3
+    inference_boundary_discipline: 4
+    hypothesis_quality: null
+    rl_specific_correctness: 4
+    output_usefulness: 3
+    efficiency: 4
+  hard_fail: false
+  summary: Stronger organization than B0 and good boundary discipline, but it remains a generic cautious template. It captures
+    the central formulation but misses the actual empirical content that the task asked to extract.
+- variant: B2_orchestra_subset
+  task_id: SPR-VAL-02
+  category: single_paper_reading
+  overall: 3.3
+  scores:
+    factual_accuracy: 3
+    evidence_traceability: 3
+    citation_validity: 3
+    literature_coverage: null
+    comparison_fairness: 3
+    experimental_rigor: 3
+    benchmark_validity: 3
+    inference_boundary_discipline: 4
+    hypothesis_quality: null
+    rl_specific_correctness: 4
+    output_usefulness: 3
+    efficiency: 4
+  hard_fail: false
+  summary: A careful but under-informative answer. It is useful as an evidence-boundary checklist, not as a deep reading of
+    the Decision Transformer packet.
+- variant: B3_final_for_validation
+  task_id: SPR-VAL-02
+  category: single_paper_reading
+  overall: 3.5
+  scores:
+    factual_accuracy: 3
+    evidence_traceability: 4
+    citation_validity: 3
+    literature_coverage: null
+    comparison_fairness: 3
+    experimental_rigor: 3
+    benchmark_validity: 3
+    inference_boundary_discipline: 5
+    hypothesis_quality: null
+    rl_specific_correctness: 4
+    output_usefulness: 3
+    efficiency: 4
+  hard_fail: false
+  summary: "Best-calibrated of the four on inference boundaries and evidence labeling, but still not a successful deep reading\
+    \ because it mostly inventories missing information rather than extracting the paper\u2019s concrete experimental content."

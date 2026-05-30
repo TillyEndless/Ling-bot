@@ -1,0 +1,42 @@
+run_id: validation_v0.1__B1_kdense_subset__LS-VAL-01__run001
+variant: B1_kdense_subset
+task_id: LS-VAL-01
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 4
+  evidence_traceability: 4
+  citation_validity: 4
+  literature_coverage: 5
+  comparison_fairness: 4
+  experimental_rigor: null
+  benchmark_validity: null
+  inference_boundary_discipline: 5
+  hypothesis_quality: null
+  rl_specific_correctness: null
+  output_usefulness: 5
+  efficiency: 5
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: evidence_traceability
+  description: Traceability is stronger than most variants through explicit evidence-status columns, but still remains at
+    controlled-note level rather than exact page/table/metric level.
+  evidence: Tables repeatedly cite "Controlled source note" and distinguish direct vs partial support, but do not cite result
+    table locations or named metrics.
+- severity: minor
+  dimension: factual_accuracy
+  description: The statement that DPM-Solver reports around 10-step sampling is plausible from the packet framing, but exact
+    conditions and metrics are not specified, so the numeric-sounding claim should be more tightly bounded.
+  evidence: Representative paper table says "Around 10-step sampling" while also noting exact solver details and benchmark
+    numbers are absent.
+- severity: minor
+  dimension: comparison_fairness
+  description: The output carefully avoids direct winners, but cannot satisfy the gold requirement to link speed/quality tradeoffs
+    to metrics and datasets because it repeatedly says these details are absent.
+  evidence: Gap list identifies missing comparable benchmark matrix and incomplete step-quality curves.
+summary: The strongest variant overall. It covers all five sources, separates the required efficiency families, clearly labels
+  partial support, and avoids broad unsupported claims. Its main weakness is that it cannot provide fine-grained metric and
+  dataset grounding.

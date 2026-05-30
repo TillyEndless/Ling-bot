@@ -1,0 +1,308 @@
+approval_policy: agent_review_sufficient_for_internal_validation
+reviewer: codex_independent_reviewer
+global_eb_rule: External facts or broad claims are penalized only when used as evidence for a core scored claim; harmless
+  background context clearly marked as non-evidence should not trigger a major penalty.
+tasks:
+- task_id: ERA-VAL-01
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  eligible_for_scoring: true
+  approval_policy: agent_review_sufficient_for_internal_validation
+  approved_items:
+  - item_id: ERA-VAL-01-M1
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: ERA-VAL-01-M2
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: ERA-VAL-01-M3
+    rationale: 'Approved after extra scrutiny: packet includes GPT-3 contamination discussion and MMLU benchmark/evaluation
+      materials, supporting separation of source-reported contamination analysis from additional follow-up contamination risks.'
+  - item_id: GLOBAL-EB-SCOPE
+    rationale: 'Approved: major penalties are scoped to external facts or broad claims used as evidence for a core scored
+      claim; harmless background context clearly marked as non-evidence should not trigger a major penalty.'
+  revisions_required: []
+  blocked_reason: ''
+  review_notes: Gold file remains unchanged; this is an independent agent review decision, not human approval. The task is
+    considered internally scorable only under the stated global E/B scope rule and fixed-source packet protocol.
+- task_id: ERA-VAL-02
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  eligible_for_scoring: true
+  approval_policy: agent_review_sufficient_for_internal_validation
+  approved_items:
+  - item_id: ERA-VAL-02-M1
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: ERA-VAL-02-M2
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: ERA-VAL-02-M3
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: GLOBAL-EB-SCOPE
+    rationale: 'Approved: major penalties are scoped to external facts or broad claims used as evidence for a core scored
+      claim; harmless background context clearly marked as non-evidence should not trigger a major penalty.'
+  revisions_required: []
+  blocked_reason: ''
+  review_notes: Gold file remains unchanged; this is an independent agent review decision, not human approval. The task is
+    considered internally scorable only under the stated global E/B scope rule and fixed-source packet protocol.
+- task_id: LS-VAL-01
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  eligible_for_scoring: true
+  approval_policy: agent_review_sufficient_for_internal_validation
+  approved_items:
+  - item_id: LS-VAL-01-M1
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: LS-VAL-01-M2
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: LS-VAL-01-M3
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: GLOBAL-EB-SCOPE
+    rationale: 'Approved: major penalties are scoped to external facts or broad claims used as evidence for a core scored
+      claim; harmless background context clearly marked as non-evidence should not trigger a major penalty.'
+  revisions_required: []
+  blocked_reason: ''
+  review_notes: Gold file remains unchanged; this is an independent agent review decision, not human approval. The task is
+    considered internally scorable only under the stated global E/B scope rule and fixed-source packet protocol.
+- task_id: LS-VAL-02
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  eligible_for_scoring: true
+  approval_policy: agent_review_sufficient_for_internal_validation
+  approved_items:
+  - item_id: LS-VAL-02-M1
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: LS-VAL-02-M2
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: LS-VAL-02-M3
+    rationale: 'Approved after extra scrutiny: packet includes both supportive CoT sources and skeptical/faithfulness sources,
+      including unfaithful-explanation and faithfulness-test papers, so the skeptical/alternative-evidence boundary is central
+      and source-supported.'
+  - item_id: GLOBAL-EB-SCOPE
+    rationale: 'Approved: major penalties are scoped to external facts or broad claims used as evidence for a core scored
+      claim; harmless background context clearly marked as non-evidence should not trigger a major penalty.'
+  revisions_required: []
+  blocked_reason: ''
+  review_notes: Gold file remains unchanged; this is an independent agent review decision, not human approval. The task is
+    considered internally scorable only under the stated global E/B scope rule and fixed-source packet protocol.
+- task_id: MC-VAL-01
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  eligible_for_scoring: true
+  approval_policy: agent_review_sufficient_for_internal_validation
+  approved_items:
+  - item_id: MC-VAL-01-M1
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: MC-VAL-01-M2
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: MC-VAL-01-M3
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: GLOBAL-EB-SCOPE
+    rationale: 'Approved: major penalties are scoped to external facts or broad claims used as evidence for a core scored
+      claim; harmless background context clearly marked as non-evidence should not trigger a major penalty.'
+  revisions_required: []
+  blocked_reason: ''
+  review_notes: Gold file remains unchanged; this is an independent agent review decision, not human approval. The task is
+    considered internally scorable only under the stated global E/B scope rule and fixed-source packet protocol.
+- task_id: MC-VAL-02
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  eligible_for_scoring: true
+  approval_policy: agent_review_sufficient_for_internal_validation
+  approved_items:
+  - item_id: MC-VAL-02-M1
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: MC-VAL-02-M2
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: MC-VAL-02-M3
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: GLOBAL-EB-SCOPE
+    rationale: 'Approved: major penalties are scoped to external facts or broad claims used as evidence for a core scored
+      claim; harmless background context clearly marked as non-evidence should not trigger a major penalty.'
+  revisions_required: []
+  blocked_reason: ''
+  review_notes: Gold file remains unchanged; this is an independent agent review decision, not human approval. The task is
+    considered internally scorable only under the stated global E/B scope rule and fixed-source packet protocol.
+- task_id: PS-VAL-01
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  eligible_for_scoring: true
+  approval_policy: agent_review_sufficient_for_internal_validation
+  approved_items:
+  - item_id: PS-VAL-01-M1
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: PS-VAL-01-M2
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: PS-VAL-01-M3
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: GLOBAL-EB-SCOPE
+    rationale: 'Approved: major penalties are scoped to external facts or broad claims used as evidence for a core scored
+      claim; harmless background context clearly marked as non-evidence should not trigger a major penalty.'
+  revisions_required: []
+  blocked_reason: ''
+  review_notes: Gold file remains unchanged; this is an independent agent review decision, not human approval. The task is
+    considered internally scorable only under the stated global E/B scope rule and fixed-source packet protocol.
+- task_id: PS-VAL-02
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  eligible_for_scoring: true
+  approval_policy: agent_review_sufficient_for_internal_validation
+  approved_items:
+  - item_id: PS-VAL-02-M1
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: PS-VAL-02-M2
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: PS-VAL-02-M3
+    rationale: 'Approved after extra scrutiny: packet includes IOI and ROME sources plus a local claim brief; these identify
+      specific model/task/feature/intervention contexts, supporting scope limits on mechanistic claims.'
+  - item_id: GLOBAL-EB-SCOPE
+    rationale: 'Approved: major penalties are scoped to external facts or broad claims used as evidence for a core scored
+      claim; harmless background context clearly marked as non-evidence should not trigger a major penalty.'
+  revisions_required: []
+  blocked_reason: ''
+  review_notes: Gold file remains unchanged; this is an independent agent review decision, not human approval. The task is
+    considered internally scorable only under the stated global E/B scope rule and fixed-source packet protocol.
+- task_id: RL-VAL-01
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  eligible_for_scoring: true
+  approval_policy: agent_review_sufficient_for_internal_validation
+  approved_items:
+  - item_id: RL-VAL-01-M1
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: RL-VAL-01-M2
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: RL-VAL-01-M3
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: GLOBAL-EB-SCOPE
+    rationale: 'Approved: major penalties are scoped to external facts or broad claims used as evidence for a core scored
+      claim; harmless background context clearly marked as non-evidence should not trigger a major penalty.'
+  revisions_required: []
+  blocked_reason: ''
+  review_notes: Gold file remains unchanged; this is an independent agent review decision, not human approval. The task is
+    considered internally scorable only under the stated global E/B scope rule and fixed-source packet protocol.
+- task_id: RL-VAL-02
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  eligible_for_scoring: true
+  approval_policy: agent_review_sufficient_for_internal_validation
+  approved_items:
+  - item_id: RL-VAL-02-M1
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: RL-VAL-02-M2
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: RL-VAL-02-M3
+    rationale: 'Approved after extra scrutiny: packet includes preference-data/reward-model/RLHF sources and notes evaluation/limitations
+      materials, supporting proxy mismatch, reward hacking, evaluator bias, and train/eval leakage as audit risks rather than
+      established failures.'
+  - item_id: GLOBAL-EB-SCOPE
+    rationale: 'Approved: major penalties are scoped to external facts or broad claims used as evidence for a core scored
+      claim; harmless background context clearly marked as non-evidence should not trigger a major penalty.'
+  revisions_required: []
+  blocked_reason: ''
+  review_notes: Gold file remains unchanged; this is an independent agent review decision, not human approval. The task is
+    considered internally scorable only under the stated global E/B scope rule and fixed-source packet protocol.
+- task_id: SPR-VAL-01
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  eligible_for_scoring: true
+  approval_policy: agent_review_sufficient_for_internal_validation
+  approved_items:
+  - item_id: SPR-VAL-01-M1
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: SPR-VAL-01-M2
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: SPR-VAL-01-M3
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: GLOBAL-EB-SCOPE
+    rationale: 'Approved: major penalties are scoped to external facts or broad claims used as evidence for a core scored
+      claim; harmless background context clearly marked as non-evidence should not trigger a major penalty.'
+  revisions_required: []
+  blocked_reason: ''
+  review_notes: Gold file remains unchanged; this is an independent agent review decision, not human approval. The task is
+    considered internally scorable only under the stated global E/B scope rule and fixed-source packet protocol.
+- task_id: SPR-VAL-02
+  agent_review_status: approved
+  reviewer: codex_independent_reviewer
+  eligible_for_scoring: true
+  approval_policy: agent_review_sufficient_for_internal_validation
+  approved_items:
+  - item_id: SPR-VAL-02-M1
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: SPR-VAL-02-M2
+    rationale: 'Approved: the anchor is central to the task, the fixed packet names the required canonical source material,
+      and the evidence location identifies a paper plus a sufficiently specific method, experiment, result, table/figure,
+      limitation, or evaluation area for internal validation scoring.'
+  - item_id: SPR-VAL-02-M3
+    rationale: 'Approved after extra scrutiny: packet identifies Decision Transformer as offline RL via sequence modeling
+      and includes datasets/environments, experiments, reproducibility details, and limitations, supporting bounded claims
+      about online control, planning, imitation, or general RL implications.'
+  - item_id: GLOBAL-EB-SCOPE
+    rationale: 'Approved: major penalties are scoped to external facts or broad claims used as evidence for a core scored
+      claim; harmless background context clearly marked as non-evidence should not trigger a major penalty.'
+  revisions_required: []
+  blocked_reason: ''
+  review_notes: Gold file remains unchanged; this is an independent agent review decision, not human approval. The task is
+    considered internally scorable only under the stated global E/B scope rule and fixed-source packet protocol.
+overall:
+  approved: 12
+  revisions_required: 0
+  blocked: 0
+  all_eligible_for_internal_scoring: true

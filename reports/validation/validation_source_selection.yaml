@@ -1,0 +1,247 @@
+sources:
+  ERA-VAL-01:
+  - id: gpt3
+    title: Language Models are Few-Shot Learners
+    authors: Tom B. Brown et al.
+    year: 2020
+    identifier: arXiv:2005.14165
+    url: https://arxiv.org/pdf/2005.14165
+    filename: brown_2020_language_models_are_few_shot_learners.pdf
+    include: Abstract; evaluation/benchmark descriptions; contamination discussion;
+      limitations.
+  - id: mmlu
+    title: Measuring Massive Multitask Language Understanding
+    authors: Dan Hendrycks et al.
+    year: 2021
+    identifier: arXiv:2009.03300
+    url: https://arxiv.org/pdf/2009.03300
+    filename: hendrycks_2021_measuring_massive_multitask_language_understanding.pdf
+    include: Abstract; benchmark/task design; evaluation protocol; limitations.
+  ERA-VAL-02:
+  - id: ddpm
+    title: Denoising Diffusion Probabilistic Models
+    authors: Jonathan Ho, Ajay Jain, Pieter Abbeel
+    year: 2020
+    identifier: arXiv:2006.11239
+    url: https://arxiv.org/pdf/2006.11239
+    filename: ho_2020_denoising_diffusion_probabilistic_models.pdf
+    include: Abstract; experiments; sample quality/likelihood discussion; limitations.
+  - id: improved_ddpm
+    title: Improved Denoising Diffusion Probabilistic Models
+    authors: Alex Nichol, Prafulla Dhariwal
+    year: 2021
+    identifier: arXiv:2102.09672
+    url: https://arxiv.org/pdf/2102.09672
+    filename: nichol_2021_improved_ddpm.pdf
+    include: Abstract; evaluation metrics; precision/recall; sampling speed; ablations.
+  LS-VAL-01:
+  - id: ddim
+    title: Denoising Diffusion Implicit Models
+    authors: Jiaming Song, Chenlin Meng, Stefano Ermon
+    year: 2020
+    identifier: arXiv:2010.02502
+    url: https://arxiv.org/pdf/2010.02502
+    filename: song_2020_denoising_diffusion_implicit_models.pdf
+    include: Abstract; sampling acceleration method; experiments; limitations.
+  - id: progressive_distillation
+    title: Progressive Distillation for Fast Sampling of Diffusion Models
+    authors: Tim Salimans, Jonathan Ho
+    year: 2022
+    identifier: arXiv:2202.00512
+    url: https://arxiv.org/pdf/2202.00512
+    filename: salimans_2022_progressive_distillation.pdf
+    include: Abstract; distillation method; sample-step tradeoffs; experiments.
+  - id: dpm_solver
+    title: 'DPM-Solver: A Fast ODE Solver for Diffusion Probabilistic Model Sampling
+      in Around 10 Steps'
+    authors: Cheng Lu et al.
+    year: 2022
+    identifier: arXiv:2206.00927
+    url: https://arxiv.org/pdf/2206.00927
+    filename: lu_2022_dpm_solver.pdf
+    include: Abstract; solver design; experiments; step/quality tradeoffs.
+  - id: ldm
+    title: High-Resolution Image Synthesis with Latent Diffusion Models
+    authors: Robin Rombach et al.
+    year: 2022
+    identifier: arXiv:2112.10752
+    url: https://arxiv.org/pdf/2112.10752
+    filename: rombach_2022_latent_diffusion_models.pdf
+    include: Abstract; latent-space modeling; computational tradeoffs; experiments.
+  - id: consistency
+    title: Consistency Models
+    authors: Yang Song et al.
+    year: 2023
+    identifier: arXiv:2303.01469
+    url: https://arxiv.org/pdf/2303.01469
+    filename: song_2023_consistency_models.pdf
+    include: Abstract; one/few-step generation; distillation/training; experiments.
+  LS-VAL-02:
+  - id: cot
+    title: Chain-of-Thought Prompting Elicits Reasoning in Large Language Models
+    authors: Jason Wei et al.
+    year: 2022
+    identifier: arXiv:2201.11903
+    url: https://arxiv.org/pdf/2201.11903
+    filename: wei_2022_chain_of_thought_prompting.pdf
+    include: Abstract; prompting/evaluation results; limitations.
+  - id: zero_shot_cot
+    title: Large Language Models are Zero-Shot Reasoners
+    authors: Takeshi Kojima et al.
+    year: 2022
+    identifier: arXiv:2205.11916
+    url: https://arxiv.org/pdf/2205.11916
+    filename: kojima_2022_large_language_models_are_zero_shot_reasoners.pdf
+    include: Abstract; zero-shot reasoning prompt; experiments.
+  - id: unfaithful_cot
+    title: 'Language Models Don''t Always Say What They Think: Unfaithful Explanations
+      in Chain-of-Thought Prompting'
+    authors: Miles Turpin et al.
+    year: 2023
+    identifier: arXiv:2305.04388
+    url: https://arxiv.org/pdf/2305.04388
+    filename: turpin_2023_unfaithful_explanations_cot.pdf
+    include: Abstract; unfaithfulness experiments; discussion.
+  - id: faithfulness
+    title: Measuring Faithfulness in Chain-of-Thought Reasoning
+    authors: Tamera Lanham et al.
+    year: 2023
+    identifier: arXiv:2307.13702
+    url: https://arxiv.org/pdf/2307.13702
+    filename: lanham_2023_measuring_faithfulness_cot.pdf
+    include: Abstract; faithfulness tests; intervention/ablation evidence; limitations.
+  MC-VAL-01:
+  - id: ppo
+    title: Proximal Policy Optimization Algorithms
+    authors: John Schulman et al.
+    year: 2017
+    identifier: arXiv:1707.06347
+    url: https://arxiv.org/pdf/1707.06347
+    filename: schulman_2017_proximal_policy_optimization_algorithms.pdf
+    include: Abstract; clipped objective; adaptive KL; experiments.
+  - id: sac
+    title: 'Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning
+      with a Stochastic Actor'
+    authors: Tuomas Haarnoja et al.
+    year: 2018
+    identifier: arXiv:1801.01290
+    url: https://arxiv.org/pdf/1801.01290
+    filename: haarnoja_2018_soft_actor_critic.pdf
+    include: Abstract; maximum entropy objective; off-policy setup; continuous-control
+      experiments.
+  MC-VAL-02:
+  - id: resnet
+    title: Deep Residual Learning for Image Recognition
+    authors: Kaiming He et al.
+    year: 2015
+    identifier: arXiv:1512.03385
+    url: https://arxiv.org/pdf/1512.03385
+    filename: he_2015_deep_residual_learning.pdf
+    include: Abstract; architecture; ImageNet/CIFAR experiments.
+  - id: vit
+    title: 'An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale'
+    authors: Alexey Dosovitskiy et al.
+    year: 2020
+    identifier: arXiv:2010.11929
+    url: https://arxiv.org/pdf/2010.11929
+    filename: dosovitskiy_2020_vit.pdf
+    include: Abstract; architecture; data scale; benchmark comparisons.
+  - id: convnext
+    title: A ConvNet for the 2020s
+    authors: Zhuang Liu et al.
+    year: 2022
+    identifier: arXiv:2201.03545
+    url: https://arxiv.org/pdf/2201.03545
+    filename: liu_2022_convnet_for_the_2020s.pdf
+    include: Abstract; modernization/training recipe; ImageNet comparisons.
+  PS-VAL-01:
+  - id: dreamer
+    title: 'Dream to Control: Learning Behaviors by Latent Imagination'
+    authors: Danijar Hafner et al.
+    year: 2019
+    identifier: arXiv:1912.01603
+    url: https://arxiv.org/pdf/1912.01603
+    filename: hafner_2019_dream_to_control.pdf
+    include: Abstract; latent world model; imagination/planning/control; experiments.
+  - id: dreamerv2
+    title: Mastering Atari with Discrete World Models
+    authors: Danijar Hafner et al.
+    year: 2020
+    identifier: arXiv:2010.02193
+    url: https://arxiv.org/pdf/2010.02193
+    filename: hafner_2020_mastering_atari_discrete_world_models.pdf
+    include: Abstract; discrete world model; Atari evaluation; baselines.
+  PS-VAL-02:
+  - id: ioi
+    title: 'Interpretability in the Wild: a Circuit for Indirect Object Identification
+      in GPT-2 small'
+    authors: Kevin Wang et al.
+    year: 2022
+    identifier: arXiv:2211.00593
+    url: https://arxiv.org/pdf/2211.00593
+    filename: wang_2022_interpretability_in_the_wild_ioi.pdf
+    include: Abstract; circuit analysis; interventions/ablations; limitations.
+  - id: rome
+    title: Locating and Editing Factual Associations in GPT
+    authors: Kevin Meng et al.
+    year: 2022
+    identifier: arXiv:2202.05262
+    url: https://arxiv.org/pdf/2202.05262
+    filename: meng_2022_locating_and_editing_factual_associations.pdf
+    include: Abstract; causal tracing; editing intervention; scope.
+  RL-VAL-01:
+  - id: pets
+    title: Deep Reinforcement Learning in a Handful of Trials using Probabilistic
+      Dynamics Models
+    authors: Kurtland Chua et al.
+    year: 2018
+    identifier: arXiv:1805.12114
+    url: https://arxiv.org/pdf/1805.12114
+    filename: chua_2018_pets.pdf
+    include: Abstract; probabilistic ensembles; model predictive control; experiments.
+  - id: planet
+    title: Learning Latent Dynamics for Planning from Pixels
+    authors: Danijar Hafner et al.
+    year: 2018
+    identifier: arXiv:1811.04551
+    url: https://arxiv.org/pdf/1811.04551
+    filename: hafner_2018_planet.pdf
+    include: Abstract; latent dynamics model; planning; DeepMind Control experiments.
+  RL-VAL-02:
+  - id: human_preferences
+    title: Deep Reinforcement Learning from Human Preferences
+    authors: Paul F. Christiano et al.
+    year: 2017
+    identifier: arXiv:1706.03741
+    url: https://arxiv.org/pdf/1706.03741
+    filename: christiano_2017_deep_rl_from_human_preferences.pdf
+    include: Abstract; preference data; reward predictor; policy optimization; experiments.
+  - id: hh_rlhf
+    title: Training a Helpful and Harmless Assistant with Reinforcement Learning from
+      Human Feedback
+    authors: Yuntao Bai et al.
+    year: 2022
+    identifier: arXiv:2204.05862
+    url: https://arxiv.org/pdf/2204.05862
+    filename: bai_2022_training_helpful_harmless_assistant_rlhf.pdf
+    include: Abstract; preference models; RLHF; evaluations; limitations.
+  SPR-VAL-01:
+  - id: dreamerv3
+    title: Mastering Diverse Domains through World Models
+    authors: Danijar Hafner et al.
+    year: 2023
+    identifier: arXiv:2301.04104
+    url: https://arxiv.org/pdf/2301.04104
+    filename: hafner_2023_mastering_diverse_domains_through_world_models.pdf
+    include: Abstract; method/objective; domains; baselines; experiments; limitations.
+  SPR-VAL-02:
+  - id: decision_transformer
+    title: 'Decision Transformer: Reinforcement Learning via Sequence Modeling'
+    authors: Lili Chen et al.
+    year: 2021
+    identifier: arXiv:2106.01345
+    url: https://arxiv.org/pdf/2106.01345
+    filename: chen_2021_decision_transformer.pdf
+    include: Abstract; method formulation; datasets/environments; baselines; experiments;
+      limitations.
+download_blockers: {}

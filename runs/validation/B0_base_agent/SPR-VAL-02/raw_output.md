@@ -1,0 +1,79 @@
+## paper_card
+
+- **Paper:** *Decision Transformer: Reinforcement Learning via Sequence Modeling*
+- **Identifier:** arXiv:2106.01345
+- **Year:** 2021
+- **Topic:** Sequence modeling for offline reinforcement learning
+- **Core idea:** The paper reformulates offline reinforcement learning as a conditional sequence modeling problem. Instead of learning a value function or policy through Bellman-style reinforcement learning updates, Decision Transformer models trajectories autoregressively and conditions action prediction on desired return.
+- **Model family:** Transformer-style autoregressive sequence model.
+- **Inputs described in packet:** Trajectories and returns; specifically, sequence modeling over states, actions, rewards/returns, and conditioning on target return.
+- **Setting:** Offline reinforcement learning.
+- **Evidence included in packet:** Abstract, method formulation, datasets/environments, baselines, experiments, reproducibility details, and limitations.
+- **Evidence missing from packet:** Exact numeric results, full tables, appendix details, and many implementation settings.
+
+## claim_ledger
+
+| Claim | Support in Packet | Evidence Boundary |
+|---|---|---|
+| Decision Transformer frames RL as conditional sequence modeling. | Explicitly stated in controlled source notes. | Packet supports the formulation but not all mathematical details. |
+| The method operates over trajectories and returns. | Explicitly stated. | Exact tokenization, context length, architecture dimensions, and training objective details are not included. |
+| The method targets offline RL. | Explicitly stated. | Packet does not provide full dataset construction details. |
+| The approach is Decision-Transformer-style and Transformer-based. | Title and source notes support this. | Specific Transformer architecture settings are not provided. |
+| The paper compares against baselines. | Packet says baseline/metric sections and baselines are included. | Specific baseline names, configurations, and exact scores are not present in the packet. |
+| The paper contains experiments on datasets/environments. | Packet says datasets/environments and experiments are included. | Exact environments, dataset variants, and numerical outcomes are not included. |
+| The paper discusses limitations. | Packet says limitations are included. | The packet does not enumerate the specific limitation text or full scope. |
+| The paper demonstrates that sequence modeling can be a viable framing for offline RL. | Supported by the controlled note and experiment inclusion. | Strength of empirical support cannot be quantified from this packet because exact results are absent. |
+
+## evidence_ledger
+
+| Evidence Object | What It Supports | What It Does Not Establish |
+|---|---|---|
+| Abstract | High-level claim that RL can be treated as sequence modeling. | Does not provide detailed experimental proof or reproducibility settings. |
+| Method formulation | Supports the central formulation: condition on desired returns and model trajectories autoregressively. | Does not, in this packet, provide exact loss, architecture, context window, or optimizer details. |
+| Datasets/environments section | Establishes that empirical evaluation was performed on RL datasets/environments. | Packet does not list exact datasets/environments. |
+| Baseline/metric sections | Establishes that comparisons and metrics exist. | Packet does not give baseline names, metric definitions, or values. |
+| Experiments | Supports that the method was evaluated empirically. | Packet omits exact numeric values and full tables, so performance magnitude and statistical reliability cannot be assessed here. |
+| Reproducibility details | Indicates that some implementation details are part of the source. | Packet says many implementation settings and appendix details are not included. |
+| Limitations | Establishes that the paper states boundaries or caveats. | Packet does not provide the specific limitations in detail. |
+
+## baseline_metric_summary
+
+The packet states that the paper includes baselines and baseline/metric sections, but it does **not** include the exact baseline names, metric definitions, numerical scores, full tables, or detailed comparison settings.
+
+What can be said from the packet:
+
+- The paper performs empirical comparisons.
+- The comparisons are in the offline RL setting.
+- Metrics and baselines are present in the original included evidence scope.
+- The supplied packet does not contain enough detail to summarize which baselines were used or how Decision Transformer ranked against them numerically.
+
+## reproducibility_notes
+
+Available from the packet:
+
+- The paper includes method formulation, experiments, datasets/environments, baselines, metrics, reproducibility details, and limitations.
+- The central reproducible framing is: train a Transformer-style sequence model over offline trajectories, conditioning behavior on desired return.
+
+Not available from the packet:
+
+- Exact model sizes.
+- Hyperparameters.
+- Optimizer settings.
+- Training schedules.
+- Context lengths.
+- Dataset preprocessing.
+- Evaluation protocol details.
+- Random seed handling.
+- Full appendix material.
+- Exact numeric tables.
+
+Because these details are not in the packet, a reproduction cannot be specified precisely from the supplied material alone.
+
+## limitations_and_open_questions
+
+- The packet does not provide exact numeric results, so the empirical strength of the demonstration cannot be audited here.
+- The packet does not list the specific datasets/environments, so the domain coverage of the evidence is unclear.
+- The packet does not provide full baseline details, so comparison fairness cannot be independently assessed from the packet.
+- The packet does not provide implementation settings, limiting reproducibility.
+- The packet says limitations are included, but does not spell them out; therefore the exact author-stated limitations cannot be summarized beyond noting that limitation material exists.
+- Open question from the supplied evidence: how robust is the Decision Transformer formulation across environments, dataset qualities, and baselines? The packet indicates experiments exist, but does not include enough detail to answer this.

@@ -1,0 +1,37 @@
+run_id: validation_v0.1__B1_kdense_subset__RL-VAL-02__run001
+variant: B1_kdense_subset
+task_id: RL-VAL-02
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 4
+  evidence_traceability: 4
+  citation_validity: 4
+  literature_coverage: null
+  comparison_fairness: 4
+  experimental_rigor: 5
+  benchmark_validity: 5
+  inference_boundary_discipline: 5
+  hypothesis_quality: null
+  rl_specific_correctness: 5
+  output_usefulness: 5
+  efficiency: 5
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: citation_validity
+  description: The output names Christiano 2017 and Bai 2022 as sources, which matches the packet context, but it does not
+    provide page or section-level grounding beyond controlled source notes.
+  evidence: Tables cite source names and 'Direct' evidence status but not specific packet evidence locations such as abstract,
+    preference-model, RLHF, or evaluation sections.
+- severity: minor
+  dimension: factual_accuracy
+  description: The review repeatedly says exact dataset sizes, metrics, and implementation settings are omitted. This is consistent
+    with the given generated-output context, but should be framed as packet-limited rather than as a finding about the original
+    papers.
+  evidence: Phrases like 'packet omits exact preference-data construction' and 'packet does not provide exact task metrics'
+    are mostly scoped correctly, though source-level source names could make readers infer original-paper absence.
+summary: Very strong, concise, and well calibrated. It cleanly separates direct packet support from partial or absent evidence,
+  captures the main RLHF risks, and produces a useful revised protocol without overclaiming.

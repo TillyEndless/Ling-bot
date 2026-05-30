@@ -1,0 +1,40 @@
+run_id: validation_v0.1__B2_orchestra_subset__LS-VAL-01__run001
+variant: B2_orchestra_subset
+task_id: LS-VAL-01
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 4
+  evidence_traceability: 4
+  citation_validity: 4
+  literature_coverage: 5
+  comparison_fairness: 4
+  experimental_rigor: null
+  benchmark_validity: null
+  inference_boundary_discipline: 5
+  hypothesis_quality: null
+  rl_specific_correctness: null
+  output_usefulness: 5
+  efficiency: 5
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: evidence_traceability
+  description: The output distinguishes source-derived claims from agent-inferred caveats, but source grounding remains at
+    packet-note level rather than exact result locations.
+  evidence: Representative table provenance column uses labels such as "Source-derived from controlled note" and "tradeoff
+    inferred from step/quality framing".
+- severity: minor
+  dimension: factual_accuracy
+  description: Some tradeoff statements are inferential rather than directly evidenced, but they are appropriately labeled
+    and bounded.
+  evidence: Training-cost, solver-dependence, and latent artifact concerns are explicitly marked as agent-inferred or partial.
+- severity: minor
+  dimension: comparison_fairness
+  description: It correctly refuses ranking and identifies non-comparability, but lacks concrete metric-level comparisons.
+  evidence: Unsupported warnings say not to rank by absolute speed, FID, likelihood, or compute efficiency because exact values
+    and comparable protocols are not included.
+summary: A strong and well-calibrated fixed-corpus map. It captures every canonical source, cleanly separates method families,
+  and is explicit about what is source-derived versus inferred. Missing metric-level grounding keeps it below perfect.

@@ -1,0 +1,62 @@
+## method_comparison_matrix
+
+| Dimension | PPO | SAC | Packet-supported comparison |
+|---|---|---|---|
+| Method family | Policy-gradient method using proximal policy updates | Off-policy actor-critic method | Directly supported by controlled notes. PPO is described as policy-gradient; SAC as off-policy actor-critic. |
+| Core objective | Clipped surrogate objective; KL-penalty/adaptive KL variants discussed | Maximum-entropy objective with stochastic actor | Directly supported by source notes: PPO includes clipped objective and adaptive KL; SAC includes maximum entropy objective. |
+| Policy type | Not fully specified in packet beyond policy-gradient/proximal update framing | Stochastic policy explicitly stated | SAC stochastic actor is directly supported. PPO policy stochasticity details are not established by the packet. |
+| Data usage | On/off-policy status not explicitly stated in packet | Off-policy setup | SAC off-policy status is directly supported. PPO data reuse/sample-efficiency claims are unknown from this packet. |
+| Target domain in supplied evidence | Continuous-control and Atari experiments | Continuous-control experiments | Both include continuous-control experiments; PPO also includes Atari evidence. Cross-domain general superiority is unsupported. |
+| Claimed design motivation | Proximal update via clipping/KL control to stabilize policy optimization | Maximum-entropy RL to combine return maximization with entropy-driven exploration | Supported at high level by included objectives and source notes. |
+| Benchmark evidence available here | Experiment sections, benchmark tables/figures mentioned, but exact numeric values and full tables omitted | Experiment sections, benchmark tables/figures mentioned, but exact numeric values and full tables omitted | Packet allows qualitative comparison of method framing and evaluation scope, not precise leaderboard claims. |
+| Fair comparison risk | Implementation settings, seeds, hyperparameters, and exact metrics are not supplied | Same | Any claim that PPO “beats” SAC or SAC “beats” PPO is unsupported unless tied to a specific supplied experiment, which the packet does not provide in numeric detail. |
+
+## assumptions_table
+
+| Assumption | PPO status | SAC status | Fairness implication |
+|---|---|---|---|
+| Same continuous-control tasks | Not established | Not established | Needed for direct empirical comparison. Packet only says both have continuous-control experiments. |
+| Same metrics | Unknown | Unknown | Cannot compare sample efficiency, final return, stability, or wall-clock cost fairly without metric definitions. |
+| Same random seeds and uncertainty reporting | Unknown | Unknown | Statistical validity is limited; variance-sensitive claims are unsupported. |
+| Same network architecture and implementation budget | Unknown | Unknown | Performance differences could reflect engineering choices rather than algorithmic differences. |
+| Same environment versions | Unknown | Unknown | Benchmark comparability is not established. |
+| Same hyperparameter tuning budget | Unknown | Unknown | A method may appear stronger if tuned more thoroughly. |
+| Same compute and replay/data budget | Unknown for PPO | Unknown for SAC | Especially important because SAC is off-policy; data-use comparisons require controlled budgets. |
+| Same evaluation protocol | Unknown | Unknown | Claims about robustness or general performance are not established by the packet. |
+
+## benchmark_protocol_review
+
+A fair PPO-vs-SAC continuous-control comparison should be scoped to matched benchmark conditions, but the packet does not provide enough protocol detail to confirm that such a comparison exists.
+
+| Protocol issue | Evidence from packet | Caveat |
+|---|---|---|
+| Task overlap | Both papers include continuous-control experiments | Exact shared tasks are not listed in the packet. |
+| Metrics | Benchmark tables/figures are mentioned | Exact numeric values, full tables, and metric definitions are omitted. |
+| Baselines | Each paper has experiment sections | The packet does not establish identical baselines or controlled head-to-head evaluation. |
+| Hyperparameters | Implementation settings are not included | Tuning-budget fairness cannot be assessed. |
+| Randomness and variance | Not described in packet | Stability and significance claims are unknown. |
+| Domain generality | PPO also includes Atari; SAC note emphasizes continuous control | Atari evidence should not be used to claim SAC weakness, and continuous-control evidence should not imply global RL superiority. |
+| Algorithmic mechanism | PPO: clipped/KL-proximal updates. SAC: off-policy maximum-entropy actor-critic | Mechanistic differences are supported, but causal claims about why one performs better require controlled experiments not supplied here. |
+
+## evidence_strength_summary
+
+| Claim | Support status | Source basis | Caveat |
+|---|---|---|---|
+| PPO is a policy-gradient method using clipped surrogate objectives | Direct | PPO controlled source notes; included clipped objective/method sections | Exact equations are not reproduced in packet. |
+| PPO discusses KL-penalty/adaptive KL variants | Direct | PPO controlled source notes | Detailed variant outcomes are not included. |
+| PPO was evaluated on continuous-control and Atari experiments | Direct | PPO controlled source notes | Exact results unavailable. |
+| SAC is an off-policy maximum-entropy actor-critic method | Direct | SAC controlled source notes; included maximum entropy and off-policy setup | Exact equations not reproduced in packet. |
+| SAC uses stochastic policies | Direct | SAC title/source notes | Details of policy parameterization are not included. |
+| SAC was evaluated on continuous-control benchmarks | Direct | SAC controlled source notes | Exact results unavailable. |
+| SAC is more sample efficient than PPO | Absent | Not established by packet | Would require matched tasks, budgets, and metrics. |
+| PPO is more stable than SAC | Absent | Not established by packet | Stability evidence and variance reporting are not supplied. |
+| SAC is generally better for continuous control | Absent | Not established by packet | Overbroad general claim. |
+| PPO is generally better across RL | Absent | Not established by packet | Packet does not support global ranking. |
+
+## scoped_recommendations
+
+Use **PPO** when the research goal is to study proximal policy-gradient optimization, clipped surrogate objectives, or KL-controlled policy updates. It is also appropriate when the comparison context includes PPO’s documented experimental scope in this packet: continuous control and Atari. Do not claim from this packet that PPO is more stable, simpler, more robust, or generally superior.
+
+Use **SAC** when the research goal is continuous-control learning with an off-policy maximum-entropy actor-critic method and stochastic policies. It is especially appropriate when the research question concerns entropy-regularized objectives or off-policy continuous-control algorithms. Do not claim from this packet that SAC is more sample-efficient, more robust, or generally better than PPO.
+
+For a fair comparison, frame PPO and SAC as different algorithm families with different objectives and data-use assumptions. Compare them only under a matched benchmark protocol: same tasks, metrics, seeds, compute budget, tuning budget, environment versions, and reporting of uncertainty. Because the packet omits exact numeric results and implementation settings, any broad ranking should be marked **unknown / not established by the packet**.

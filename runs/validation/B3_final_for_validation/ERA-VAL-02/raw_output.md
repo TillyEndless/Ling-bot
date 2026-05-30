@@ -1,0 +1,73 @@
+**rigor_audit_findings**
+
+1. **High: the packet is insufficient to verify the evaluation section’s quality/diversity claims.**  
+   `DIRECT_PACKET_EVIDENCE`: the packet only states that DDPM and Improved DDPM evaluate image generation using sample quality, likelihood-related metrics, precision/recall, sampling speed, and ablations. It also states that exact numeric values, full tables, appendix details, and implementation settings are not included.  
+   Scope: the packet supports saying these evaluation dimensions exist, but not whether reported results justify any specific quality or diversity claim.
+
+2. **High: quality and diversity are only partially aligned with the described metrics.**  
+   `WITHIN_PACKET_SYNTHESIS`: sample-quality metrics and likelihood-related quantities address quality-like claims; precision/recall style evaluation can separate fidelity and coverage more directly.  
+   `LIMITED_CRITIQUE`: without exact metric definitions, datasets, splits, sample counts, confidence intervals, and tables, the claim strength cannot be audited.
+
+3. **Medium: baseline fairness cannot be established from the packet.**  
+   `DIRECT_PACKET_EVIDENCE`: the source notes mention sample-quality comparisons and metric tables/figures, but not the exact baseline systems, tuning budgets, model sizes, or evaluation settings.  
+   `LIMITED_CRITIQUE`: any claim that diffusion models outperform alternatives is setup-specific unless baselines are shown to be comparable.
+
+4. **Medium: ablation support is present only at a coarse level.**  
+   `DIRECT_PACKET_EVIDENCE`: Improved DDPM includes ablations where supplied.  
+   `LIMITED_CRITIQUE`: because the packet omits full ablation tables and implementation settings, it cannot establish which modifications causally support improved quality, likelihood, diversity, or speed.
+
+5. **Medium: reproducibility risk is substantial.**  
+   `DIRECT_PACKET_EVIDENCE`: exact numeric values, full tables, appendix details, and implementation settings are absent from the input packet.  
+   Scope: this is a packet-level limitation, not proof that the original papers lack those details.
+
+6. **Low: human evaluation cannot be credited.**  
+   `DIRECT_PACKET_EVIDENCE`: the packet does not mention human evaluation.  
+   Boundary: any statement about human preference, perceptual quality from raters, or annotation protocol is `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW`.
+
+**metric_claim_alignment_table**
+
+| Claim | Packet-supported metric evidence | Alignment | Evidence label | Boundary |
+|---|---|---:|---|---|
+| Sample quality is high | Sample-quality comparisons and metric tables/figures are included | Partial | `DIRECT_PACKET_EVIDENCE` | No exact scores or protocols supplied |
+| Likelihood is improved or competitive | Likelihood-related quantities are evaluated | Partial | `DIRECT_PACKET_EVIDENCE` | Likelihood does not by itself establish visual quality or diversity |
+| Diversity / mode coverage is strong | Improved DDPM reports precision/recall style evaluation | Moderate | `DIRECT_PACKET_EVIDENCE` | Requires exact precision/recall definitions, sample counts, datasets, and baselines |
+| Faster sampling preserves quality | Improved DDPM includes sampling-speed discussion and faster sampling settings | Partial | `DIRECT_PACKET_EVIDENCE` | Need speed-quality tradeoff curves and comparable compute |
+| Broad superiority over generative models | Comparisons are mentioned only generally | Weak | `LIMITED_CRITIQUE` | Global superiority is unsupported without shared protocols |
+
+**baseline_and_ablation_review**
+
+Baselines: the packet confirms sample-quality comparisons but does not identify the compared models, dataset splits, tuning budget, or whether baselines used comparable compute and sampling procedures. Therefore, baseline adequacy is `LIMITED_CRITIQUE`: the evidence may support setup-local comparisons, but not broad ranking claims.
+
+Ablations: Improved DDPM is described as containing ablations, which is `DIRECT_PACKET_EVIDENCE`. However, because the packet excludes full tables and implementation settings, the audit cannot determine whether ablations isolate each proposed modification, cover interactions among changes, or measure quality, diversity, likelihood, and speed under the same protocol.
+
+Human evaluation: not present in the packet. Any human-quality claim requires external review.
+
+**reproducibility_risk_list**
+
+- Missing exact metric values and full tables: `DIRECT_PACKET_EVIDENCE`.
+- Missing implementation settings and appendix details in the packet: `DIRECT_PACKET_EVIDENCE`.
+- Unknown dataset split details: `LIMITED_CRITIQUE`.
+- Unknown sample counts and sample-selection rules: `LIMITED_CRITIQUE`.
+- Unknown random seeds, repeated runs, or uncertainty intervals: `LIMITED_CRITIQUE`.
+- Unknown baseline tuning and compute parity: `LIMITED_CRITIQUE`.
+- Unknown human-evaluation protocol, if any existed: `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW`.
+
+**corrected_protocol**
+
+1. State claims separately: visual quality, distribution coverage/diversity, likelihood, and sampling efficiency.
+
+2. Use aligned metrics: quality metric(s), likelihood-related metric(s), precision/recall style diversity or coverage metric(s), and speed-quality tradeoff metrics.
+
+3. Fix datasets and splits before evaluation. Report dataset identity, train/test split, preprocessing, and whether any validation set is used for tuning.
+
+4. Pre-register sample selection: number of generated samples, random seeds, checkpoint selection rule, rejection policy if any, and whether grids are cherry-picked or random.
+
+5. Compare against named baselines under a shared protocol: same datasets, evaluation code, sample counts, preprocessing, and clearly reported model size, compute, and tuning budget.
+
+6. Run ablations one change at a time and in combination. Report effects on quality, diversity/recall, likelihood, and sampling speed.
+
+7. Report uncertainty: repeated runs or seeds, confidence intervals or standard deviations, and per-dataset results before aggregation.
+
+8. If human evaluation is used, specify rater recruitment, task wording, randomization, blinding, number of ratings, inter-rater reliability, and statistical test.
+
+9. Bound conclusions: claim only setup-specific improvements demonstrated by the reported protocol; mark broader deployment, perceptual, or field-wide superiority claims as needing external review.

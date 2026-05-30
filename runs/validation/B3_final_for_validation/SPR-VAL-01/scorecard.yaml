@@ -1,0 +1,44 @@
+run_id: validation_v0.1__B3_final_for_validation__SPR-VAL-01__run001
+variant: B3_final_for_validation
+task_id: SPR-VAL-01
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 3
+  evidence_traceability: 4
+  citation_validity: 3
+  literature_coverage: null
+  comparison_fairness: 4
+  experimental_rigor: 3
+  benchmark_validity: 3
+  inference_boundary_discipline: 5
+  hypothesis_quality: null
+  rl_specific_correctness: 3
+  output_usefulness: 4
+  efficiency: 4
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: major
+  dimension: factual_accuracy
+  description: 'Despite strong structure, it still omits core required paper-specific facts: exact world-model objective,
+    policy-learning setup, evaluated domains, baseline names, metrics, ablations, and author-stated limitations.'
+  evidence: The paper card and experiment summary repeatedly mark these as unknown, including 'Exact architecture, loss terms,
+    objective equations... unknown,' 'exact domains... unknown,' and 'Baseline/result tables... do not name the baselines
+    or report values.'
+- severity: minor
+  dimension: evidence_traceability
+  description: Traceability is clearer than other variants because it labels direct packet evidence, limited critique, and
+    unsupported claims.
+  evidence: The output uses labels such as `DIRECT_PACKET_EVIDENCE`, `LIMITED_CRITIQUE`, and `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW`
+    across the paper card, claim ledger, and limitations.
+- severity: minor
+  dimension: rl_specific_correctness
+  description: Acknowledges RL-specific protocol gaps more explicitly than the other variants, but still does not capture
+    actual RL setup details required by the task.
+  evidence: The experiment summary lists unknown environment versions, wrappers, action spaces, training steps, evaluation
+    episodes, stochasticity, termination details, seeds, and uncertainty.
+summary: Best calibrated variant. It is highly disciplined about inference boundaries and explicitly distinguishes packet
+  evidence from critique, but it remains substantively incomplete for the requested deep read because the key DreamerV3 experimental
+  and method facts are absent.

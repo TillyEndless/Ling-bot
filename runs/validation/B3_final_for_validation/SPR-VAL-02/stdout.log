@@ -1,0 +1,72 @@
+**paper_card**
+
+| Field | Content |
+|---|---|
+| Problem | Offline reinforcement learning via a sequence-modeling formulation. The packet says the paper asks whether RL can be treated as conditional sequence modeling over trajectories and returns. |
+| Core method | Decision Transformer-style formulation: model trajectories as sequences conditioned on desired returns, then predict actions from trajectory context and return information. |
+| Assumptions | The packet supports only that training is offline and trajectory/return information is available. It does not provide exact modeling assumptions, context length, architecture settings, optimization details, or return-conditioning procedure. |
+| Evidence | Included evidence objects are abstract, method formulation, datasets/environments, baseline/metric sections, experiments, reproducibility details, and limitations. Exact tables and most numbers are absent from the packet. |
+| Baselines | The packet says baseline sections are included, but it does not name the baselines. |
+| Metrics | The packet says baseline/metric sections and experiments are included, but it does not give exact metrics or numeric results. |
+| Ablations | Not specified in the provided packet. |
+| Reproducibility | The packet says reproducibility details are included in the source, but the model input packet omits exact implementation settings, appendix details, and full tables. |
+| Limitations | The packet says limitations are included, but does not provide their contents. Evidence boundaries therefore must remain broad and cautious. |
+
+**claim_ledger**
+
+| Claim | Claim type | Evidence-burden label | Source location | Supported scope | Missing detail |
+|---|---|---|---|---|---|
+| The paper formulates offline RL as conditional sequence modeling over trajectories and returns. | Method definition | DIRECT_PACKET_EVIDENCE | Controlled Source Notes; abstract/method formulation noted as included | The provided Decision Transformer paper as summarized in packet | Exact equations, tokenization, architecture, training loss |
+| The method is Decision-Transformer-style sequence modeling for RL. | Method definition | DIRECT_PACKET_EVIDENCE | Source title and controlled notes | Paper-level method identity | Model size, context length, hyperparameters |
+| The evidence includes datasets/environments, baselines, experiments, reproducibility details, and limitations. | Source fact | DIRECT_PACKET_EVIDENCE | “Included evidence” and “Controlled Source Notes” | Packet inventory only | Names of datasets, environments, baselines, metrics, exact results |
+| The packet does not establish global superiority over RL methods. | Limitation / claim boundary | LIMITED_CRITIQUE | Packet Scope notes missing exact values, full tables, appendix details, implementation settings | Appropriate boundary for this prompt | Full source might support narrower setup-specific comparisons, but packet omits details |
+| Claims about deployment robustness, field-wide novelty, contamination, or benchmark generality require external review. | Unsupported boundary | UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW | Packet Scope; no external evidence allowed | Beyond-packet claims only | External literature, benchmark histories, deployment evidence |
+
+**evidence_ledger**
+
+| Evidence object | What it supports | Evidence-burden label | Directness | Boundary |
+|---|---|---|---|---|
+| Source metadata: “Decision Transformer: Reinforcement Learning via Sequence Modeling” | Paper identity, topic, year/arXiv identifier | DIRECT_PACKET_EVIDENCE | Direct | Does not provide experimental specifics |
+| Controlled note: “formulates offline reinforcement learning as conditional sequence modeling over trajectories and returns” | Core contribution and method framing | DIRECT_PACKET_EVIDENCE | Direct | Does not specify architecture or objective in detail |
+| Included evidence list: abstract, method formulation, datasets/environments, baselines, experiments, reproducibility details, limitations | Confirms these evidence categories exist in the source packet | DIRECT_PACKET_EVIDENCE | Direct | Contents are mostly not supplied in the prompt |
+| Packet Scope: exact numeric values, full tables, appendix details, implementation settings not included | Supports caution about quantitative and reproducibility claims | DIRECT_PACKET_EVIDENCE | Direct | Absence from packet is not proof the paper lacks these details |
+| Relation between method framing and research question | The paper demonstrates a sequence-modeling approach to offline RL, at least at formulation level | WITHIN_PACKET_SYNTHESIS | Indirect | Strength of empirical demonstration cannot be assessed from omitted tables/results |
+
+**baseline_metric_summary**
+
+The packet states that baseline and metric sections are included, but it does not provide baseline names, metric definitions, dataset names, environment versions, evaluation protocols, or numeric results.
+
+Supported summary:
+
+| Item | Packet-supported answer |
+|---|---|
+| Training setting | Offline RL / trajectory dataset setting |
+| Evaluation domains | Datasets/environments are included in the source, but not named in the packet |
+| Baselines | Present in the source packet category list, but not specified |
+| Metrics | Present in the source packet category list, but not specified |
+| Results | Experiments are included, but exact numeric values and full tables are omitted |
+| Fair comparison status | Cannot audit fairness, tuning, or comparability from the provided details |
+| Uncertainty | Seeds, runs, confidence intervals, or variance are not provided in the model input packet |
+
+**reproducibility_notes**
+
+The packet says reproducibility details exist in the included source evidence, but also says implementation settings and appendix details are not included in this model input packet. Therefore, from the available packet alone, the following are unknown: code availability, model hyperparameters, data preprocessing, context length, optimizer, hardware, random seeds, number of runs, evaluation episodes, prompt or conditioning procedure, and exact environment versions.
+
+This is a `LIMITED_CRITIQUE`: the packet is insufficient for a reproducibility audit, but that does not establish that the original paper failed to report these details.
+
+**limitations_and_open_questions**
+
+The strongest supported conclusion is narrow: the paper demonstrates a formulation of offline RL as return-conditioned sequence modeling over trajectories, and the packet indicates that experiments, baselines, datasets/environments, reproducibility details, and limitations exist in the source.
+
+Evidence boundaries:
+
+| Boundary | Label |
+|---|---|
+| No exact empirical performance claims can be made from this packet because numeric results and full tables are omitted. | DIRECT_PACKET_EVIDENCE / LIMITED_CRITIQUE |
+| No global claim that Decision Transformer is superior to all offline RL methods is supported. | LIMITED_CRITIQUE |
+| No deployment robustness claim is supported. | UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW |
+| No causal mechanism claim is supported beyond the stated formulation. | LIMITED_CRITIQUE |
+| No benchmark leakage or contamination claim can be assessed from the packet. | UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW |
+| No detailed reproducibility judgment can be made without the omitted implementation and appendix details. | LIMITED_CRITIQUE |
+
+Open questions the packet leaves unresolved: Which datasets and environments were used? Which baselines were compared? What metrics and aggregation were reported? Were repeated seeds or uncertainty reported? What ablations were run? What limitations did the authors explicitly state?

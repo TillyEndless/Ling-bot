@@ -1,0 +1,35 @@
+task_id: ERA-VAL-02
+packet_id: validation_ERA-VAL-02_packet_v0_draft
+status: draft_pending_human_review
+sources:
+- id: ddpm
+  title: Denoising Diffusion Probabilistic Models
+  authors: Jonathan Ho, Ajay Jain, Pieter Abbeel
+  year: 2020
+  identifier: arXiv:2006.11239
+  url: https://arxiv.org/pdf/2006.11239
+  filename: ho_2020_denoising_diffusion_probabilistic_models.pdf
+  include: Abstract; experiments; sample quality/likelihood discussion; limitations.
+  local_filename: ho_2020_denoising_diffusion_probabilistic_models.pdf
+  sha256: aee5e07a802e8dfd2a386374c94fd61d1d056cb7e1e0fec4f28e8120ff5d8505
+  page_count: '25'
+  included_in_model_packet: Abstract; experiments; sample quality/likelihood discussion;
+    limitations.
+- id: improved_ddpm
+  title: Improved Denoising Diffusion Probabilistic Models
+  authors: Alex Nichol, Prafulla Dhariwal
+  year: 2021
+  identifier: arXiv:2102.09672
+  url: https://arxiv.org/pdf/2102.09672
+  filename: nichol_2021_improved_ddpm.pdf
+  include: Abstract; evaluation metrics; precision/recall; sampling speed; ablations.
+  local_filename: nichol_2021_improved_ddpm.pdf
+  sha256: 1f041c12d72020bb40cc69c644694027fa89131ab05349ec07dc48a929f75adf
+  page_count: '17'
+  included_in_model_packet: Abstract; evaluation metrics; precision/recall; sampling
+    speed; ablations.
+model_input_packet:
+  path: model_input_packet.md
+  sha256: f22de88e98cec3fec8b5d07af17faebb9033a3d1fcc141e3ea563deacb99bb03
+packet_matches_task_spec: true
+unresolved_source_version_issues: []

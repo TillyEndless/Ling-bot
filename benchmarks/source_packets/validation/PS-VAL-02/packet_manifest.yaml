@@ -1,0 +1,47 @@
+task_id: PS-VAL-02
+packet_id: validation_PS-VAL-02_packet_v0_draft
+status: draft_pending_human_review
+sources:
+- id: ioi
+  title: 'Interpretability in the Wild: a Circuit for Indirect Object Identification
+    in GPT-2 small'
+  authors: Kevin Wang et al.
+  year: 2022
+  identifier: arXiv:2211.00593
+  url: https://arxiv.org/pdf/2211.00593
+  filename: wang_2022_interpretability_in_the_wild_ioi.pdf
+  include: Abstract; circuit analysis; interventions/ablations; limitations.
+  local_filename: wang_2022_interpretability_in_the_wild_ioi.pdf
+  sha256: af0ea3ca3912f819d2cd06b0f36f5c20bfcab72fbc83816d830c286af6872c91
+  page_count: '25'
+  included_in_model_packet: Abstract; circuit analysis; interventions/ablations; limitations.
+- id: rome
+  title: Locating and Editing Factual Associations in GPT
+  authors: Kevin Meng et al.
+  year: 2022
+  identifier: arXiv:2202.05262
+  url: https://arxiv.org/pdf/2202.05262
+  filename: meng_2022_locating_and_editing_factual_associations.pdf
+  include: Abstract; causal tracing; editing intervention; scope.
+  local_filename: meng_2022_locating_and_editing_factual_associations.pdf
+  sha256: d7c17f896cca512fb258261421b073baa6f4e6e44b6bb7ada5c90185f423054a
+  page_count: '35'
+  included_in_model_packet: Abstract; causal tracing; editing intervention; scope.
+- id: local_mech_interp_claim
+  title: local_mech_interp_claim.md
+  authors: local validation seed brief
+  year: 2026
+  identifier: local_seed_brief
+  url: local
+  filename: local_mech_interp_claim.md
+  include: User/evaluator-provided seed idea or claim brief for proposal construction.
+  local_filename: local_mech_interp_claim.md
+  sha256: 9315c2589125b1b5528ccf17d02717685bb8082fb2314d1bca43b825ce2b9d23
+  page_count: null
+  included_in_model_packet: User/evaluator-provided seed idea or claim brief for proposal
+    construction.
+model_input_packet:
+  path: model_input_packet.md
+  sha256: 8f34e5e11bfa480afa1b11ba11103d5e63a4c52c0f2aa26fe6d010c71807924a
+packet_matches_task_spec: true
+unresolved_source_version_issues: []

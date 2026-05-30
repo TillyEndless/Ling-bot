@@ -1,0 +1,408 @@
+2026-05-30T04:50:42.720624Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:50:42.745203Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+OpenAI Codex v0.133.0-alpha.1
+--------
+workdir: /private/tmp/ling_bot_validation_v0_1_execution/B1_kdense_subset
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: none
+reasoning summaries: none
+session id: 019e7738-5b7d-7e30-9fc8-6931f1a135f9
+--------
+user
+# Variant Runtime Instructions
+
+You are running benchmark variant `B1_kdense_subset` for the `literature_analysis_and_research_rigor` module. Follow only the variant skill/reference content included below. Do not use external retrieval or dynamic tools. Do not use knowledge outside the supplied source packet as evidence.
+
+# Variant Skill And References
+
+## Variant File: variant/kdense_literature_research_rigor/SKILL.md
+
+---
+name: kdense-literature-research-rigor-subset
+description: Instruction-only K-Dense-derived subset for fixed-source literature review, citation/evidence handling, scientific criticism, and synthesis. No tools, scripts, APIs, retrieval, or external services.
+license: MIT-derived-upstream-patterns-with-attribution
+---
+
+# K-Dense Subset: Literature Analysis And Research Rigor
+
+Use this skill when the task asks for research literature review, paper reading, citation/evidence handling, scientific criticism, or synthesis from supplied material.
+
+This variant is instruction/reference-only. It must not retrieve, search, execute scripts, call APIs, manage a citation library, parse PDFs, or use external databases. If the user asks for facts not present in the supplied material, mark them as unavailable or unsupported.
+
+## Operating Rules
+
+1. Work only from the provided source packet and task prompt.
+2. Build an evidence-first response: every important claim should point to a supplied source, section, page, figure, table, or quoted/excerpted location when available.
+3. Separate source claims, your synthesis, and unsupported possibilities.
+4. For literature reviews, account for every supplied source before synthesizing themes.
+5. For criticism, assess validity, bias, methods, evidence quality, limitations, and claim scope.
+6. For proposal or hypothesis tasks, turn observations into testable claims only when the packet supports the motivation; mark broader novelty or field-gap claims as needing external review.
+7. Do not rank methods globally unless the packet contains directly comparable evidence.
+
+## Workflow
+
+1. Scope the task: identify the research question, the fixed corpus, requested output sections, and forbidden external evidence.
+2. Inventory sources: make a source coverage table with role, evidence type, claims, methods, experiments, and limitations.
+3. Extract evidence: record claims, evidence locations, methods, datasets, metrics, baselines, comparisons, and caveats.
+4. Evaluate quality: ask whether the evidence is direct, indirect, incomplete, contradictory, or out of scope.
+5. Synthesize cautiously: group sources into themes or methods, then state what the corpus supports and what remains unresolved.
+6. Audit conclusions: remove unsupported generalizations, invented citations, prestige-based judgments, or claims that exceed the supplied evidence.
+
+## Preferred Output Moves
+
+- Use tables for source coverage, claim-evidence mapping, comparison, and limitations.
+- Use short evidence labels such as source name plus page/section/table when provided.
+- Include an explicit unsupported-or-unknown section whenever the task asks for synthesis or comparison.
+- Preserve uncertainty instead of filling missing methods, metrics, or results from memory.
+
+Load the references in this variant only as needed:
+
+- `references/literature_review_structure.md`
+- `references/evidence_and_citation_handling.md`
+- `references/scientific_criticism.md`
+- `references/synthesis_and_hypotheses.md`
+
+
+## Variant File: variant/kdense_literature_research_rigor/references/evidence_and_citation_handling.md
+
+# Evidence And Citation Handling
+
+Adapted from K-Dense citation-management and literature-review patterns, without scripts or external services.
+
+## Evidence Ledger
+
+For each important claim, record:
+
+| Claim | Source | Location supplied | Evidence type | Support status | Caveat |
+|---|---|---|---|---|---|
+
+Support status should be one of: direct, indirect, partial, contradicted, absent, or speculative.
+
+## Citation Discipline
+
+- Cite only sources supplied in the packet.
+- If metadata is incomplete, do not invent DOI, venue, version, page, or author details.
+- Prefer supplied page, section, figure, and table locations over generic source mentions.
+- If the packet gives only a general source note, cite that note and mark the granularity as limited.
+- Separate bibliographic identity from evidence support: a real source is not automatically evidence for a claim.
+
+## Unsupported Evidence Policy
+
+- Incidental background knowledge may be mentioned only if clearly outside the evidence base and not used to support a conclusion.
+- Any conclusion, method ranking, novelty claim, or causal claim must be grounded in supplied evidence.
+- If evidence is missing, write “not established by the packet” rather than guessing.
+
+
+## Variant File: variant/kdense_literature_research_rigor/references/literature_review_structure.md
+
+# Literature Review Structure
+
+Adapted from K-Dense literature-review, paper-lookup, and research-lookup workflow patterns.
+
+## Fixed-Corpus Review
+
+For a closed packet, treat literature review as mapping and synthesis rather than discovery.
+
+1. Corpus inventory: list every supplied source and its apparent role.
+2. Screening within packet: identify central, supporting, background, boundary, and unusable sources using only packet evidence.
+3. Extraction fields: research question, method, assumptions, data, experimental setup, result type, limitations, and relevance.
+4. Thematic grouping: cluster sources by problem, method family, evidence type, or claim type.
+5. Synthesis: state relationships among sources and qualify them by evidence strength.
+6. Gaps: report gaps visible in the packet, not gaps claimed for the entire field unless external review is allowed.
+
+## Literature Map Template
+
+| Source | Role in packet | Research problem | Method or artifact | Evidence type | Limitations | Use in synthesis |
+|---|---|---|---|---|---|---|
+
+## Search-Derived Workflows Disabled
+
+K-Dense search, database, and citation-chaining patterns are not active in this variant. When external retrieval is disabled, do not simulate search results or cite absent work.
+
+
+## Variant File: variant/kdense_literature_research_rigor/references/scientific_criticism.md
+
+# Scientific Criticism
+
+Adapted from K-Dense scientific-critical-thinking and peer-review patterns.
+
+## Critique Axes
+
+- Internal validity: does the method or experiment test what it claims?
+- Construct validity: do tasks, metrics, and proxies match the intended concept?
+- External validity: what populations, settings, tasks, models, or environments are covered?
+- Statistical validity: are seeds, variability, uncertainty, aggregation, and multiple comparisons handled?
+- Reproducibility: are data, code, settings, prompts, models, hardware, and configs sufficiently specified?
+- Bias and confounds: are there dataset artifacts, leakage, selection bias, or unfair baselines?
+- Claim proportionality: are conclusions limited to the actual evidence?
+
+## Review Pattern
+
+1. State the claim under review.
+2. Identify the direct evidence.
+3. List missing controls, baselines, metrics, or reporting details.
+4. Classify severity and likely effect on the claim.
+5. Suggest a corrected, narrower claim or improved protocol.
+
+Avoid prestige-based judgments and avoid treating citation count, venue, or author identity as proof of quality.
+
+
+## Variant File: variant/kdense_literature_research_rigor/references/synthesis_and_hypotheses.md
+
+# Synthesis And Hypotheses
+
+Adapted from K-Dense hypothesis-generation and scientific brainstorming patterns, constrained by evidence.
+
+## Synthesis Rules
+
+- Build synthesis from extracted evidence, not from memory.
+- Name the synthesis operation: grouping, contrast, causal conjecture, mechanism hypothesis, or gap identification.
+- Mark whether a statement is source-stated, cross-source synthesis, or proposal speculation.
+- Do not turn absence from a small fixed packet into a field-wide absence.
+
+## Hypothesis Template
+
+| Hypothesis | Evidence motivation | Prediction | Disconfirming observation | Required experiment | Feasibility caveat |
+|---|---|---|---|---|---|
+
+## Useful Checks
+
+- Is the hypothesis falsifiable?
+- Does it identify observables and controls?
+- Does it require stronger evidence than the packet provides?
+- Does it distinguish correlation, recoverability, mechanism, and causation?
+
+
+## Variant File: variant/reuse_and_license_notes.md
+
+# B1 Reuse And License Notes
+
+This variant selectively adapts K-Dense-derived instruction patterns for literature review, citation/evidence handling, scientific criticism, peer-review framing, and hypothesis formulation.
+
+No upstream scripts, APIs, database clients, generated templates, search providers, or executable services are included. The implementation is rewritten in compact form for fixed-source benchmark execution.
+
+## Components Used
+
+| Upstream component | Files consulted per ledger | Adaptation decision | License status from audit |
+|---|---|---|---|
+| `K-Dense-AI/scientific-agent-skills/skills/literature-review` | `SKILL.md`, citation/database references, review template | Rewritten into fixed-corpus review structure | MIT observed in skill frontmatter; root repository MIT |
+| `K-Dense-AI/scientific-agent-skills/skills/citation-management` | `SKILL.md`, citation/database references | Rewritten as evidence and citation discipline only | MIT observed in skill frontmatter; root repository MIT |
+| `K-Dense-AI/scientific-agent-skills/skills/scientific-critical-thinking` | `SKILL.md`, evidence, bias, validity references | Rewritten as critique axes and review pattern | MIT observed in skill frontmatter; root repository MIT |
+| `K-Dense-AI/scientific-agent-skills/skills/peer-review` | `SKILL.md`, review criteria/templates | Rewritten as criticism scaffolding | MIT observed in skill frontmatter; root repository MIT |
+| `K-Dense-AI/scientific-agent-skills/skills/hypothesis-generation` | `SKILL.md`, design/framework references | Rewritten as evidence-constrained hypothesis template | MIT observed in skill frontmatter; root repository MIT |
+
+## Explicit Runtime Exclusions
+
+- No scripts copied or enabled.
+- No API keys, external services, citation databases, PDF parsers, or search tools.
+- No Orchestra-derived material.
+- No benchmark-specific paper names, task identifiers, expected answers, or development answer-key content.
+
+
+## Variant File: variant/variant_manifest.yaml
+
+variant_id: B1_kdense_subset
+module_scope: literature_analysis_and_research_rigor
+implementation_type: instruction_reference_only
+runtime_tools_enabled: false
+external_services_enabled: false
+dynamic_retrieval_enabled: false
+scripts_enabled: false
+upstream_basis:
+  repository: K-Dense-AI/scientific-agent-skills
+  components:
+    - path: skills/literature-review/SKILL.md
+      consulted_files:
+        - skills/literature-review/SKILL.md
+        - skills/literature-review/references/citation_styles.md
+        - skills/literature-review/references/database_strategies.md
+        - skills/literature-review/assets/review_template.md
+      use: adapted_workflow_pattern
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: skills/citation-management/SKILL.md
+      consulted_files:
+        - skills/citation-management/SKILL.md
+        - skills/citation-management/references/citation_styles.md
+        - skills/citation-management/references/database_apis.md
+      use: adapted_citation_discipline_without_tools
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: skills/scientific-critical-thinking/SKILL.md
+      consulted_files:
+        - skills/scientific-critical-thinking/SKILL.md
+        - skills/scientific-critical-thinking/references/bias_detection.md
+        - skills/scientific-critical-thinking/references/evidence_evaluation.md
+        - skills/scientific-critical-thinking/references/validity_frameworks.md
+      use: adapted_critique_axes
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: skills/peer-review/SKILL.md
+      consulted_files:
+        - skills/peer-review/SKILL.md
+        - skills/peer-review/references/review_criteria.md
+        - skills/peer-review/references/review_templates.md
+      use: adapted_review_scaffolding
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: skills/hypothesis-generation/SKILL.md
+      consulted_files:
+        - skills/hypothesis-generation/SKILL.md
+        - skills/hypothesis-generation/references/experimental_design.md
+        - skills/hypothesis-generation/references/hypothesis_frameworks.md
+      use: adapted_hypothesis_template
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+runtime_exclusions:
+  - no K-Dense scripts included
+  - no APIs included
+  - no database search included
+  - no external citation validation included
+  - no Orchestra-derived rules included
+  - no B3-original AI/ML/RL guidance included
+
+
+# Task
+
+- Task ID: `SPR-VAL-02`
+- Split: `validation`
+- Task type: `single_paper_deep_reading`
+- Topic: sequence modeling for reinforcement learning
+- Research question: What does the provided Decision-Transformer-style paper demonstrate, and where are its evidence boundaries?
+
+## Input Prompt
+
+Read only the provided source packet. Produce a structured paper card, claim ledger, evidence ledger, baseline/metric summary, reproducibility notes, and limitation summary.
+Do not use external retrieval. If the packet does not contain a detail, say so.
+
+
+## Required Outputs
+
+- paper_card
+- claim_ledger
+- evidence_ledger
+- baseline_metric_summary
+- reproducibility_notes
+- limitations_and_open_questions
+
+# Source Packet
+
+# SPR-VAL-02 Model Input Packet
+## Sources
+- Decision Transformer: Reinforcement Learning via Sequence Modeling (arXiv:2106.01345; 2021). Local file: `chen_2021_decision_transformer.pdf`. Included evidence: Abstract; method formulation; datasets/environments; baselines; experiments; limitations.
+
+## Controlled Source Notes
+- Decision Transformer paper: formulates offline reinforcement learning as conditional sequence modeling over trajectories and returns.
+- Evidence objects: abstract, method formulation, datasets/environments, baseline/metric sections, experiments, reproducibility details, and limitations.
+
+## Packet Scope
+- This packet contains source metadata and neutral source notes prepared from the listed canonical files.
+- Some exact numeric values, full tables, appendix details, and implementation settings are not included in this model input packet.
+
+
+2026-05-30T04:50:42.765083Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:50:42.765099Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:50:42.765432Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:50:42.765436Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:50:42.765895Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:50:42.765898Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:50:42.766243Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:50:42.766248Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:50:42.766592Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:50:42.766595Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:50:42.767233Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:50:42.767236Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:50:42.770370Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:50:44.216116Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:50:44.216127Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:50:44.216538Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:50:44.216545Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:50:44.216946Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:50:44.216952Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:50:44.217329Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:50:44.217332Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:50:44.217690Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:50:44.217694Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:50:44.218494Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:50:44.218498Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+codex
+paper_card
+
+| Field | Details |
+|---|---|
+| Source | Decision Transformer: Reinforcement Learning via Sequence Modeling, arXiv:2106.01345, 2021 |
+| Topic | Sequence modeling for reinforcement learning |
+| Packet-provided scope | Abstract; method formulation; datasets/environments; baselines; experiments; limitations |
+| Core research problem | Whether offline reinforcement learning can be formulated as conditional sequence modeling over trajectories and returns |
+| Main artifact | Decision Transformer-style model that conditions on desired return and trajectory history |
+| Method framing | Offline RL is treated as sequence modeling rather than as explicit value estimation or policy optimization |
+| Evidence available in packet | Neutral notes state that the paper includes method formulation, datasets/environments, baselines/metrics, experiments, reproducibility details, and limitations |
+| Evidence unavailable in packet | Exact numeric results, full tables, appendix details, and implementation settings are not included |
+| Best-supported takeaway | The paper demonstrates a Decision-Transformer-style formulation of offline RL as conditional sequence modeling over trajectories and returns, with experiments against baselines in stated environments |
+| Evidence boundary | The packet does not provide enough detail to verify exact performance magnitude, statistical robustness, full reproducibility, or whether conclusions generalize beyond the included environments |
+
+claim_ledger
+
+| Claim | Source | Location supplied | Support status | Caveat |
+|---|---|---|---|---|
+| The paper formulates offline RL as conditional sequence modeling over trajectories and returns. | Decision Transformer paper | Controlled Source Notes; included method formulation | Direct | The packet summarizes the formulation but does not include equations or full architecture details. |
+| The model is Decision-Transformer-style and uses return conditioning. | Decision Transformer paper | Controlled Source Notes; abstract/method formulation listed | Direct | Exact conditioning format, tokenization, and architectural hyperparameters are not included. |
+| The paper evaluates the approach experimentally. | Decision Transformer paper | Included evidence: experiments | Direct | Experimental details and full results are not in the packet. |
+| The paper compares against baselines. | Decision Transformer paper | Included evidence: baselines; baseline/metric sections | Direct | Baseline names, configurations, fairness checks, and numeric comparisons are not included. |
+| The paper uses datasets/environments for offline RL evaluation. | Decision Transformer paper | Included evidence: datasets/environments | Direct | Specific environments and dataset compositions are not listed in the packet. |
+| The paper includes limitations. | Decision Transformer paper | Included evidence: limitations | Direct | Specific limitation text is not supplied. |
+| The paper proves Decision Transformers are generally superior to all offline RL methods. | None in packet | Not supplied | Absent | Not established by the packet. |
+| The results are statistically robust across seeds and uncertainty intervals. | None in packet | Not supplied | Absent | Seeds, variance, confidence intervals, and aggregation details are unavailable. |
+
+evidence_ledger
+
+| Evidence item | Source | Location supplied | Evidence type | What it supports | Boundary |
+|---|---|---|---|---|---|
+| Offline RL is framed as conditional sequence modeling over trajectories and returns. | Decision Transformer paper | Controlled Source Notes | Method claim | Supports the central conceptual contribution. | No full mathematical formulation is included in the packet. |
+| Abstract is included as an evidence object. | Decision Transformer paper | Evidence objects list | Paper-level claim framing | Supports that the source packet includes the paper’s high-level motivation and claimed contribution. | Exact abstract wording is not provided. |
+| Method formulation is included. | Decision Transformer paper | Evidence objects list | Method evidence | Supports that the paper describes how the sequence-modeling formulation is constructed. | Equations, model dimensions, objective, and training details are not supplied here. |
+| Datasets/environments are included. | Decision Transformer paper | Evidence objects list | Evaluation setup evidence | Supports that experiments are tied to defined tasks or datasets. | The packet omits specific task names and dataset properties. |
+| Baseline/metric sections are included. | Decision Transformer paper | Evidence objects list | Comparative evaluation evidence | Supports that the paper evaluates against baselines using metrics. | Exact baselines, metrics, scores, and table values are unavailable. |
+| Experiments are included. | Decision Transformer paper | Evidence objects list | Empirical evidence | Supports that the paper provides empirical demonstrations. | Numeric effect size and robustness cannot be audited from the packet. |
+| Reproducibility details are included. | Decision Transformer paper | Evidence objects list | Reproducibility evidence | Supports that some implementation or setup details exist in the paper. | Full implementation settings and appendix details are explicitly not included. |
+| Limitations are included. | Decision Transformer paper | Evidence objects list | Boundary evidence | Supports that the paper states some limitations. | Exact limitations are not provided in the packet. |
+
+baseline_metric_summary
+
+| Category | Packet-supported details | Missing details |
+|---|---|---|
+| Baselines | The paper includes baseline sections and compares the proposed method against baselines. | Baseline names, algorithm families, tuning protocol, implementation source, compute budget, and fairness controls are not provided. |
+| Metrics | The paper includes baseline/metric sections. | Metric names, normalization, score definitions, aggregation, uncertainty reporting, and success criteria are not provided. |
+| Datasets/environments | The paper includes datasets/environments. | Specific environments, dataset sizes, trajectory quality distributions, train/test splits, and task diversity are not provided. |
+| Results | The paper includes experiments. | Exact numeric values, full tables, and appendix details are explicitly outside the packet. |
+| Comparative conclusion | The packet supports that comparative evaluation was performed. | The packet does not establish the size, consistency, or statistical reliability of any advantage. |
+
+reproducibility_notes
+
+| Aspect | Packet status | Reproducibility implication |
+|---|---|---|
+| Source identity | Title, arXiv ID, and year are supplied. | The paper is identifiable within the packet. |
+| Method formulation | Included at a high level. | Enough to understand the conceptual framing, not enough to reimplement precisely from this packet alone. |
+| Datasets/environments | Included as an evidence object. | Specific benchmark reconstruction is not possible from the packet. |
+| Baselines/metrics | Included as evidence objects. | Comparative replication is not possible without baseline names, metric definitions, and settings. |
+| Implementation settings | Some reproducibility details are said to be included, but full settings are not. | Hyperparameters, architecture details, seeds, compute, preprocessing, and training protocol are not established by the packet. |
+| Numeric results | Exact values and full tables are not included. | Independent verification of reported performance is not possible from the packet alone. |
+
+limitations_and_open_questions
+
+| Limitation or open question | Evidence basis | Severity for interpretation |
+|---|---|---|
+| Exact performance claims cannot be audited. | Packet says exact numeric values and full tables are not included. | High: prevents checking effect sizes and ranking claims. |
+| Statistical reliability is not established. | Packet does not provide seeds, variance, confidence intervals, or aggregation methods. | High: limits claims about robustness. |
+| Baseline fairness cannot be assessed. | Baseline sections are included, but baseline details are absent from the packet. | Medium to high: comparative conclusions need baseline configuration evidence. |
+| Reproducibility is incomplete from this packet. | Full appendix details and implementation settings are not included. | High: reimplementation would require details outside the supplied packet. |
+| Environment generalization is bounded. | Datasets/environments are included, but specific environments are not listed. | Medium: the packet supports empirical evaluation, not broad generalization. |
+| Mechanistic explanation remains unclear. | The packet states the formulation but does not provide analysis details. | Medium: it supports what was demonstrated, not necessarily why it works. |
+| Field-wide superiority or novelty is not established. | No external retrieval is allowed, and the packet has only one source. | High: broader claims require external literature review. |
+
+Overall, the packet supports a cautious reading: the Decision Transformer paper demonstrates an offline-RL formulation based on conditional sequence modeling over trajectories and returns, and it reports experiments with datasets/environments, baselines, metrics, reproducibility details, and limitations. The evidence boundary is that the supplied packet does not contain the numeric tables, complete baseline/metric details, implementation settings, or appendix-level information needed to audit performance strength, reproducibility, or broad generalization.
+tokens used
+2,997

@@ -1,0 +1,42 @@
+run_id: validation_v0.1__B2_orchestra_subset__SPR-VAL-01__run001
+variant: B2_orchestra_subset
+task_id: SPR-VAL-01
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 3
+  evidence_traceability: 3
+  citation_validity: 3
+  literature_coverage: null
+  comparison_fairness: 4
+  experimental_rigor: 3
+  benchmark_validity: 3
+  inference_boundary_discipline: 4
+  hypothesis_quality: null
+  rl_specific_correctness: 2
+  output_usefulness: 4
+  efficiency: 4
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: major
+  dimension: factual_accuracy
+  description: Still fails to extract required substantive paper facts, especially exact objective, policy-learning setup,
+    domains, baselines, metrics, ablations, and limitations.
+  evidence: 'The output says ''no objective text is provided,'' ''metrics: Unknown,'' ''domains_tasks: exact task list unknown,''
+    and ''comparators: identities... unknown.'''
+- severity: minor
+  dimension: comparison_fairness
+  description: Better than B0/B1 at flagging why comparative conclusions are unsupported without baseline identities, tuning,
+    compute, and protocol details.
+  evidence: The limitations table states improvement over baselines is unverified because 'Baseline identities, tuning, compute,
+    and numeric comparisons are absent.'
+- severity: major
+  dimension: rl_specific_correctness
+  description: RL-specific details are mostly treated as missing rather than captured; no policy-learning setup or evaluation
+    protocol is reconstructed.
+  evidence: Reproducibility notes mark data/environment versions, seeds, compute budget, and metrics/aggregation as unknown.
+summary: The strongest of the incomplete subset-style answers. It gives useful calibrated critique and comparison-fairness
+  warnings, but it remains far below an expert paper card because it lacks the actual DreamerV3 objective, domains, metrics,
+  baselines, and limitations.

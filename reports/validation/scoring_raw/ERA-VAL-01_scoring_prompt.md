@@ -1,0 +1,577 @@
+You are scoring an internal fixed-source validation benchmark after generation is complete.
+
+Use only the task specification, frozen validation gold annotation, scoring rubric, and generated outputs below. Do not use external facts. Do not reward style over correctness. Score each variant independently but compare across variants for calibration.
+
+Return JSON matching the provided schema only. For each of the four variants, provide scores from 1-5 or null when a dimension is not applicable to this task. Include concise findings and scoring_notes. No markdown.
+
+# Task ID
+ERA-VAL-01
+
+# Task Specification
+task_id: ERA-VAL-01
+split: validation
+task_type: experimental_rigor_audit
+topic: LLM benchmark contamination
+research_question: "Does the provided LLM evaluation evidence support the claimed model capability, given possible benchmark contamination and protocol issues?"
+input_prompt: |
+  Audit the provided LLM evaluation excerpt or proposal for experimental rigor.
+  Focus on contamination risk, benchmark saturation, prompt protocol, baseline selection, statistical reporting, evaluation leakage, and claim scope.
+  Return severity-ranked findings and a corrected evaluation protocol.
+evaluation_mode: closed_source
+source_material_required: true
+provided_materials:
+  - material_id: packet_era_ho_llm_contamination
+    type: experiment_excerpt_packet
+    status: source_material_required
+    description: "A frozen excerpt or proposal describing LLM benchmark results, evaluation setup, and capability claims."
+required_outputs:
+  - rigor_audit_findings
+  - contamination_and_leakage_risk_table
+  - baseline_and_metric_review
+  - claim_scope_assessment
+  - corrected_protocol
+critical_facts_to_capture:
+  - "The claimed capability and benchmark evidence in the packet."
+  - "Training/evaluation separation, prompt protocol, and contamination controls if present."
+  - "Baseline selection and metric appropriateness."
+  - "Statistical uncertainty and reproducibility details."
+common_failure_modes:
+  - "Treating benchmark scores as self-validating."
+  - "Ignoring contamination or benchmark saturation."
+  - "Failing to inspect prompt and evaluation protocol."
+  - "Overgeneralizing benchmark performance to broad capability."
+scoring_dimensions:
+  - factual_accuracy
+  - evidence_traceability
+  - experimental_rigor
+  - benchmark_validity
+  - inference_boundary_discipline
+  - output_usefulness
+  - efficiency
+notes_on_domain_specificity: "LLM evaluation task. It tests benchmark skepticism rather than LLM enthusiasm."
+
+
+
+# Frozen Gold Annotation
+task_id: ERA-VAL-01
+source_packet_id: validation_ERA-VAL-01_packet_v0_draft
+drafted_by_agent: true
+human_review_status: pending
+eligible_for_scoring: false
+must_capture:
+- id: ERA-VAL-01-M1
+  finding: Identifies benchmark scores as protocol-bound evidence rather than self-validating capability proof.
+  evidence_locations_to_verify:
+  - GPT-3 PDF p.1 Abstract; evaluation/result sections; test-set contamination analysis section/appendix; MMLU PDF p.1 Abstract
+    and benchmark/evaluation sections.
+  scoring_weight: high
+- id: ERA-VAL-01-M2
+  finding: Audits contamination, benchmark exposure, prompt protocol, baseline choice, uncertainty, and reproducibility controls.
+  evidence_locations_to_verify:
+  - GPT-3 contamination analysis section/appendix; MMLU evaluation protocol and benchmark construction sections.
+  scoring_weight: high
+- id: ERA-VAL-01-M3
+  finding: Separates source-reported contamination analysis from additional contamination risks requiring follow-up evidence.
+  evidence_locations_to_verify:
+  - GPT-3 and MMLU result tables/figures and limitations/discussion sections.
+  scoring_weight: medium
+acceptable_equivalent_formulations:
+- Equivalent wording is acceptable if it remains grounded in the supplied validation packet and preserves claim scope.
+critical_errors:
+- id: E1
+  error: Uses external sources or remembered facts as evidence for a core claim in the closed-source task.
+  penalty: major
+- id: E2
+  error: Presents a broad superiority, deployment, causality, or field-gap claim beyond packet evidence.
+  penalty: major
+- id: E3
+  error: Invents missing metrics, seeds, versions, baselines, or numeric results.
+  penalty: major
+inference_boundary_requirements:
+- Use only the packet as evidence.
+- Separate direct source facts, within-packet synthesis, critique, and proposed hypotheses.
+- Mark broader literature, deployment, causal, or superiority claims as requiring external review unless directly evidenced.
+optional_high_value_findings:
+- Identifies missing reproducibility details without treating absence from the packet as proof of source failure.
+- Separates direct evidence from synthesis and proposed follow-up checks.
+- Reports source/page/table grounding where the packet or canonical source supplies it.
+ambiguities_requiring_human_review:
+- Exact page, section, table, and figure locations must be verified against the acquired canonical sources.
+- Some packet notes are compressed source summaries and should be checked against full PDFs before scoring approval.
+
+
+# Agent Review Authorization Layer
+This authorizes internal scoring but is not itself a gold answer. Apply the global E/B rule: external facts or broad claims should be penalized only when used as evidence for a core scored claim; harmless background context clearly marked as non-evidence should not trigger a major penalty.
+
+# Scoring Rubric
+# Scoring Rubric
+
+Score each dimension from 1 to 5. Keep dimensions separate; do not collapse them into one total score unless a later report explicitly defines a weighted decision rule.
+
+## Scale
+
+| Score | Meaning |
+|---:|---|
+| 5 | Excellent. Expert-useful, accurate, traceable, and complete for the task scope. |
+| 4 | Strong. Minor omissions or calibration issues, but scientifically reliable. |
+| 3 | Adequate. Useful with expert cleanup; some missing detail or weak organization. |
+| 2 | Weak. Substantial omissions, unsupported reasoning, or poor task fit. |
+| 1 | Unreliable. Misleading, unsupported, materially incorrect, or unsafe for research use. |
+
+## Dimensions
+
+### Factual Accuracy
+
+Measures whether the output correctly states methods, assumptions, datasets, metrics, experimental findings, and limitations.
+
+Strong outputs separate source claims from the agent's interpretation. Weak outputs misstate paper facts, confuse versions, invent details, or generalize beyond the source.
+
+### Evidence Traceability
+
+Measures whether substantive claims link to provided sources, source locations, evidence IDs, or retrieval results.
+
+Strong outputs make it clear what each source supports and what it does not support. Weak outputs provide unsupported claims or citations that are only topically related.
+
+### Citation Validity
+
+Measures whether cited works exist, are identified correctly, and support the stated claim.
+
+For closed-source tasks, citations must come from the source packet. For retrieval tasks, citations must follow fixed retrieval rules and include enough metadata to verify.
+
+### Literature Coverage
+
+Applies primarily to retrieval and literature-survey tasks. Measures whether the output includes canonical work, recent relevant work, and important contrasting lines of research.
+
+Strong outputs document search strategy, coverage limits, and omissions. Weak outputs miss obvious core work or overfit to one source.
+
+### Comparison Fairness
+
+Measures whether methods are compared under compatible assumptions, datasets, metrics, compute, tuning effort, and evaluation protocols.
+
+Strong outputs identify non-comparable settings and normalize conclusions. Weak outputs declare winners without accounting for task setup or baseline strength.
+
+### Experimental Rigor
+
+Measures handling of baselines, ablations, metrics, seeds, statistical uncertainty, compute, data splits, hyperparameter search, and reproduction risk.
+
+Strong outputs distinguish confirmatory from exploratory evidence. Weak outputs ignore missing baselines, single-seed claims, metric mismatch, or leakage.
+
+### Benchmark Validity
+
+Measures whether benchmarks, datasets, tasks, metrics, and protocols are suitable for the claim being made.
+
+Strong outputs identify contamination, leakage, saturation, protocol mismatch, metric gaming, and train/eval mismatch. Weak outputs treat a benchmark score as automatically meaningful.
+
+### Inference-Boundary Discipline
+
+Measures whether the output distinguishes source-supported conclusions, cross-paper synthesis, hypotheses, and speculation.
+
+Strong outputs calibrate scope and uncertainty. Weak outputs launder speculation into conclusions or overstate causal/generalization claims.
+
+### Hypothesis Quality
+
+Applies primarily to proposal-support tasks. Measures whether hypotheses are grounded in evidence, falsifiable, scoped, feasible, and paired with disconfirming observations.
+
+Strong outputs specify predictions, failure criteria, required evidence, and alternative explanations. Weak outputs generate attractive but untestable ideas.
+
+### RL-Specific Correctness
+
+Applies to RL tasks. Measures correctness about environment versions, wrappers, policies, reward functions, offline data, evaluation episodes, stochasticity, train/eval mismatch, and return distributions.
+
+Strong outputs catch RL-specific failure modes. Weak outputs treat RL results like ordinary supervised-learning benchmarks.
+
+### Output Usefulness
+
+Measures whether the artifact supports a real research decision: reading, reviewing, planning, reproduction, proposal writing, or experimental design.
+
+Strong outputs are structured, actionable, and concise enough to use. Weak outputs are polished but generic.
+
+### Efficiency
+
+Measures token cost, latency, tool calls, retrieval volume, and useful-information density.
+
+High-quality but extremely inefficient outputs should be flagged. Efficient outputs must still satisfy reliability requirements.
+
+## Hard-Fail Conditions
+
+A task may receive an overall hard-fail flag if any of these occur:
+
+- A hallucinated citation is presented as real.
+- A critical claim is marked supported without direct evidence.
+- A comparative conclusion is made without adequate baseline or setting normalization.
+- An RL result is summarized from best seed/checkpoint only without disclosure.
+- A causal interpretability claim is supported only by correlational evidence.
+- A reproduction or experiment plan omits required data, environment, or evaluation protocol.
+- Held-out gold annotation content appears in the output or prompt context.
+
+## Scorecard Format
+
+```yaml
+run_id:
+variant:
+task_id:
+reviewer:
+scores:
+  factual_accuracy:
+  evidence_traceability:
+  citation_validity:
+  literature_coverage:
+  comparison_fairness:
+  experimental_rigor:
+  benchmark_validity:
+  inference_boundary_discipline:
+  hypothesis_quality:
+  rl_specific_correctness:
+  output_usefulness:
+  efficiency:
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+  - severity: major|minor
+    dimension:
+    description:
+    evidence:
+summary:
+```
+
+
+# Generated Outputs
+## OUTPUT: B0_base_agent
+
+## rigor_audit_findings
+
+1. **High: Evidence packet is insufficient to support a claimed model capability.**  
+   The task asks whether the “provided LLM evaluation evidence” supports a claim, but the packet only gives source metadata and high-level notes about GPT-3 and MMLU. It does not provide the specific evaluated model, claimed capability, prompt format, scores, variance, baselines, or test conditions. Any strong capability claim would be under-supported.
+
+2. **High: Contamination risk is acknowledged but not resolved.**  
+   The GPT-3 source note says the paper includes contamination analysis for test-set overlap risk. That is relevant, but the packet does not provide the actual overlap rates, filtering method, affected benchmarks, or whether results changed after removing contaminated examples. Without those details, contamination remains an unresolved threat.
+
+3. **High: Benchmark saturation and memorization risk are not addressed for reused public benchmarks.**  
+   GPT-3 and MMLU are canonical public evaluations. The packet does not establish whether the target model was trained before or after benchmark release, whether training data was filtered, or whether benchmark items were present in pretraining, instruction tuning, evaluation examples, or prompt engineering iterations.
+
+4. **Medium: Prompt protocol is underspecified.**  
+   The packet notes GPT-3 reports zero-shot, one-shot, and few-shot settings, and MMLU reports defined evaluation settings. It does not give the exact prompts, number of shots, demonstrations, answer extraction rules, decoding settings, or whether prompts were tuned on test performance.
+
+5. **Medium: Baseline selection cannot be evaluated.**  
+   The packet says benchmark result tables exist, but does not include which baselines were used, whether they were current at evaluation time, whether they used comparable compute or prompting, or whether supervised task-specific systems were compared fairly.
+
+6. **Medium: Statistical reporting is missing.**  
+   No confidence intervals, standard errors, number of trials, per-subject breakdowns, significance tests, or robustness checks are included in the packet. For multitask results like MMLU, aggregate accuracy alone would be insufficient.
+
+7. **Medium: Evaluation leakage via benchmark-aware development is not ruled out.**  
+   The packet does not state whether prompts, model selection, checkpoints, decoding parameters, or refusal handling were tuned using benchmark validation or test feedback.
+
+8. **Low-to-medium: Claim scope likely needs narrowing.**  
+   GPT-3-style few-shot benchmark performance and MMLU-style multitask accuracy can support limited claims about performance under those protocols. They do not by themselves establish broad “understanding,” general reasoning ability, real-world reliability, or contamination-free knowledge.
+
+## contamination_and_leakage_risk_table
+
+| Risk | Severity | Why it matters | Required mitigation |
+|---|---:|---|---|
+| Pretraining overlap with benchmark test items | High | Public benchmark items may appear in web-scale corpora | Deduplicate train data against test sets; report overlap rates and filtered results |
+| Prompt examples drawn from benchmark distribution | High | Few-shot examples can leak task format or near-duplicates | Use clean development examples; document provenance |
+| Test-set-driven prompt tuning | High | Repeated test probing turns the test set into validation data | Freeze prompts before final run; use held-out private test set |
+| Benchmark saturation | High | Popular benchmarks may no longer measure novel generalization | Add fresh, private, or newly authored evaluations |
+| Evaluation script leakage | Medium | Answer formatting and extraction can inflate or deflate scores | Publish exact scoring code and answer normalization |
+| Selective reporting | Medium | Reporting only favorable tasks overstates capability | Pre-register task list and include all results |
+| Contaminated chain-of-thought or rationales | Medium | Explanations may reproduce memorized solutions | Score final answers separately; use unseen variants |
+| Baseline mismatch | Medium | Weak or outdated baselines exaggerate gains | Compare against contemporary models under same protocol |
+
+## baseline_and_metric_review
+
+The supplied packet does not include enough detail to validate baseline adequacy.
+
+A rigorous evaluation should include:
+
+| Area | Audit judgment |
+|---|---|
+| Baselines | Cannot assess from packet. Need contemporaneous LLMs, smaller model variants, random/chance baselines, majority-class baselines where applicable, and task-specialized supervised systems when claims compare against prior NLP methods. |
+| Metrics | Accuracy may be appropriate for multiple-choice MMLU-style tasks, but should be reported per subject/task as well as macro averages. For generation tasks, exact match, F1, human ratings, or task-specific metrics may be needed. |
+| Statistical reporting | Missing. Need sample sizes, confidence intervals, bootstrap or paired tests, and variance across prompt seeds/orderings. |
+| Ablations | Missing. Need zero-shot vs one-shot vs few-shot, prompt order sensitivity, contaminated vs filtered subsets, and benchmark-public vs newly created items. |
+| Calibration | Not described. For multiple-choice evaluations, probability calibration and answer-choice bias should be checked. |
+
+## claim_scope_assessment
+
+Based only on the supplied packet, the evidence can at most support a narrow claim such as:
+
+> Under specified zero-shot, one-shot, or few-shot prompting protocols, the evaluated model achieved reported benchmark performance on selected public NLP or multitask knowledge benchmarks.
+
+It does **not** sufficiently support broader claims such as:
+
+| Claim | Supported? | Reason |
+|---|---|---|
+| “The model has general human-level understanding” | No | Benchmarks are limited proxies and may be contaminated |
+| “The model reasons robustly across domains” | Not established | Need unseen, adversarial, and out-of-distribution tests |
+| “The model’s benchmark performance reflects uncontaminated generalization” | Not established | Contamination analysis details are absent |
+| “The model outperforms all prior systems” | Not assessable | Baseline set and exact results are not provided |
+| “Few-shot learning ability is proven broadly” | Partially, if protocol is documented | Public benchmark success alone does not rule out memorization or prompt sensitivity |
+
+## corrected_protocol
+
+1. **Define the claim precisely.**  
+   State whether the evaluation is measuring benchmark accuracy, few-shot adaptation, knowledge recall, reasoning, robustness, or real-world task competence.
+
+2. **Freeze the evaluation before testing.**  
+   Pre-register benchmarks, prompts, decoding settings, answer extraction, baselines, metrics, and aggregation rules.
+
+3. **Use contamination controls.**  
+   Deduplicate all training, instruction-tuning, RLHF, and prompt-development data against benchmark train/dev/test items. Report exact overlap methodology and overlap rates.
+
+4. **Report filtered and unfiltered results.**  
+   For any benchmark with detected overlap, provide scores with contaminated or near-duplicate items removed.
+
+5. **Include fresh private evaluation items.**  
+   Add newly authored tasks unavailable during model training. For MMLU-style evaluation, create fresh subject-matched questions with independent review.
+
+6. **Use clean prompt protocols.**  
+   Publish exact prompts, number of shots, demonstration source, prompt order, answer format, decoding parameters, and whether any prompt search was performed.
+
+7. **Separate validation from test.**  
+   Use a development set for prompt and parameter choices. Run the final test once, with no post hoc prompt adjustment.
+
+8. **Use strong baselines.**  
+   Compare against chance, simple retrieval or majority baselines where relevant, prior published models, contemporary LLMs, and task-specialized systems when making broad superiority claims.
+
+9. **Report robust statistics.**  
+   Include per-task and aggregate scores, sample sizes, confidence intervals, prompt-seed variance, and significance tests for model comparisons.
+
+10. **Analyze failure modes.**  
+   Break down results by subject, difficulty, reasoning type, memorization susceptibility, and answer-choice position bias.
+
+11. **Limit conclusions to the protocol.**  
+   Claims should say what was measured, under which prompts, on which benchmarks, and with what contamination controls. Broad claims about understanding or general reasoning require additional evidence beyond public benchmark scores.
+## OUTPUT: B1_kdense_subset
+
+**rigor_audit_findings**
+
+1. **High severity: contamination cannot be ruled out from the packet.**  
+   The GPT-3 source note says the paper includes a contamination analysis for test-set overlap risk, but the packet does not provide the analysis method, overlap rates, affected benchmarks, or exclusion criteria. Any claim that benchmark performance cleanly reflects capability is only partially supported by the packet.
+
+2. **High severity: benchmark saturation risk is plausible but not quantified.**  
+   The GPT-3 evaluation spans many existing NLP benchmarks, and MMLU was introduced as a broad multitask benchmark. The packet does not include per-task saturation indicators, human ceilings, prior model trends, or whether evaluated tasks were already heavily exposed in training corpora.
+
+3. **Medium severity: prompt protocol is under-specified.**  
+   GPT-3 reports zero-shot, one-shot, and few-shot settings; MMLU reports defined evaluation settings. However, the packet omits prompt templates, example selection rules, ordering, calibration, answer parsing, and whether prompts were reused or tuned. This weakens reproducibility and makes prompt overfitting impossible to assess.
+
+4. **Medium severity: baseline adequacy cannot be fully assessed.**  
+   The packet says both papers report model results and benchmark result tables, but does not include the actual baselines, sizes, training data differences, or compute budgets. Baseline comparisons therefore cannot establish whether gains come from capability, scale, data exposure, prompting, or protocol differences.
+
+5. **Medium severity: statistical reporting is not established.**  
+   The packet does not include confidence intervals, seed variation, bootstrap estimates, per-subject variance, multiple-comparison handling, or significance testing. Reported benchmark scores, if used alone, would support descriptive comparison more than robust inferential claims.
+
+6. **Low-to-medium severity: claim scope needs narrowing.**  
+   The supplied evidence supports that these papers evaluate LLMs on many tasks under stated settings. It does not, by itself, establish broad “general intelligence,” uncontaminated reasoning ability, or field-wide benchmark superiority.
+
+**contamination_and_leakage_risk_table**
+
+| Risk | Evidence from packet | Support status | Severity | Audit implication |
+|---|---|---:|---:|---|
+| Test-set overlap | GPT-3 includes contamination analysis discussion for test-set overlap risk | Direct that it was discussed; absent details | High | Cannot verify adequacy of contamination controls |
+| Training data exposure | GPT-3 evaluates across many NLP benchmarks | Indirect | High | Public benchmarks may appear in web-scale corpora |
+| Evaluation leakage via prompt tuning | Prompt templates and selection rules not supplied | Absent | Medium | Cannot tell whether prompts were tuned on test feedback |
+| Benchmark saturation | GPT-3 uses many existing benchmarks; MMLU introduced broad benchmark | Partial | Medium | Saturation risk visible but unquantified |
+| Answer parsing leakage | Implementation settings not included | Absent | Medium | Scoring could depend on undocumented parsing choices |
+| Subject/task leakage in MMLU | MMLU benchmark construction and protocol exist, but details omitted | Partial | Medium | Cannot assess train/test separation from packet |
+
+**baseline_and_metric_review**
+
+| Area | Packet evidence | Rigor concern | Corrective requirement |
+|---|---|---|---|
+| Baselines | Result tables exist for GPT-3 and MMLU | Baseline identities and comparability are unavailable | Include model names, sizes, training corpora, prompting setup, and compute |
+| Metrics | Benchmark result tables are included in source objects | Exact metrics and aggregation are omitted | Report per-task metrics, macro/micro averages, and aggregation rules |
+| Statistical uncertainty | Not included in packet | No variance or significance assessment | Add confidence intervals and paired tests or bootstrap where applicable |
+| Prompt settings | GPT-3 uses zero-, one-, and few-shot; MMLU has defined settings | Templates and example selection are missing | Freeze prompts before evaluation and publish prompt protocol |
+| Human or expert comparison | Not established by packet | Capability claims lack external anchors | Include human/expert baselines when claiming expert-level or broad knowledge |
+| Contamination controls | GPT-3 discusses contamination | Details unavailable | Publish overlap detection, affected examples, exclusion policy, and sensitivity results |
+
+**claim_scope_assessment**
+
+Supported by the packet:
+
+| Claim | Assessment |
+|---|---|
+| GPT-3 was evaluated in zero-shot, one-shot, and few-shot settings across many NLP tasks | Supported by controlled source notes |
+| GPT-3 paper considered benchmark contamination risk | Supported, but details unavailable |
+| MMLU introduced a multitask benchmark for knowledge and reasoning across many subjects | Supported |
+| MMLU reports model results under defined evaluation settings | Supported |
+
+Not established by the packet:
+
+| Claim | Reason |
+|---|---|
+| Scores demonstrate uncontaminated model capability | Contamination method and results are omitted |
+| A model has general reasoning ability across domains | Benchmark scores alone do not establish mechanism or generality |
+| One model is globally superior to another | Comparable baselines, uncertainty, and full metrics are unavailable |
+| Prompting protocol is reproducible | Prompt templates and selection rules are absent |
+| Benchmark results are statistically reliable | Variance and significance reporting are not provided |
+
+Corrected claim:  
+“The supplied evidence can support a descriptive claim that the evaluated models achieved reported benchmark results under the papers’ stated zero-/one-/few-shot or defined evaluation settings. It does not, from this packet alone, establish that those results are free from contamination, robust to prompt choices, statistically reliable across seeds, or sufficient evidence of broad model capability.”
+
+**corrected_protocol**
+
+1. **Pre-register the evaluation.**  
+   Define tasks, splits, prompts, decoding settings, metrics, baselines, exclusion rules, and statistical tests before running models.
+
+2. **Use contamination controls.**  
+   Check benchmark items against training data where possible. Report matching method, thresholds, overlap counts, affected tasks, and sensitivity analyses with contaminated or suspicious items removed.
+
+3. **Freeze prompt protocol.**  
+   Publish exact zero-shot, one-shot, and few-shot prompts; example selection rules; example order; answer-format instructions; calibration steps; and answer parsing code or rules.
+
+4. **Separate development and test usage.**  
+   Use a development set for prompt design and never alter prompts based on test-set outcomes. Record all prompt trials.
+
+5. **Choose comparable baselines.**  
+   Include prior models, smaller/larger variants where relevant, retrieval-free and retrieval-enabled systems if applicable, and human or expert baselines only when the claim requires them.
+
+6. **Report metrics transparently.**  
+   Provide per-task and aggregate scores, macro/micro aggregation rules, confidence intervals, seed or prompt variance, and significance tests for paired comparisons.
+
+7. **Audit leakage paths.**  
+   Check for duplicate questions, paraphrases, answer-key artifacts, formatting cues, benchmark examples in prompts, and accidental inclusion of test answers in few-shot demonstrations.
+
+8. **Stress-test benchmark saturation.**  
+   Include newer or held-out benchmark variants, adversarially rewritten items, private test splits where available, and performance stratified by item age or public availability.
+
+9. **Limit claims to evidence.**  
+   State results as benchmark performance under a specified protocol unless contamination, robustness, and statistical uncertainty analyses support stronger claims.
+## OUTPUT: B2_orchestra_subset
+
+## rigor_audit_findings
+
+| Severity | Claim affected | Evidence issue | Consequence | Minimal fix |
+|---|---|---|---|---|
+| High | “The evaluation supports broad model capability.” | The packet only states that GPT-3 was evaluated across many NLP tasks and that MMLU measures knowledge and reasoning across many subjects. Exact task coverage, scores, splits, prompts, and result tables are not included. | Broad capability claims are under-supported because the supplied evidence lacks enough detail to verify representativeness, per-task behavior, or failure modes. | Report per-task results, task categories, prompt formats, scoring rules, and aggregate construction. |
+| High | “Benchmark performance reflects uncontaminated capability.” | GPT-3 includes contamination analysis discussion, but the packet does not provide the overlap rates, affected benchmarks, filtering method, or sensitivity results. MMLU construction/evaluation notes are present only at a high level. | Contamination cannot be ruled out. Scores may overestimate capability if test items or close variants appeared in pretraining or prompt-development data. | Add dataset provenance checks, train-test overlap analysis, near-duplicate detection, and contaminated-vs-clean subset reporting. |
+| High | “Performance gains imply better reasoning or knowledge.” | Improvement claims require direct compatible baselines. The packet says both papers report model results, but omits baseline identities, tuning fairness, compute, prompt budgets, and exact metrics. | Model superiority or reasoning improvement claims are not established from the supplied packet. | Compare against clearly specified baselines under identical prompts, scoring, data access, and evaluation budgets. |
+| Medium | “Aggregate benchmark scores are meaningful.” | The packet does not include aggregation formulas, per-subject MMLU results, weighting, variance, or calibration details. | Aggregate scores may hide benchmark saturation, subject imbalance, or uneven performance. | Preserve per-task and per-subject results; define macro/micro aggregation; report uncertainty. |
+| Medium | “Prompt protocol is stable.” | GPT-3 reports zero-shot, one-shot, and few-shot settings; MMLU reports defined evaluation settings. The packet does not include prompt templates, demonstration selection, ordering, or prompt search details. | Prompt sensitivity and protocol overfitting remain unresolved risks. | Pre-register prompt templates, demonstration selection rules, number of trials, and prompt tuning constraints. |
+| Medium | “Reported results are statistically reliable.” | The packet does not include repeated runs, seeds, confidence intervals, bootstrap estimates, or variance across prompts/items. | Differences may be noise, especially for small subject subsets or prompt-sensitive tasks. | Report confidence intervals, paired tests where applicable, seed counts, and prompt-sampling variance. |
+| Low | “Benchmark limitations are acknowledged.” | Both source notes mention limitations, but the packet does not include their exact scope. | The audit cannot determine whether the original claims were properly calibrated. | Quote or summarize limitation sections and align final claims to them. |
+
+## contamination_and_leakage_risk_table
+
+| Risk | Evidence from packet | Severity | Why it matters | Required check |
+|---|---|---:|---|---|
+| Pretraining test-set contamination | GPT-3 paper includes contamination analysis discussion. Exact details omitted. | High | Large web-scale corpora may contain benchmark test examples or near-duplicates. | Exact-match and near-duplicate overlap against train corpus; report affected items and clean-subset scores. |
+| Benchmark saturation | GPT-3 evaluated on many existing NLP benchmarks; MMLU introduced a broad multitask benchmark. Exact score distributions omitted. | Medium | Saturated tasks can exaggerate apparent generality or fail to distinguish models. | Include human, random, prior SOTA, and strong contemporary baselines; inspect ceiling effects per task. |
+| Prompt leakage or prompt tuning leakage | Zero-/one-/few-shot settings noted, but prompt construction details omitted. | Medium | Development on test examples or repeated prompt iteration can leak evaluation signal. | Separate dev set for prompt selection; freeze prompts before test evaluation; log all prompt trials. |
+| Evaluation-set leakage through examples | Few-shot evaluation uses demonstrations; demonstration sourcing not specified in packet. | Medium | Demonstrations may overlap with test distribution or include answer patterns that bias results. | Document demonstration pool, exclusion rules, and retrieval/selection procedure. |
+| MMLU item exposure | MMLU benchmark construction and limitations noted, but contamination checks are not described in packet. | High | Public benchmark items can later enter training or prompt-selection workflows. | Use hidden or refreshed test sets; track release date relative to model training data cutoff. |
+| Metric leakage or answer-format artifacts | Metrics and scoring details omitted. | Medium | Multiple-choice format or answer tokenization can create shortcuts unrelated to claimed reasoning. | Validate scoring rules, answer normalization, and artifact-only baselines. |
+
+## baseline_and_metric_review
+
+| Dimension | Supplied evidence | Rigor assessment | Needed for stronger support |
+|---|---|---|---|
+| Baselines | Packet says benchmark result tables exist, but identities and setup are omitted. | Insufficient for improvement claims. | Name all baselines, model sizes, training data assumptions, prompt settings, and tuning budgets. |
+| Metrics | Packet references benchmark evaluations and result tables but omits metric definitions. | Insufficient to judge alignment with capability claims. | Define accuracy/F1/exact match/etc.; explain aggregation and task weighting. |
+| Prompt protocol | GPT-3 includes zero-shot, one-shot, few-shot settings; MMLU has defined evaluation settings. | Partially supported, but not auditable from packet. | Provide exact templates, examples, ordering, sampling, and prompt-search policy. |
+| Statistical reporting | No uncertainty details included in packet. | Weak support for fine-grained comparisons. | Report confidence intervals, standard errors, paired bootstrap or randomization tests, and variance across prompts. |
+| Per-task reporting | Source notes mention many tasks and result tables, but not values. | Aggregate claims cannot be checked. | Include per-task and per-subject scores before any aggregate conclusion. |
+| Human or expert reference | MMLU is described as measuring knowledge and reasoning across subjects, but reference levels are not included. | Cannot calibrate absolute capability. | Include human/expert, random, majority, and simple retrieval or artifact baselines where relevant. |
+
+## claim_scope_assessment
+
+| Claim | Type | Evidence burden | Supplied evidence | Support status | Allowed scope |
+|---|---|---|---|---|---|
+| GPT-3 was evaluated in zero-shot, one-shot, and few-shot settings across many NLP tasks. | Descriptive | Source description of evaluation setup. | Controlled notes state this directly. | Supported at high level. | The packet supports only the existence of these evaluation modes, not exact performance strength. |
+| GPT-3 results demonstrate broad few-shot language capability. | Generalization / improvement | Heterogeneous tasks, compatible baselines, metrics, and contamination controls. | Many-task evaluation and contamination discussion are noted, but details are omitted. | Partially supported, scope-limited. | May claim evaluated performance across included benchmarks, with unresolved contamination and protocol caveats. |
+| MMLU measures multitask language understanding across knowledge and reasoning subjects. | Benchmark-validity | Task/metric/protocol analysis and limitations. | MMLU benchmark design and protocol are noted. | Partially supported. | May describe MMLU as intended to measure broad multitask knowledge/reasoning, not as definitive proof of general intelligence. |
+| Scores on these benchmarks prove uncontaminated model capability. | Benchmark-validity / causal | Strong contamination exclusion, leakage controls, and clean-subset analysis. | Packet lacks exact contamination rates and leakage controls. | Not supported. | Only claim performance under the reported benchmark protocols, with contamination risk unresolved. |
+| Higher benchmark scores imply better reasoning. | Causal / improvement | Controlled comparisons plus ablations or mechanism-isolating evidence. | No mechanism evidence or ablations included in packet. | Not supported. | At most, higher scores indicate better performance on the evaluated tasks under the specified protocol. |
+
+## corrected_protocol
+
+1. **Define the claim before evaluation.** State whether the target claim is benchmark performance, few-shot adaptation, factual knowledge, reasoning, or broad generalization. Avoid claiming reasoning ability from benchmark accuracy alone.
+
+2. **Use contamination controls.** Record model training data cutoff, benchmark release dates, dataset provenance, exact-match overlap, near-duplicate overlap, and paraphrase-level similarity. Report results on full, flagged, and clean subsets.
+
+3. **Freeze the prompt protocol.** Pre-register prompt templates, demonstration counts, example selection rules, ordering, answer format, decoding settings, and allowed prompt-development data. Do not tune prompts on the test set.
+
+4. **Select compatible baselines.** Include random, majority or simple heuristic baselines, prior published systems, same-family smaller models, and strong contemporary models where available. Match evaluation data access, prompt budget, decoding, and scoring.
+
+5. **Report metrics transparently.** Provide metric definitions, answer normalization, aggregation formula, task weights, and per-task/per-subject results. Do not rely only on a headline aggregate.
+
+6. **Quantify uncertainty.** Run repeated prompt samples or seeds where applicable. Report confidence intervals and paired significance tests for model comparisons.
+
+7. **Audit leakage paths.** Separate training, development, prompt-selection, and test data. Log all prompt trials and exclude test examples from demonstrations or prompt engineering.
+
+8. **Check benchmark saturation.** Compare against human/expert references, prior SOTA, and ceiling effects. If many tasks are saturated, use harder held-out or newly constructed evaluations.
+
+9. **Preserve failure analysis.** Report low-performing tasks, contaminated subsets, prompt-sensitive cases, and answer-format artifacts.
+
+10. **Calibrate final claims.** The defensible claim should be: “The model achieved the reported results under the specified benchmark and prompting protocol, subject to unresolved or quantified contamination, leakage, and prompt-sensitivity risks.”
+## OUTPUT: B3_final_for_validation
+
+**Source Inventory**
+
+Sources supplied: GPT-3 “Language Models are Few-Shot Learners” and MMLU “Measuring Massive Multitask Language Understanding.” Evidence objects named in the packet: abstracts, evaluation/benchmark descriptions, GPT-3 contamination discussion, benchmark result tables, MMLU benchmark construction, evaluation protocol, result tables, and limitations. Exact numeric results, full tables, appendix details, prompts, seeds, and implementation settings are not included.
+
+## rigor_audit_findings
+
+1. **High: Contamination risk is acknowledged but not resolvable from the packet.**  
+   `DIRECT_PACKET_EVIDENCE`: The GPT-3 source includes a contamination analysis discussion for test-set overlap risk.  
+   `LIMITED_CRITIQUE`: Because the packet omits exact overlap rates, affected benchmarks, decontamination procedure, and result deltas, the evidence cannot fully establish whether reported benchmark performance reflects capability rather than memorization or benchmark exposure.
+
+2. **High: Capability claims are vulnerable to benchmark saturation and public-test exposure concerns.**  
+   `WITHIN_PACKET_SYNTHESIS`: GPT-3 evaluates across many NLP benchmarks; MMLU is introduced to measure broad knowledge and reasoning across many subjects.  
+   `LIMITED_CRITIQUE`: If benchmarks are public or widely used, performance alone may not isolate general capability. The packet does not provide enough detail to assess whether tasks were novel, held out, or resistant to training-set exposure.
+
+3. **Medium: Prompt protocol is under-specified in the provided packet.**  
+   `DIRECT_PACKET_EVIDENCE`: GPT-3 reports zero-shot, one-shot, and few-shot evaluations; MMLU reports defined evaluation settings.  
+   `LIMITED_CRITIQUE`: The packet does not include full prompt templates, example selection rules, ordering, sampling settings, decoding parameters, or whether prompts were tuned per benchmark. This weakens reproducibility and fairness assessment.
+
+4. **Medium: Baseline strength and comparability cannot be fully audited.**  
+   `DIRECT_PACKET_EVIDENCE`: Both sources include result tables and evaluations.  
+   `LIMITED_CRITIQUE`: The packet omits full baseline lists, tuning budgets, model versions, and whether baselines used equivalent prompting or supervision. Cross-source comparisons should not be treated as direct rankings.
+
+5. **Medium: Statistical reporting appears insufficient from the packet.**  
+   `LIMITED_CRITIQUE`: The packet does not provide seeds, repeated runs, confidence intervals, variance, bootstrap intervals, or per-task uncertainty. Missing uncertainty does not prove the studies lacked it, but it limits support for fine-grained performance claims.
+
+6. **Low-to-medium: Aggregation across heterogeneous tasks may obscure failure modes.**  
+   `WITHIN_PACKET_SYNTHESIS`: Both evaluations involve many tasks or subjects.  
+   `LIMITED_CRITIQUE`: Aggregate scores can mask uneven performance across domains unless per-task results, weighting, and aggregation rules are visible.
+
+## contamination_and_leakage_risk_table
+
+| Risk | Evidence-burden label | Packet evidence | Severity | Audit judgment |
+|---|---:|---|---:|---|
+| Train/test overlap | `DIRECT_PACKET_EVIDENCE` + `LIMITED_CRITIQUE` | GPT-3 includes contamination analysis discussion | High | Acknowledged risk, but unresolved without overlap rates, affected tasks, and corrected scores |
+| Public benchmark exposure | `LIMITED_CRITIQUE` | Many NLP benchmarks and MMLU tasks are used for evaluation | High | Requires external or dataset-lineage evidence; packet alone cannot clear exposure risk |
+| Prompt leakage through examples | `LIMITED_CRITIQUE` | GPT-3 uses few-shot/one-shot settings | Medium | Example selection protocol is needed to rule out label or answer-pattern leakage |
+| Evaluation-set tuning | `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` | Not specified in packet | Medium | Cannot determine whether prompts/model choices were tuned against test performance |
+| Benchmark saturation | `LIMITED_CRITIQUE` | Evaluations rely on benchmark result tables | Medium | Saturation cannot be measured from packet because historical score distributions are absent |
+| Cross-benchmark leakage | `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` | Not specified | Medium | Needs dataset provenance and overlap checks beyond packet |
+
+## baseline_and_metric_review
+
+Baselines: The packet says both papers report model results and benchmark tables, but it does not provide full baseline identities, model sizes, training data exposure, tuning procedures, or inference protocols. Baseline adequacy is therefore only partially auditable. `LIMITED_CRITIQUE`
+
+Metrics: The packet establishes benchmark-style evaluation across many NLP tasks and MMLU subject areas. It does not provide exact metrics, aggregation rules, weighting, confidence intervals, or per-domain breakdowns. Metric alignment is plausible for benchmark performance, but insufficiently grounded for broad claims about general language understanding or robust reasoning. `WITHIN_PACKET_SYNTHESIS` / `LIMITED_CRITIQUE`
+
+Comparability: GPT-3 benchmark results and MMLU results should be interpreted within their own evaluation settings. Cross-paper or cross-benchmark claims require matching data exposure, prompt format, model size, decoding, scoring, and task composition. `WITHIN_PACKET_SYNTHESIS`
+
+## claim_scope_assessment
+
+Supported scope: The packet supports the narrow claim that the sources report LLM benchmark evaluations under zero-shot/one-shot/few-shot or defined benchmark settings, and that GPT-3 discusses contamination risk. `DIRECT_PACKET_EVIDENCE`
+
+Partially supported scope: The evidence can support setup-specific benchmark performance claims if tied to the original reported protocols, but exact strength cannot be audited here because full numeric tables and implementation details are omitted. `LIMITED_CRITIQUE`
+
+Unsupported stronger claims: The packet does not establish uncontaminated general capability, deployment robustness, durable reasoning ability, or field-wide superiority over other models. Those claims require external review, stronger held-out evaluations, contamination audits, and uncertainty reporting. `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW`
+
+## corrected_protocol
+
+1. Use sealed or newly constructed test sets with documented provenance, creation date, and access controls.
+2. Run exact-deduplication and near-deduplication checks between training data, prompt examples, development data, and test items.
+3. Report contamination rates by benchmark, subject, and item type, plus performance before and after removing contaminated items.
+4. Freeze prompt templates, few-shot example pools, example ordering, decoding settings, scoring rules, and model checkpoints before evaluation.
+5. Separate development, validation, and final test sets; prohibit tuning prompts or model-selection decisions on the final test set.
+6. Include strong baselines: prior LMs under matched prompting, supervised task-specific baselines where relevant, retrieval or closed-book variants if the claim concerns knowledge, and simple controls such as random/majority baselines.
+7. Report per-task and aggregate metrics, with transparent weighting and confidence intervals or bootstrap uncertainty.
+8. Use multiple random seeds or prompt-example samples for few-shot settings and report variance.
+9. Include ablations for prompt format, number of shots, example selection, contaminated-item removal, and subject/task category.
+10. Scope claims to the tested setting: benchmark performance under the frozen protocol, not uncontaminated general intelligence or deployment robustness unless separately evaluated.

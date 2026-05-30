@@ -1,0 +1,221 @@
+global_review_item:
+  item_id: GLOBAL-EB-SCOPE
+  recommended_status: approved_candidate
+  review_notes: Approved as a draft recommendation because it scopes major penalties to core scored claims and explicitly
+    protects harmless background context. This does not approve any gold file.
+tasks:
+- task_id: ERA-VAL-01
+  recommended_status: revisions_required_candidate
+  eligible_after_human_confirmation: false
+  approved_items: []
+  source_check_required_items:
+  - ERA-VAL-01-M1
+  - ERA-VAL-01-M2
+  - ERA-VAL-01-M3
+  revisions_required:
+  - item_id: ERA-VAL-01-M1
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  - item_id: ERA-VAL-01-M2
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  - item_id: ERA-VAL-01-M3
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  review_notes: One or more high-priority anchors cite broad sections/tables/figures rather than exact source locations; human
+    source inspection is also required because packet excerpts are compressed/truncated.
+- task_id: ERA-VAL-02
+  recommended_status: revisions_required_candidate
+  eligible_after_human_confirmation: false
+  approved_items: []
+  source_check_required_items:
+  - ERA-VAL-02-M1
+  - ERA-VAL-02-M2
+  - ERA-VAL-02-M3
+  revisions_required:
+  - item_id: ERA-VAL-02-M1
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  - item_id: ERA-VAL-02-M2
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  - item_id: ERA-VAL-02-M3
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  review_notes: One or more high-priority anchors cite broad sections/tables/figures rather than exact source locations; human
+    source inspection is also required because packet excerpts are compressed/truncated.
+- task_id: LS-VAL-01
+  recommended_status: revisions_required_candidate
+  eligible_after_human_confirmation: false
+  approved_items: []
+  source_check_required_items:
+  - LS-VAL-01-M1
+  - LS-VAL-01-M2
+  - LS-VAL-01-M3
+  revisions_required:
+  - item_id: LS-VAL-01-M1
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  - item_id: LS-VAL-01-M2
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  - item_id: LS-VAL-01-M3
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  review_notes: One or more high-priority anchors cite broad sections/tables/figures rather than exact source locations; human
+    source inspection is also required because packet excerpts are compressed/truncated.
+- task_id: LS-VAL-02
+  recommended_status: revisions_required_candidate
+  eligible_after_human_confirmation: false
+  approved_items: []
+  source_check_required_items:
+  - LS-VAL-02-M1
+  - LS-VAL-02-M2
+  - LS-VAL-02-M3
+  revisions_required:
+  - item_id: LS-VAL-02-M1
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  - item_id: LS-VAL-02-M2
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  review_notes: One or more high-priority anchors cite broad sections/tables/figures rather than exact source locations; human
+    source inspection is also required because packet excerpts are compressed/truncated.
+- task_id: MC-VAL-01
+  recommended_status: revisions_required_candidate
+  eligible_after_human_confirmation: false
+  approved_items: []
+  source_check_required_items:
+  - MC-VAL-01-M1
+  - MC-VAL-01-M2
+  - MC-VAL-01-M3
+  revisions_required:
+  - item_id: MC-VAL-01-M1
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  - item_id: MC-VAL-01-M2
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  - item_id: MC-VAL-01-M3
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  review_notes: One or more high-priority anchors cite broad sections/tables/figures rather than exact source locations; human
+    source inspection is also required because packet excerpts are compressed/truncated.
+- task_id: MC-VAL-02
+  recommended_status: revisions_required_candidate
+  eligible_after_human_confirmation: false
+  approved_items: []
+  source_check_required_items:
+  - MC-VAL-02-M1
+  - MC-VAL-02-M2
+  - MC-VAL-02-M3
+  revisions_required:
+  - item_id: MC-VAL-02-M1
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  - item_id: MC-VAL-02-M2
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  - item_id: MC-VAL-02-M3
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  review_notes: One or more high-priority anchors cite broad sections/tables/figures rather than exact source locations; human
+    source inspection is also required because packet excerpts are compressed/truncated.
+- task_id: PS-VAL-01
+  recommended_status: revisions_required_candidate
+  eligible_after_human_confirmation: false
+  approved_items: []
+  source_check_required_items:
+  - PS-VAL-01-M1
+  - PS-VAL-01-M2
+  - PS-VAL-01-M3
+  revisions_required:
+  - item_id: PS-VAL-01-M1
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  - item_id: PS-VAL-01-M2
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  - item_id: PS-VAL-01-M3
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  review_notes: One or more high-priority anchors cite broad sections/tables/figures rather than exact source locations; human
+    source inspection is also required because packet excerpts are compressed/truncated.
+- task_id: PS-VAL-02
+  recommended_status: revisions_required_candidate
+  eligible_after_human_confirmation: false
+  approved_items: []
+  source_check_required_items:
+  - PS-VAL-02-M1
+  - PS-VAL-02-M2
+  - PS-VAL-02-M3
+  revisions_required:
+  - item_id: PS-VAL-02-M1
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  - item_id: PS-VAL-02-M2
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  review_notes: One or more high-priority anchors cite broad sections/tables/figures rather than exact source locations; human
+    source inspection is also required because packet excerpts are compressed/truncated.
+- task_id: RL-VAL-01
+  recommended_status: revisions_required_candidate
+  eligible_after_human_confirmation: false
+  approved_items: []
+  source_check_required_items:
+  - RL-VAL-01-M1
+  - RL-VAL-01-M2
+  - RL-VAL-01-M3
+  revisions_required:
+  - item_id: RL-VAL-01-M1
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  - item_id: RL-VAL-01-M2
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  - item_id: RL-VAL-01-M3
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  review_notes: One or more high-priority anchors cite broad sections/tables/figures rather than exact source locations; human
+    source inspection is also required because packet excerpts are compressed/truncated.
+- task_id: RL-VAL-02
+  recommended_status: revisions_required_candidate
+  eligible_after_human_confirmation: false
+  approved_items: []
+  source_check_required_items:
+  - RL-VAL-02-M1
+  - RL-VAL-02-M2
+  - RL-VAL-02-M3
+  revisions_required:
+  - item_id: RL-VAL-02-M1
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  - item_id: RL-VAL-02-M2
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  - item_id: RL-VAL-02-M3
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  review_notes: One or more high-priority anchors cite broad sections/tables/figures rather than exact source locations; human
+    source inspection is also required because packet excerpts are compressed/truncated.
+- task_id: SPR-VAL-01
+  recommended_status: revisions_required_candidate
+  eligible_after_human_confirmation: false
+  approved_items: []
+  source_check_required_items:
+  - SPR-VAL-01-M1
+  - SPR-VAL-01-M2
+  - SPR-VAL-01-M3
+  revisions_required:
+  - item_id: SPR-VAL-01-M1
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  - item_id: SPR-VAL-01-M2
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  - item_id: SPR-VAL-01-M3
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  review_notes: One or more high-priority anchors cite broad sections/tables/figures rather than exact source locations; human
+    source inspection is also required because packet excerpts are compressed/truncated.
+- task_id: SPR-VAL-02
+  recommended_status: revisions_required_candidate
+  eligible_after_human_confirmation: false
+  approved_items: []
+  source_check_required_items:
+  - SPR-VAL-02-M1
+  - SPR-VAL-02-M2
+  - SPR-VAL-02-M3
+  revisions_required:
+  - item_id: SPR-VAL-02-M1
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  - item_id: SPR-VAL-02-M2
+    required_change: Replace broad evidence location with exact page/section/table/figure anchors after source inspection.
+  review_notes: One or more high-priority anchors cite broad sections/tables/figures rather than exact source locations; human
+    source inspection is also required because packet excerpts are compressed/truncated.
+validation_gold_review_overall:
+  approved_candidate_tasks: []
+  source_check_required_tasks: []
+  revisions_required_candidate_tasks:
+  - ERA-VAL-01
+  - ERA-VAL-02
+  - LS-VAL-01
+  - LS-VAL-02
+  - MC-VAL-01
+  - MC-VAL-02
+  - PS-VAL-01
+  - PS-VAL-02
+  - RL-VAL-01
+  - RL-VAL-02
+  - SPR-VAL-01
+  - SPR-VAL-02
+  ready_for_validation_freeze: false

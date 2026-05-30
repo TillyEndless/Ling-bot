@@ -1,0 +1,153 @@
+{
+  "task_id": "PS-VAL-02",
+  "scorecards": [
+    {
+      "variant": "B0_base_agent",
+      "scores": {
+        "factual_accuracy": 4,
+        "evidence_traceability": 4,
+        "citation_validity": null,
+        "literature_coverage": null,
+        "comparison_fairness": null,
+        "experimental_rigor": 4,
+        "benchmark_validity": null,
+        "inference_boundary_discipline": 4,
+        "hypothesis_quality": 4,
+        "rl_specific_correctness": null,
+        "output_usefulness": 4,
+        "efficiency": 4
+      },
+      "hard_fail": {
+        "triggered": false,
+        "reasons": []
+      },
+      "findings": [
+        {
+          "severity": "minor",
+          "dimension": "inference_boundary_discipline",
+          "description": "Some wording leans toward a broad localized-mechanism frame without fully specifying the packet's missing target behavior, model, task, layer, or feature scope.",
+          "evidence": "Research questions ask whether a localized mechanism generalizes across prompt variants and whether it can be edited, while the evidence map notes only IOI and ROME precedents plus a local claim brief."
+        },
+        {
+          "severity": "minor",
+          "dimension": "evidence_traceability",
+          "description": "Traceability is good at source level but lacks the stronger page, section, table, or figure grounding requested where available in the packet/gold annotation.",
+          "evidence": "Evidence map cites 'IOI circuit paper', 'ROME paper', and 'Local claim brief' but not specific packet locations beyond broad paper-level descriptions."
+        }
+      ],
+      "summary": "A strong cautious proposal that separates correlational localization from causal testing, includes interventions, controls, falsification criteria, alternatives, and a risk register. Minor limitations are broad source references and incomplete scope binding to the unspecified target behavior.",
+      "scoring_notes": "No hard fail. It does not invent numeric results and generally treats IOI/ROME as methodological precedents rather than proof of the new claim."
+    },
+    {
+      "variant": "B1_kdense_subset",
+      "scores": {
+        "factual_accuracy": 4,
+        "evidence_traceability": 5,
+        "citation_validity": null,
+        "literature_coverage": null,
+        "comparison_fairness": null,
+        "experimental_rigor": 5,
+        "benchmark_validity": null,
+        "inference_boundary_discipline": 5,
+        "hypothesis_quality": 5,
+        "rl_specific_correctness": null,
+        "output_usefulness": 5,
+        "efficiency": 4
+      },
+      "hard_fail": {
+        "triggered": false,
+        "reasons": []
+      },
+      "findings": [
+        {
+          "severity": "minor",
+          "dimension": "factual_accuracy",
+          "description": "The evidence map references 'local_seed_brief; 2026', which is more specific than the visible task materials justify and may be an invented metadata detail if not in the frozen packet.",
+          "evidence": "Evidence_map row: 'Local claim brief | local_seed_brief; 2026 | Seed claim'."
+        },
+        {
+          "severity": "minor",
+          "dimension": "efficiency",
+          "description": "The answer is somewhat dense, but the density is mostly useful because it adds caveats, support status, and feasibility constraints.",
+          "evidence": "Hypothesis table and evidence map include multiple extra columns such as feasibility caveat, evidence type, support status, and caveat."
+        }
+      ],
+      "summary": "Best-calibrated variant overall. It is careful about direct versus speculative support, explicitly marks missing behavior/model/metric details, and provides actionable causal tests with matched controls and falsification conditions.",
+      "scoring_notes": "No hard fail. Strong performance on the task's main causal-evidence discipline requirements. Minor concern about one potentially over-specific local-brief identifier/date."
+    },
+    {
+      "variant": "B2_orchestra_subset",
+      "scores": {
+        "factual_accuracy": 4,
+        "evidence_traceability": 4,
+        "citation_validity": null,
+        "literature_coverage": null,
+        "comparison_fairness": null,
+        "experimental_rigor": 5,
+        "benchmark_validity": null,
+        "inference_boundary_discipline": 5,
+        "hypothesis_quality": 5,
+        "rl_specific_correctness": null,
+        "output_usefulness": 5,
+        "efficiency": 5
+      },
+      "hard_fail": {
+        "triggered": false,
+        "reasons": []
+      },
+      "findings": [
+        {
+          "severity": "minor",
+          "dimension": "evidence_traceability",
+          "description": "Evidence is clearly mapped to packet notes, but source locations remain broad rather than tied to exact packet excerpts or canonical page/section locations.",
+          "evidence": "Evidence_map uses provenance labels like 'Source-derived from packet notes' but does not provide page or section anchors."
+        },
+        {
+          "severity": "minor",
+          "dimension": "factual_accuracy",
+          "description": "The positive control proposal slightly implies an expected reproducible source-like effect, which should remain a proposal design element because exact protocols and results are unavailable in the packet.",
+          "evidence": "Causal_test_plan: 'Positive control: reproduce an effect on a source-like narrow behavior where intervention methods are expected to work.'"
+        }
+      ],
+      "summary": "A very strong and efficient proposal. It cleanly distinguishes what IOI/ROME support from what they do not, gives falsifiable hypotheses, and includes robust controls, specificity checks, and alternative explanations.",
+      "scoring_notes": "No hard fail. Slightly less traceable than B1/B3 because it relies on broad packet-note provenance, but it has excellent causal discipline and practical experimental design."
+    },
+    {
+      "variant": "B3_final_for_validation",
+      "scores": {
+        "factual_accuracy": 5,
+        "evidence_traceability": 5,
+        "citation_validity": null,
+        "literature_coverage": null,
+        "comparison_fairness": null,
+        "experimental_rigor": 5,
+        "benchmark_validity": null,
+        "inference_boundary_discipline": 5,
+        "hypothesis_quality": 5,
+        "rl_specific_correctness": null,
+        "output_usefulness": 5,
+        "efficiency": 4
+      },
+      "hard_fail": {
+        "triggered": false,
+        "reasons": []
+      },
+      "findings": [
+        {
+          "severity": "minor",
+          "dimension": "output_usefulness",
+          "description": "The artifact is slightly more label-heavy than necessary, which may slow direct proposal use, but the labels improve inference-boundary discipline.",
+          "evidence": "Repeated evidence-burden labels such as SPECULATIVE_PROPOSAL, DIRECT_PACKET_EVIDENCE, LIMITED_CRITIQUE, and UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW appear across all sections."
+        },
+        {
+          "severity": "minor",
+          "dimension": "experimental_rigor",
+          "description": "It asks to pre-register seeds/runs and model version as proposal requirements, which is appropriate, but the packet itself lacks exact implementation details, so these must remain future design choices.",
+          "evidence": "Risk register mitigation: 'Pre-register prompts, metrics, seeds/runs, model version, code, and raw outputs.'"
+        }
+      ],
+      "summary": "Excellent closed-source proposal support. It explicitly labels evidence burden, separates direct packet evidence from proposal speculation and critique, avoids numeric invention, and supplies causal tests, controls, falsification criteria, alternatives, and risks.",
+      "scoring_notes": "No hard fail. This is the strongest inference-boundary treatment, with only a small efficiency cost from repeated labeling."
+    }
+  ]
+}

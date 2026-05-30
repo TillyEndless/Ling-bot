@@ -1,0 +1,401 @@
+2026-05-30T04:49:03.721285Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:49:03.746912Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+OpenAI Codex v0.133.0-alpha.1
+--------
+workdir: /private/tmp/ling_bot_validation_v0_1_execution/B1_kdense_subset
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: none
+reasoning summaries: none
+session id: 019e7736-d8c4-77c2-986e-9f64dd74cb43
+--------
+user
+# Variant Runtime Instructions
+
+You are running benchmark variant `B1_kdense_subset` for the `literature_analysis_and_research_rigor` module. Follow only the variant skill/reference content included below. Do not use external retrieval or dynamic tools. Do not use knowledge outside the supplied source packet as evidence.
+
+# Variant Skill And References
+
+## Variant File: variant/kdense_literature_research_rigor/SKILL.md
+
+---
+name: kdense-literature-research-rigor-subset
+description: Instruction-only K-Dense-derived subset for fixed-source literature review, citation/evidence handling, scientific criticism, and synthesis. No tools, scripts, APIs, retrieval, or external services.
+license: MIT-derived-upstream-patterns-with-attribution
+---
+
+# K-Dense Subset: Literature Analysis And Research Rigor
+
+Use this skill when the task asks for research literature review, paper reading, citation/evidence handling, scientific criticism, or synthesis from supplied material.
+
+This variant is instruction/reference-only. It must not retrieve, search, execute scripts, call APIs, manage a citation library, parse PDFs, or use external databases. If the user asks for facts not present in the supplied material, mark them as unavailable or unsupported.
+
+## Operating Rules
+
+1. Work only from the provided source packet and task prompt.
+2. Build an evidence-first response: every important claim should point to a supplied source, section, page, figure, table, or quoted/excerpted location when available.
+3. Separate source claims, your synthesis, and unsupported possibilities.
+4. For literature reviews, account for every supplied source before synthesizing themes.
+5. For criticism, assess validity, bias, methods, evidence quality, limitations, and claim scope.
+6. For proposal or hypothesis tasks, turn observations into testable claims only when the packet supports the motivation; mark broader novelty or field-gap claims as needing external review.
+7. Do not rank methods globally unless the packet contains directly comparable evidence.
+
+## Workflow
+
+1. Scope the task: identify the research question, the fixed corpus, requested output sections, and forbidden external evidence.
+2. Inventory sources: make a source coverage table with role, evidence type, claims, methods, experiments, and limitations.
+3. Extract evidence: record claims, evidence locations, methods, datasets, metrics, baselines, comparisons, and caveats.
+4. Evaluate quality: ask whether the evidence is direct, indirect, incomplete, contradictory, or out of scope.
+5. Synthesize cautiously: group sources into themes or methods, then state what the corpus supports and what remains unresolved.
+6. Audit conclusions: remove unsupported generalizations, invented citations, prestige-based judgments, or claims that exceed the supplied evidence.
+
+## Preferred Output Moves
+
+- Use tables for source coverage, claim-evidence mapping, comparison, and limitations.
+- Use short evidence labels such as source name plus page/section/table when provided.
+- Include an explicit unsupported-or-unknown section whenever the task asks for synthesis or comparison.
+- Preserve uncertainty instead of filling missing methods, metrics, or results from memory.
+
+Load the references in this variant only as needed:
+
+- `references/literature_review_structure.md`
+- `references/evidence_and_citation_handling.md`
+- `references/scientific_criticism.md`
+- `references/synthesis_and_hypotheses.md`
+
+
+## Variant File: variant/kdense_literature_research_rigor/references/evidence_and_citation_handling.md
+
+# Evidence And Citation Handling
+
+Adapted from K-Dense citation-management and literature-review patterns, without scripts or external services.
+
+## Evidence Ledger
+
+For each important claim, record:
+
+| Claim | Source | Location supplied | Evidence type | Support status | Caveat |
+|---|---|---|---|---|---|
+
+Support status should be one of: direct, indirect, partial, contradicted, absent, or speculative.
+
+## Citation Discipline
+
+- Cite only sources supplied in the packet.
+- If metadata is incomplete, do not invent DOI, venue, version, page, or author details.
+- Prefer supplied page, section, figure, and table locations over generic source mentions.
+- If the packet gives only a general source note, cite that note and mark the granularity as limited.
+- Separate bibliographic identity from evidence support: a real source is not automatically evidence for a claim.
+
+## Unsupported Evidence Policy
+
+- Incidental background knowledge may be mentioned only if clearly outside the evidence base and not used to support a conclusion.
+- Any conclusion, method ranking, novelty claim, or causal claim must be grounded in supplied evidence.
+- If evidence is missing, write “not established by the packet” rather than guessing.
+
+
+## Variant File: variant/kdense_literature_research_rigor/references/literature_review_structure.md
+
+# Literature Review Structure
+
+Adapted from K-Dense literature-review, paper-lookup, and research-lookup workflow patterns.
+
+## Fixed-Corpus Review
+
+For a closed packet, treat literature review as mapping and synthesis rather than discovery.
+
+1. Corpus inventory: list every supplied source and its apparent role.
+2. Screening within packet: identify central, supporting, background, boundary, and unusable sources using only packet evidence.
+3. Extraction fields: research question, method, assumptions, data, experimental setup, result type, limitations, and relevance.
+4. Thematic grouping: cluster sources by problem, method family, evidence type, or claim type.
+5. Synthesis: state relationships among sources and qualify them by evidence strength.
+6. Gaps: report gaps visible in the packet, not gaps claimed for the entire field unless external review is allowed.
+
+## Literature Map Template
+
+| Source | Role in packet | Research problem | Method or artifact | Evidence type | Limitations | Use in synthesis |
+|---|---|---|---|---|---|---|
+
+## Search-Derived Workflows Disabled
+
+K-Dense search, database, and citation-chaining patterns are not active in this variant. When external retrieval is disabled, do not simulate search results or cite absent work.
+
+
+## Variant File: variant/kdense_literature_research_rigor/references/scientific_criticism.md
+
+# Scientific Criticism
+
+Adapted from K-Dense scientific-critical-thinking and peer-review patterns.
+
+## Critique Axes
+
+- Internal validity: does the method or experiment test what it claims?
+- Construct validity: do tasks, metrics, and proxies match the intended concept?
+- External validity: what populations, settings, tasks, models, or environments are covered?
+- Statistical validity: are seeds, variability, uncertainty, aggregation, and multiple comparisons handled?
+- Reproducibility: are data, code, settings, prompts, models, hardware, and configs sufficiently specified?
+- Bias and confounds: are there dataset artifacts, leakage, selection bias, or unfair baselines?
+- Claim proportionality: are conclusions limited to the actual evidence?
+
+## Review Pattern
+
+1. State the claim under review.
+2. Identify the direct evidence.
+3. List missing controls, baselines, metrics, or reporting details.
+4. Classify severity and likely effect on the claim.
+5. Suggest a corrected, narrower claim or improved protocol.
+
+Avoid prestige-based judgments and avoid treating citation count, venue, or author identity as proof of quality.
+
+
+## Variant File: variant/kdense_literature_research_rigor/references/synthesis_and_hypotheses.md
+
+# Synthesis And Hypotheses
+
+Adapted from K-Dense hypothesis-generation and scientific brainstorming patterns, constrained by evidence.
+
+## Synthesis Rules
+
+- Build synthesis from extracted evidence, not from memory.
+- Name the synthesis operation: grouping, contrast, causal conjecture, mechanism hypothesis, or gap identification.
+- Mark whether a statement is source-stated, cross-source synthesis, or proposal speculation.
+- Do not turn absence from a small fixed packet into a field-wide absence.
+
+## Hypothesis Template
+
+| Hypothesis | Evidence motivation | Prediction | Disconfirming observation | Required experiment | Feasibility caveat |
+|---|---|---|---|---|---|
+
+## Useful Checks
+
+- Is the hypothesis falsifiable?
+- Does it identify observables and controls?
+- Does it require stronger evidence than the packet provides?
+- Does it distinguish correlation, recoverability, mechanism, and causation?
+
+
+## Variant File: variant/reuse_and_license_notes.md
+
+# B1 Reuse And License Notes
+
+This variant selectively adapts K-Dense-derived instruction patterns for literature review, citation/evidence handling, scientific criticism, peer-review framing, and hypothesis formulation.
+
+No upstream scripts, APIs, database clients, generated templates, search providers, or executable services are included. The implementation is rewritten in compact form for fixed-source benchmark execution.
+
+## Components Used
+
+| Upstream component | Files consulted per ledger | Adaptation decision | License status from audit |
+|---|---|---|---|
+| `K-Dense-AI/scientific-agent-skills/skills/literature-review` | `SKILL.md`, citation/database references, review template | Rewritten into fixed-corpus review structure | MIT observed in skill frontmatter; root repository MIT |
+| `K-Dense-AI/scientific-agent-skills/skills/citation-management` | `SKILL.md`, citation/database references | Rewritten as evidence and citation discipline only | MIT observed in skill frontmatter; root repository MIT |
+| `K-Dense-AI/scientific-agent-skills/skills/scientific-critical-thinking` | `SKILL.md`, evidence, bias, validity references | Rewritten as critique axes and review pattern | MIT observed in skill frontmatter; root repository MIT |
+| `K-Dense-AI/scientific-agent-skills/skills/peer-review` | `SKILL.md`, review criteria/templates | Rewritten as criticism scaffolding | MIT observed in skill frontmatter; root repository MIT |
+| `K-Dense-AI/scientific-agent-skills/skills/hypothesis-generation` | `SKILL.md`, design/framework references | Rewritten as evidence-constrained hypothesis template | MIT observed in skill frontmatter; root repository MIT |
+
+## Explicit Runtime Exclusions
+
+- No scripts copied or enabled.
+- No API keys, external services, citation databases, PDF parsers, or search tools.
+- No Orchestra-derived material.
+- No benchmark-specific paper names, task identifiers, expected answers, or development answer-key content.
+
+
+## Variant File: variant/variant_manifest.yaml
+
+variant_id: B1_kdense_subset
+module_scope: literature_analysis_and_research_rigor
+implementation_type: instruction_reference_only
+runtime_tools_enabled: false
+external_services_enabled: false
+dynamic_retrieval_enabled: false
+scripts_enabled: false
+upstream_basis:
+  repository: K-Dense-AI/scientific-agent-skills
+  components:
+    - path: skills/literature-review/SKILL.md
+      consulted_files:
+        - skills/literature-review/SKILL.md
+        - skills/literature-review/references/citation_styles.md
+        - skills/literature-review/references/database_strategies.md
+        - skills/literature-review/assets/review_template.md
+      use: adapted_workflow_pattern
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: skills/citation-management/SKILL.md
+      consulted_files:
+        - skills/citation-management/SKILL.md
+        - skills/citation-management/references/citation_styles.md
+        - skills/citation-management/references/database_apis.md
+      use: adapted_citation_discipline_without_tools
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: skills/scientific-critical-thinking/SKILL.md
+      consulted_files:
+        - skills/scientific-critical-thinking/SKILL.md
+        - skills/scientific-critical-thinking/references/bias_detection.md
+        - skills/scientific-critical-thinking/references/evidence_evaluation.md
+        - skills/scientific-critical-thinking/references/validity_frameworks.md
+      use: adapted_critique_axes
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: skills/peer-review/SKILL.md
+      consulted_files:
+        - skills/peer-review/SKILL.md
+        - skills/peer-review/references/review_criteria.md
+        - skills/peer-review/references/review_templates.md
+      use: adapted_review_scaffolding
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: skills/hypothesis-generation/SKILL.md
+      consulted_files:
+        - skills/hypothesis-generation/SKILL.md
+        - skills/hypothesis-generation/references/experimental_design.md
+        - skills/hypothesis-generation/references/hypothesis_frameworks.md
+      use: adapted_hypothesis_template
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+runtime_exclusions:
+  - no K-Dense scripts included
+  - no APIs included
+  - no database search included
+  - no external citation validation included
+  - no Orchestra-derived rules included
+  - no B3-original AI/ML/RL guidance included
+
+
+# Task
+
+- Task ID: `RL-VAL-01`
+- Split: `validation`
+- Task type: `rl_specific_analysis`
+- Topic: model-based reinforcement learning
+- Research question: Is the provided model-based RL protocol sufficient to evaluate world-model planning claims?
+
+## Input Prompt
+
+Review the provided model-based RL protocol using only the source packet.
+Audit environment details, model-learning objective, planning horizon, model-error controls, baselines, seeds, evaluation episodes, metrics, and claim boundaries.
+Return an RL-specific risk register and a revised protocol.
+
+
+## Required Outputs
+
+- rl_protocol_audit
+- model_error_and_planning_risk_table
+- environment_and_seed_checklist
+- baseline_and_metric_review
+- revised_protocol
+
+# Source Packet
+
+# RL-VAL-01 Model Input Packet
+## Sources
+- Deep Reinforcement Learning in a Handful of Trials using Probabilistic Dynamics Models (arXiv:1805.12114; 2018). Local file: `chua_2018_pets.pdf`. Included evidence: Abstract; probabilistic ensembles; model predictive control; experiments.
+- Learning Latent Dynamics for Planning from Pixels (arXiv:1811.04551; 2018). Local file: `hafner_2018_planet.pdf`. Included evidence: Abstract; latent dynamics model; planning; DeepMind Control experiments.
+
+## Controlled Source Notes
+- PETS paper: uses probabilistic dynamics models and model predictive control for sample-efficient continuous-control reinforcement learning.
+- PlaNet paper: learns latent dynamics from pixels and plans in latent space for control tasks.
+- Evidence objects: abstracts, dynamics/model-learning sections, planning/control sections, experiment sections, baselines, result tables/figures, and limitations.
+
+## Packet Scope
+- This packet contains source metadata and neutral source notes prepared from the listed canonical files.
+- Some exact numeric values, full tables, appendix details, and implementation settings are not included in this model input packet.
+
+
+2026-05-30T04:49:03.771099Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:49:03.775214Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:49:03.775232Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:49:03.775792Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:49:03.775796Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:49:03.776219Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:49:03.776224Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:49:03.776611Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:49:03.776614Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:49:03.776981Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:49:03.776985Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:49:03.777781Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:49:03.777785Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:49:05.265731Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:49:05.265742Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:49:05.266115Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:49:05.266119Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:49:05.266485Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:49:05.266489Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:49:05.266851Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:49:05.266856Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:49:05.267190Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:49:05.267193Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:49:05.267940Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:49:05.267942Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+codex
+I can’t complete the requested audit against the actual protocol because the packet does not include the protocol text to review. It only provides two source notes: PETS uses probabilistic dynamics models with MPC, and PlaNet learns latent dynamics from pixels and plans in latent space. Exact settings, tables, appendix details, and implementation parameters are explicitly unavailable.
+
+## rl_protocol_audit
+
+| Audit area | Packet-supported expectation | Status for provided protocol | Risk |
+|---|---|---:|---|
+| Environment details | PETS: continuous-control RL; PlaNet: DeepMind Control from pixels | Protocol details absent | Not established by packet |
+| Model-learning objective | PETS: probabilistic dynamics models; PlaNet: latent dynamics from pixels | Objective absent | Cannot assess whether learning objective matches claim |
+| Planning horizon | Both source notes involve planning/control | Horizon absent | Cannot assess whether planning claim is meaningfully tested |
+| Model-error controls | PETS emphasizes probabilistic ensembles; PlaNet uses learned latent dynamics | Controls absent | High risk of attributing model artifacts to planning |
+| Baselines | Packet says experiment sections/baselines exist, but details unavailable | Baselines absent | Cannot judge comparative strength |
+| Seeds | No seed information in packet | Absent | Statistical validity not established |
+| Evaluation episodes | No episode-count information in packet | Absent | Reliability not established |
+| Metrics | No metric details in packet | Absent | Claim scope unsupported |
+| Claim boundaries | PETS and PlaNet support only general world-model planning relevance | Protocol claim absent | Any strong claim would exceed packet evidence |
+
+## model_error_and_planning_risk_table
+
+| Risk | Source motivation | Why it matters | Severity | Required control |
+|---|---|---|---:|---|
+| Model exploitation during planning | PETS uses probabilistic dynamics models with MPC; PlaNet plans using learned latent dynamics | Planning may exploit prediction errors rather than learn robust control | High | Report model-error diagnostics and evaluate rollouts under held-out dynamics data |
+| Unspecified uncertainty handling | PETS specifically uses probabilistic ensembles | Deterministic or under-specified models may hide compounding error | High | State uncertainty method, ensemble size if any, and how uncertainty affects planning |
+| Planning horizon not specified | Both packet sources involve planning/control | Long horizons amplify model error; short horizons may not test world-model planning claims | High | Predefine horizon sweep or justify fixed horizon |
+| Pixel-to-latent mismatch | PlaNet learns latent dynamics from pixels | Latent planning may optimize representations that do not preserve task-relevant state | Medium | Include reconstruction/prediction or latent consistency checks tied to control |
+| Weak baseline comparison | Packet notes baselines exist but gives no details | Planning claims require comparison against non-planning or model-free alternatives | High | Include model-free, no-planning, random-shooting/MPC, and ablation baselines where appropriate |
+| Insufficient reporting of variance | Seeds unavailable | Sample-efficient RL can be unstable across seeds | High | Report multiple seeds with dispersion, not only best run |
+
+## environment_and_seed_checklist
+
+| Item | Required for sufficient protocol | Packet status |
+|---|---|---|
+| Environment names | List all tasks and versions | Not provided |
+| Observation modality | State whether state-based, pixel-based, or both | Only source notes distinguish PETS continuous control and PlaNet pixels |
+| Action space | Specify continuous/discrete and bounds | Not provided |
+| Episode horizon | Specify max episode length | Not provided |
+| Training budget | State environment steps/trials | Not provided |
+| Evaluation budget | State number of episodes per checkpoint | Not provided |
+| Seeds | Use multiple random seeds and disclose them | Not provided |
+| Initialization | Specify model, policy, planner, and environment initialization | Not provided |
+| Train/eval separation | Separate model-learning data from evaluation episodes | Not provided |
+
+## baseline_and_metric_review
+
+| Area | Minimum needed | Packet-supported critique |
+|---|---|---|
+| Baselines | Compare against relevant model-free, no-model, no-planning, and prior model-based methods | Packet confirms baselines exist in source papers but does not provide which ones |
+| Metrics | Return, sample efficiency, model prediction error, planning success, variance | Metrics are not specified in the packet |
+| Aggregation | Mean/median plus uncertainty across seeds | Not established |
+| Claim boundary | Claims should be limited to tested environments and budgets | Any broader claim is unsupported |
+| Ablations | Remove planning, vary horizon, vary model uncertainty, vary data budget | Needed to isolate world-model planning effects |
+
+## revised_protocol
+
+1. Define environments explicitly: task names, versions, observation modality, action space, episode length, reward definition, and train/evaluation split.
+
+2. Specify the world model: input/output variables, deterministic vs probabilistic dynamics, latent vs observation-space prediction, loss function, training schedule, data collection procedure, and uncertainty mechanism.
+
+3. Define planning: planner type, planning horizon, number of candidate trajectories or optimization iterations, replanning frequency, objective, terminal value use if any, and action constraints.
+
+4. Add model-error controls: held-out one-step and multi-step prediction error, error by horizon, uncertainty calibration if probabilistic, and comparison between imagined rollouts and real environment outcomes.
+
+5. Include baselines: model-free baseline, random policy, no-planning world-model ablation, shorter/longer planning-horizon ablations, and a model-based baseline comparable to MPC-style planning where applicable.
+
+6. Use rigorous evaluation: multiple seeds, fixed evaluation episodes per seed, no exploration noise during evaluation unless justified, report mean and uncertainty, and include learning curves over environment interaction budget.
+
+7. Bound claims narrowly: state that results support world-model planning only for the listed environments, budgets, observation modalities, model class, and planner settings. Broader claims about model-based RL or general planning ability are not established by this packet.
+tokens used
+2,541

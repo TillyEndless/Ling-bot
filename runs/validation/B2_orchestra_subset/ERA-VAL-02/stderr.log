@@ -1,0 +1,430 @@
+2026-05-30T04:52:03.793970Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:52:03.819106Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+OpenAI Codex v0.133.0-alpha.1
+--------
+workdir: /private/tmp/ling_bot_validation_v0_1_execution/B2_orchestra_subset
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: none
+reasoning summaries: none
+session id: 019e7739-982a-74a3-9039-036728395bb6
+--------
+user
+# Variant Runtime Instructions
+
+You are running benchmark variant `B2_orchestra_subset` for the `literature_analysis_and_research_rigor` module. Follow only the variant skill/reference content included below. Do not use external retrieval or dynamic tools. Do not use knowledge outside the supplied source packet as evidence.
+
+# Variant Skill And References
+
+## Variant File: variant/orchestra_research_rigor/SKILL.md
+
+---
+name: orchestra-research-rigor-subset
+description: Instruction-only Orchestra-derived subset for claim provenance, research artifact structure, rigor review, method comparison, and evaluation reasoning. No autonomous experiments or tools.
+license: MIT-derived-upstream-patterns-with-attribution
+---
+
+# Orchestra Subset: Research Rigor And Evidence Artifacts
+
+Use this skill when the task asks for paper analysis, method comparison, benchmark audit, evidence review, or proposal support from supplied material.
+
+This variant adapts Orchestra research-artifact, research-manager, rigor-reviewer, and ML-paper-review patterns. It is not an autonomous research agent. Do not execute experiments, retrieve papers, run evaluation harnesses, manage repositories, update persistent state, or call tools.
+
+## Core Discipline
+
+1. Convert the response into research artifacts: claims, evidence, assumptions, comparisons, risks, and unresolved questions.
+2. Assign provenance to each major statement: source-derived, cross-source synthesis, inferred from supplied evidence, proposed by the agent, or unsupported.
+3. Match claim type to evidence burden before concluding.
+4. For comparisons, require compatible tasks, data, metrics, baselines, compute, and protocols; otherwise make a scoped comparison.
+5. For evaluation audits, inspect metric alignment, aggregation, baselines, ablations, seeds, uncertainty, leakage, and reproducibility details.
+6. Preserve negative and missing evidence. Do not silently upgrade a plausible idea into a supported finding.
+
+## Claim-Type Evidence Burdens
+
+- Improvement claim: requires direct baseline comparison under a compatible setup.
+- Generalization claim: requires heterogeneous tasks, datasets, or settings.
+- Causal claim: requires intervention, ablation, or mechanism-isolating evidence.
+- Benchmark-validity claim: requires task/metric/protocol analysis and scope limitations.
+- Reproducibility claim: requires sufficient artifact, configuration, environment, and data details.
+- Proposal claim: requires falsifiable hypothesis, observable outcomes, controls, and disconfirmation conditions.
+
+## Response Pattern
+
+1. Artifact inventory: sources, claims, assumptions, evidence, and missing details.
+2. Claim ledger: claim, type, provenance, evidence, scope, evidence burden, support status.
+3. Rigor review: severity-ranked issues tied to claim validity.
+4. Corrected scope: what the packet supports, what is unknown, and what would be needed next.
+5. Final output in the user-requested format.
+
+References:
+
+- `references/provenance_and_artifacts.md`
+- `references/rigor_review_workflow.md`
+- `references/evaluation_reasoning.md`
+- `references/method_and_claim_audit.md`
+
+
+## Variant File: variant/orchestra_research_rigor/references/evaluation_reasoning.md
+
+# Evaluation Reasoning
+
+Adapted from Orchestra ML evaluation and rigor-review patterns, without evaluation harness execution.
+
+## Benchmark Audit Questions
+
+- What construct does the benchmark claim to measure?
+- Are tasks representative of that construct?
+- Are metrics aligned with the claim?
+- Is aggregation across tasks meaningful and transparent?
+- Are baselines appropriate and fairly tuned?
+- Are repeated runs, uncertainty, and variance reported?
+- Could contamination, leakage, prompt sensitivity, or protocol overfitting affect conclusions?
+- Are per-task results preserved before aggregate claims?
+
+## Experiment Audit Questions
+
+- What exact intervention or method differs between compared systems?
+- Are training data, evaluation data, compute, and tuning budgets compatible?
+- Which variables are controlled and which confounds remain?
+- Are ablations sufficient to support mechanism claims?
+- Are negative results or failure modes reported?
+
+Report benchmark and experiment concerns as risks unless the supplied packet directly establishes a failure.
+
+
+## Variant File: variant/orchestra_research_rigor/references/method_and_claim_audit.md
+
+# Method And Claim Audit
+
+Adapted from Orchestra claim-centered artifact patterns and ML writing/reviewer criteria.
+
+## Method Comparison Schema
+
+| Dimension | Method A | Method B | Comparable? | Evidence | Caveat |
+|---|---|---|---|---|---|
+
+Recommended dimensions: objective, data, assumptions, model class, optimization, baselines, metrics, compute, evaluation protocol, limitations, and claim scope.
+
+## Claim Ledger Schema
+
+| Claim | Type | Evidence burden | Supplied evidence | Support status | Allowed scope |
+|---|---|---|---|---|---|
+
+## Boundary Rules
+
+- A within-paper comparison supports that paper's setup, not all possible settings.
+- A benchmark score supports performance under the benchmark protocol, not unrestricted capability.
+- A probe or correlational analysis supports recoverability or association unless stronger causal evidence is supplied.
+- A reproduction plan must list artifacts, code/config/data needs, seeds, metrics, and environment details.
+
+
+## Variant File: variant/orchestra_research_rigor/references/provenance_and_artifacts.md
+
+# Provenance And Research Artifacts
+
+Adapted from Orchestra agent-native research artifact and research-manager patterns.
+
+## Provenance Tags
+
+Use these tags internally and expose them when helpful:
+
+- source-derived: directly stated by supplied material.
+- source-located: source-derived and tied to page, section, figure, or table.
+- cross-source synthesis: a relation among supplied sources.
+- agent-inferred: inferred from supplied evidence and marked as such.
+- agent-proposed: a hypothesis, critique, or protocol improvement.
+- unsupported: not established by supplied material.
+
+## Artifact Schema
+
+| Artifact | Purpose |
+|---|---|
+| Claim ledger | Tracks claims, claim types, source support, and scope. |
+| Evidence ledger | Tracks source locations and directness of support. |
+| Assumption list | Separates method assumptions from evaluation assumptions. |
+| Risk register | Records threats to validity and reproducibility. |
+| Missing-information list | Identifies details needed before stronger conclusions. |
+
+Never silently convert an agent-proposed idea into a source-derived fact.
+
+
+## Variant File: variant/orchestra_research_rigor/references/rigor_review_workflow.md
+
+# Rigor Review Workflow
+
+Adapted from Orchestra rigor-reviewer patterns.
+
+## Review Dimensions
+
+- Evidence relevance: does the evidence actually support the claim?
+- Falsifiability: can the claim be tested or refuted?
+- Scope calibration: is the claim limited to the studied setting?
+- Argument coherence: do conclusions follow from assumptions and results?
+- Exploration integrity: are hypotheses, post-hoc analyses, and exploratory ideas separated?
+- Methodological rigor: are baselines, ablations, metrics, seeds, and reproducibility details adequate?
+
+## Severity-Ranked Finding Template
+
+| Severity | Claim affected | Evidence issue | Consequence | Minimal fix |
+|---|---|---|---|---|
+
+## Missing Detail Checklist
+
+- Baseline identity and strength.
+- Ablation presence and purpose.
+- Metric definition and aggregation.
+- Dataset split, task sampling, or environment setup.
+- Number of seeds, runs, or trials.
+- Variability or confidence reporting.
+- Hyperparameter search and compute comparability.
+- Implementation and artifact availability.
+
+
+## Variant File: variant/reuse_and_license_notes.md
+
+# B2 Reuse And License Notes
+
+This variant selectively adapts Orchestra-derived ideas for claim-centered artifacts, provenance, rigor review, and evaluation reasoning. It deliberately excludes autonomous experiment execution, repository management, evaluation harnesses, training infrastructure, deployment, and tool loops.
+
+## Components Used
+
+| Upstream component | Files consulted per ledger | Adaptation decision | License status from audit |
+|---|---|---|---|
+| `Orchestra-Research/AI-Research-SKILLs/22-agent-native-research-artifact/ara-compiler` | `SKILL.md`, `references/schema.md` | Rewritten as compact claim/evidence/artifact schema | MIT observed in skill frontmatter |
+| `Orchestra-Research/AI-Research-SKILLs/22-agent-native-research-artifact/research-manager` | `SKILL.md`, `references/provenance_tags.md` | Rewritten as provenance tags and artifact discipline | MIT observed in skill frontmatter |
+| `Orchestra-Research/AI-Research-SKILLs/22-agent-native-research-artifact/rigor-reviewer` | `SKILL.md`, `references/rigor_dimensions.md` | Rewritten as type-aware rigor review workflow | MIT observed in skill frontmatter |
+| `Orchestra-Research/AI-Research-SKILLs/20-ml-paper-writing/ml-paper-writing` | `SKILL.md`, citation/reviewer references | Rewritten as claim-to-evidence and reviewer criteria patterns | MIT observed in skill frontmatter |
+
+## Explicit Runtime Exclusions
+
+- No autonomous research loop or persistent research state.
+- No scripts, APIs, retrieval tools, evaluation harnesses, training infrastructure, or code execution.
+- No K-Dense-derived material.
+- No benchmark-specific paper names, task identifiers, expected answers, or development answer-key content.
+
+
+## Variant File: variant/variant_manifest.yaml
+
+variant_id: B2_orchestra_subset
+module_scope: literature_analysis_and_research_rigor
+implementation_type: instruction_reference_only
+runtime_tools_enabled: false
+external_services_enabled: false
+dynamic_retrieval_enabled: false
+scripts_enabled: false
+upstream_basis:
+  repository: Orchestra-Research/AI-Research-SKILLs
+  components:
+    - path: 22-agent-native-research-artifact/ara-compiler/SKILL.md
+      consulted_files:
+        - 22-agent-native-research-artifact/ara-compiler/SKILL.md
+        - 22-agent-native-research-artifact/ara-compiler/references/schema.md
+      use: adapted_claim_and_artifact_schema
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: 22-agent-native-research-artifact/research-manager/SKILL.md
+      consulted_files:
+        - 22-agent-native-research-artifact/research-manager/SKILL.md
+        - 22-agent-native-research-artifact/research-manager/references/provenance_tags.md
+      use: adapted_provenance_tags
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: 22-agent-native-research-artifact/rigor-reviewer/SKILL.md
+      consulted_files:
+        - 22-agent-native-research-artifact/rigor-reviewer/SKILL.md
+        - 22-agent-native-research-artifact/rigor-reviewer/references/rigor_dimensions.md
+      use: adapted_rigor_review_dimensions
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: 20-ml-paper-writing/ml-paper-writing/SKILL.md
+      consulted_files:
+        - 20-ml-paper-writing/ml-paper-writing/SKILL.md
+        - 20-ml-paper-writing/ml-paper-writing/references/citation-management.md
+        - 20-ml-paper-writing/ml-paper-writing/references/reviewer-criteria.md
+      use: adapted_claim_to_evidence_and_reviewer_patterns
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+runtime_exclusions:
+  - no autoresearch autonomous loop
+  - no experiment execution
+  - no evaluation harnesses
+  - no training infrastructure
+  - no K-Dense-derived material
+  - no B3-original AI/ML/RL additions
+
+
+# Task
+
+- Task ID: `ERA-VAL-02`
+- Split: `validation`
+- Task type: `experimental_rigor_audit`
+- Topic: generative model evaluation
+- Research question: Does the provided generative-model evaluation section justify its quality and diversity claims?
+
+## Input Prompt
+
+Audit the provided generative-model experiment section using only the source packet.
+Focus on metrics, baselines, dataset splits, sample selection, human evaluation if present, ablations, compute, and claim scope.
+Return severity-ranked findings and a corrected evaluation protocol.
+
+
+## Required Outputs
+
+- rigor_audit_findings
+- metric_claim_alignment_table
+- baseline_and_ablation_review
+- reproducibility_risk_list
+- corrected_protocol
+
+# Source Packet
+
+# ERA-VAL-02 Model Input Packet
+## Sources
+- Denoising Diffusion Probabilistic Models (arXiv:2006.11239; 2020). Local file: `ho_2020_denoising_diffusion_probabilistic_models.pdf`. Included evidence: Abstract; experiments; sample quality/likelihood discussion; limitations.
+- Improved Denoising Diffusion Probabilistic Models (arXiv:2102.09672; 2021). Local file: `nichol_2021_improved_ddpm.pdf`. Included evidence: Abstract; evaluation metrics; precision/recall; sampling speed; ablations.
+
+## Controlled Source Notes
+- DDPM paper: presents diffusion probabilistic models and evaluates sample quality and likelihood-related quantities on image-generation benchmarks.
+- Improved DDPM paper: studies modifications to diffusion models, reports likelihood/sample-quality metrics, precision/recall style evaluation, and faster sampling settings.
+- Evidence objects: abstracts, experiment sections, metric tables/figures, sample-quality comparisons, sampling-speed discussions, and ablations where supplied.
+
+## Packet Scope
+- This packet contains source metadata and neutral source notes prepared from the listed canonical files.
+- Some exact numeric values, full tables, appendix details, and implementation settings are not included in this model input packet.
+
+
+2026-05-30T04:52:03.843753Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:52:03.863972Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:03.863985Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:52:03.864573Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:03.864576Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:52:03.864921Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:03.864926Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:52:03.865277Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:03.865282Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:52:03.865734Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:03.865738Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:52:03.866665Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:03.866670Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:52:05.243300Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:05.243314Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:52:05.243673Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:05.243677Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:52:05.244026Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:05.244030Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:52:05.244365Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:05.244368Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:52:05.244704Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:05.244707Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:52:05.245468Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:52:05.245472Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+codex
+## rigor_audit_findings
+
+| Severity | Claim affected | Evidence issue | Consequence | Minimal fix |
+|---|---|---|---|---|
+| High | Quality claims for the provided generative-model section | The packet only says DDPM and improved DDPM evaluate sample quality and likelihood-related quantities; it does not provide the experiment section’s exact claims, numeric metrics, tables, sample counts, or protocol details. | The section cannot justify strong quality claims from this packet alone. | State quality claims only as “evaluated under reported image-generation benchmark metrics in the cited papers,” or include exact metric values, datasets, baselines, and sampling settings. |
+| High | Diversity claims | Diversity is only indirectly supported by the improved DDPM note that precision/recall style evaluation is reported. The packet does not provide the values, datasets, thresholds, or interpretation. | A diversity claim is under-supported unless tied narrowly to the precision/recall evaluation actually reported. | Report precision and recall values, define the metric, identify datasets/splits, and explain whether recall is being used as the diversity proxy. |
+| High | Comparison against baselines | The packet mentions sample-quality comparisons and ablations but omits baseline identities, tuning parity, compute, and protocol compatibility. | Improvement claims over other generative models or DDPM variants are not justified. | Add a baseline table with model names, training data, evaluation data, compute budgets, sampling steps, metrics, and tuning procedure. |
+| Medium | Dataset split validity | The packet references image-generation benchmarks but gives no train/test split details, preprocessing, or task sampling. | Metric claims may be vulnerable to leakage, non-comparable splits, or unclear benchmark scope. | Specify dataset names, train/eval split, preprocessing, number of generated samples, and random seeds. |
+| Medium | Sample selection | The packet mentions sample-quality discussion, but not whether samples are cherry-picked, random, fixed-seed, or from all checkpoints. | Visual evidence cannot substantiate quality or diversity claims without selection rules. | Require fixed, predeclared seeds and report uncurated grids alongside aggregate metrics. |
+| Medium | Human evaluation | No human evaluation is described in the packet. | Any perceptual-quality claim relying on human judgment is unsupported. | Either remove human-preference wording or add a human study protocol with raters, blinding, prompts/tasks, aggregation, and uncertainty. |
+| Medium | Ablation support | Improved DDPM is said to include ablations, but exact ablation factors and results are not provided. | Mechanism claims about which modification improves quality, likelihood, diversity, or sampling speed are not justified. | Provide ablation table isolating each modification under fixed data, compute, metric, and sampling settings. |
+| Medium | Compute and sampling speed | Sampling-speed discussions are noted, but compute, hardware, number of diffusion steps, and quality-speed tradeoffs are missing. | Claims of faster sampling cannot be compared fairly or reproduced. | Report wall-clock time, hardware, sampling steps, batch size, precision, and quality metrics at each speed setting. |
+| Low | Limitation handling | DDPM limitations are mentioned, but not enumerated in the packet. | The evaluation section may overstate scope if limitations are omitted. | Add a limitations paragraph separating benchmark-specific evidence from broader generative-model capability claims. |
+
+## metric_claim_alignment_table
+
+| Metric / evidence type | Claim it can support | Claim type | Supplied evidence | Support status | Correct scope |
+|---|---|---|---|---|---|
+| Sample-quality metrics in DDPM | Image sample quality on reported benchmarks | Improvement / benchmark-performance | Source-derived: DDPM evaluates sample quality on image-generation benchmarks | Partially supported | Only under the original paper’s benchmark protocol; exact strength unknown without values |
+| Likelihood-related quantities in DDPM | Likelihood or density-modeling performance | Benchmark-performance | Source-derived: DDPM evaluates likelihood-related quantities | Partially supported | Supports likelihood discussion only if metric definition and values are reported |
+| Improved DDPM likelihood/sample-quality metrics | Modified diffusion model performance | Improvement | Source-derived: improved DDPM reports likelihood/sample-quality metrics | Partially supported | Within that paper’s datasets, metrics, and training/sampling setup |
+| Precision/recall style evaluation | Quality-diversity tradeoff, with recall as diversity proxy | Benchmark-validity / diversity | Source-derived: improved DDPM reports precision/recall style evaluation | Partially supported | Can support scoped diversity discussion only after metric definition, values, and thresholds are included |
+| Sampling-speed discussion | Faster sampling under selected settings | Improvement / efficiency | Source-derived: improved DDPM discusses faster sampling settings | Partially supported | Only for specified sampling steps, hardware, and quality-speed tradeoff |
+| Visual samples | Qualitative sample quality | Qualitative evidence | Source-derived: sample-quality discussion exists | Weak unless sample selection rules are known | Illustrative only unless uncurated and predeclared |
+| Human evaluation | Human-perceived quality/diversity | Human-subject evaluation | Not present in packet | Unsupported | No human-evaluation claim should be made |
+
+## baseline_and_ablation_review
+
+Baseline review:
+
+| Dimension | Status from packet | Rigor implication |
+|---|---|---|
+| Baseline identity | Not specified beyond DDPM and improved DDPM source context | Cannot verify fair comparison |
+| Dataset compatibility | Image-generation benchmarks mentioned, exact datasets/splits omitted | Scope must remain benchmark-level and non-numeric |
+| Metric compatibility | Sample quality, likelihood, precision/recall, speed mentioned | Claims must name which metric supports which conclusion |
+| Compute parity | Not supplied | Efficiency and improvement claims are underdetermined |
+| Tuning parity | Not supplied | Baseline comparisons may be confounded |
+| Sampling protocol | Faster sampling settings mentioned, details omitted | Speed-quality claims require step counts and sampler settings |
+
+Ablation review:
+
+| Ablation target | Supplied evidence | What it can support | Gap |
+|---|---|---|---|
+| Improved DDPM modifications | Packet says ablations are included where supplied | Possible mechanism or component contribution claims | Exact components, controls, values, and metrics are missing |
+| Sampling speed | Packet says faster sampling settings are discussed | Possible efficiency tradeoff claim | Needs sampling steps, wall-clock time, hardware, and matched quality metrics |
+| Quality vs likelihood tradeoff | Packet says likelihood/sample-quality metrics are reported | Possible multi-metric comparison | Needs paired metrics across the same checkpoints/settings |
+| Diversity via precision/recall | Packet says precision/recall style evaluation is reported | Possible diversity-related claim | Needs metric definition and interpretation limits |
+
+## reproducibility_risk_list
+
+- Missing exact numeric metric values and full tables.
+- Missing dataset names, train/eval splits, preprocessing, and generated sample counts.
+- Missing random seeds, number of runs, and variance or confidence intervals.
+- Missing baseline list and baseline tuning details.
+- Missing compute budget, hardware, training duration, and sampling-time measurement protocol.
+- Missing checkpoint selection criteria.
+- Missing sample selection rules for qualitative figures.
+- Missing implementation settings and hyperparameters.
+- Missing full ablation definitions and controlled variables.
+- Missing human-evaluation protocol; if no human study exists, human-perceptual claims are unsupported.
+- Possible metric-scope mismatch: likelihood, sample quality, precision, recall, and speed measure different constructs and should not be collapsed into one general “better generation” claim.
+
+## corrected_protocol
+
+1. Define claims before evaluation:
+   - Quality claim: measured by named sample-quality metrics and uncurated visual samples.
+   - Diversity claim: measured by recall or another explicitly defined diversity metric.
+   - Efficiency claim: measured by sampling wall-clock time and number of function evaluations or diffusion steps.
+   - Likelihood claim: measured separately from perceptual quality.
+
+2. Use explicit datasets and splits:
+   - Name each benchmark dataset.
+   - State train, validation, and test splits.
+   - Fix preprocessing and resolution.
+   - Generate the same number of samples per model.
+
+3. Compare against fair baselines:
+   - Include DDPM, improved DDPM variants, and any external generative baselines claimed in the section.
+   - Match training data, evaluation data, sample count, and metric computation.
+   - Report compute and tuning budgets for each model.
+
+4. Report aligned metrics:
+   - For quality: report the chosen sample-quality metric with confidence intervals.
+   - For diversity: report precision/recall or another diversity metric, with definitions and thresholds.
+   - For likelihood: report likelihood-related quantities separately.
+   - For speed: report sampling steps, hardware, batch size, wall-clock time, and quality at each speed point.
+
+5. Control sample selection:
+   - Use predeclared random seeds.
+   - Show uncurated sample grids.
+   - State whether failed or low-quality samples are included.
+
+6. Add ablations:
+   - Isolate each improved DDPM modification.
+   - Hold dataset, compute, training schedule, sampler, and evaluation metrics fixed.
+   - Include negative or neutral ablation results.
+
+7. Add uncertainty and reproducibility details:
+   - Report number of runs or seeds.
+   - Include variance or confidence intervals.
+   - Provide implementation details, hyperparameters, checkpoint-selection rules, and evaluation code/configs.
+
+8. Calibrate final claims:
+   - Supported: “The cited papers report diffusion-model evaluations using sample-quality, likelihood-related, precision/recall, sampling-speed, and ablation analyses.”
+   - Not supported from this packet alone: “The model is generally higher quality,” “more diverse,” or “faster” without exact metrics, baselines, and protocol details.
+tokens used
+5,067

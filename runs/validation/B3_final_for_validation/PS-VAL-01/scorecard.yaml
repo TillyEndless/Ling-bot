@@ -1,0 +1,38 @@
+run_id: validation_v0.1__B3_final_for_validation__PS-VAL-01__run001
+variant: B3_final_for_validation
+task_id: PS-VAL-01
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 4
+  evidence_traceability: 5
+  citation_validity: null
+  literature_coverage: null
+  comparison_fairness: 5
+  experimental_rigor: 5
+  benchmark_validity: 5
+  inference_boundary_discipline: 5
+  hypothesis_quality: 4
+  rl_specific_correctness: 5
+  output_usefulness: 5
+  efficiency: 4
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: factual_accuracy
+  description: The source inventory gives years and a local seed filename/date not present in the task specification, which
+    risks importing unstated metadata.
+  evidence: It lists Dream to Control as 2019, Mastering Atari as 2020, and local_seed_world_model_planning.md as 2026; the
+    scoring materials only provide titles and generic local seed brief references.
+- severity: minor
+  dimension: hypothesis_quality
+  description: H1 has a compound falsification criterion that could conflate no sample-efficiency gain with no horizon degradation;
+    separate tests would be clearer.
+  evidence: H1 is falsified by either no improvement over non-imagination baselines or monotonic horizon improvement, which
+    mixes the sample-efficiency claim and the horizon-limit claim.
+summary: Excellent boundary discipline and proposal mechanics. It explicitly labels direct evidence, synthesis, critique,
+  and unsupported claims; includes concrete required reporting, RL protocol details, model-error diagnostics, baselines, ablations,
+  and risk controls. Minor unstated source metadata and a compound hypothesis keep factual accuracy and hypothesis quality
+  slightly below perfect.

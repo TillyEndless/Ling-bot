@@ -1,0 +1,56 @@
+## corpus_coverage_table
+
+| Source | Included evidence in packet | What it can support | What it cannot establish from packet alone |
+|---|---:|---|---|
+| Wei et al. 2022, *Chain-of-Thought Prompting Elicits Reasoning in Large Language Models* | Abstract; prompting/evaluation results; limitations | CoT exemplars can improve performance on selected reasoning tasks in large LMs. This supports the weaker claim that explicit reasoning-style traces are useful for eliciting better behavior. | Does not prove the model’s generated chain of thought is faithful to its internal computation, or that useful reasoning happens latently without prompting. |
+| Kojima et al. 2022, *Large Language Models are Zero-Shot Reasoners* | Abstract; zero-shot reasoning prompt; experiments | A simple prompt can elicit step-by-step reasoning behavior without task-specific examples in selected settings. Supports the idea that some reasoning-like capability may already be present and prompt-accessible. | Does not establish that the internal reasoning is latent, causally used, or generally reliable across models/tasks. |
+| Turpin et al. 2023, *Language Models Don’t Always Say What They Think* | Abstract; unfaithfulness experiments; discussion | Challenges strong interpretations of CoT as transparent access to model reasoning. Generated rationales can be unfaithful or bias-influenced. | Does not show CoT is always unfaithful, nor that internal reasoning never occurs. |
+| Lanham et al. 2023, *Measuring Faithfulness in Chain-of-Thought Reasoning* | Abstract; faithfulness tests; intervention/ablation evidence; limitations | Provides methods and evidence for testing whether CoT rationales are causally related to model behavior in selected settings. Supports a more nuanced view: faithfulness is empirical and variable. | Does not provide a universal verdict on latent reasoning, and packet lacks full numeric details and appendices. |
+
+## evidence_type_taxonomy
+
+| Evidence type | Sources | Relevance to latent/internal reasoning |
+|---|---|---|
+| Prompting-performance evidence | Wei 2022; Kojima 2022 | Shows reasoning-style prompts can improve or elicit better outputs. This is evidence for useful prompted reasoning behavior, but only indirect evidence for latent internal reasoning. |
+| Zero-shot elicitation evidence | Kojima 2022 | Suggests reasoning behavior can be unlocked by generic instruction, which is compatible with latent capability. Still not direct evidence of internal causal mechanisms. |
+| Generated-rationale faithfulness evidence | Turpin 2023; Lanham 2023 | Tests whether stated reasoning corresponds to actual model behavior. This directly bears on whether visible CoT should be interpreted as internal reasoning. |
+| Intervention/ablation evidence | Lanham 2023 | Stronger than observational performance evidence because it perturbs reasoning traces or conditions and observes behavioral effects. |
+| Bias/unfaithfulness evidence | Turpin 2023 | Challenges the idea that natural-language explanations reliably reveal what the model “thought.” |
+| Limitations/discussion evidence | All sources | Defines boundaries: selected tasks, selected models, incomplete implementation details in packet, and uncertainty about causal interpretation. |
+
+## representative_paper_table
+
+| Paper | Representative claim within corpus | Relation to latent/internal reasoning | Evidence stance |
+|---|---|---|---|
+| Wei et al. 2022 | Chain-of-thought exemplars improve reasoning performance in large LMs on selected tasks. | Supports usefulness of explicit reasoning traces as an elicitation technique. It is compatible with internal reasoning but does not prove it. | Supportive but indirect |
+| Kojima et al. 2022 | “Let’s think step by step”-style prompting can elicit zero-shot stepwise reasoning behavior. | Stronger evidence that reasoning-like ability may be present before task-specific exemplars, but still measured through outputs. | Supportive but indirect |
+| Turpin et al. 2023 | CoT explanations can be unfaithful to model behavior and affected by biases. | Directly challenges treating generated rationales as transparent reports of internal computation. | Skeptical |
+| Lanham et al. 2023 | Faithfulness can be measured using tests, interventions, and ablations; CoT faithfulness varies by setting. | Moves the debate from “CoT equals reasoning” to empirical causal testing of when rationales matter. | Mixed/diagnostic |
+
+## counter_evidence_summary
+
+The strongest skeptical evidence in the packet comes from Turpin et al. 2023 and Lanham et al. 2023.
+
+Turpin et al. challenge the assumption that a model’s stated chain of thought is necessarily what caused its answer. Their unfaithfulness experiments show that rationales can be shaped by biases or fail to reflect the model behavior that produced the output. This undermines a simple interpretation of CoT as a window into internal reasoning.
+
+Lanham et al. further complicate the picture by proposing faithfulness tests and studying interventions or ablations. The key implication is that faithfulness is not guaranteed; it must be measured. This challenges broad claims that visible reasoning traces reliably expose latent reasoning, while leaving room for cases where traces may be causally useful.
+
+## unsupported_synthesis_warnings
+
+- Do not infer “language models perform latent reasoning” as a general fact from CoT performance improvements alone.
+- Do not treat generated chain-of-thought text as direct evidence of internal computation without faithfulness tests.
+- Do not generalize from selected tasks and selected settings to all LMs, all reasoning tasks, or all prompting formats.
+- Do not claim the packet proves hidden reasoning exists independently of prompts; the supportive papers mainly show prompt-elicited behavior.
+- Do not claim CoT is useless or always deceptive; the skeptical papers challenge faithfulness, not necessarily task utility.
+- Do not rely on exact effect sizes, full tables, or appendix-level implementation details, because the packet explicitly says these are not included.
+
+## gap_and_hypothesis_list
+
+| Gap visible in corpus | Possible hypothesis to test |
+|---|---|
+| Limited direct evidence about internal mechanisms | CoT improvements may reflect either genuine intermediate computation, better output formatting, distributional cueing, or some mixture of these. |
+| Faithfulness varies but corpus does not settle when or why | CoT may be more faithful on tasks where intermediate steps are necessary and less faithful where shortcuts or biases dominate. |
+| Packet lacks full numeric values and implementation details | Apparent strength of evidence should be treated qualitatively unless the full papers are inspected. |
+| Prompted reasoning and latent reasoning are not cleanly separated | Zero-shot reasoning prompts may reveal latent capability, but they may also create a new behavior pattern at inference time. |
+| Sparse coverage of model scale, architecture, and task diversity | Useful latent/internal reasoning may emerge only in certain model sizes, training regimes, or task families. |
+| Little direct comparison between visible CoT and hidden internal computation | Future work would need causal probes, interventions, or ablations connecting internal states, generated rationales, and final answers. |

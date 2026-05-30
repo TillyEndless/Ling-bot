@@ -1,0 +1,694 @@
+2026-05-30T07:38:57.484919Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T07:38:57.498771Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T07:38:57.539833Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+OpenAI Codex v0.133.0-alpha.1
+--------
+workdir: /Users/tilly/code/repository/Ling-bot/reports/validation/scoring_raw
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: none
+reasoning summaries: none
+session id: 019e77d2-642a-7723-bbfb-0848b29d10ec
+--------
+user
+You are scoring an internal fixed-source validation benchmark after generation is complete.
+
+Use only the task specification, frozen validation gold annotation, scoring rubric, and generated outputs below. Do not use external facts. Do not reward style over correctness. Score each variant independently but compare across variants for calibration.
+
+Return JSON matching the provided schema only. For each of the four variants, provide scores from 1-5 or null when a dimension is not applicable to this task. Include concise findings and scoring_notes. No markdown.
+
+# Task ID
+PS-VAL-01
+
+# Task Specification
+task_id: PS-VAL-01
+split: validation
+task_type: evidence_grounded_proposal_support
+topic: world-model planning
+research_question: "Can the provided world-model planning idea be converted into a feasible, evidence-grounded research proposal?"
+input_prompt: |
+  Using only the provided source packet, turn the seed idea into a small research proposal.
+  Produce scoped research questions, evidence-grounded hypotheses, falsification criteria, required experiments, baselines, ablations, RL-specific evaluation details, and a risk register.
+  Separate packet facts, synthesis, and proposed hypotheses.
+evaluation_mode: closed_source
+source_material_required: true
+provided_materials:
+  - material_id: packet_ps_ho_world_model_planning
+    type: seed_literature_and_idea_packet
+    status: source_material_required
+    description: "A frozen packet with a world-model planning idea brief and seed literature/excerpts."
+required_outputs:
+  - scoped_research_questions
+  - hypothesis_table
+  - evidence_map
+  - experiment_plan
+  - rl_evaluation_protocol
+  - risk_register
+critical_facts_to_capture:
+  - "What the packet establishes about world models, planning, or evaluation."
+  - "Which gaps are supported by source evidence and which are speculative."
+  - "Falsifiable predictions, negative outcomes, and alternative explanations."
+  - "Environment, baseline, seed, metric, and model-error controls needed for execution."
+common_failure_modes:
+  - "Turning the idea into an implementation plan without evidence grounding."
+  - "Ignoring model-error or planning-specific confounds."
+  - "Failing to specify disconfirming outcomes."
+  - "Overgeneralizing beyond the seed literature."
+scoring_dimensions:
+  - factual_accuracy
+  - evidence_traceability
+  - hypothesis_quality
+  - experimental_rigor
+  - rl_specific_correctness
+  - inference_boundary_discipline
+  - output_usefulness
+  - efficiency
+notes_on_domain_specificity: "Proposal task with RL/world-model content; it evaluates research planning discipline."
+
+
+
+# Frozen Gold Annotation
+task_id: PS-VAL-01
+source_packet_id: validation_PS-VAL-01_packet_v0_draft
+drafted_by_agent: true
+human_review_status: pending
+eligible_for_scoring: false
+must_capture:
+- id: PS-VAL-01-M1
+  finding: Grounds proposal hypotheses in world-model/planning packet facts and the local seed brief.
+  evidence_locations_to_verify:
+  - Dream to Control PDF p.1 Abstract and latent world-model/imagination sections; DreamerV2 PDF p.1 Abstract and Atari/world-model
+    sections; local seed brief.
+  scoring_weight: high
+- id: PS-VAL-01-M2
+  finding: Specifies falsifiable predictions, disconfirming outcomes, model-error controls, planning baselines, RL metrics,
+    seeds, and environment details.
+  evidence_locations_to_verify:
+  - Dream to Control and DreamerV2 experiment sections, baseline tables/figures, and local seed brief.
+  scoring_weight: high
+- id: PS-VAL-01-M3
+  finding: Separates model-learning quality, planner quality, and policy performance claims.
+  evidence_locations_to_verify:
+  - World-model method sections, planning/control sections, result tables, and discussion/limitations in the two canonical
+    PDFs.
+  scoring_weight: medium
+acceptable_equivalent_formulations:
+- Equivalent wording is acceptable if it remains grounded in the supplied validation packet and preserves claim scope.
+critical_errors:
+- id: E1
+  error: Uses external sources or remembered facts as evidence for a core claim in the closed-source task.
+  penalty: major
+- id: E2
+  error: Presents a broad superiority, deployment, causality, or field-gap claim beyond packet evidence.
+  penalty: major
+- id: E3
+  error: Invents missing metrics, seeds, versions, baselines, or numeric results.
+  penalty: major
+inference_boundary_requirements:
+- Use only the packet as evidence.
+- Separate direct source facts, within-packet synthesis, critique, and proposed hypotheses.
+- Mark broader literature, deployment, causal, or superiority claims as requiring external review unless directly evidenced.
+optional_high_value_findings:
+- Identifies missing reproducibility details without treating absence from the packet as proof of source failure.
+- Separates direct evidence from synthesis and proposed follow-up checks.
+- Reports source/page/table grounding where the packet or canonical source supplies it.
+ambiguities_requiring_human_review:
+- Exact page, section, table, and figure locations must be verified against the acquired canonical sources.
+- Some packet notes are compressed source summaries and should be checked against full PDFs before scoring approval.
+
+
+# Agent Review Authorization Layer
+This authorizes internal scoring but is not itself a gold answer. Apply the global E/B rule: external facts or broad claims should be penalized only when used as evidence for a core scored claim; harmless background context clearly marked as non-evidence should not trigger a major penalty.
+
+# Scoring Rubric
+# Scoring Rubric
+
+Score each dimension from 1 to 5. Keep dimensions separate; do not collapse them into one total score unless a later report explicitly defines a weighted decision rule.
+
+## Scale
+
+| Score | Meaning |
+|---:|---|
+| 5 | Excellent. Expert-useful, accurate, traceable, and complete for the task scope. |
+| 4 | Strong. Minor omissions or calibration issues, but scientifically reliable. |
+| 3 | Adequate. Useful with expert cleanup; some missing detail or weak organization. |
+| 2 | Weak. Substantial omissions, unsupported reasoning, or poor task fit. |
+| 1 | Unreliable. Misleading, unsupported, materially incorrect, or unsafe for research use. |
+
+## Dimensions
+
+### Factual Accuracy
+
+Measures whether the output correctly states methods, assumptions, datasets, metrics, experimental findings, and limitations.
+
+Strong outputs separate source claims from the agent's interpretation. Weak outputs misstate paper facts, confuse versions, invent details, or generalize beyond the source.
+
+### Evidence Traceability
+
+Measures whether substantive claims link to provided sources, source locations, evidence IDs, or retrieval results.
+
+Strong outputs make it clear what each source supports and what it does not support. Weak outputs provide unsupported claims or citations that are only topically related.
+
+### Citation Validity
+
+Measures whether cited works exist, are identified correctly, and support the stated claim.
+
+For closed-source tasks, citations must come from the source packet. For retrieval tasks, citations must follow fixed retrieval rules and include enough metadata to verify.
+
+### Literature Coverage
+
+Applies primarily to retrieval and literature-survey tasks. Measures whether the output includes canonical work, recent relevant work, and important contrasting lines of research.
+
+Strong outputs document search strategy, coverage limits, and omissions. Weak outputs miss obvious core work or overfit to one source.
+
+### Comparison Fairness
+
+Measures whether methods are compared under compatible assumptions, datasets, metrics, compute, tuning effort, and evaluation protocols.
+
+Strong outputs identify non-comparable settings and normalize conclusions. Weak outputs declare winners without accounting for task setup or baseline strength.
+
+### Experimental Rigor
+
+Measures handling of baselines, ablations, metrics, seeds, statistical uncertainty, compute, data splits, hyperparameter search, and reproduction risk.
+
+Strong outputs distinguish confirmatory from exploratory evidence. Weak outputs ignore missing baselines, single-seed claims, metric mismatch, or leakage.
+
+### Benchmark Validity
+
+Measures whether benchmarks, datasets, tasks, metrics, and protocols are suitable for the claim being made.
+
+Strong outputs identify contamination, leakage, saturation, protocol mismatch, metric gaming, and train/eval mismatch. Weak outputs treat a benchmark score as automatically meaningful.
+
+### Inference-Boundary Discipline
+
+Measures whether the output distinguishes source-supported conclusions, cross-paper synthesis, hypotheses, and speculation.
+
+Strong outputs calibrate scope and uncertainty. Weak outputs launder speculation into conclusions or overstate causal/generalization claims.
+
+### Hypothesis Quality
+
+Applies primarily to proposal-support tasks. Measures whether hypotheses are grounded in evidence, falsifiable, scoped, feasible, and paired with disconfirming observations.
+
+Strong outputs specify predictions, failure criteria, required evidence, and alternative explanations. Weak outputs generate attractive but untestable ideas.
+
+### RL-Specific Correctness
+
+Applies to RL tasks. Measures correctness about environment versions, wrappers, policies, reward functions, offline data, evaluation episodes, stochasticity, train/eval mismatch, and return distributions.
+
+Strong outputs catch RL-specific failure modes. Weak outputs treat RL results like ordinary supervised-learning benchmarks.
+
+### Output Usefulness
+
+Measures whether the artifact supports a real research decision: reading, reviewing, planning, reproduction, proposal writing, or experimental design.
+
+Strong outputs are structured, actionable, and concise enough to use. Weak outputs are polished but generic.
+
+### Efficiency
+
+Measures token cost, latency, tool calls, retrieval volume, and useful-information density.
+
+High-quality but extremely inefficient outputs should be flagged. Efficient outputs must still satisfy reliability requirements.
+
+## Hard-Fail Conditions
+
+A task may receive an overall hard-fail flag if any of these occur:
+
+- A hallucinated citation is presented as real.
+- A critical claim is marked supported without direct evidence.
+- A comparative conclusion is made without adequate baseline or setting normalization.
+- An RL result is summarized from best seed/checkpoint only without disclosure.
+- A causal interpretability claim is supported only by correlational evidence.
+- A reproduction or experiment plan omits required data, environment, or evaluation protocol.
+- Held-out gold annotation content appears in the output or prompt context.
+
+## Scorecard Format
+
+```yaml
+run_id:
+variant:
+task_id:
+reviewer:
+scores:
+  factual_accuracy:
+  evidence_traceability:
+  citation_validity:
+  literature_coverage:
+  comparison_fairness:
+  experimental_rigor:
+  benchmark_validity:
+  inference_boundary_discipline:
+  hypothesis_quality:
+  rl_specific_correctness:
+  output_usefulness:
+  efficiency:
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+  - severity: major|minor
+    dimension:
+    description:
+    evidence:
+summary:
+```
+
+
+# Generated Outputs
+## OUTPUT: B0_base_agent
+
+## scoped_research_questions
+
+**Packet Facts**
+
+Dream to Control studies learned latent dynamics models and uses latent imagination for behavior learning in control tasks. Mastering Atari with Discrete World Models studies discrete world models for Atari and reports performance under Atari evaluation settings with baselines. The seed brief asks whether latent world-model planning remains useful under limited real-environment interaction and accumulated model error.
+
+**Synthesis**
+
+The feasible proposal should not ask whether world models work in general. The packet already supports that world-model behavior learning has been demonstrated in control and Atari settings. The sharper question is when latent imagination helps or hurts as real interaction is constrained and model rollout error grows.
+
+**Scoped Research Questions**
+
+1. Under fixed low real-environment interaction budgets, does behavior learning through latent imagination improve policy performance over comparable non-imagination or model-free baselines?
+2. How does imagined rollout horizon affect return, stability, and model-error sensitivity?
+3. Are discrete latent world models more robust than continuous latent world models in Atari-like visual domains when imagination horizons increase?
+4. Can simple model-error controls, such as shorter imagination horizons or uncertainty/error-based rollout truncation, preserve the benefits of planning while reducing failure from accumulated model error?
+
+## hypothesis_table
+
+| ID | Proposed Hypothesis | Evidence Grounding | Falsification Criteria |
+|---|---|---|---|
+| H1 | Latent imagination improves sample efficiency under limited real interaction compared with policy learning without imagination. | Dream to Control uses latent dynamics and latent imagination for behavior learning in control tasks. The seed asks about limited real-environment interaction. | At matched environment-step budgets, imagination agents fail to outperform no-imagination variants on most tasks, or gains vanish across repeated seeds. |
+| H2 | Longer imagined rollout horizons help only up to a point; excessive horizon length degrades performance because model error accumulates. | The seed explicitly raises accumulated model error. Dream to Control relies on imagined latent trajectories, making horizon length a direct mechanism. | Performance monotonically improves with longer horizons, or model-error metrics do not increase with horizon length. |
+| H3 | Discrete world models are a strong candidate for Atari-like settings under limited interaction. | Mastering Atari with Discrete World Models studies discrete world models for Atari and reports Atari evaluation and baselines. | Discrete world-model variants do not match or exceed continuous/standard latent variants under the same Atari evaluation settings and interaction budgets. |
+| H4 | Error-aware planning, such as truncating imagined rollouts when predicted uncertainty/error is high, improves reliability over fixed long rollouts. | Seed concern is accumulated model error; both cited works rely on learned world models, making rollout quality a central dependency. | Error-aware truncation does not improve return, variance, or catastrophic failure rate relative to fixed-horizon imagination. |
+
+## evidence_map
+
+| Claim Type | Packet Fact | How It Supports Proposal | Limitation |
+|---|---|---|---|
+| Packet fact | Dream to Control learns latent dynamics models. | Justifies using learned latent world models as the main method family. | Packet does not provide exact architecture or numeric results. |
+| Packet fact | Dream to Control uses latent imagination for behavior learning in control tasks. | Grounds RQs about imagined rollouts, planning horizon, and sample efficiency. | Does not by itself prove robustness under severe model error. |
+| Packet fact | Mastering Atari with Discrete World Models studies discrete world models for Atari. | Grounds Atari-like visual RL experiments and discrete latent ablations. | Packet omits exact table values and implementation settings. |
+| Packet fact | Mastering Atari reports performance under Atari evaluation settings with baselines. | Supports including Atari evaluation protocol and baseline comparisons. | Exact baseline list must be selected conservatively from the packet description. |
+| Packet fact | Seed brief asks whether latent world-model planning remains useful under limited real interaction and accumulated model error. | Defines the central empirical uncertainty. | The seed is a research prompt, not evidence that the effect exists. |
+| Synthesis | Planning benefit should be measured at fixed real-environment budgets. | Directly tests whether imagination substitutes for real interaction. | Requires careful compute and update matching to avoid unfair comparisons. |
+| Synthesis | Model-error accumulation should be tested by varying rollout horizon. | Horizon is the cleanest intervention on accumulated latent prediction error. | Error metrics may not perfectly correlate with control performance. |
+
+## experiment_plan
+
+**Experiment 1: Limited-Interaction Control Benchmark**
+
+Purpose: Test whether latent imagination improves sample efficiency in control tasks.
+
+Design:
+- Train a Dream-to-Control-style latent world-model agent.
+- Compare against a no-imagination ablation using the same encoder/world model where possible but learning behavior only from real collected transitions.
+- Run multiple real-environment budgets: very low, low, medium.
+- Report final return, learning curves, and area under the learning curve.
+
+Baselines:
+- No-imagination latent agent.
+- Model-free RL baseline under the same environment-step budget.
+- Random policy or simple non-learning policy as a sanity baseline.
+
+Ablations:
+- Imagined rollout horizon: short, medium, long.
+- World-model update frequency.
+- Planning/control objective with and without imagined trajectories.
+- Same policy capacity with imagination disabled.
+
+**Experiment 2: Horizon and Model-Error Accumulation**
+
+Purpose: Directly test the seed concern that accumulated model error may erase planning benefits.
+
+Design:
+- Train world models on limited real data.
+- Evaluate prediction error over imagined rollout depth.
+- Train policies using different imagination horizons.
+- Correlate model rollout error with downstream return.
+
+Metrics:
+- Return at fixed environment steps.
+- Prediction error by rollout depth.
+- Policy variance across seeds.
+- Failure rate or severe return collapse.
+
+Falsification:
+- If long horizons produce no additional model error and consistently improve returns, H2 is falsified.
+
+**Experiment 3: Atari-Like Discrete World Model Evaluation**
+
+Purpose: Test whether discrete world models are more suitable for visual Atari settings.
+
+Design:
+- Implement or adapt a discrete latent world-model agent consistent with the Atari source.
+- Evaluate under Atari-style settings from the packet.
+- Compare against non-discrete latent world model and non-world-model baselines.
+
+Baselines:
+- Atari model-free baseline.
+- Continuous latent world-model variant.
+- No-imagination discrete world-model variant.
+
+Ablations:
+- Discrete vs continuous latent representation.
+- Imagined horizon length.
+- Real-data budget.
+- Planning with fixed horizon vs error-aware truncation.
+
+**Experiment 4: Error-Aware Planning**
+
+Purpose: Test whether model-error controls preserve planning gains.
+
+Design:
+- Add rollout truncation based on learned or held-out model prediction error.
+- Compare to fixed short, medium, and long horizons.
+- Evaluate both control and Atari-like tasks.
+
+Expected useful outcome:
+- Even if full world-model planning fails under long horizons, the study can identify regimes where short-horizon or error-aware imagination remains useful.
+
+## rl_evaluation_protocol
+
+Use matched real-environment interaction budgets across all agents. The main independent variable is access to latent imagination, not additional real samples.
+
+Evaluation requirements:
+- Report learning curves over real environment steps.
+- Use identical environment-step budgets for all methods.
+- Use multiple random seeds and report variability.
+- Evaluate final policies without exploration noise where appropriate.
+- Track both task return and model-prediction error.
+- Separate training-time imagined steps from real environment steps in all reporting.
+- Include compute/update counts so imagination methods are not silently given much larger optimization budgets.
+- For Atari-like tasks, use the Atari evaluation setting referenced by the packet source and compare to baselines under that same setting.
+- Include low-budget regimes because the seed specifically concerns limited real interaction.
+- Include horizon sweeps because accumulated model error is the key failure mode.
+
+Primary metrics:
+- Final episodic return.
+- Sample efficiency: return at fixed real-step budgets.
+- Area under learning curve.
+- Variance across seeds.
+- Model rollout error as a function of imagined depth.
+
+Decision rule:
+- The idea is supported if imagination-based agents outperform matched baselines in low-interaction regimes and if horizon/error-aware ablations show a controllable tradeoff between planning benefit and model-error accumulation.
+- The idea is weakened if gains disappear under fair step/update matching or if imagined rollouts systematically reduce return as model error grows.
+
+## risk_register
+
+| Risk | Why It Matters | Mitigation |
+|---|---|---|
+| Model-based agents get more compute than baselines. | Apparent sample efficiency may reflect extra optimization, not better use of data. | Report real steps, imagined steps, gradient updates, and wall-clock or compute proxies separately. |
+| Accumulated model error causes misleading imagined rewards/states. | This is the seed’s central concern. | Sweep imagination horizon and add error-aware rollout truncation. |
+| Exact source implementation details are missing from packet. | Full reproduction may be underspecified. | Treat the proposal as a small comparative study; clearly document implementation choices. |
+| Atari and control tasks may favor different latent representations. | Results may not generalize across domains. | Analyze control and Atari-like settings separately before making cross-domain claims. |
+| Baseline selection may be unfair. | Weak baselines could overstate world-model planning value. | Include no-imagination, model-free, random/sanity, discrete/continuous variants where applicable. |
+| Prediction error may not correlate with policy performance. | Model metrics alone may not explain RL outcomes. | Report both model-error curves and downstream return. |
+| Low interaction budgets may be too low for stable world-model learning. | All methods could fail, making conclusions uninformative. | Use several budgets, including a minimally viable medium budget. |
+| High variance across RL seeds may obscure effects. | False positives or negatives are likely in RL. | Use repeated seeds and report confidence intervals or variability summaries. |
+## OUTPUT: B1_kdense_subset
+
+**scoped_research_questions**
+
+1. Under limited real-environment interaction, does latent world-model planning improve policy learning compared with model-free or non-imagination baselines?
+2. How quickly does accumulated model error degrade planning performance as imagination horizon increases?
+3. Are discrete latent world models more robust than continuous latent world models for planning in visually complex RL settings such as Atari?
+4. Which components are necessary for gains: learned latent dynamics, imagined rollouts, actor-critic learning in imagination, or discrete latent representation?
+
+**Packet Facts vs Synthesis vs Hypotheses**
+
+| Type | Statement | Support |
+|---|---|---|
+| Packet fact | Dream to Control learns latent dynamics models and uses latent imagination for behavior learning in control tasks. | Source note: Dream to Control abstract/method/experiments |
+| Packet fact | Mastering Atari studies discrete world models for Atari and reports performance under Atari evaluation settings and baselines. | Source note: Mastering Atari abstract/experiments/baselines |
+| Packet fact | The seed asks whether latent world-model planning remains useful under limited real-environment interaction and accumulated model error. | Source note: local seed brief |
+| Synthesis | The proposal can test sample efficiency and model-error sensitivity by varying real-environment budget and imagination horizon. | Cross-source synthesis from world-model imagination plus seed concern |
+| Proposed hypothesis | Latent imagination will help most at low interaction budgets but may degrade with long imagined rollouts if model error accumulates. | Evidence-grounded proposal speculation; not established by packet |
+
+**hypothesis_table**
+
+| Hypothesis | Evidence motivation | Prediction | Falsification criteria | Required experiment | Feasibility caveat |
+|---|---|---|---|---|---|
+| H1: Latent world-model planning improves sample efficiency under limited real interaction. | Dream to Control uses latent dynamics and imagination for behavior learning; seed asks about limited interaction. | At fixed low environment-step budgets, world-model agents outperform model-free or no-imagination baselines. | No statistically meaningful improvement over baselines at low budgets, or worse performance across most tasks. | Train agents under strict environment-step budgets on control tasks and Atari-like visual tasks. | Exact budgets and variance reporting are not specified in the packet. |
+| H2: Longer imagination horizons show a non-monotonic effect because accumulated model error offsets planning benefits. | Seed explicitly raises accumulated model error; Dream to Control uses latent imagination. | Short-to-medium horizons improve returns; very long horizons reduce or fail to improve returns. | Return does not vary with horizon, or longer horizons consistently improve without degradation. | Horizon sweep with fixed real data, fixed model capacity, and repeated seeds. | Packet does not provide exact horizon settings. |
+| H3: Discrete latent world models are competitive in visually complex domains. | Mastering Atari studies discrete world models for Atari evaluation. | Discrete world-model planning performs competitively against listed Atari baselines under matched evaluation. | Discrete model fails to match relevant baselines under matched data and evaluation settings. | Atari benchmark subset with discrete latent model, continuous latent variant, and model-free baselines. | Exact Atari scores, tables, and implementation settings are unavailable. |
+| H4: Planning gains require both learned latent dynamics and imagination-based policy optimization. | Dream to Control combines latent dynamics with latent imagination for behavior learning. | Removing imagination or corrupting dynamics reduces performance more than minor architectural changes. | Ablations show no degradation when imagination or learned dynamics are removed. | Component ablations: no imagination, one-step model only, shuffled dynamics, oracle/real rollout upper bound if feasible. | Oracle rollouts may not be feasible in all benchmark settings. |
+
+**evidence_map**
+
+| Claim | Source | Location supplied | Evidence type | Support status | Caveat |
+|---|---|---|---|---|---|
+| Latent dynamics models can support behavior learning through imagination. | Dream to Control | Abstract; method; experiments per packet | Source claim/method | Direct | No exact metrics included. |
+| Discrete world models have been evaluated on Atari. | Mastering Atari | Abstract; Atari evaluation; baselines per packet | Source claim/experiment | Direct | Full result tables absent. |
+| The target concern is limited interaction plus accumulated model error. | local_seed_world_model_planning.md | Seed brief note | Problem statement | Direct | Seed is motivation, not empirical evidence. |
+| Low interaction budgets are the right stress test. | Dream to Control + seed brief | Cross-source synthesis | Proposal rationale | Partial | Packet does not prove this is the only or best stress test. |
+| Horizon sweeps can test model-error accumulation. | Seed brief + Dream to Control | Cross-source synthesis | Experimental design inference | Indirect | Model error measurement details must be designed. |
+| Discrete vs continuous latent models are relevant comparison axes. | Dream to Control + Mastering Atari | Source contrast | Synthesis | Partial | Packet does not provide a head-to-head comparison. |
+
+**experiment_plan**
+
+| Component | Design |
+|---|---|
+| Domains | Small continuous-control tasks aligned with Dream to Control’s control setting; Atari subset aligned with Mastering Atari’s evaluation setting. |
+| Main independent variables | Real-environment interaction budget, imagination horizon, latent representation type, and use of imagination. |
+| Primary agents | Latent world-model planning agent using imagined rollouts; discrete latent world-model variant for Atari-style visual domains. |
+| Baselines | Model-free RL baseline; no-imagination world-model baseline; one-step predictive model baseline; discrete-vs-continuous latent model comparison where applicable; published/source-reported baselines only when packet details are available. |
+| Ablations | No imagined rollouts; horizon sweep; reduced model capacity; frozen or stale model; corrupted/shuffled latent dynamics; policy trained on real rollouts only; discrete latent disabled for Atari variant. |
+| Measurements | Episodic return, sample efficiency at fixed environment steps, model prediction error over rollout depth, performance vs imagination horizon, variance across random seeds. |
+| Decision logic | A hypothesis is supported only if improvements hold under matched environment budgets, repeated seeds, and relevant ablations. |
+
+**rl_evaluation_protocol**
+
+| Evaluation detail | Protocol |
+|---|---|
+| Environment interaction | Report all results as a function of real-environment steps, not only gradient steps or imagined steps. |
+| Budgeting | Use low, medium, and higher real-interaction budgets to test sample efficiency. |
+| Seeds and uncertainty | Run multiple random seeds; report mean, variability, and confidence intervals or comparable uncertainty summaries. |
+| Horizon analysis | Evaluate imagination horizons separately; track both return and model error by rollout depth. |
+| Baseline fairness | Match observation preprocessing, action spaces, environment-step budgets, network capacity where possible, and evaluation frequency. |
+| Evaluation episodes | Use held-out evaluation episodes without exploration noise when appropriate; keep training and evaluation returns separate. |
+| Atari-specific details | Use the Atari evaluation setting described in the Mastering Atari packet when exact settings are available; do not invent absent frame-skip, sticky-action, or life-loss details. |
+| Failure analysis | Inspect cases where imagined performance improves while real-environment return does not, because that indicates model exploitation or compounding error. |
+
+**risk_register**
+
+| Risk | Why it matters | Evidence status | Mitigation |
+|---|---|---|---|
+| Accumulated model error makes imagined rollouts misleading. | Central seed concern; may invalidate planning gains. | Directly motivated by seed, indirectly tied to imagination methods. | Horizon sweep, rollout-depth prediction error, short-horizon controls. |
+| Baselines are unfair or under-tuned. | Could falsely attribute gains to world-model planning. | Packet notes baselines but lacks full settings. | Match budgets/settings; report tuning protocol; include simple and strong baselines. |
+| Gains come from representation learning rather than planning. | Would weaken claim that planning is useful. | Plausible but not established by packet. | No-imagination and real-rollout-only ablations. |
+| Results may not transfer from control to Atari or vice versa. | Dream to Control and Atari source cover different settings. | Direct source-domain difference. | Treat domains separately; avoid global ranking. |
+| Discrete vs continuous comparison may be confounded by architecture. | Representation type is not isolated if model sizes differ. | Packet lacks head-to-head evidence. | Capacity-matched variants and component ablations. |
+| Insufficient statistical reporting. | RL results can be seed-sensitive. | Not specified in packet. | Multiple seeds, uncertainty intervals, per-task curves. |
+| Exact implementation settings unavailable. | Reproducibility and comparison may be limited. | Packet explicitly omits some numeric values and appendix details. | Mark unspecified settings; use proposal-level design rather than claiming replication. |
+
+Overall, the seed idea can be converted into a feasible proposal, but the packet supports it as a scoped empirical test rather than as an already-established claim that latent world-model planning remains beneficial under limited interaction and model error.
+## OUTPUT: B2_orchestra_subset
+
+## scoped_research_questions
+
+1. Under limited real-environment interaction, does latent world-model planning improve policy performance compared with model-free RL baselines in control and Atari-like settings?
+2. How does accumulated model error during imagined rollouts affect downstream policy quality?
+3. Do discrete world models offer better robustness to long imagined rollouts than continuous latent world models in Atari-like domains?
+4. What rollout horizon, planning frequency, or imagination depth best trades off sample efficiency against model-error accumulation?
+
+Provenance separation:
+
+- Packet facts: Dream to Control learns latent dynamics models and uses latent imagination for behavior learning in control tasks. Mastering Atari with Discrete World Models studies discrete world models for Atari and reports performance under Atari evaluation settings. The seed asks whether latent world-model planning remains useful under limited real interaction and accumulated model error.
+- Synthesis: The proposal can compare world-model planning usefulness across interaction budgets, rollout horizons, and world-model representation types.
+- Proposed hypotheses: The specific claims below are testable proposal hypotheses, not established packet findings.
+
+## hypothesis_table
+
+| Hypothesis | Type | Evidence grounding | Falsification criteria | Scope |
+|---|---|---|---|---|
+| H1: Latent world-model planning improves sample efficiency under low real-environment interaction budgets versus model-free RL. | Improvement | Source-derived grounding: Dream to Control uses latent imagination for behavior learning; Atari discrete world-model work evaluates world models against baselines. | Falsified if world-model planning fails to outperform matched model-free baselines at low budgets across predefined tasks and metrics. | Limited-budget control and Atari-like tasks only. |
+| H2: Longer imagined rollouts initially help but eventually degrade policy learning because model error accumulates. | Causal/mechanism proposal | Source-derived seed concern: accumulated model error; source-derived world-model imagination/planning setup. | Falsified if performance is monotonic with rollout horizon or if measured model error does not correlate with policy degradation. | Imagined-rollout planning regimes in learned latent models. |
+| H3: Discrete latent world models are more robust than continuous latent models on Atari-like domains under the same interaction budget. | Improvement/comparison | Source-derived: Mastering Atari studies discrete world models for Atari; Dream to Control uses latent dynamics and imagination in control tasks. | Falsified if discrete models do not outperform or show lower rollout-error sensitivity than continuous alternatives under matched protocol. | Atari-like domains; not general control unless separately tested. |
+| H4: Adaptive short-horizon planning outperforms fixed long-horizon planning when the world model is imperfect. | Proposal | Agent-proposed from seed concern about accumulated model error. | Falsified if fixed long horizons match or exceed adaptive planning across seeds without higher model-error penalties. | Planning with learned world models under limited environment interaction. |
+
+## evidence_map
+
+| Evidence item | Provenance | Supports | Limitations |
+|---|---|---|---|
+| Dream to Control learns latent dynamics models and uses latent imagination for behavior learning in control tasks. | source-derived | Feasibility of latent world-model imagination for control. | Exact metrics, baselines, and implementation details are not included in the packet. |
+| Mastering Atari with Discrete World Models studies discrete world models for Atari and reports evaluation against baselines. | source-derived | Feasibility of discrete world models and Atari evaluation framing. | Exact scores, tables, and protocol details are omitted. |
+| Seed asks whether planning remains useful with limited real interaction and accumulated model error. | source-derived | Central research question and threat model. | Does not itself provide empirical evidence. |
+| Comparing rollout horizons can expose model-error accumulation. | agent-inferred | H2 and ablation design. | Requires direct measurement of model prediction error and policy performance. |
+| Comparing continuous and discrete latent models may test representation robustness. | cross-source synthesis | H3. | Packet does not establish that tasks, architectures, or budgets are directly comparable across original papers. |
+
+## experiment_plan
+
+| Experiment | Purpose | Required setup | Baselines | Ablations | Success condition |
+|---|---|---|---|---|---|
+| E1: Limited-budget control benchmark | Test H1 in control tasks. | Train world-model planning agents under fixed low, medium, and high real-interaction budgets. | Model-free RL matched for interaction budget; no-imagination latent agent if available. | Rollout horizon, model update frequency, planning frequency. | World-model planning improves return or sample efficiency at low budgets with uncertainty reported. |
+| E2: Atari-like discrete world-model benchmark | Test H1 and H3 in Atari-like settings. | Evaluate discrete world-model planning under Atari protocol. | Atari model-free baseline; continuous latent world-model variant if implemented. | Discrete vs continuous latent state; imagination horizon; action-repeat/frame preprocessing if relevant. | Discrete model shows better limited-budget performance or lower sensitivity to rollout length. |
+| E3: Model-error accumulation study | Test H2. | Measure latent prediction error or reconstruction/prediction quality across imagined rollout lengths. | Short-horizon planning; model-free baseline not using imagination. | Horizons such as 1, 5, 15, 30 imagined steps; teacher-forced vs free rollout prediction. | Performance degrades when measured rollout error exceeds a predefined threshold. |
+| E4: Adaptive horizon planning | Test H4. | Stop or shorten imagination when model uncertainty/error proxy is high. | Fixed short horizon; fixed long horizon. | Error threshold, uncertainty proxy, horizon cap. | Adaptive horizon improves return or reduces variance over fixed long horizon. |
+
+## rl_evaluation_protocol
+
+- Tasks: include at least one continuous-control setting aligned with Dream to Control’s control focus and at least one Atari-like setting aligned with the discrete world-model paper.
+- Metrics: report episode return, sample efficiency curves, area under learning curve, final performance at fixed interaction budgets, and model prediction/error metrics over imagined rollout length.
+- Interaction budgets: define low, medium, and high real-environment step budgets before training; do not tune budgets post hoc.
+- Baselines: include matched model-free RL, world-model agent without imagined rollouts, fixed short-horizon planning, fixed long-horizon planning, and where feasible continuous vs discrete world-model variants.
+- Seeds and uncertainty: run multiple random seeds and report mean, variance or confidence intervals, and per-task results before aggregate scores.
+- Fairness controls: match real-environment interaction, observation preprocessing, action space, reward normalization, network capacity where possible, optimizer budget, and hyperparameter search budget.
+- Leakage controls: separate training/evaluation episodes; avoid using evaluation returns to tune rollout horizon or model-selection criteria.
+- Aggregation: preserve per-task learning curves and only aggregate after normalizing or otherwise justifying cross-task comparability.
+- Failure reporting: report negative results, unstable training, high model-error regimes, and cases where planning underperforms model-free RL.
+
+## risk_register
+
+| Risk | Severity | Claim affected | Consequence | Minimal mitigation |
+|---|---:|---|---|---|
+| Baselines are weaker or less tuned than the world-model method. | High | H1, H3 | Apparent improvement may reflect unfair comparison. | Use published strong baselines where available and equalize tuning budgets. |
+| Model-error metric is poorly aligned with control performance. | High | H2, H4 | Error analysis may not explain policy degradation. | Measure both prediction error and downstream return; test correlation explicitly. |
+| Continuous-control and Atari results are over-aggregated. | Medium | Generalization claims | Proposal may imply broader validity than supported. | Report domains separately and avoid unrestricted generalization. |
+| Exact source tables and implementation details are missing from the packet. | Medium | Reproducibility | Proposal cannot lock exact hyperparameters or expected numeric thresholds. | Treat numeric targets as preregistered design choices to be filled from full papers or pilot runs. |
+| Adaptive horizon uses evaluation feedback indirectly. | Medium | H4 | Protocol overfitting could inflate results. | Select thresholds on validation tasks or training-only model-error proxies. |
+| Limited interaction budget makes results high variance. | Medium | H1 | False negatives or false positives across seeds. | Increase seeds, report confidence intervals, and include learning curves. |
+| Discrete vs continuous model comparison changes too many variables. | High | H3 | Representation effect may be confounded by architecture or optimization differences. | Keep architecture, capacity, training data, and optimizer as matched as possible; ablate only representation where feasible. |
+## OUTPUT: B3_final_for_validation
+
+## Source Inventory
+
+Sources in packet: `Dream to Control: Learning Behaviors by Latent Imagination` (2019), `Mastering Atari with Discrete World Models` (2020), and `local_seed_world_model_planning.md` (2026). Evidence objects named by the packet: abstracts, latent/discrete world-model method sections, imagination/planning/control material, experiment sections, baseline/result tables, Atari evaluation, discussion/limitations, and seed brief. Exact numeric results, full tables, appendix details, and implementation settings are not included.
+
+## scoped_research_questions
+
+1. Under limited real-environment interaction, when does latent world-model planning or imagination improve policy learning compared with direct model-free or behavior-cloning-style baselines?
+   - Label: `SPECULATIVE_PROPOSAL`
+   - Grounding: packet states Dream to Control uses latent dynamics and latent imagination for behavior learning; seed asks about limited real interaction and model error.
+
+2. How does accumulated model error affect downstream planning quality as imagination horizon increases?
+   - Label: `SPECULATIVE_PROPOSAL`
+   - Grounding: seed brief explicitly raises accumulated model error; packet notes world-model imagination/planning/control evidence.
+
+3. Are discrete latent world models more robust than continuous/standard latent models under long-horizon imagined rollouts in Atari-style environments?
+   - Label: `SPECULATIVE_PROPOSAL`
+   - Boundary: the packet supports that a discrete world-model Atari study exists, but does not provide enough detail to claim discrete models are generally more robust.
+
+4. Which diagnostics best predict when imagined rollouts help versus harm control performance?
+   - Label: `SPECULATIVE_PROPOSAL`
+   - Candidate diagnostics: model prediction loss, latent rollout consistency, imagined-horizon sensitivity, real rollout return gap.
+
+## hypothesis_table
+
+| Hypothesis | Evidence basis | Support label | Falsification criteria |
+|---|---|---:|---|
+| H1: Latent imagination improves sample efficiency when real-environment interaction is limited, but only up to a task-dependent planning horizon. | Dream to Control learns behavior via latent imagination; seed asks about limited real interaction and accumulated model error. | `SPECULATIVE_PROPOSAL` | No improvement over non-imagination baselines at any interaction budget, or performance monotonically improves with horizon without degradation. |
+| H2: Longer imagined rollouts eventually reduce policy quality because model error compounds. | Seed brief directly raises accumulated model error. | `SPECULATIVE_PROPOSAL` | Long-horizon planning shows no increase in prediction error and no return degradation relative to short-horizon planning. |
+| H3: Discrete world models may show different error/return tradeoffs from latent continuous world models in Atari-style settings. | Mastering Atari studies discrete world models for Atari; Dream to Control uses latent imagination for control. | `WITHIN_PACKET_SYNTHESIS` / `SPECULATIVE_PROPOSAL` | Under matched budgets and evaluation, discrete and non-discrete variants have indistinguishable error curves and return curves. |
+| H4: Model-error diagnostics can predict whether planning helps before full policy evaluation. | Seed concern links model error to planning usefulness. | `SPECULATIVE_PROPOSAL` | Diagnostics fail to correlate with later real-environment return or cannot distinguish helpful from harmful planning settings. |
+
+## evidence_map
+
+| Claim | Claim type | Evidence-burden label | Source location | Evidence directness | Supported scope | Missing detail |
+|---|---|---|---|---|---|---|
+| Dream to Control learns latent dynamics models and uses latent imagination for behavior learning. | Method definition | `DIRECT_PACKET_EVIDENCE` | Controlled Source Notes; abstract/method evidence objects | Direct | Source-level description only | Exact architecture, losses, horizons, metrics |
+| Mastering Atari studies discrete world models for Atari and reports performance under Atari evaluation settings. | Method/benchmark result | `DIRECT_PACKET_EVIDENCE` | Controlled Source Notes; abstract/evaluation/baseline tables | Direct | Source-level description only | Exact scores, games, evaluation protocol |
+| The seed proposal concerns limited real-environment interaction and accumulated model error. | Proposal motivation | `DIRECT_PACKET_EVIDENCE` | local_seed brief note | Direct | Seed scope | Specific tasks and budgets |
+| Comparing continuous latent imagination and discrete Atari world models requires matched setups. | Comparison boundary | `LIMITED_CRITIQUE` | Packet states different source domains and missing details | Indirect | Proposal design constraint | Model sizes, budgets, metrics, exact tasks |
+| Claims of general superiority are not supported by the packet. | Inference boundary | `LIMITED_CRITIQUE` | Packet scope notes missing numeric tables and settings | Indirect | This proposal only | External literature and full papers needed |
+
+## experiment_plan
+
+Primary experiment: vary real-environment interaction budget and imagination horizon, then measure real-environment return and model-error diagnostics.
+
+Independent variables:
+- Real interaction budget: low, medium, high.
+- Planning/imagination horizon: none, short, medium, long.
+- World-model type: latent model inspired by Dream to Control; discrete latent model inspired by Mastering Atari where applicable.
+
+Baselines:
+- No-world-model policy learning baseline.
+- World model trained but no imagined planning.
+- Short-horizon imagination baseline.
+- Behavior-cloning or supervised policy baseline if logged data is available.
+- Random or task-default baseline where appropriate.
+
+Ablations:
+- Remove latent imagination while keeping model learning.
+- Vary imagination horizon.
+- Vary model update frequency.
+- Discrete versus non-discrete latent state representation, if implementable under matched compute.
+- Train policy on imagined rollouts only versus mixed real and imagined rollouts.
+
+Metrics:
+- Real-environment episodic return or task success.
+- Sample efficiency at fixed interaction budgets.
+- Model prediction loss or latent rollout error.
+- Return gap between imagined evaluation and real rollout evaluation.
+- Sensitivity of performance to horizon length.
+
+Required reporting:
+- Environment versions, wrappers, action spaces, horizons, reward definitions.
+- Number of seeds/runs and uncertainty intervals.
+- Hyperparameters, model size, training budget, and compute.
+- Full baseline settings and raw evaluation outputs.
+
+## rl_evaluation_protocol
+
+Training/evaluation distinction:
+- Train world models from fixed or incrementally collected real-environment trajectories.
+- Train policies using imagined rollouts according to specified horizons.
+- Evaluate only with real-environment or simulator rollouts, not imagined returns alone.
+
+RL details to specify:
+- Dataset collection policy: random, exploratory policy, prior agent, or online learner.
+- Whether training is offline-only, online, or hybrid.
+- Reward function and episode termination rules.
+- Environment version and stochasticity.
+- Evaluation episodes per seed.
+- Seeds/runs and confidence intervals.
+- Distribution shift between behavior data and learned policy actions.
+- Whether model rollout states remain within behavior-policy support.
+
+Claim boundaries:
+- Benchmark performance does not establish deployment robustness.
+- Model-error diagnostics do not prove mechanism unless intervention/ablation confirms they causally affect planning performance.
+- Atari-style results and continuous-control results should not be merged into a universal ranking unless protocols are matched.
+
+## risk_register
+
+| Risk | Label | Why it matters | Mitigation |
+|---|---|---|---|
+| Model error compounds during imagined rollouts. | `DIRECT_PACKET_EVIDENCE` for seed concern; `SPECULATIVE_PROPOSAL` for mitigation | Could make planning harmful at longer horizons. | Horizon sweep; compare imagined-return estimates with real rollout returns. |
+| Cross-domain comparison between control tasks and Atari is unfair. | `LIMITED_CRITIQUE` | Packet sources involve different evaluation settings. | Keep domain-specific conclusions separate; run matched environments where possible. |
+| Missing exact source details limit reproduction. | `DIRECT_PACKET_EVIDENCE` | Packet states numeric values, full tables, appendix details, and implementation settings are not included. | Treat proposal as design-level; require full configs before empirical claims. |
+| Baselines may be underpowered or unfairly tuned. | `LIMITED_CRITIQUE` | Without full baseline details, performance claims are weak. | Pre-register baseline tuning budgets and shared compute limits. |
+| Diagnostics may correlate with return without explaining causal mechanism. | `LIMITED_CRITIQUE` | Could overclaim model-error mechanism. | Include intervention ablations that deliberately vary model quality or horizon. |
+| Limited-budget findings may not generalize to high-budget or deployment settings. | `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` | Packet does not establish external validity. | Report scope narrowly and require external validation before broad claims. |
+
+2026-05-30T07:38:57.644823Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T07:38:57.644835Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T07:38:57.645376Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T07:38:57.645381Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T07:38:57.645767Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T07:38:57.645771Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T07:38:57.646590Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T07:38:57.646601Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T07:38:57.647046Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T07:38:57.647051Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T07:38:57.647925Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T07:38:57.647929Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T07:38:59.217565Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T07:38:59.217576Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T07:38:59.218169Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T07:38:59.218174Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T07:38:59.218467Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T07:38:59.218470Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T07:38:59.218775Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T07:38:59.218780Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T07:38:59.219111Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T07:38:59.219116Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T07:38:59.219807Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T07:38:59.219810Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+codex
+{"task_id":"PS-VAL-01","scorecards":[{"variant":"B0_base_agent","scores":{"factual_accuracy":4,"evidence_traceability":4,"citation_validity":null,"literature_coverage":null,"comparison_fairness":4,"experimental_rigor":4,"benchmark_validity":4,"inference_boundary_discipline":4,"hypothesis_quality":4,"rl_specific_correctness":4,"output_usefulness":4,"efficiency":4},"hard_fail":{"triggered":false,"reasons":[]},"findings":[{"severity":"minor","dimension":"inference_boundary_discipline","description":"Some hypotheses are phrased more strongly than the packet can support, especially discrete world models as a strong Atari candidate and error-aware truncation improving reliability.","evidence":"H3 says discrete world models are a strong candidate and H4 predicts error-aware planning improves reliability, while the gold requires marking such comparative or mitigation claims as speculative unless directly evidenced."},{"severity":"minor","dimension":"experimental_rigor","description":"The plan includes strong controls but leaves some concrete reproducibility details underspecified, such as exact environment versions, evaluation episodes, and statistical decision thresholds.","evidence":"The RL protocol calls for multiple seeds, budgets, compute/update counts, and Atari settings, but does not require environment versions/wrappers or explicit confidence interval/statistical tests."}],"summary":"Strong proposal support response. It separates facts, synthesis, and hypotheses; covers falsification, baselines, ablations, model-error controls, seeds, and RL metrics. Minor overstrength in comparative hypotheses and some missing implementation-level protocol details keep it below excellent.","scoring_notes":"No evidence of external-source use or invented numeric results. It is well calibrated overall and directly addresses M1-M3, with especially good treatment of model-error confounds and fair step/update matching."},{"variant":"B1_kdense_subset","scores":{"factual_accuracy":4,"evidence_traceability":4,"citation_validity":null,"literature_coverage":null,"comparison_fairness":5,"experimental_rigor":5,"benchmark_validity":4,"inference_boundary_discipline":5,"hypothesis_quality":5,"rl_specific_correctness":5,"output_usefulness":5,"efficiency":5},"hard_fail":{"triggered":false,"reasons":[]},"findings":[{"severity":"minor","dimension":"factual_accuracy","description":"One component ablation suggests an oracle/real rollout upper bound, which is useful but not grounded in the packet and may be infeasible in some settings.","evidence":"H4 required experiment includes 'oracle/real rollout upper bound if feasible'; the answer appropriately flags feasibility, so this is only a minor issue."},{"severity":"minor","dimension":"evidence_traceability","description":"Traceability is strong at the packet-note level but does not include exact page/table IDs, which the gold notes would be high value if available.","evidence":"Evidence map cites source notes such as Dream to Control abstract/method/experiments and Mastering Atari abstract/experiments/baselines, but not exact packet evidence IDs or table/page locations."}],"summary":"Best calibrated output. It cleanly separates packet facts, synthesis, and hypotheses; avoids inventing Atari protocol details; gives falsifiable hypotheses; and includes strong RL-specific fairness controls, ablations, seeds, uncertainty, and model-error diagnostics.","scoring_notes":"This satisfies all required outputs and captures M1-M3 with disciplined inference boundaries. The final caveat correctly frames the proposal as a scoped empirical test rather than an established claim."},{"variant":"B2_orchestra_subset","scores":{"factual_accuracy":4,"evidence_traceability":4,"citation_validity":null,"literature_coverage":null,"comparison_fairness":4,"experimental_rigor":4,"benchmark_validity":4,"inference_boundary_discipline":4,"hypothesis_quality":4,"rl_specific_correctness":4,"output_usefulness":4,"efficiency":4},"hard_fail":{"triggered":false,"reasons":[]},"findings":[{"severity":"minor","dimension":"factual_accuracy","description":"The output introduces concrete horizon values and action-repeat/frame preprocessing as examples despite the packet not supplying such settings.","evidence":"E3 lists horizons '1, 5, 15, 30 imagined steps' and E2 mentions action-repeat/frame preprocessing if relevant. These are design suggestions, not stated source facts, so the penalty is minor."},{"severity":"minor","dimension":"hypothesis_quality","description":"H2 frames model-error accumulation as a causal mechanism proposal and uses correlation with degradation as a falsification criterion, which is slightly loose without intervention-level causal tests.","evidence":"H2 is labeled 'Causal/mechanism proposal' and is falsified if model error does not correlate with degradation; the gold emphasizes separating model-learning quality, planner quality, and policy performance claims."},{"severity":"minor","dimension":"experimental_rigor","description":"The success condition for model-error accumulation relies on a predefined threshold but does not specify how the threshold would be chosen without post hoc tuning.","evidence":"E3 success condition says performance degrades when measured rollout error exceeds a predefined threshold, while the protocol later warns against tuning budgets post hoc but does not define threshold selection."}],"summary":"Strong and usable proposal. It includes provenance separation, falsification, fair baselines, seeds, leakage controls, aggregation cautions, and risk analysis. Minor invented design specifics and slightly loose causal wording prevent a top score.","scoring_notes":"No hard fail because the extra horizon values are framed as experimental design rather than claimed source facts. Overall it captures the packet-supported research gap and key RL/world-model confounds well."},{"variant":"B3_final_for_validation","scores":{"factual_accuracy":4,"evidence_traceability":5,"citation_validity":null,"literature_coverage":null,"comparison_fairness":5,"experimental_rigor":5,"benchmark_validity":5,"inference_boundary_discipline":5,"hypothesis_quality":4,"rl_specific_correctness":5,"output_usefulness":5,"efficiency":4},"hard_fail":{"triggered":false,"reasons":[]},"findings":[{"severity":"minor","dimension":"factual_accuracy","description":"The source inventory gives years and a local seed filename/date not present in the task specification, which risks importing unstated metadata.","evidence":"It lists Dream to Control as 2019, Mastering Atari as 2020, and local_seed_world_model_planning.md as 2026; the scoring materials only provide titles and generic local seed brief references."},{"severity":"minor","dimension":"hypothesis_quality","description":"H1 has a compound falsification criterion that could conflate no sample-efficiency gain with no horizon degradation; separate tests would be clearer.","evidence":"H1 is falsified by either no improvement over non-imagination baselines or monotonic horizon improvement, which mixes the sample-efficiency claim and the horizon-limit claim."}],"summary":"Excellent boundary discipline and proposal mechanics. It explicitly labels direct evidence, synthesis, critique, and unsupported claims; includes concrete required reporting, RL protocol details, model-error diagnostics, baselines, ablations, and risk controls. Minor unstated source metadata and a compound hypothesis keep factual accuracy and hypothesis quality slightly below perfect.","scoring_notes":"This most directly satisfies the gold's inference-boundary requirements and M2/M3. It is especially strong on avoiding broad superiority claims and requiring environment, wrapper, seed, compute, and evaluation details."}]}
+tokens used
+18,971

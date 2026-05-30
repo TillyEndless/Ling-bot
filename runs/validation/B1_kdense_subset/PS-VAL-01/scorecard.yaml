@@ -1,0 +1,37 @@
+run_id: validation_v0.1__B1_kdense_subset__PS-VAL-01__run001
+variant: B1_kdense_subset
+task_id: PS-VAL-01
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 4
+  evidence_traceability: 4
+  citation_validity: null
+  literature_coverage: null
+  comparison_fairness: 5
+  experimental_rigor: 5
+  benchmark_validity: 4
+  inference_boundary_discipline: 5
+  hypothesis_quality: 5
+  rl_specific_correctness: 5
+  output_usefulness: 5
+  efficiency: 5
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: factual_accuracy
+  description: One component ablation suggests an oracle/real rollout upper bound, which is useful but not grounded in the
+    packet and may be infeasible in some settings.
+  evidence: H4 required experiment includes 'oracle/real rollout upper bound if feasible'; the answer appropriately flags
+    feasibility, so this is only a minor issue.
+- severity: minor
+  dimension: evidence_traceability
+  description: Traceability is strong at the packet-note level but does not include exact page/table IDs, which the gold notes
+    would be high value if available.
+  evidence: Evidence map cites source notes such as Dream to Control abstract/method/experiments and Mastering Atari abstract/experiments/baselines,
+    but not exact packet evidence IDs or table/page locations.
+summary: Best calibrated output. It cleanly separates packet facts, synthesis, and hypotheses; avoids inventing Atari protocol
+  details; gives falsifiable hypotheses; and includes strong RL-specific fairness controls, ablations, seeds, uncertainty,
+  and model-error diagnostics.

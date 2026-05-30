@@ -1,0 +1,43 @@
+run_id: validation_v0.1__B1_kdense_subset__SPR-VAL-02__run001
+variant: B1_kdense_subset
+task_id: SPR-VAL-02
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 3
+  evidence_traceability: 3
+  citation_validity: 3
+  literature_coverage: null
+  comparison_fairness: 3
+  experimental_rigor: 3
+  benchmark_validity: 3
+  inference_boundary_discipline: 4
+  hypothesis_quality: null
+  rl_specific_correctness: 4
+  output_usefulness: 3
+  efficiency: 4
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: major
+  dimension: factual_accuracy
+  description: "The output asserts that exact numeric results, full tables, appendix details, implementation settings, specific\
+    \ environments, and baseline details are not in the packet. The benchmark expected reading of the provided packet\u2019\
+    s dataset/environment, baseline/metric, experiment, and reproducibility sections, so this is likely an unsupported omission\
+    \ or misreading."
+  evidence: paper_card and baseline_metric_summary repeatedly list these as unavailable rather than reporting them.
+- severity: major
+  dimension: output_usefulness
+  description: The artifact is well structured but does not deliver the required baseline/metric summary or reproducibility
+    notes at the level needed for research use.
+  evidence: 'baseline_metric_summary contains only category-level placeholders: baselines present, metrics present, datasets/environments
+    present, results included, but missing all names and values.'
+- severity: minor
+  dimension: inference_boundary_discipline
+  description: It handles boundaries well by rejecting global superiority and statistical robustness claims, and by distinguishing
+    absent evidence from supported scope.
+  evidence: claim_ledger includes unsupported claims such as general superiority and statistical robustness and marks them
+    absent.
+summary: Stronger organization than B0 and good boundary discipline, but it remains a generic cautious template. It captures
+  the central formulation but misses the actual empirical content that the task asked to extract.

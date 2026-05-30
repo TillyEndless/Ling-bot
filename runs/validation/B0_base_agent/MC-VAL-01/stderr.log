@@ -1,0 +1,169 @@
+2026-05-30T04:38:49.101470Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:38:49.126704Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+OpenAI Codex v0.133.0-alpha.1
+--------
+workdir: /private/tmp/ling_bot_validation_v0_1_execution/B0_base_agent
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: none
+reasoning summaries: none
+session id: 019e772d-77e8-7e81-87d4-0d43a2446a73
+--------
+user
+# Variant Runtime Instructions
+
+You are running benchmark variant `B0_base_agent`. No research skill is loaded. Use only the task prompt and supplied source packet. Do not use external retrieval or dynamic tools. Do not use knowledge outside the supplied source packet as evidence.
+
+# Task
+
+- Task ID: `MC-VAL-01`
+- Split: `validation`
+- Task type: `method_comparison`
+- Topic: policy optimization
+- Research question: How should PPO and SAC be compared for continuous-control research without making unfair general claims?
+
+## Input Prompt
+
+Using only the provided source packet, compare PPO and SAC for continuous-control research.
+Produce a method comparison matrix, assumptions table, benchmark/evaluation caveats, and scoped recommendations for when each method is appropriate.
+Mark unsupported claims as unknown.
+
+
+## Required Outputs
+
+- method_comparison_matrix
+- assumptions_table
+- benchmark_protocol_review
+- evidence_strength_summary
+- scoped_recommendations
+
+# Source Packet
+
+# MC-VAL-01 Model Input Packet
+## Sources
+- Proximal Policy Optimization Algorithms (arXiv:1707.06347; 2017). Local file: `schulman_2017_proximal_policy_optimization_algorithms.pdf`. Included evidence: Abstract; clipped objective; adaptive KL; experiments.
+- Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor (arXiv:1801.01290; 2018). Local file: `haarnoja_2018_soft_actor_critic.pdf`. Included evidence: Abstract; maximum entropy objective; off-policy setup; continuous-control experiments.
+
+## Controlled Source Notes
+- PPO paper: presents a policy-gradient method based on clipped surrogate objectives and discusses KL-penalty variants with continuous-control and Atari experiments.
+- SAC paper: presents an off-policy maximum-entropy actor-critic method for continuous control with stochastic policies and benchmark experiments.
+- Evidence objects: abstracts, objective/method sections, algorithms/equations, experiment sections, benchmark tables/figures, and limitations/discussion.
+
+## Packet Scope
+- This packet contains source metadata and neutral source notes prepared from the listed canonical files.
+- Some exact numeric values, full tables, appendix details, and implementation settings are not included in this model input packet.
+
+
+2026-05-30T04:38:49.151824Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:38:49.166330Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:38:49.166345Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:38:49.166911Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:38:49.166915Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:38:49.167257Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:38:49.167260Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:38:49.167583Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:38:49.167585Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:38:49.167939Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:38:49.167943Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:38:49.168809Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:38:49.168812Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:38:50.516847Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:38:50.516858Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:38:50.517232Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:38:50.517238Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:38:50.517606Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:38:50.517610Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:38:50.517965Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:38:50.517969Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:38:50.518346Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:38:50.518349Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:38:50.519112Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:38:50.519115Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+codex
+I’ll stay within the supplied packet only. Since the packet summarizes the relevant evidence but omits exact metrics and many settings, I’ll mark those comparison points as unknown rather than inferring them.
+codex
+## method_comparison_matrix
+
+| Dimension | PPO | SAC | Comparison Status |
+|---|---|---|---|
+| Core method type | Policy-gradient method | Off-policy maximum-entropy actor-critic | Supported by packet |
+| Policy form | Uses policy optimization with clipped surrogate objectives; also discusses KL-penalty variants | Uses stochastic actor within maximum-entropy framework | Supported by packet |
+| Data usage | Packet does not explicitly state on-policy/off-policy for PPO | Off-policy setup | PPO data-efficiency comparison unknown from packet |
+| Main optimization idea | Constrain policy updates using clipped surrogate objective or adaptive KL penalty | Optimize expected return plus entropy objective | Supported by packet |
+| Exploration mechanism | Not specified in packet beyond policy-gradient setup | Entropy maximization explicitly encourages stochasticity | PPO exploration comparison unknown |
+| Target domain in cited experiments | Continuous control and Atari | Continuous-control benchmarks | Supported by packet |
+| Continuous-control suitability | Evaluated on continuous-control experiments | Designed and evaluated for continuous control | Supported, but no general superiority claim supported |
+| Stability claims | PPO paper presents clipped/KL objectives intended for proximal updates | SAC uses off-policy actor-critic plus entropy objective | Relative stability unknown from packet |
+| Sample efficiency | Unknown | Unknown | Numeric or general sample-efficiency claims unsupported |
+| Final performance | Unknown | Unknown | Exact rankings unsupported |
+| Implementation complexity | Unknown | Unknown | Unsupported |
+| Hyperparameter sensitivity | Unknown | Unknown | Unsupported |
+| Compute cost | Unknown | Unknown | Unsupported |
+| Fair general claim | PPO is a relevant continuous-control baseline | SAC is a relevant continuous-control method | Supported |
+| Unfair general claim | “PPO is better than SAC” unsupported | “SAC is better than PPO” unsupported | Unknown without matched protocol and metrics |
+
+## assumptions_table
+
+| Assumption | Status | Notes |
+|---|---:|---|
+| Both methods are being considered for continuous-control research | Supported | Both papers include continuous-control experiments. |
+| PPO is represented by the 2017 clipped surrogate / KL-penalty formulation | Supported | Packet names clipped objective and adaptive KL. |
+| SAC is represented by the 2018 off-policy maximum-entropy stochastic actor-critic formulation | Supported | Packet names maximum entropy objective, stochastic actor, off-policy setup. |
+| The comparison uses the original papers only | Supported | Required by task and source packet. |
+| Exact benchmark scores are available | Unsupported | Packet says exact numeric values and full tables are not included. |
+| Implementation settings are sufficient for replication | Unsupported | Packet says some implementation settings are not included. |
+| One method is universally better for continuous control | Unsupported | Packet does not justify broad superiority. |
+| Differences in on-policy/off-policy data usage can affect evaluation protocol | Partially supported | SAC is off-policy; PPO’s data regime is not explicitly stated in packet, so details remain unknown. |
+| Atari results are relevant to continuous-control conclusions | Limited | PPO includes Atari experiments, but the task concerns continuous control. |
+
+## benchmark_protocol_review
+
+A fair PPO-vs-SAC comparison for continuous-control research should avoid broad claims unless the benchmark protocol controls for evaluation conditions. Based only on the packet, the original papers are not enough to establish a universal winner because they introduce different algorithms, objectives, and experiment setups, and the packet does not include complete numeric tables, appendix details, or implementation settings.
+
+Key caveats:
+
+| Caveat | Why It Matters |
+|---|---|
+| Missing exact numeric results | Prevents precise ranking, effect-size comparison, or statistical comparison. |
+| Missing full implementation settings | Hyperparameters, network architecture, replay setup, rollout length, and tuning budgets could change outcomes, but are unknown here. |
+| Different algorithm families | PPO is policy-gradient with clipped/KL-constrained updates; SAC is off-policy maximum-entropy actor-critic. Comparing them requires care because they optimize different objectives. |
+| Continuous-control benchmark overlap unknown | The packet says both include continuous-control experiments, but does not specify whether tasks are identical. |
+| Evaluation budget unknown | Claims about sample efficiency, wall-clock efficiency, or asymptotic return are unsupported without matched budgets. |
+| Tuning fairness unknown | No evidence is provided about equal hyperparameter search effort. |
+| Random-seed robustness unknown | The packet does not provide seed counts, variance, or statistical tests. |
+| Generalization beyond reported tasks unknown | Results from benchmark experiments should not be generalized to all continuous-control research. |
+
+A defensible benchmark protocol would report at least: identical environments, same observation/action preprocessing, equal interaction budgets, equal tuning budgets, multiple seeds, learning curves, final performance, variance, compute cost, and implementation details. The packet does not provide enough evidence to say the original papers satisfy all of these requirements.
+
+## evidence_strength_summary
+
+| Claim | Evidence Strength | Reason |
+|---|---|---|
+| PPO uses clipped surrogate objectives and discusses KL variants | Strong within packet | Directly stated in source notes. |
+| SAC uses off-policy maximum-entropy actor-critic with stochastic policies | Strong within packet | Directly stated in source notes. |
+| Both are applicable to continuous-control research | Moderate to strong | Both papers include continuous-control experiments. |
+| SAC is more sample efficient than PPO | Unknown | Not supported by supplied packet. |
+| PPO is more stable than SAC | Unknown | Not supported by supplied packet. |
+| SAC achieves better final returns | Unknown | Exact benchmark values unavailable. |
+| PPO is easier to implement or tune | Unknown | Implementation complexity and tuning sensitivity not included. |
+| Either method is generally superior | Unsupported | Packet does not justify broad general claims. |
+
+## scoped_recommendations
+
+Use **PPO** when the research question concerns policy-gradient methods, clipped surrogate objectives, KL-constrained policy updates, or comparisons against a widely used continuous-control and Atari-tested policy optimization baseline. It is appropriate as a continuous-control baseline, but the packet does not support claims that PPO is more stable, simpler, cheaper, or better-performing than SAC.
+
+Use **SAC** when the research question concerns off-policy continuous-control learning, maximum-entropy objectives, stochastic actor-critic methods, or entropy-regularized exploration. It is appropriate for continuous-control studies centered on off-policy maximum-entropy RL, but the packet does not support claims that SAC is generally more sample-efficient or higher-performing than PPO.
+
+For direct comparison, frame conclusions narrowly:
+
+“Under this specific benchmark protocol, implementation, tuning budget, and evaluation metric, method X performed better than method Y.”
+
+Avoid conclusions like:
+
+“PPO is better for continuous control” or “SAC is better for continuous control.”
+
+Those are unsupported by the supplied source packet.
+tokens used
+9,273

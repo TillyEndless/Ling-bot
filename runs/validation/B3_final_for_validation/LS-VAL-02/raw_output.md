@@ -1,0 +1,57 @@
+## Source Inventory
+
+Packet sources: four 2022-2023 papers on chain-of-thought prompting, zero-shot reasoning prompts, and faithfulness of generated rationales. Evidence objects available in the packet are abstracts, method/evaluation sections, result tables/figures, discussion/limitations, plus controlled source notes. Exact numeric values, full tables, appendix details, and many implementation settings are explicitly not included.
+
+## corpus_coverage_table
+
+| Source | Role in Corpus | What It Supports | What It Challenges | Evidence Objects | Evidence-Burden Label |
+|---|---|---|---|---|---|
+| Wei et al. 2022, *Chain-of-Thought Prompting Elicits Reasoning in Large Language Models* | Method/empirical performance paper | Chain-of-thought exemplars can improve performance on selected reasoning tasks in large language models. | Does not by itself establish that generated reasoning is faithful to internal computation. | Abstract; prompting/evaluation results; limitations; controlled note | `DIRECT_PACKET_EVIDENCE` for performance claim; `LIMITED_CRITIQUE` for faithfulness boundary |
+| Kojima et al. 2022, *Large Language Models are Zero-Shot Reasoners* | Method/empirical performance paper | A simple reasoning prompt can elicit step-by-step reasoning behavior without task-specific examples in selected settings. | Does not establish that the displayed steps reveal latent reasoning rather than steer output style. | Abstract; zero-shot reasoning prompt; experiments; controlled note | `DIRECT_PACKET_EVIDENCE`; `LIMITED_CRITIQUE` for internal-reasoning boundary |
+| Turpin et al. 2023, *Language Models Don't Always Say What They Think* | Skeptical empirical study | Generated chain-of-thought rationales can be unfaithful to model behavior or influenced by biases. | Challenges treating verbal rationales as transparent evidence of internal reasoning. | Abstract; unfaithfulness experiments; discussion; controlled note | `DIRECT_PACKET_EVIDENCE` |
+| Lanham et al. 2023, *Measuring Faithfulness in Chain-of-Thought Reasoning* | Measurement/intervention paper | Proposes tests for rationale faithfulness and studies interventions/perturbations in selected settings. | Shows faithfulness is an empirical property requiring tests, not an assumption from performance gains. | Abstract; faithfulness tests; intervention/ablation evidence; limitations; controlled note | `DIRECT_PACKET_EVIDENCE`; `WITHIN_PACKET_SYNTHESIS` for corpus-level implication |
+
+## evidence_type_taxonomy
+
+| Evidence Type | Sources | Relevance to Latent/Internal Reasoning | Boundary |
+|---|---|---|---|
+| Prompting-based performance improvement | Wei et al. 2022; Kojima et al. 2022 | Supports the weaker claim that reasoning-style prompts can improve or elicit useful behavior in selected settings. | Performance improvement is not direct evidence that the visible rationale matches internal computation. `LIMITED_CRITIQUE` |
+| Generated step-by-step rationale behavior | Wei et al. 2022; Kojima et al. 2022 | Shows models can produce intermediate-looking reasoning text under chain-of-thought or “reasoning prompt” conditions. | Textual steps may be output behavior, explanation, or task scaffold; packet does not prove mechanism. `WITHIN_PACKET_SYNTHESIS` |
+| Rationale unfaithfulness tests | Turpin et al. 2023 | Directly challenges the inference from stated rationale to actual model behavior. | Applies to studied cases/settings only; packet does not justify universal unfaithfulness. `DIRECT_PACKET_EVIDENCE` |
+| Faithfulness interventions/ablations | Lanham et al. 2023 | Provides stronger evidence type for assessing whether rationales causally relate to answers. | Packet lacks exact numeric results and full protocols, limiting strength of comparative conclusions. `DIRECT_PACKET_EVIDENCE` plus `LIMITED_CRITIQUE` |
+| Limitations/discussion evidence | All four sources | Makes scope boundaries visible: selected tasks/settings and incomplete implementation detail in packet. | Cannot infer field-wide consensus or deployment robustness. `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` if claimed broadly |
+
+## representative_paper_table
+
+| Paper | Representative Claim | Evidence Directness | Supported Scope | Missing Detail |
+|---|---|---|---|---|
+| Wei et al. 2022 | Chain-of-thought exemplars can improve reasoning performance in large LMs on selected tasks. | Direct from controlled source note and included evaluation results. `DIRECT_PACKET_EVIDENCE` | Selected tasks and large language models in the paper. | Exact numbers, full tables, appendix details, implementation settings. |
+| Kojima et al. 2022 | A simple zero-shot prompt can elicit step-by-step reasoning behavior in selected settings. | Direct from controlled source note and experiments. `DIRECT_PACKET_EVIDENCE` | Selected zero-shot reasoning settings. | Exact task results, model/prompt variants, full protocol details. |
+| Turpin et al. 2023 | Chain-of-thought explanations can be unfaithful or bias-influenced. | Direct from controlled source note and unfaithfulness experiments. `DIRECT_PACKET_EVIDENCE` | Studied cases of CoT unfaithfulness. | Exact experimental designs, magnitudes, and generality beyond included settings. |
+| Lanham et al. 2023 | Faithfulness of CoT rationales can be measured using tests and interventions. | Direct from controlled source note. `DIRECT_PACKET_EVIDENCE` | Selected intervention/perturbation settings. | Full ablation results, uncertainty, and reproducibility details. |
+
+## counter_evidence_summary
+
+The strongest skeptical evidence in the packet comes from Turpin et al. 2023 and Lanham et al. 2023. Turpin et al. directly studies cases where generated rationales are unfaithful to model behavior or influenced by biases, which challenges the claim that chain-of-thought text reliably reveals what the model “thinks.” Lanham et al. reinforces this skepticism by treating faithfulness as something to be tested through interventions and perturbations, rather than assumed from the presence of coherent rationale text.
+
+A balanced corpus-level synthesis is: Wei et al. and Kojima et al. support the usefulness of reasoning-style prompting as an output-performance technique in selected settings, while Turpin et al. and Lanham et al. challenge the stronger interpretation that such outputs are faithful windows into latent or internal reasoning. This is `WITHIN_PACKET_SYNTHESIS`, not a direct claim from any single source.
+
+## unsupported_synthesis_warnings
+
+| Warning | Why Unsupported or Risky | Label |
+|---|---|---|
+| “Language models perform latent reasoning.” | The packet supports useful reasoning-prompt behavior, but not a general mechanism claim about internal computation. | `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` |
+| “Chain-of-thought is faithful by default.” | Packet includes direct counter-evidence on unfaithfulness and faithfulness testing. | `DIRECT_PACKET_EVIDENCE` against broad claim |
+| “Unfaithful rationales mean no internal reasoning occurs.” | Unfaithfulness of explanations does not prove absence of internal reasoning. | `LIMITED_CRITIQUE` |
+| “Performance gains prove causal use of the written rationale.” | Performance evidence and causal faithfulness evidence are different evidence types. | `WITHIN_PACKET_SYNTHESIS` |
+| “Findings generalize across all models, tasks, or deployments.” | Packet covers selected settings and omits exact numbers/full protocols. | `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` |
+| “This corpus settles the latent reasoning debate.” | Only four sources are included, focused mainly on CoT prompting and faithfulness. | `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` |
+
+## gap_and_hypothesis_list
+
+| Gap Visible in Corpus | Evidence-Grounded Hypothesis | What Would Support It | What Would Count Against It | Label |
+|---|---|---|---|---|
+| The packet distinguishes performance gains from rationale faithfulness but does not fully connect them. | CoT prompting may improve answers even when generated rationales are only partially faithful. | Interventions showing some rationale tokens causally affect answers while others do not. | Perturbing/removing rationales has no answer effect, or rationales remain coherent while answers change independently. | `SPECULATIVE_PROPOSAL` |
+| Exact numeric results, full tables, and implementation settings are absent from the packet. | Stronger conclusions require protocol-level comparison across tasks, models, prompts, and perturbations. | Full tables, seeds/runs, prompt templates, model versions, and uncertainty estimates. | Large effects disappearing under controlled replications or prompt/model changes. | `SPECULATIVE_PROPOSAL` |
+| The corpus is CoT-centered and does not include non-verbal internal-state evidence. | Latent reasoning claims would need evidence beyond generated text, such as intervention or representation-level tests. | Causal interventions linking internal states or hidden computation to final answers. | Probes recover apparent reasoning signals that fail under intervention or causal testing. | `SPECULATIVE_PROPOSAL` |
+| The packet does not establish task or model generality. | Faithfulness and usefulness may vary by task type, model scale, prompt format, and evaluation protocol. | Systematic ablations across models, tasks, prompts, and rationale perturbations. | Uniform behavior across settings, or no stable relationship between these factors and faithfulness. | `SPECULATIVE_PROPOSAL` |

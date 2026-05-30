@@ -1,0 +1,103 @@
+## rigor_audit_findings
+
+1. **High: Evidence packet is insufficient to support a claimed model capability.**  
+   The task asks whether the “provided LLM evaluation evidence” supports a claim, but the packet only gives source metadata and high-level notes about GPT-3 and MMLU. It does not provide the specific evaluated model, claimed capability, prompt format, scores, variance, baselines, or test conditions. Any strong capability claim would be under-supported.
+
+2. **High: Contamination risk is acknowledged but not resolved.**  
+   The GPT-3 source note says the paper includes contamination analysis for test-set overlap risk. That is relevant, but the packet does not provide the actual overlap rates, filtering method, affected benchmarks, or whether results changed after removing contaminated examples. Without those details, contamination remains an unresolved threat.
+
+3. **High: Benchmark saturation and memorization risk are not addressed for reused public benchmarks.**  
+   GPT-3 and MMLU are canonical public evaluations. The packet does not establish whether the target model was trained before or after benchmark release, whether training data was filtered, or whether benchmark items were present in pretraining, instruction tuning, evaluation examples, or prompt engineering iterations.
+
+4. **Medium: Prompt protocol is underspecified.**  
+   The packet notes GPT-3 reports zero-shot, one-shot, and few-shot settings, and MMLU reports defined evaluation settings. It does not give the exact prompts, number of shots, demonstrations, answer extraction rules, decoding settings, or whether prompts were tuned on test performance.
+
+5. **Medium: Baseline selection cannot be evaluated.**  
+   The packet says benchmark result tables exist, but does not include which baselines were used, whether they were current at evaluation time, whether they used comparable compute or prompting, or whether supervised task-specific systems were compared fairly.
+
+6. **Medium: Statistical reporting is missing.**  
+   No confidence intervals, standard errors, number of trials, per-subject breakdowns, significance tests, or robustness checks are included in the packet. For multitask results like MMLU, aggregate accuracy alone would be insufficient.
+
+7. **Medium: Evaluation leakage via benchmark-aware development is not ruled out.**  
+   The packet does not state whether prompts, model selection, checkpoints, decoding parameters, or refusal handling were tuned using benchmark validation or test feedback.
+
+8. **Low-to-medium: Claim scope likely needs narrowing.**  
+   GPT-3-style few-shot benchmark performance and MMLU-style multitask accuracy can support limited claims about performance under those protocols. They do not by themselves establish broad “understanding,” general reasoning ability, real-world reliability, or contamination-free knowledge.
+
+## contamination_and_leakage_risk_table
+
+| Risk | Severity | Why it matters | Required mitigation |
+|---|---:|---|---|
+| Pretraining overlap with benchmark test items | High | Public benchmark items may appear in web-scale corpora | Deduplicate train data against test sets; report overlap rates and filtered results |
+| Prompt examples drawn from benchmark distribution | High | Few-shot examples can leak task format or near-duplicates | Use clean development examples; document provenance |
+| Test-set-driven prompt tuning | High | Repeated test probing turns the test set into validation data | Freeze prompts before final run; use held-out private test set |
+| Benchmark saturation | High | Popular benchmarks may no longer measure novel generalization | Add fresh, private, or newly authored evaluations |
+| Evaluation script leakage | Medium | Answer formatting and extraction can inflate or deflate scores | Publish exact scoring code and answer normalization |
+| Selective reporting | Medium | Reporting only favorable tasks overstates capability | Pre-register task list and include all results |
+| Contaminated chain-of-thought or rationales | Medium | Explanations may reproduce memorized solutions | Score final answers separately; use unseen variants |
+| Baseline mismatch | Medium | Weak or outdated baselines exaggerate gains | Compare against contemporary models under same protocol |
+
+## baseline_and_metric_review
+
+The supplied packet does not include enough detail to validate baseline adequacy.
+
+A rigorous evaluation should include:
+
+| Area | Audit judgment |
+|---|---|
+| Baselines | Cannot assess from packet. Need contemporaneous LLMs, smaller model variants, random/chance baselines, majority-class baselines where applicable, and task-specialized supervised systems when claims compare against prior NLP methods. |
+| Metrics | Accuracy may be appropriate for multiple-choice MMLU-style tasks, but should be reported per subject/task as well as macro averages. For generation tasks, exact match, F1, human ratings, or task-specific metrics may be needed. |
+| Statistical reporting | Missing. Need sample sizes, confidence intervals, bootstrap or paired tests, and variance across prompt seeds/orderings. |
+| Ablations | Missing. Need zero-shot vs one-shot vs few-shot, prompt order sensitivity, contaminated vs filtered subsets, and benchmark-public vs newly created items. |
+| Calibration | Not described. For multiple-choice evaluations, probability calibration and answer-choice bias should be checked. |
+
+## claim_scope_assessment
+
+Based only on the supplied packet, the evidence can at most support a narrow claim such as:
+
+> Under specified zero-shot, one-shot, or few-shot prompting protocols, the evaluated model achieved reported benchmark performance on selected public NLP or multitask knowledge benchmarks.
+
+It does **not** sufficiently support broader claims such as:
+
+| Claim | Supported? | Reason |
+|---|---|---|
+| “The model has general human-level understanding” | No | Benchmarks are limited proxies and may be contaminated |
+| “The model reasons robustly across domains” | Not established | Need unseen, adversarial, and out-of-distribution tests |
+| “The model’s benchmark performance reflects uncontaminated generalization” | Not established | Contamination analysis details are absent |
+| “The model outperforms all prior systems” | Not assessable | Baseline set and exact results are not provided |
+| “Few-shot learning ability is proven broadly” | Partially, if protocol is documented | Public benchmark success alone does not rule out memorization or prompt sensitivity |
+
+## corrected_protocol
+
+1. **Define the claim precisely.**  
+   State whether the evaluation is measuring benchmark accuracy, few-shot adaptation, knowledge recall, reasoning, robustness, or real-world task competence.
+
+2. **Freeze the evaluation before testing.**  
+   Pre-register benchmarks, prompts, decoding settings, answer extraction, baselines, metrics, and aggregation rules.
+
+3. **Use contamination controls.**  
+   Deduplicate all training, instruction-tuning, RLHF, and prompt-development data against benchmark train/dev/test items. Report exact overlap methodology and overlap rates.
+
+4. **Report filtered and unfiltered results.**  
+   For any benchmark with detected overlap, provide scores with contaminated or near-duplicate items removed.
+
+5. **Include fresh private evaluation items.**  
+   Add newly authored tasks unavailable during model training. For MMLU-style evaluation, create fresh subject-matched questions with independent review.
+
+6. **Use clean prompt protocols.**  
+   Publish exact prompts, number of shots, demonstration source, prompt order, answer format, decoding parameters, and whether any prompt search was performed.
+
+7. **Separate validation from test.**  
+   Use a development set for prompt and parameter choices. Run the final test once, with no post hoc prompt adjustment.
+
+8. **Use strong baselines.**  
+   Compare against chance, simple retrieval or majority baselines where relevant, prior published models, contemporary LLMs, and task-specialized systems when making broad superiority claims.
+
+9. **Report robust statistics.**  
+   Include per-task and aggregate scores, sample sizes, confidence intervals, prompt-seed variance, and significance tests for model comparisons.
+
+10. **Analyze failure modes.**  
+   Break down results by subject, difficulty, reasoning type, memorization susceptibility, and answer-choice position bias.
+
+11. **Limit conclusions to the protocol.**  
+   Claims should say what was measured, under which prompts, on which benchmarks, and with what contamination controls. Broad claims about understanding or general reasoning require additional evidence beyond public benchmark scores.

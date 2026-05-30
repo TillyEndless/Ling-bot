@@ -1,0 +1,399 @@
+2026-05-30T04:55:34.891044Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:55:34.914020Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+OpenAI Codex v0.133.0-alpha.1
+--------
+workdir: /private/tmp/ling_bot_validation_v0_1_execution/B2_orchestra_subset
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: none
+reasoning summaries: none
+session id: 019e773c-d0ce-7a01-9f35-37137b194a2d
+--------
+user
+# Variant Runtime Instructions
+
+You are running benchmark variant `B2_orchestra_subset` for the `literature_analysis_and_research_rigor` module. Follow only the variant skill/reference content included below. Do not use external retrieval or dynamic tools. Do not use knowledge outside the supplied source packet as evidence.
+
+# Variant Skill And References
+
+## Variant File: variant/orchestra_research_rigor/SKILL.md
+
+---
+name: orchestra-research-rigor-subset
+description: Instruction-only Orchestra-derived subset for claim provenance, research artifact structure, rigor review, method comparison, and evaluation reasoning. No autonomous experiments or tools.
+license: MIT-derived-upstream-patterns-with-attribution
+---
+
+# Orchestra Subset: Research Rigor And Evidence Artifacts
+
+Use this skill when the task asks for paper analysis, method comparison, benchmark audit, evidence review, or proposal support from supplied material.
+
+This variant adapts Orchestra research-artifact, research-manager, rigor-reviewer, and ML-paper-review patterns. It is not an autonomous research agent. Do not execute experiments, retrieve papers, run evaluation harnesses, manage repositories, update persistent state, or call tools.
+
+## Core Discipline
+
+1. Convert the response into research artifacts: claims, evidence, assumptions, comparisons, risks, and unresolved questions.
+2. Assign provenance to each major statement: source-derived, cross-source synthesis, inferred from supplied evidence, proposed by the agent, or unsupported.
+3. Match claim type to evidence burden before concluding.
+4. For comparisons, require compatible tasks, data, metrics, baselines, compute, and protocols; otherwise make a scoped comparison.
+5. For evaluation audits, inspect metric alignment, aggregation, baselines, ablations, seeds, uncertainty, leakage, and reproducibility details.
+6. Preserve negative and missing evidence. Do not silently upgrade a plausible idea into a supported finding.
+
+## Claim-Type Evidence Burdens
+
+- Improvement claim: requires direct baseline comparison under a compatible setup.
+- Generalization claim: requires heterogeneous tasks, datasets, or settings.
+- Causal claim: requires intervention, ablation, or mechanism-isolating evidence.
+- Benchmark-validity claim: requires task/metric/protocol analysis and scope limitations.
+- Reproducibility claim: requires sufficient artifact, configuration, environment, and data details.
+- Proposal claim: requires falsifiable hypothesis, observable outcomes, controls, and disconfirmation conditions.
+
+## Response Pattern
+
+1. Artifact inventory: sources, claims, assumptions, evidence, and missing details.
+2. Claim ledger: claim, type, provenance, evidence, scope, evidence burden, support status.
+3. Rigor review: severity-ranked issues tied to claim validity.
+4. Corrected scope: what the packet supports, what is unknown, and what would be needed next.
+5. Final output in the user-requested format.
+
+References:
+
+- `references/provenance_and_artifacts.md`
+- `references/rigor_review_workflow.md`
+- `references/evaluation_reasoning.md`
+- `references/method_and_claim_audit.md`
+
+
+## Variant File: variant/orchestra_research_rigor/references/evaluation_reasoning.md
+
+# Evaluation Reasoning
+
+Adapted from Orchestra ML evaluation and rigor-review patterns, without evaluation harness execution.
+
+## Benchmark Audit Questions
+
+- What construct does the benchmark claim to measure?
+- Are tasks representative of that construct?
+- Are metrics aligned with the claim?
+- Is aggregation across tasks meaningful and transparent?
+- Are baselines appropriate and fairly tuned?
+- Are repeated runs, uncertainty, and variance reported?
+- Could contamination, leakage, prompt sensitivity, or protocol overfitting affect conclusions?
+- Are per-task results preserved before aggregate claims?
+
+## Experiment Audit Questions
+
+- What exact intervention or method differs between compared systems?
+- Are training data, evaluation data, compute, and tuning budgets compatible?
+- Which variables are controlled and which confounds remain?
+- Are ablations sufficient to support mechanism claims?
+- Are negative results or failure modes reported?
+
+Report benchmark and experiment concerns as risks unless the supplied packet directly establishes a failure.
+
+
+## Variant File: variant/orchestra_research_rigor/references/method_and_claim_audit.md
+
+# Method And Claim Audit
+
+Adapted from Orchestra claim-centered artifact patterns and ML writing/reviewer criteria.
+
+## Method Comparison Schema
+
+| Dimension | Method A | Method B | Comparable? | Evidence | Caveat |
+|---|---|---|---|---|---|
+
+Recommended dimensions: objective, data, assumptions, model class, optimization, baselines, metrics, compute, evaluation protocol, limitations, and claim scope.
+
+## Claim Ledger Schema
+
+| Claim | Type | Evidence burden | Supplied evidence | Support status | Allowed scope |
+|---|---|---|---|---|---|
+
+## Boundary Rules
+
+- A within-paper comparison supports that paper's setup, not all possible settings.
+- A benchmark score supports performance under the benchmark protocol, not unrestricted capability.
+- A probe or correlational analysis supports recoverability or association unless stronger causal evidence is supplied.
+- A reproduction plan must list artifacts, code/config/data needs, seeds, metrics, and environment details.
+
+
+## Variant File: variant/orchestra_research_rigor/references/provenance_and_artifacts.md
+
+# Provenance And Research Artifacts
+
+Adapted from Orchestra agent-native research artifact and research-manager patterns.
+
+## Provenance Tags
+
+Use these tags internally and expose them when helpful:
+
+- source-derived: directly stated by supplied material.
+- source-located: source-derived and tied to page, section, figure, or table.
+- cross-source synthesis: a relation among supplied sources.
+- agent-inferred: inferred from supplied evidence and marked as such.
+- agent-proposed: a hypothesis, critique, or protocol improvement.
+- unsupported: not established by supplied material.
+
+## Artifact Schema
+
+| Artifact | Purpose |
+|---|---|
+| Claim ledger | Tracks claims, claim types, source support, and scope. |
+| Evidence ledger | Tracks source locations and directness of support. |
+| Assumption list | Separates method assumptions from evaluation assumptions. |
+| Risk register | Records threats to validity and reproducibility. |
+| Missing-information list | Identifies details needed before stronger conclusions. |
+
+Never silently convert an agent-proposed idea into a source-derived fact.
+
+
+## Variant File: variant/orchestra_research_rigor/references/rigor_review_workflow.md
+
+# Rigor Review Workflow
+
+Adapted from Orchestra rigor-reviewer patterns.
+
+## Review Dimensions
+
+- Evidence relevance: does the evidence actually support the claim?
+- Falsifiability: can the claim be tested or refuted?
+- Scope calibration: is the claim limited to the studied setting?
+- Argument coherence: do conclusions follow from assumptions and results?
+- Exploration integrity: are hypotheses, post-hoc analyses, and exploratory ideas separated?
+- Methodological rigor: are baselines, ablations, metrics, seeds, and reproducibility details adequate?
+
+## Severity-Ranked Finding Template
+
+| Severity | Claim affected | Evidence issue | Consequence | Minimal fix |
+|---|---|---|---|---|
+
+## Missing Detail Checklist
+
+- Baseline identity and strength.
+- Ablation presence and purpose.
+- Metric definition and aggregation.
+- Dataset split, task sampling, or environment setup.
+- Number of seeds, runs, or trials.
+- Variability or confidence reporting.
+- Hyperparameter search and compute comparability.
+- Implementation and artifact availability.
+
+
+## Variant File: variant/reuse_and_license_notes.md
+
+# B2 Reuse And License Notes
+
+This variant selectively adapts Orchestra-derived ideas for claim-centered artifacts, provenance, rigor review, and evaluation reasoning. It deliberately excludes autonomous experiment execution, repository management, evaluation harnesses, training infrastructure, deployment, and tool loops.
+
+## Components Used
+
+| Upstream component | Files consulted per ledger | Adaptation decision | License status from audit |
+|---|---|---|---|
+| `Orchestra-Research/AI-Research-SKILLs/22-agent-native-research-artifact/ara-compiler` | `SKILL.md`, `references/schema.md` | Rewritten as compact claim/evidence/artifact schema | MIT observed in skill frontmatter |
+| `Orchestra-Research/AI-Research-SKILLs/22-agent-native-research-artifact/research-manager` | `SKILL.md`, `references/provenance_tags.md` | Rewritten as provenance tags and artifact discipline | MIT observed in skill frontmatter |
+| `Orchestra-Research/AI-Research-SKILLs/22-agent-native-research-artifact/rigor-reviewer` | `SKILL.md`, `references/rigor_dimensions.md` | Rewritten as type-aware rigor review workflow | MIT observed in skill frontmatter |
+| `Orchestra-Research/AI-Research-SKILLs/20-ml-paper-writing/ml-paper-writing` | `SKILL.md`, citation/reviewer references | Rewritten as claim-to-evidence and reviewer criteria patterns | MIT observed in skill frontmatter |
+
+## Explicit Runtime Exclusions
+
+- No autonomous research loop or persistent research state.
+- No scripts, APIs, retrieval tools, evaluation harnesses, training infrastructure, or code execution.
+- No K-Dense-derived material.
+- No benchmark-specific paper names, task identifiers, expected answers, or development answer-key content.
+
+
+## Variant File: variant/variant_manifest.yaml
+
+variant_id: B2_orchestra_subset
+module_scope: literature_analysis_and_research_rigor
+implementation_type: instruction_reference_only
+runtime_tools_enabled: false
+external_services_enabled: false
+dynamic_retrieval_enabled: false
+scripts_enabled: false
+upstream_basis:
+  repository: Orchestra-Research/AI-Research-SKILLs
+  components:
+    - path: 22-agent-native-research-artifact/ara-compiler/SKILL.md
+      consulted_files:
+        - 22-agent-native-research-artifact/ara-compiler/SKILL.md
+        - 22-agent-native-research-artifact/ara-compiler/references/schema.md
+      use: adapted_claim_and_artifact_schema
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: 22-agent-native-research-artifact/research-manager/SKILL.md
+      consulted_files:
+        - 22-agent-native-research-artifact/research-manager/SKILL.md
+        - 22-agent-native-research-artifact/research-manager/references/provenance_tags.md
+      use: adapted_provenance_tags
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: 22-agent-native-research-artifact/rigor-reviewer/SKILL.md
+      consulted_files:
+        - 22-agent-native-research-artifact/rigor-reviewer/SKILL.md
+        - 22-agent-native-research-artifact/rigor-reviewer/references/rigor_dimensions.md
+      use: adapted_rigor_review_dimensions
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: 20-ml-paper-writing/ml-paper-writing/SKILL.md
+      consulted_files:
+        - 20-ml-paper-writing/ml-paper-writing/SKILL.md
+        - 20-ml-paper-writing/ml-paper-writing/references/citation-management.md
+        - 20-ml-paper-writing/ml-paper-writing/references/reviewer-criteria.md
+      use: adapted_claim_to_evidence_and_reviewer_patterns
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+runtime_exclusions:
+  - no autoresearch autonomous loop
+  - no experiment execution
+  - no evaluation harnesses
+  - no training infrastructure
+  - no K-Dense-derived material
+  - no B3-original AI/ML/RL additions
+
+
+# Task
+
+- Task ID: `PS-VAL-02`
+- Split: `validation`
+- Task type: `evidence_grounded_proposal_support`
+- Topic: mechanistic interpretability
+- Research question: Can the provided mechanistic-interpretability claim be turned into a cautious, testable research proposal?
+
+## Input Prompt
+
+Using only the provided source packet, develop a small proposal to test the mechanistic-interpretability claim.
+Produce scoped research questions, evidence-grounded hypotheses, causal tests or interventions, controls, falsification criteria, alternative explanations, and a risk register.
+Do not treat correlational evidence as causal proof.
+
+
+## Required Outputs
+
+- scoped_research_questions
+- hypothesis_table
+- evidence_map
+- causal_test_plan
+- alternative_explanations
+- risk_register
+
+# Source Packet
+
+# PS-VAL-02 Model Input Packet
+## Sources
+- Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 small (arXiv:2211.00593; 2022). Local file: `wang_2022_interpretability_in_the_wild_ioi.pdf`. Included evidence: Abstract; circuit analysis; interventions/ablations; limitations.
+- Locating and Editing Factual Associations in GPT (arXiv:2202.05262; 2022). Local file: `meng_2022_locating_and_editing_factual_associations.pdf`. Included evidence: Abstract; causal tracing; editing intervention; scope.
+- local_mech_interp_claim.md (local_seed_brief; 2026). Local file: `local_mech_interp_claim.md`. Included evidence: User/evaluator-provided seed idea or claim brief for proposal construction.
+
+## Controlled Source Notes
+- IOI circuit paper: analyzes a circuit for indirect-object identification in a language model and reports mechanistic evidence including intervention/ablation-style analyses.
+- ROME paper: studies localization and editing of factual associations in language models using causal tracing and model editing experiments.
+- Local claim brief: asks for a cautious test of whether a localized internal circuit or representation is responsible for a behavior.
+- Evidence objects: abstracts, method sections, causal/intervention sections, result tables/figures, and limitations.
+
+## Packet Scope
+- This packet contains source metadata and neutral source notes prepared from the listed canonical files.
+- Some exact numeric values, full tables, appendix details, and implementation settings are not included in this model input packet.
+
+
+2026-05-30T04:55:34.938917Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:55:34.951395Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:55:34.951402Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:55:34.952025Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:55:34.952028Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:55:34.952378Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:55:34.952382Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:55:34.952715Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:55:34.952720Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:55:34.953071Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:55:34.953074Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:55:34.953839Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:55:34.953843Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:55:36.431880Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:55:36.431892Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:55:36.432221Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:55:36.432225Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:55:36.432556Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:55:36.432560Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:55:36.432927Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:55:36.432931Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:55:36.433274Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:55:36.433279Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:55:36.433995Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:55:36.433999Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+codex
+## scoped_research_questions
+
+1. Can a localized internal circuit or representation be shown to be necessary for a narrowly defined model behavior under controlled prompts?
+2. Does intervening on the proposed component change the target behavior more than matched interventions on control components?
+3. Is the apparent localization specific to one behavior family, or does it reflect a broader prompt, dataset, or activation-distribution artifact?
+4. Can evidence from causal tracing, ablation, and editing converge on the same internal mechanism without treating correlation as causal proof?
+
+## hypothesis_table
+
+| Hypothesis | Provenance | Evidence basis | Testable prediction | Falsification criteria | Support status |
+|---|---|---|---|---|---|
+| H1: A small set of localized components contributes causally to a narrowly specified behavior. | Agent-proposed, grounded in supplied sources | IOI source note reports circuit analysis with intervention/ablation-style evidence; ROME source note reports causal tracing and editing experiments. | Targeted activation/path/component interventions reduce or alter the behavior more than matched controls. | Matched controls produce equal or larger effects, or target effects vanish across prompt variants/seeds. | Plausible proposal, not established for the new claim. |
+| H2: Localization evidence will be behavior-specific rather than globally explanatory. | Agent-inferred | Packet notes both papers have defined scopes and limitations. | Effects are strongest on the target behavior and weaker on unrelated behaviors. | Intervention causes broad nonspecific degradation or improves/harms many unrelated tasks similarly. | Cautiously supported as a design expectation. |
+| H3: Editing or activation replacement can provide stronger evidence than passive probing alone. | Cross-source synthesis | IOI includes interventions/ablations; ROME includes causal tracing and editing. | Causal interventions predictably change behavior, while probes alone do not justify causal claims. | Probe accuracy fails to align with intervention effects, or edits do not produce targeted behavioral changes. | Supported as a methodological principle, not as an outcome. |
+
+## evidence_map
+
+| Evidence item | Provenance | What it supports | What it does not support |
+|---|---|---|---|
+| IOI paper analyzes an indirect-object-identification circuit in GPT-2 small. | Source-derived from packet notes | Mechanistic circuit analysis can be applied to a narrow language-model behavior. | Does not show that any arbitrary behavior has a localized circuit. |
+| IOI reports intervention/ablation-style analyses. | Source-derived | Causal-style tests are relevant for moving beyond correlational attribution. | Exact strength, robustness, and implementation details are unavailable in the packet. |
+| ROME uses causal tracing for factual associations. | Source-derived | Localization claims can be tested with causal tracing-style methods. | Does not prove the same localization pattern applies to non-factual behaviors. |
+| ROME includes model-editing experiments. | Source-derived | Editing interventions can test whether changing localized representations changes outputs. | Does not guarantee edits are clean, isolated, or free of side effects. |
+| Packet omits exact numeric values, full tables, appendices, and implementation settings. | Source-derived | Any proposal must remain scoped and avoid quantitative claims. | Prevents strong claims about effect size, reproducibility, or benchmark-level reliability. |
+
+## causal_test_plan
+
+1. Define the target behavior narrowly.
+   Use a controlled prompt set where the behavior is clearly observable, plus matched counterfactual prompts that preserve surface form while changing the required answer.
+
+2. Identify candidate components.
+   Use causal tracing or activation-patching-style localization to find layers, heads, MLPs, or representations whose restoration changes the target output after corruption. Treat this as candidate generation, not proof.
+
+3. Run targeted interventions.
+   Ablate, patch, or edit the candidate component and measure whether the target behavior changes predictably. Compare against random components, same-layer noncandidate components, frequency-matched tokens, and unrelated prompt families.
+
+4. Add positive and negative controls.
+   Positive control: reproduce an effect on a source-like narrow behavior where intervention methods are expected to work.
+   Negative control: intervene on components not implicated by tracing and verify that effects are smaller or nonspecific.
+
+5. Test specificity.
+   Measure whether the intervention affects only the target behavior or causes broad language-model degradation. Include unrelated factual, syntactic, and continuation-quality checks.
+
+6. Test robustness.
+   Repeat across prompt templates, entity/token substitutions, random seeds where applicable, and multiple corruption baselines. Report per-condition results before aggregates.
+
+7. Evaluate falsification.
+   The localized-circuit claim should be rejected or weakened if effects are not larger than controls, do not replicate across prompt variants, or are explained by broad distribution shift rather than targeted mechanism change.
+
+## alternative_explanations
+
+| Alternative explanation | Why it matters | How to test |
+|---|---|---|
+| Prompt artifact | The component may track a template feature rather than the behavior. | Use diverse templates and counterfactual prompt pairs. |
+| Token-frequency or lexical cue | Localization may reflect common token statistics. | Match entities/tokens by frequency and lexical properties. |
+| General performance degradation | Ablation may harm the model broadly rather than target the mechanism. | Include unrelated behavior and fluency controls. |
+| Distributed mechanism | No single localized circuit may be responsible. | Test multi-component interventions and compare with single-component effects. |
+| Method artifact | Causal tracing or patching may create off-distribution activations. | Use multiple intervention types and check consistency. |
+| Editing side effects | Model editing may alter nearby associations or unrelated outputs. | Measure locality, specificity, and unrelated task behavior after edits. |
+
+## risk_register
+
+| Risk | Severity | Claim affected | Consequence | Minimal mitigation |
+|---|---:|---|---|---|
+| Correlational localization is overstated as causal. | High | Localized representation is responsible for behavior. | Proposal would overclaim mechanism evidence. | Require intervention effects and matched controls. |
+| Controls are too weak or unmatched. | High | Candidate component is special. | Apparent effect may reflect layer position, activation scale, or prompt sensitivity. | Use same-layer, random, and behavior-negative controls. |
+| Prompt set is too narrow. | High | Mechanism generalizes beyond examples. | Findings may only hold for a template artifact. | Use template and entity variation; report scoped conclusions. |
+| Missing implementation details from packet. | Medium | Reproducibility of proposed tests. | Exact setup cannot be specified from sources alone. | Mark implementation choices as proposal details to be preregistered. |
+| Intervention creates off-distribution states. | Medium | Causal interpretation of patching/editing. | Behavioral changes may be artifacts of unnatural activations. | Compare ablation, patching, and editing; monitor unrelated degradation. |
+| Aggregate metrics hide failures. | Medium | Intervention works reliably. | Strong average effects may mask per-template failures. | Preserve per-task and per-condition results before aggregation. |
+| Editing effects are not local. | Medium | Representation encodes specific association or behavior. | Changes may spread to unrelated outputs. | Include locality checks and unrelated behavior probes. |
+tokens used
+4,633

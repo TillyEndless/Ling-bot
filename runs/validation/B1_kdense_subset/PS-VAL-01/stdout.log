@@ -1,0 +1,75 @@
+**scoped_research_questions**
+
+1. Under limited real-environment interaction, does latent world-model planning improve policy learning compared with model-free or non-imagination baselines?
+2. How quickly does accumulated model error degrade planning performance as imagination horizon increases?
+3. Are discrete latent world models more robust than continuous latent world models for planning in visually complex RL settings such as Atari?
+4. Which components are necessary for gains: learned latent dynamics, imagined rollouts, actor-critic learning in imagination, or discrete latent representation?
+
+**Packet Facts vs Synthesis vs Hypotheses**
+
+| Type | Statement | Support |
+|---|---|---|
+| Packet fact | Dream to Control learns latent dynamics models and uses latent imagination for behavior learning in control tasks. | Source note: Dream to Control abstract/method/experiments |
+| Packet fact | Mastering Atari studies discrete world models for Atari and reports performance under Atari evaluation settings and baselines. | Source note: Mastering Atari abstract/experiments/baselines |
+| Packet fact | The seed asks whether latent world-model planning remains useful under limited real-environment interaction and accumulated model error. | Source note: local seed brief |
+| Synthesis | The proposal can test sample efficiency and model-error sensitivity by varying real-environment budget and imagination horizon. | Cross-source synthesis from world-model imagination plus seed concern |
+| Proposed hypothesis | Latent imagination will help most at low interaction budgets but may degrade with long imagined rollouts if model error accumulates. | Evidence-grounded proposal speculation; not established by packet |
+
+**hypothesis_table**
+
+| Hypothesis | Evidence motivation | Prediction | Falsification criteria | Required experiment | Feasibility caveat |
+|---|---|---|---|---|---|
+| H1: Latent world-model planning improves sample efficiency under limited real interaction. | Dream to Control uses latent dynamics and imagination for behavior learning; seed asks about limited interaction. | At fixed low environment-step budgets, world-model agents outperform model-free or no-imagination baselines. | No statistically meaningful improvement over baselines at low budgets, or worse performance across most tasks. | Train agents under strict environment-step budgets on control tasks and Atari-like visual tasks. | Exact budgets and variance reporting are not specified in the packet. |
+| H2: Longer imagination horizons show a non-monotonic effect because accumulated model error offsets planning benefits. | Seed explicitly raises accumulated model error; Dream to Control uses latent imagination. | Short-to-medium horizons improve returns; very long horizons reduce or fail to improve returns. | Return does not vary with horizon, or longer horizons consistently improve without degradation. | Horizon sweep with fixed real data, fixed model capacity, and repeated seeds. | Packet does not provide exact horizon settings. |
+| H3: Discrete latent world models are competitive in visually complex domains. | Mastering Atari studies discrete world models for Atari evaluation. | Discrete world-model planning performs competitively against listed Atari baselines under matched evaluation. | Discrete model fails to match relevant baselines under matched data and evaluation settings. | Atari benchmark subset with discrete latent model, continuous latent variant, and model-free baselines. | Exact Atari scores, tables, and implementation settings are unavailable. |
+| H4: Planning gains require both learned latent dynamics and imagination-based policy optimization. | Dream to Control combines latent dynamics with latent imagination for behavior learning. | Removing imagination or corrupting dynamics reduces performance more than minor architectural changes. | Ablations show no degradation when imagination or learned dynamics are removed. | Component ablations: no imagination, one-step model only, shuffled dynamics, oracle/real rollout upper bound if feasible. | Oracle rollouts may not be feasible in all benchmark settings. |
+
+**evidence_map**
+
+| Claim | Source | Location supplied | Evidence type | Support status | Caveat |
+|---|---|---|---|---|---|
+| Latent dynamics models can support behavior learning through imagination. | Dream to Control | Abstract; method; experiments per packet | Source claim/method | Direct | No exact metrics included. |
+| Discrete world models have been evaluated on Atari. | Mastering Atari | Abstract; Atari evaluation; baselines per packet | Source claim/experiment | Direct | Full result tables absent. |
+| The target concern is limited interaction plus accumulated model error. | local_seed_world_model_planning.md | Seed brief note | Problem statement | Direct | Seed is motivation, not empirical evidence. |
+| Low interaction budgets are the right stress test. | Dream to Control + seed brief | Cross-source synthesis | Proposal rationale | Partial | Packet does not prove this is the only or best stress test. |
+| Horizon sweeps can test model-error accumulation. | Seed brief + Dream to Control | Cross-source synthesis | Experimental design inference | Indirect | Model error measurement details must be designed. |
+| Discrete vs continuous latent models are relevant comparison axes. | Dream to Control + Mastering Atari | Source contrast | Synthesis | Partial | Packet does not provide a head-to-head comparison. |
+
+**experiment_plan**
+
+| Component | Design |
+|---|---|
+| Domains | Small continuous-control tasks aligned with Dream to Control’s control setting; Atari subset aligned with Mastering Atari’s evaluation setting. |
+| Main independent variables | Real-environment interaction budget, imagination horizon, latent representation type, and use of imagination. |
+| Primary agents | Latent world-model planning agent using imagined rollouts; discrete latent world-model variant for Atari-style visual domains. |
+| Baselines | Model-free RL baseline; no-imagination world-model baseline; one-step predictive model baseline; discrete-vs-continuous latent model comparison where applicable; published/source-reported baselines only when packet details are available. |
+| Ablations | No imagined rollouts; horizon sweep; reduced model capacity; frozen or stale model; corrupted/shuffled latent dynamics; policy trained on real rollouts only; discrete latent disabled for Atari variant. |
+| Measurements | Episodic return, sample efficiency at fixed environment steps, model prediction error over rollout depth, performance vs imagination horizon, variance across random seeds. |
+| Decision logic | A hypothesis is supported only if improvements hold under matched environment budgets, repeated seeds, and relevant ablations. |
+
+**rl_evaluation_protocol**
+
+| Evaluation detail | Protocol |
+|---|---|
+| Environment interaction | Report all results as a function of real-environment steps, not only gradient steps or imagined steps. |
+| Budgeting | Use low, medium, and higher real-interaction budgets to test sample efficiency. |
+| Seeds and uncertainty | Run multiple random seeds; report mean, variability, and confidence intervals or comparable uncertainty summaries. |
+| Horizon analysis | Evaluate imagination horizons separately; track both return and model error by rollout depth. |
+| Baseline fairness | Match observation preprocessing, action spaces, environment-step budgets, network capacity where possible, and evaluation frequency. |
+| Evaluation episodes | Use held-out evaluation episodes without exploration noise when appropriate; keep training and evaluation returns separate. |
+| Atari-specific details | Use the Atari evaluation setting described in the Mastering Atari packet when exact settings are available; do not invent absent frame-skip, sticky-action, or life-loss details. |
+| Failure analysis | Inspect cases where imagined performance improves while real-environment return does not, because that indicates model exploitation or compounding error. |
+
+**risk_register**
+
+| Risk | Why it matters | Evidence status | Mitigation |
+|---|---|---|---|
+| Accumulated model error makes imagined rollouts misleading. | Central seed concern; may invalidate planning gains. | Directly motivated by seed, indirectly tied to imagination methods. | Horizon sweep, rollout-depth prediction error, short-horizon controls. |
+| Baselines are unfair or under-tuned. | Could falsely attribute gains to world-model planning. | Packet notes baselines but lacks full settings. | Match budgets/settings; report tuning protocol; include simple and strong baselines. |
+| Gains come from representation learning rather than planning. | Would weaken claim that planning is useful. | Plausible but not established by packet. | No-imagination and real-rollout-only ablations. |
+| Results may not transfer from control to Atari or vice versa. | Dream to Control and Atari source cover different settings. | Direct source-domain difference. | Treat domains separately; avoid global ranking. |
+| Discrete vs continuous comparison may be confounded by architecture. | Representation type is not isolated if model sizes differ. | Packet lacks head-to-head evidence. | Capacity-matched variants and component ablations. |
+| Insufficient statistical reporting. | RL results can be seed-sensitive. | Not specified in packet. | Multiple seeds, uncertainty intervals, per-task curves. |
+| Exact implementation settings unavailable. | Reproducibility and comparison may be limited. | Packet explicitly omits some numeric values and appendix details. | Mark unspecified settings; use proposal-level design rather than claiming replication. |
+
+Overall, the seed idea can be converted into a feasible proposal, but the packet supports it as a scoped empirical test rather than as an already-established claim that latent world-model planning remains beneficial under limited interaction and model error.

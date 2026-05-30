@@ -1,0 +1,66 @@
+**scoped_research_questions**
+
+1. Can a candidate localized circuit or representation be identified for the target behavior under a tightly specified prompt/task distribution?
+2. Does intervention on that candidate component causally change the target behavior, beyond correlational activation or attribution evidence?
+3. Are effects behavior-specific, or do interventions broadly degrade model performance?
+4. Does the localization remain stable across paraphrases, distractors, and near-control tasks?
+5. Can editing or activation-level interventions produce predictable behavioral changes without claiming a general mechanism beyond the tested setup?
+
+**hypothesis_table**
+
+| Hypothesis | Evidence-burden label | Grounding | Support criterion | Falsification criterion |
+|---|---:|---|---|---|
+| H1: A localized candidate component can be associated with the target behavior. | `SPECULATIVE_PROPOSAL` | Local claim brief asks whether a localized circuit/representation is responsible; IOI and ROME provide examples of localization-oriented analyses. | Candidate component shows task-specific activation/attribution patterns on target examples. | No component or small set of components shows repeatable task-specific signal. |
+| H2: The candidate component is causally involved in the behavior. | `SPECULATIVE_PROPOSAL` | IOI reports intervention/ablation-style mechanistic evidence; ROME uses causal tracing and editing interventions. | Patch, ablate, or edit the component changes target behavior more than matched controls. | Intervention has no reliable target-behavior effect, or matched random/control interventions have equal effect. |
+| H3: The component is behavior-specific rather than a general performance bottleneck. | `SPECULATIVE_PROPOSAL` | Packet notes limitations and scope; causal proof requires specificity checks. | Intervention affects target task more than unrelated or minimally different control tasks. | Intervention broadly harms language modeling or unrelated tasks at similar magnitude. |
+| H4: Localization generalizes within the scoped task family. | `SPECULATIVE_PROPOSAL` | Packet supports cautious testing, not broad claims. | Effects replicate across held-out templates, paraphrases, and distractor conditions. | Effects disappear under modest prompt variation. |
+
+**evidence_map**
+
+| Claim | Claim type | Evidence-burden label | Source location | Evidence directness | Supported scope | Missing detail |
+|---|---|---|---|---|---|---|
+| IOI paper analyzes a circuit for indirect-object identification in GPT-2 small. | method/evidence precedent | `DIRECT_PACKET_EVIDENCE` | Source list and controlled source notes | Direct | IOI task in GPT-2 small | Exact circuit components, metrics, tables, implementation settings |
+| IOI includes intervention/ablation-style analyses. | method precedent | `DIRECT_PACKET_EVIDENCE` | Controlled source notes | Direct | Mechanistic evidence style, not this proposed claim | Full intervention protocols and quantitative results |
+| ROME studies localization and editing of factual associations using causal tracing and editing. | method precedent | `DIRECT_PACKET_EVIDENCE` | Source list and controlled source notes | Direct | Factual-association localization/editing precedent | Exact causal tracing setup and editing metrics |
+| The local claim asks whether a localized internal circuit or representation is responsible for a behavior. | proposal target | `DIRECT_PACKET_EVIDENCE` | Local claim brief note | Direct | Seed proposal only | Target model, behavior, dataset, metrics |
+| Correlational localization alone does not establish causality. | inference boundary | `METHOD_BACKGROUND` / `LIMITED_CRITIQUE` | Inference boundary rule in supplied instructions; task prompt | Direct as rule, critique as application | Applies to proposal design | None within packet |
+
+**causal_test_plan**
+
+1. **Define the behavior and scope.**  
+   Specify model, prompt distribution, target output metric, and control tasks. Because the packet omits exact target behavior and model details, this must be treated as a proposal requirement, not an established fact. Label: `SPECULATIVE_PROPOSAL`.
+
+2. **Localize candidate components.**  
+   Use activation analysis, attribution, causal tracing-style scans, or circuit discovery to nominate layers, heads, MLPs, or representations. This stage generates candidates only; it does not prove mechanism. Label: `SPECULATIVE_PROPOSAL`.
+
+3. **Run activation patching or causal tracing.**  
+   Compare clean, corrupted, and restored runs. A candidate is stronger if restoring its activation restores the target behavior while matched irrelevant components do not. Label: `SPECULATIVE_PROPOSAL`, grounded by ROME causal tracing precedent.
+
+4. **Ablate or replace candidate components.**  
+   Test whether removing, mean-ablating, resampling, or noise-perturbing the component selectively reduces the target behavior. Include random matched components, same-layer controls, and prompt-position controls. Label: `SPECULATIVE_PROPOSAL`, grounded by IOI intervention/ablation precedent.
+
+5. **Edit or steer the representation.**  
+   If the claim involves stored associations or internal representations, perform a small editing-style intervention and test whether behavior changes in the predicted direction. Use locality checks to ensure the edit does not broadly alter unrelated outputs. Label: `SPECULATIVE_PROPOSAL`, grounded by ROME editing precedent.
+
+6. **Replicate across variants.**  
+   Test held-out prompts, paraphrases, distractors, and near-control behaviors. Report failures instead of treating one successful prompt family as general mechanism evidence.
+
+**alternative_explanations**
+
+- The candidate component may correlate with the behavior but not causally drive it.
+- Intervention effects may reflect distribution shift or activation damage rather than removal of a specific mechanism.
+- The behavior may be implemented redundantly across multiple components, so single-component tests may underestimate causal structure.
+- The proposed circuit may be task-template-specific rather than behavior-general.
+- Editing effects may alter surface associations without identifying the full mechanism.
+- Control failures could arise from poorly matched controls rather than true specificity.
+
+**risk_register**
+
+| Risk | Evidence-burden label | Why it matters | Mitigation |
+|---|---:|---|---|
+| Overclaiming causality from activation correlations | `LIMITED_CRITIQUE` | The task explicitly warns not to treat correlation as causal proof. | Require interventions, controls, and falsification criteria. |
+| Narrow prompt distribution | `LIMITED_CRITIQUE` | Packet scope lacks full datasets or task diversity. | Use held-out templates, paraphrases, distractors, and near-control tasks. |
+| Poorly matched controls | `LIMITED_CRITIQUE` | Apparent specificity may be an artifact of component choice. | Match controls by layer, component type, activation norm, and position where possible. |
+| General degradation mistaken for mechanistic effect | `LIMITED_CRITIQUE` | Ablations can damage model computation broadly. | Measure unrelated task performance and fluency/locality metrics. |
+| Missing reproducibility details | `DIRECT_PACKET_EVIDENCE` / `LIMITED_CRITIQUE` | Packet says exact numbers, tables, appendix details, and implementation settings are not included. | Pre-register prompts, metrics, seeds/runs, model version, code, and raw outputs. |
+| Field-wide novelty overclaim | `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` | Packet does not support claims about what the broader literature has or has not shown. | Limit claims to this experiment and cite external review only if later performed. |

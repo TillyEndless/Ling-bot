@@ -1,0 +1,392 @@
+2026-05-30T04:54:58.521521Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:54:58.544444Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+OpenAI Codex v0.133.0-alpha.1
+--------
+workdir: /private/tmp/ling_bot_validation_v0_1_execution/B2_orchestra_subset
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: none
+reasoning summaries: none
+session id: 019e773c-42b8-7963-8d16-04325f10a127
+--------
+user
+# Variant Runtime Instructions
+
+You are running benchmark variant `B2_orchestra_subset` for the `literature_analysis_and_research_rigor` module. Follow only the variant skill/reference content included below. Do not use external retrieval or dynamic tools. Do not use knowledge outside the supplied source packet as evidence.
+
+# Variant Skill And References
+
+## Variant File: variant/orchestra_research_rigor/SKILL.md
+
+---
+name: orchestra-research-rigor-subset
+description: Instruction-only Orchestra-derived subset for claim provenance, research artifact structure, rigor review, method comparison, and evaluation reasoning. No autonomous experiments or tools.
+license: MIT-derived-upstream-patterns-with-attribution
+---
+
+# Orchestra Subset: Research Rigor And Evidence Artifacts
+
+Use this skill when the task asks for paper analysis, method comparison, benchmark audit, evidence review, or proposal support from supplied material.
+
+This variant adapts Orchestra research-artifact, research-manager, rigor-reviewer, and ML-paper-review patterns. It is not an autonomous research agent. Do not execute experiments, retrieve papers, run evaluation harnesses, manage repositories, update persistent state, or call tools.
+
+## Core Discipline
+
+1. Convert the response into research artifacts: claims, evidence, assumptions, comparisons, risks, and unresolved questions.
+2. Assign provenance to each major statement: source-derived, cross-source synthesis, inferred from supplied evidence, proposed by the agent, or unsupported.
+3. Match claim type to evidence burden before concluding.
+4. For comparisons, require compatible tasks, data, metrics, baselines, compute, and protocols; otherwise make a scoped comparison.
+5. For evaluation audits, inspect metric alignment, aggregation, baselines, ablations, seeds, uncertainty, leakage, and reproducibility details.
+6. Preserve negative and missing evidence. Do not silently upgrade a plausible idea into a supported finding.
+
+## Claim-Type Evidence Burdens
+
+- Improvement claim: requires direct baseline comparison under a compatible setup.
+- Generalization claim: requires heterogeneous tasks, datasets, or settings.
+- Causal claim: requires intervention, ablation, or mechanism-isolating evidence.
+- Benchmark-validity claim: requires task/metric/protocol analysis and scope limitations.
+- Reproducibility claim: requires sufficient artifact, configuration, environment, and data details.
+- Proposal claim: requires falsifiable hypothesis, observable outcomes, controls, and disconfirmation conditions.
+
+## Response Pattern
+
+1. Artifact inventory: sources, claims, assumptions, evidence, and missing details.
+2. Claim ledger: claim, type, provenance, evidence, scope, evidence burden, support status.
+3. Rigor review: severity-ranked issues tied to claim validity.
+4. Corrected scope: what the packet supports, what is unknown, and what would be needed next.
+5. Final output in the user-requested format.
+
+References:
+
+- `references/provenance_and_artifacts.md`
+- `references/rigor_review_workflow.md`
+- `references/evaluation_reasoning.md`
+- `references/method_and_claim_audit.md`
+
+
+## Variant File: variant/orchestra_research_rigor/references/evaluation_reasoning.md
+
+# Evaluation Reasoning
+
+Adapted from Orchestra ML evaluation and rigor-review patterns, without evaluation harness execution.
+
+## Benchmark Audit Questions
+
+- What construct does the benchmark claim to measure?
+- Are tasks representative of that construct?
+- Are metrics aligned with the claim?
+- Is aggregation across tasks meaningful and transparent?
+- Are baselines appropriate and fairly tuned?
+- Are repeated runs, uncertainty, and variance reported?
+- Could contamination, leakage, prompt sensitivity, or protocol overfitting affect conclusions?
+- Are per-task results preserved before aggregate claims?
+
+## Experiment Audit Questions
+
+- What exact intervention or method differs between compared systems?
+- Are training data, evaluation data, compute, and tuning budgets compatible?
+- Which variables are controlled and which confounds remain?
+- Are ablations sufficient to support mechanism claims?
+- Are negative results or failure modes reported?
+
+Report benchmark and experiment concerns as risks unless the supplied packet directly establishes a failure.
+
+
+## Variant File: variant/orchestra_research_rigor/references/method_and_claim_audit.md
+
+# Method And Claim Audit
+
+Adapted from Orchestra claim-centered artifact patterns and ML writing/reviewer criteria.
+
+## Method Comparison Schema
+
+| Dimension | Method A | Method B | Comparable? | Evidence | Caveat |
+|---|---|---|---|---|---|
+
+Recommended dimensions: objective, data, assumptions, model class, optimization, baselines, metrics, compute, evaluation protocol, limitations, and claim scope.
+
+## Claim Ledger Schema
+
+| Claim | Type | Evidence burden | Supplied evidence | Support status | Allowed scope |
+|---|---|---|---|---|---|
+
+## Boundary Rules
+
+- A within-paper comparison supports that paper's setup, not all possible settings.
+- A benchmark score supports performance under the benchmark protocol, not unrestricted capability.
+- A probe or correlational analysis supports recoverability or association unless stronger causal evidence is supplied.
+- A reproduction plan must list artifacts, code/config/data needs, seeds, metrics, and environment details.
+
+
+## Variant File: variant/orchestra_research_rigor/references/provenance_and_artifacts.md
+
+# Provenance And Research Artifacts
+
+Adapted from Orchestra agent-native research artifact and research-manager patterns.
+
+## Provenance Tags
+
+Use these tags internally and expose them when helpful:
+
+- source-derived: directly stated by supplied material.
+- source-located: source-derived and tied to page, section, figure, or table.
+- cross-source synthesis: a relation among supplied sources.
+- agent-inferred: inferred from supplied evidence and marked as such.
+- agent-proposed: a hypothesis, critique, or protocol improvement.
+- unsupported: not established by supplied material.
+
+## Artifact Schema
+
+| Artifact | Purpose |
+|---|---|
+| Claim ledger | Tracks claims, claim types, source support, and scope. |
+| Evidence ledger | Tracks source locations and directness of support. |
+| Assumption list | Separates method assumptions from evaluation assumptions. |
+| Risk register | Records threats to validity and reproducibility. |
+| Missing-information list | Identifies details needed before stronger conclusions. |
+
+Never silently convert an agent-proposed idea into a source-derived fact.
+
+
+## Variant File: variant/orchestra_research_rigor/references/rigor_review_workflow.md
+
+# Rigor Review Workflow
+
+Adapted from Orchestra rigor-reviewer patterns.
+
+## Review Dimensions
+
+- Evidence relevance: does the evidence actually support the claim?
+- Falsifiability: can the claim be tested or refuted?
+- Scope calibration: is the claim limited to the studied setting?
+- Argument coherence: do conclusions follow from assumptions and results?
+- Exploration integrity: are hypotheses, post-hoc analyses, and exploratory ideas separated?
+- Methodological rigor: are baselines, ablations, metrics, seeds, and reproducibility details adequate?
+
+## Severity-Ranked Finding Template
+
+| Severity | Claim affected | Evidence issue | Consequence | Minimal fix |
+|---|---|---|---|---|
+
+## Missing Detail Checklist
+
+- Baseline identity and strength.
+- Ablation presence and purpose.
+- Metric definition and aggregation.
+- Dataset split, task sampling, or environment setup.
+- Number of seeds, runs, or trials.
+- Variability or confidence reporting.
+- Hyperparameter search and compute comparability.
+- Implementation and artifact availability.
+
+
+## Variant File: variant/reuse_and_license_notes.md
+
+# B2 Reuse And License Notes
+
+This variant selectively adapts Orchestra-derived ideas for claim-centered artifacts, provenance, rigor review, and evaluation reasoning. It deliberately excludes autonomous experiment execution, repository management, evaluation harnesses, training infrastructure, deployment, and tool loops.
+
+## Components Used
+
+| Upstream component | Files consulted per ledger | Adaptation decision | License status from audit |
+|---|---|---|---|
+| `Orchestra-Research/AI-Research-SKILLs/22-agent-native-research-artifact/ara-compiler` | `SKILL.md`, `references/schema.md` | Rewritten as compact claim/evidence/artifact schema | MIT observed in skill frontmatter |
+| `Orchestra-Research/AI-Research-SKILLs/22-agent-native-research-artifact/research-manager` | `SKILL.md`, `references/provenance_tags.md` | Rewritten as provenance tags and artifact discipline | MIT observed in skill frontmatter |
+| `Orchestra-Research/AI-Research-SKILLs/22-agent-native-research-artifact/rigor-reviewer` | `SKILL.md`, `references/rigor_dimensions.md` | Rewritten as type-aware rigor review workflow | MIT observed in skill frontmatter |
+| `Orchestra-Research/AI-Research-SKILLs/20-ml-paper-writing/ml-paper-writing` | `SKILL.md`, citation/reviewer references | Rewritten as claim-to-evidence and reviewer criteria patterns | MIT observed in skill frontmatter |
+
+## Explicit Runtime Exclusions
+
+- No autonomous research loop or persistent research state.
+- No scripts, APIs, retrieval tools, evaluation harnesses, training infrastructure, or code execution.
+- No K-Dense-derived material.
+- No benchmark-specific paper names, task identifiers, expected answers, or development answer-key content.
+
+
+## Variant File: variant/variant_manifest.yaml
+
+variant_id: B2_orchestra_subset
+module_scope: literature_analysis_and_research_rigor
+implementation_type: instruction_reference_only
+runtime_tools_enabled: false
+external_services_enabled: false
+dynamic_retrieval_enabled: false
+scripts_enabled: false
+upstream_basis:
+  repository: Orchestra-Research/AI-Research-SKILLs
+  components:
+    - path: 22-agent-native-research-artifact/ara-compiler/SKILL.md
+      consulted_files:
+        - 22-agent-native-research-artifact/ara-compiler/SKILL.md
+        - 22-agent-native-research-artifact/ara-compiler/references/schema.md
+      use: adapted_claim_and_artifact_schema
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: 22-agent-native-research-artifact/research-manager/SKILL.md
+      consulted_files:
+        - 22-agent-native-research-artifact/research-manager/SKILL.md
+        - 22-agent-native-research-artifact/research-manager/references/provenance_tags.md
+      use: adapted_provenance_tags
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: 22-agent-native-research-artifact/rigor-reviewer/SKILL.md
+      consulted_files:
+        - 22-agent-native-research-artifact/rigor-reviewer/SKILL.md
+        - 22-agent-native-research-artifact/rigor-reviewer/references/rigor_dimensions.md
+      use: adapted_rigor_review_dimensions
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: 20-ml-paper-writing/ml-paper-writing/SKILL.md
+      consulted_files:
+        - 20-ml-paper-writing/ml-paper-writing/SKILL.md
+        - 20-ml-paper-writing/ml-paper-writing/references/citation-management.md
+        - 20-ml-paper-writing/ml-paper-writing/references/reviewer-criteria.md
+      use: adapted_claim_to_evidence_and_reviewer_patterns
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+runtime_exclusions:
+  - no autoresearch autonomous loop
+  - no experiment execution
+  - no evaluation harnesses
+  - no training infrastructure
+  - no K-Dense-derived material
+  - no B3-original AI/ML/RL additions
+
+
+# Task
+
+- Task ID: `PS-VAL-01`
+- Split: `validation`
+- Task type: `evidence_grounded_proposal_support`
+- Topic: world-model planning
+- Research question: Can the provided world-model planning idea be converted into a feasible, evidence-grounded research proposal?
+
+## Input Prompt
+
+Using only the provided source packet, turn the seed idea into a small research proposal.
+Produce scoped research questions, evidence-grounded hypotheses, falsification criteria, required experiments, baselines, ablations, RL-specific evaluation details, and a risk register.
+Separate packet facts, synthesis, and proposed hypotheses.
+
+
+## Required Outputs
+
+- scoped_research_questions
+- hypothesis_table
+- evidence_map
+- experiment_plan
+- rl_evaluation_protocol
+- risk_register
+
+# Source Packet
+
+# PS-VAL-01 Model Input Packet
+## Sources
+- Dream to Control: Learning Behaviors by Latent Imagination (arXiv:1912.01603; 2019). Local file: `hafner_2019_dream_to_control.pdf`. Included evidence: Abstract; latent world model; imagination/planning/control; experiments.
+- Mastering Atari with Discrete World Models (arXiv:2010.02193; 2020). Local file: `hafner_2020_mastering_atari_discrete_world_models.pdf`. Included evidence: Abstract; discrete world model; Atari evaluation; baselines.
+- local_seed_world_model_planning.md (local_seed_brief; 2026). Local file: `local_seed_world_model_planning.md`. Included evidence: User/evaluator-provided seed idea or claim brief for proposal construction.
+
+## Controlled Source Notes
+- Dream to Control: learns latent dynamics models and uses latent imagination for behavior learning in control tasks.
+- Mastering Atari with Discrete World Models: studies discrete world models for Atari and reports performance under Atari evaluation settings.
+- Local seed brief: asks whether latent world-model planning remains useful under limited real-environment interaction and accumulated model error.
+- Evidence objects: abstracts, method sections, experiment sections, baseline/result tables, and discussion/limitations.
+
+## Packet Scope
+- This packet contains source metadata and neutral source notes prepared from the listed canonical files.
+- Some exact numeric values, full tables, appendix details, and implementation settings are not included in this model input packet.
+
+
+2026-05-30T04:54:58.569346Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:54:58.583330Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:54:58.583339Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:54:58.583948Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:54:58.583950Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:54:58.584264Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:54:58.584267Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:54:58.584582Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:54:58.584585Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:54:58.584906Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:54:58.584910Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:54:58.585686Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:54:58.585688Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:55:00.195890Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:55:00.195904Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:55:00.196313Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:55:00.196318Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:55:00.196728Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:55:00.196732Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:55:00.197143Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:55:00.197147Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:55:00.197550Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:55:00.197554Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:55:00.198461Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:55:00.198467Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+codex
+## scoped_research_questions
+
+1. Under limited real-environment interaction, does latent world-model planning improve policy performance compared with model-free RL baselines in control and Atari-like settings?
+2. How does accumulated model error during imagined rollouts affect downstream policy quality?
+3. Do discrete world models offer better robustness to long imagined rollouts than continuous latent world models in Atari-like domains?
+4. What rollout horizon, planning frequency, or imagination depth best trades off sample efficiency against model-error accumulation?
+
+Provenance separation:
+
+- Packet facts: Dream to Control learns latent dynamics models and uses latent imagination for behavior learning in control tasks. Mastering Atari with Discrete World Models studies discrete world models for Atari and reports performance under Atari evaluation settings. The seed asks whether latent world-model planning remains useful under limited real interaction and accumulated model error.
+- Synthesis: The proposal can compare world-model planning usefulness across interaction budgets, rollout horizons, and world-model representation types.
+- Proposed hypotheses: The specific claims below are testable proposal hypotheses, not established packet findings.
+
+## hypothesis_table
+
+| Hypothesis | Type | Evidence grounding | Falsification criteria | Scope |
+|---|---|---|---|---|
+| H1: Latent world-model planning improves sample efficiency under low real-environment interaction budgets versus model-free RL. | Improvement | Source-derived grounding: Dream to Control uses latent imagination for behavior learning; Atari discrete world-model work evaluates world models against baselines. | Falsified if world-model planning fails to outperform matched model-free baselines at low budgets across predefined tasks and metrics. | Limited-budget control and Atari-like tasks only. |
+| H2: Longer imagined rollouts initially help but eventually degrade policy learning because model error accumulates. | Causal/mechanism proposal | Source-derived seed concern: accumulated model error; source-derived world-model imagination/planning setup. | Falsified if performance is monotonic with rollout horizon or if measured model error does not correlate with policy degradation. | Imagined-rollout planning regimes in learned latent models. |
+| H3: Discrete latent world models are more robust than continuous latent models on Atari-like domains under the same interaction budget. | Improvement/comparison | Source-derived: Mastering Atari studies discrete world models for Atari; Dream to Control uses latent dynamics and imagination in control tasks. | Falsified if discrete models do not outperform or show lower rollout-error sensitivity than continuous alternatives under matched protocol. | Atari-like domains; not general control unless separately tested. |
+| H4: Adaptive short-horizon planning outperforms fixed long-horizon planning when the world model is imperfect. | Proposal | Agent-proposed from seed concern about accumulated model error. | Falsified if fixed long horizons match or exceed adaptive planning across seeds without higher model-error penalties. | Planning with learned world models under limited environment interaction. |
+
+## evidence_map
+
+| Evidence item | Provenance | Supports | Limitations |
+|---|---|---|---|
+| Dream to Control learns latent dynamics models and uses latent imagination for behavior learning in control tasks. | source-derived | Feasibility of latent world-model imagination for control. | Exact metrics, baselines, and implementation details are not included in the packet. |
+| Mastering Atari with Discrete World Models studies discrete world models for Atari and reports evaluation against baselines. | source-derived | Feasibility of discrete world models and Atari evaluation framing. | Exact scores, tables, and protocol details are omitted. |
+| Seed asks whether planning remains useful with limited real interaction and accumulated model error. | source-derived | Central research question and threat model. | Does not itself provide empirical evidence. |
+| Comparing rollout horizons can expose model-error accumulation. | agent-inferred | H2 and ablation design. | Requires direct measurement of model prediction error and policy performance. |
+| Comparing continuous and discrete latent models may test representation robustness. | cross-source synthesis | H3. | Packet does not establish that tasks, architectures, or budgets are directly comparable across original papers. |
+
+## experiment_plan
+
+| Experiment | Purpose | Required setup | Baselines | Ablations | Success condition |
+|---|---|---|---|---|---|
+| E1: Limited-budget control benchmark | Test H1 in control tasks. | Train world-model planning agents under fixed low, medium, and high real-interaction budgets. | Model-free RL matched for interaction budget; no-imagination latent agent if available. | Rollout horizon, model update frequency, planning frequency. | World-model planning improves return or sample efficiency at low budgets with uncertainty reported. |
+| E2: Atari-like discrete world-model benchmark | Test H1 and H3 in Atari-like settings. | Evaluate discrete world-model planning under Atari protocol. | Atari model-free baseline; continuous latent world-model variant if implemented. | Discrete vs continuous latent state; imagination horizon; action-repeat/frame preprocessing if relevant. | Discrete model shows better limited-budget performance or lower sensitivity to rollout length. |
+| E3: Model-error accumulation study | Test H2. | Measure latent prediction error or reconstruction/prediction quality across imagined rollout lengths. | Short-horizon planning; model-free baseline not using imagination. | Horizons such as 1, 5, 15, 30 imagined steps; teacher-forced vs free rollout prediction. | Performance degrades when measured rollout error exceeds a predefined threshold. |
+| E4: Adaptive horizon planning | Test H4. | Stop or shorten imagination when model uncertainty/error proxy is high. | Fixed short horizon; fixed long horizon. | Error threshold, uncertainty proxy, horizon cap. | Adaptive horizon improves return or reduces variance over fixed long horizon. |
+
+## rl_evaluation_protocol
+
+- Tasks: include at least one continuous-control setting aligned with Dream to Control’s control focus and at least one Atari-like setting aligned with the discrete world-model paper.
+- Metrics: report episode return, sample efficiency curves, area under learning curve, final performance at fixed interaction budgets, and model prediction/error metrics over imagined rollout length.
+- Interaction budgets: define low, medium, and high real-environment step budgets before training; do not tune budgets post hoc.
+- Baselines: include matched model-free RL, world-model agent without imagined rollouts, fixed short-horizon planning, fixed long-horizon planning, and where feasible continuous vs discrete world-model variants.
+- Seeds and uncertainty: run multiple random seeds and report mean, variance or confidence intervals, and per-task results before aggregate scores.
+- Fairness controls: match real-environment interaction, observation preprocessing, action space, reward normalization, network capacity where possible, optimizer budget, and hyperparameter search budget.
+- Leakage controls: separate training/evaluation episodes; avoid using evaluation returns to tune rollout horizon or model-selection criteria.
+- Aggregation: preserve per-task learning curves and only aggregate after normalizing or otherwise justifying cross-task comparability.
+- Failure reporting: report negative results, unstable training, high model-error regimes, and cases where planning underperforms model-free RL.
+
+## risk_register
+
+| Risk | Severity | Claim affected | Consequence | Minimal mitigation |
+|---|---:|---|---|---|
+| Baselines are weaker or less tuned than the world-model method. | High | H1, H3 | Apparent improvement may reflect unfair comparison. | Use published strong baselines where available and equalize tuning budgets. |
+| Model-error metric is poorly aligned with control performance. | High | H2, H4 | Error analysis may not explain policy degradation. | Measure both prediction error and downstream return; test correlation explicitly. |
+| Continuous-control and Atari results are over-aggregated. | Medium | Generalization claims | Proposal may imply broader validity than supported. | Report domains separately and avoid unrestricted generalization. |
+| Exact source tables and implementation details are missing from the packet. | Medium | Reproducibility | Proposal cannot lock exact hyperparameters or expected numeric thresholds. | Treat numeric targets as preregistered design choices to be filled from full papers or pilot runs. |
+| Adaptive horizon uses evaluation feedback indirectly. | Medium | H4 | Protocol overfitting could inflate results. | Select thresholds on validation tasks or training-only model-error proxies. |
+| Limited interaction budget makes results high variance. | Medium | H1 | False negatives or false positives across seeds. | Increase seeds, report confidence intervals, and include learning curves. |
+| Discrete vs continuous model comparison changes too many variables. | High | H3 | Representation effect may be confounded by architecture or optimization differences. | Keep architecture, capacity, training data, and optimizer as matched as possible; ablate only representation where feasible. |
+tokens used
+2,858

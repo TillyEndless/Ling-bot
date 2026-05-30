@@ -1,0 +1,35 @@
+run_id: validation_v0.1__B1_kdense_subset__PS-VAL-02__run001
+variant: B1_kdense_subset
+task_id: PS-VAL-02
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 4
+  evidence_traceability: 5
+  citation_validity: null
+  literature_coverage: null
+  comparison_fairness: null
+  experimental_rigor: 5
+  benchmark_validity: null
+  inference_boundary_discipline: 5
+  hypothesis_quality: 5
+  rl_specific_correctness: null
+  output_usefulness: 5
+  efficiency: 4
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: factual_accuracy
+  description: The evidence map references 'local_seed_brief; 2026', which is more specific than the visible task materials
+    justify and may be an invented metadata detail if not in the frozen packet.
+  evidence: 'Evidence_map row: ''Local claim brief | local_seed_brief; 2026 | Seed claim''.'
+- severity: minor
+  dimension: efficiency
+  description: The answer is somewhat dense, but the density is mostly useful because it adds caveats, support status, and
+    feasibility constraints.
+  evidence: Hypothesis table and evidence map include multiple extra columns such as feasibility caveat, evidence type, support
+    status, and caveat.
+summary: Best-calibrated variant overall. It is careful about direct versus speculative support, explicitly marks missing
+  behavior/model/metric details, and provides actionable causal tests with matched controls and falsification conditions.

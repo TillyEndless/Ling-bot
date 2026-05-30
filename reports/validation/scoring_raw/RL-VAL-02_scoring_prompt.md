@@ -1,0 +1,686 @@
+You are scoring an internal fixed-source validation benchmark after generation is complete.
+
+Use only the task specification, frozen validation gold annotation, scoring rubric, and generated outputs below. Do not use external facts. Do not reward style over correctness. Score each variant independently but compare across variants for calibration.
+
+Return JSON matching the provided schema only. For each of the four variants, provide scores from 1-5 or null when a dimension is not applicable to this task. Include concise findings and scoring_notes. No markdown.
+
+# Task ID
+RL-VAL-02
+
+# Task Specification
+task_id: RL-VAL-02
+split: validation
+task_type: rl_specific_analysis
+topic: reward modeling and post-training RL
+research_question: "Does the provided reward-modeling or post-training RL protocol support its alignment or preference-learning claims?"
+input_prompt: |
+  Review the provided reward-modeling or post-training RL protocol using only the source packet.
+  Audit preference data, reward model validation, policy optimization setup, evaluation metrics, baseline policies, human or automated evaluation, reward hacking risks, and claim boundaries.
+  Return an RL-specific risk register and a revised protocol.
+evaluation_mode: closed_source
+source_material_required: true
+provided_materials:
+  - material_id: packet_rl_ho_reward_modeling_protocol
+    type: protocol_packet
+    status: source_material_required
+    description: "A frozen reward-modeling, RLHF, or post-training RL protocol/proposal excerpt."
+required_outputs:
+  - rl_protocol_audit
+  - reward_model_validation_review
+  - policy_evaluation_checklist
+  - reward_hacking_and_proxy_risk_register
+  - revised_protocol
+critical_facts_to_capture:
+  - "Preference-data collection, reward-model training/validation, and policy-optimization setup described in the packet."
+  - "Evaluation metrics, baselines, and human/automated evaluation procedures."
+  - "Risks of proxy mismatch, reward hacking, evaluator bias, and train/eval leakage."
+  - "Limits on alignment, helpfulness, or general capability claims."
+common_failure_modes:
+  - "Treating reward-model score improvements as direct alignment evidence."
+  - "Ignoring preference-data bias and reward hacking."
+  - "Missing policy baseline and evaluation protocol details."
+  - "Overstating conclusions from narrow evaluator judgments."
+scoring_dimensions:
+  - factual_accuracy
+  - evidence_traceability
+  - experimental_rigor
+  - benchmark_validity
+  - rl_specific_correctness
+  - inference_boundary_discipline
+  - output_usefulness
+  - efficiency
+notes_on_domain_specificity: "Bridges RL and LLM post-training while preserving RL-specific evaluation concerns."
+
+
+
+# Frozen Gold Annotation
+task_id: RL-VAL-02
+source_packet_id: validation_RL-VAL-02_packet_v0_draft
+drafted_by_agent: true
+human_review_status: pending
+eligible_for_scoring: false
+must_capture:
+- id: RL-VAL-02-M1
+  finding: Audits preference-data collection, reward-model training/validation, policy optimization, and policy evaluation
+    setup.
+  evidence_locations_to_verify:
+  - Deep RL from Human Preferences PDF p.1 Abstract and preference/reward-predictor sections; Helpful/Harmless RLHF PDF p.1
+    Abstract and preference model/RLHF sections.
+  scoring_weight: high
+- id: RL-VAL-02-M2
+  finding: Separates reward-model score improvements from human preference, alignment, helpfulness, or deployment claims.
+  evidence_locations_to_verify:
+  - Preference data, reward model validation, policy optimization, and evaluation sections in both canonical PDFs.
+  scoring_weight: high
+- id: RL-VAL-02-M3
+  finding: Identifies proxy mismatch, reward hacking, evaluator bias, and train/eval leakage risks.
+  evidence_locations_to_verify:
+  - Result tables/figures and limitations/discussion covering proxy mismatch, evaluator bias, reward hacking, or evaluation
+    scope where supplied.
+  scoring_weight: medium
+acceptable_equivalent_formulations:
+- Equivalent wording is acceptable if it remains grounded in the supplied validation packet and preserves claim scope.
+critical_errors:
+- id: E1
+  error: Uses external sources or remembered facts as evidence for a core claim in the closed-source task.
+  penalty: major
+- id: E2
+  error: Presents a broad superiority, deployment, causality, or field-gap claim beyond packet evidence.
+  penalty: major
+- id: E3
+  error: Invents missing metrics, seeds, versions, baselines, or numeric results.
+  penalty: major
+inference_boundary_requirements:
+- Use only the packet as evidence.
+- Separate direct source facts, within-packet synthesis, critique, and proposed hypotheses.
+- Mark broader literature, deployment, causal, or superiority claims as requiring external review unless directly evidenced.
+optional_high_value_findings:
+- Identifies missing reproducibility details without treating absence from the packet as proof of source failure.
+- Separates direct evidence from synthesis and proposed follow-up checks.
+- Reports source/page/table grounding where the packet or canonical source supplies it.
+ambiguities_requiring_human_review:
+- Exact page, section, table, and figure locations must be verified against the acquired canonical sources.
+- Some packet notes are compressed source summaries and should be checked against full PDFs before scoring approval.
+
+
+# Agent Review Authorization Layer
+This authorizes internal scoring but is not itself a gold answer. Apply the global E/B rule: external facts or broad claims should be penalized only when used as evidence for a core scored claim; harmless background context clearly marked as non-evidence should not trigger a major penalty.
+
+# Scoring Rubric
+# Scoring Rubric
+
+Score each dimension from 1 to 5. Keep dimensions separate; do not collapse them into one total score unless a later report explicitly defines a weighted decision rule.
+
+## Scale
+
+| Score | Meaning |
+|---:|---|
+| 5 | Excellent. Expert-useful, accurate, traceable, and complete for the task scope. |
+| 4 | Strong. Minor omissions or calibration issues, but scientifically reliable. |
+| 3 | Adequate. Useful with expert cleanup; some missing detail or weak organization. |
+| 2 | Weak. Substantial omissions, unsupported reasoning, or poor task fit. |
+| 1 | Unreliable. Misleading, unsupported, materially incorrect, or unsafe for research use. |
+
+## Dimensions
+
+### Factual Accuracy
+
+Measures whether the output correctly states methods, assumptions, datasets, metrics, experimental findings, and limitations.
+
+Strong outputs separate source claims from the agent's interpretation. Weak outputs misstate paper facts, confuse versions, invent details, or generalize beyond the source.
+
+### Evidence Traceability
+
+Measures whether substantive claims link to provided sources, source locations, evidence IDs, or retrieval results.
+
+Strong outputs make it clear what each source supports and what it does not support. Weak outputs provide unsupported claims or citations that are only topically related.
+
+### Citation Validity
+
+Measures whether cited works exist, are identified correctly, and support the stated claim.
+
+For closed-source tasks, citations must come from the source packet. For retrieval tasks, citations must follow fixed retrieval rules and include enough metadata to verify.
+
+### Literature Coverage
+
+Applies primarily to retrieval and literature-survey tasks. Measures whether the output includes canonical work, recent relevant work, and important contrasting lines of research.
+
+Strong outputs document search strategy, coverage limits, and omissions. Weak outputs miss obvious core work or overfit to one source.
+
+### Comparison Fairness
+
+Measures whether methods are compared under compatible assumptions, datasets, metrics, compute, tuning effort, and evaluation protocols.
+
+Strong outputs identify non-comparable settings and normalize conclusions. Weak outputs declare winners without accounting for task setup or baseline strength.
+
+### Experimental Rigor
+
+Measures handling of baselines, ablations, metrics, seeds, statistical uncertainty, compute, data splits, hyperparameter search, and reproduction risk.
+
+Strong outputs distinguish confirmatory from exploratory evidence. Weak outputs ignore missing baselines, single-seed claims, metric mismatch, or leakage.
+
+### Benchmark Validity
+
+Measures whether benchmarks, datasets, tasks, metrics, and protocols are suitable for the claim being made.
+
+Strong outputs identify contamination, leakage, saturation, protocol mismatch, metric gaming, and train/eval mismatch. Weak outputs treat a benchmark score as automatically meaningful.
+
+### Inference-Boundary Discipline
+
+Measures whether the output distinguishes source-supported conclusions, cross-paper synthesis, hypotheses, and speculation.
+
+Strong outputs calibrate scope and uncertainty. Weak outputs launder speculation into conclusions or overstate causal/generalization claims.
+
+### Hypothesis Quality
+
+Applies primarily to proposal-support tasks. Measures whether hypotheses are grounded in evidence, falsifiable, scoped, feasible, and paired with disconfirming observations.
+
+Strong outputs specify predictions, failure criteria, required evidence, and alternative explanations. Weak outputs generate attractive but untestable ideas.
+
+### RL-Specific Correctness
+
+Applies to RL tasks. Measures correctness about environment versions, wrappers, policies, reward functions, offline data, evaluation episodes, stochasticity, train/eval mismatch, and return distributions.
+
+Strong outputs catch RL-specific failure modes. Weak outputs treat RL results like ordinary supervised-learning benchmarks.
+
+### Output Usefulness
+
+Measures whether the artifact supports a real research decision: reading, reviewing, planning, reproduction, proposal writing, or experimental design.
+
+Strong outputs are structured, actionable, and concise enough to use. Weak outputs are polished but generic.
+
+### Efficiency
+
+Measures token cost, latency, tool calls, retrieval volume, and useful-information density.
+
+High-quality but extremely inefficient outputs should be flagged. Efficient outputs must still satisfy reliability requirements.
+
+## Hard-Fail Conditions
+
+A task may receive an overall hard-fail flag if any of these occur:
+
+- A hallucinated citation is presented as real.
+- A critical claim is marked supported without direct evidence.
+- A comparative conclusion is made without adequate baseline or setting normalization.
+- An RL result is summarized from best seed/checkpoint only without disclosure.
+- A causal interpretability claim is supported only by correlational evidence.
+- A reproduction or experiment plan omits required data, environment, or evaluation protocol.
+- Held-out gold annotation content appears in the output or prompt context.
+
+## Scorecard Format
+
+```yaml
+run_id:
+variant:
+task_id:
+reviewer:
+scores:
+  factual_accuracy:
+  evidence_traceability:
+  citation_validity:
+  literature_coverage:
+  comparison_fairness:
+  experimental_rigor:
+  benchmark_validity:
+  inference_boundary_discipline:
+  hypothesis_quality:
+  rl_specific_correctness:
+  output_usefulness:
+  efficiency:
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+  - severity: major|minor
+    dimension:
+    description:
+    evidence:
+summary:
+```
+
+
+# Generated Outputs
+## OUTPUT: B0_base_agent
+
+## rl_protocol_audit
+
+| Area | Audit finding | Risk level | Claim impact |
+|---|---|---:|---|
+| Preference data | The protocol is directionally consistent with the cited work: human preference comparisons are used to train reward or preference models. However, the packet does not provide sampling strategy, annotator instructions, rater calibration, disagreement handling, or coverage analysis. | High | Alignment and preference-learning claims are under-supported unless data representativeness and label quality are documented. |
+| Reward model | Reward predictors / preference models are central to both cited protocols, but the packet does not include held-out accuracy, calibration, robustness, subgroup/domain performance, or overoptimization tests. | High | Claims that the reward model captures human preferences require validation beyond training loss or downstream RL gains. |
+| Policy optimization | The protocol optimizes policies against learned rewards, matching the source notes. Missing details include algorithm, KL constraints, reward normalization, stopping criteria, rollout distribution, and hyperparameter sensitivity. | High | It supports “RL from learned preferences was attempted,” but not strong alignment claims. |
+| Evaluation metrics | The packet references experiments/evaluations/result tables, but exact metrics and statistical evidence are omitted. | Medium-High | Claims about helpfulness, harmlessness, or behavioral improvement need explicit metrics, confidence intervals, and baselines. |
+| Baselines | Baseline policies are not specified in the packet. | High | Without supervised, prompted, non-RL, and previous-policy baselines, improvement claims are hard to attribute to RLHF. |
+| Human / automated evaluation | The packet indicates human preferences and evaluations are used, but details are absent. Automated evaluation is not described. | Medium | Human eval can support preference claims if blinded, randomized, and sufficiently powered. Automated eval alone would be insufficient for alignment claims. |
+| Reward hacking | Optimizing learned rewards creates known proxy-risk pressure. The packet does not mention adversarial reward-model probing, KL monitoring, qualitative audits, or held-out human re-evaluation after RL. | High | Alignment claims are fragile without evidence the optimized policy is not exploiting reward-model artifacts. |
+| Claim boundaries | The supplied evidence supports a narrower claim: “the protocol follows an RLHF-style pipeline using preference-trained reward models and policy optimization.” It does not, by itself, support broad claims of general alignment, harmlessness, or robust preference learning. | High | Claims should be narrowed unless stronger validation artifacts are supplied. |
+
+## reward_model_validation_review
+
+Required validation artifacts are not present in the packet. A defensible reward-model review should require:
+
+| Validation item | Required evidence | Status from packet |
+|---|---|---|
+| Train / validation / test split | Split by prompt/task/source to prevent leakage | Not provided |
+| Held-out preference accuracy | Pairwise accuracy on unseen comparisons | Not provided |
+| Calibration | Whether predicted preference probabilities match human choice frequencies | Not provided |
+| Inter-rater reliability | Agreement rates, adjudication, disagreement modeling | Not provided |
+| Labeler guidance | Annotation rubric for helpfulness, harmlessness, task success, refusal behavior | Not provided |
+| Distribution coverage | Coverage across tasks, harmful requests, ambiguous cases, long-context cases | Not provided |
+| Reward robustness | Performance under paraphrase, prompt injection, verbosity, formatting, sycophancy pressure | Not provided |
+| Overoptimization test | Human evaluation of policies at increasing reward scores / RL steps | Not provided |
+| Reward-model uncertainty | Use of ensembles, confidence thresholds, or abstention | Not provided |
+| External validity | Whether preference model generalizes beyond collected comparison distribution | Not established |
+
+Conclusion: the reward-modeling setup is plausible and consistent with the cited RLHF papers, but the packet does not validate that the learned reward is a reliable proxy for human preferences or alignment-relevant behavior.
+
+## policy_evaluation_checklist
+
+Use this before accepting policy-level alignment or preference-learning claims:
+
+1. **Baselines**
+   - Pretrained base policy
+   - Supervised fine-tuned policy
+   - Prompted or rejection-sampled non-RL policy
+   - Previous production or checkpoint policy
+   - Randomized or ablated reward-model policy where relevant
+
+2. **Optimization controls**
+   - RL algorithm specified
+   - KL penalty or trust-region constraint reported
+   - Reward scale and normalization documented
+   - Early stopping based on held-out human evaluation
+   - Multiple seeds or sensitivity checks
+   - Monitoring of reward score versus human preference
+
+3. **Human evaluation**
+   - Blind randomized pairwise comparisons
+   - Fresh prompts not used for reward-model training
+   - Separate helpfulness and harmlessness evaluations
+   - Clear rater rubric
+   - Inter-rater agreement reported
+   - Confidence intervals or statistical tests
+
+4. **Automated evaluation**
+   - Task success metrics where objective answers exist
+   - Safety-policy violation checks
+   - Refusal quality checks
+   - Toxicity / harmfulness classifiers only as secondary evidence
+   - Regression tests for known failure modes
+
+5. **Generalization**
+   - In-domain and out-of-domain prompts
+   - Adversarial prompts
+   - Long conversations
+   - Ambiguous user intent
+   - Distribution shifts from training prompts
+
+6. **Qualitative audits**
+   - High-reward sampled outputs reviewed by humans
+   - Failure cases categorized
+   - Reward-model exploitation examples collected
+   - Comparison of helpfulness-harmlessness tradeoffs
+
+## reward_hacking_and_proxy_risk_register
+
+| Risk | Mechanism | Severity | Detection | Mitigation |
+|---|---|---:|---|---|
+| Verbosity reward hacking | Model learns longer answers are preferred regardless of quality | Medium | Compare reward vs concise human ratings | Length-normalized reward features; human eval stratified by length |
+| Sycophancy | Model learns agreement with user is rewarded | High | Adversarial prompts with false premises | Include truthfulness and correction examples in preference data |
+| Over-refusal | Harmlessness reward causes excessive refusals | High | Benign-sensitive prompt suite | Separate harmlessness from helpful refusal quality |
+| Under-refusal | Helpfulness reward dominates safety | High | Harmful-request evals | Multi-objective reward or explicit safety constraints |
+| Formatting exploitation | Reward model favors polished formatting over substance | Medium | Perturb formatting while holding content fixed | Counterfactual preference data |
+| Prompt-distribution overfit | Policy performs well only on collected comparison prompts | High | Held-out task families and OOD evals | Split by task/source; collect broader preference data |
+| Reward-model blind spots | Policy finds outputs reward model scores highly but humans dislike | High | Human review at high reward quantiles | Periodic fresh human evaluation during RL |
+| Labeler bias amplification | Reward model encodes narrow annotator preferences | Medium-High | Rater subgroup and disagreement analysis | Diverse raters; report disagreement and uncertainty |
+| Evaluation leakage | Test prompts resemble reward-model training data | High | Deduplication and source-level splits | Strict held-out eval construction |
+| Automated metric substitution | Classifier or proxy score treated as alignment evidence | Medium | Compare automated metrics to human judgments | Use automated metrics only as secondary diagnostics |
+| RL instability | Policy drifts under reward optimization | Medium-High | Track KL, reward, eval win rate over training | KL constraints, early stopping, checkpoint selection |
+| Capability-safety tradeoff hidden | Aggregate score masks harmfulness regressions | High | Disaggregated helpfulness and harmlessness reporting | Separate metrics and minimum safety thresholds |
+
+## revised_protocol
+
+A defensible revised protocol should make the alignment claim narrower and add validation gates.
+
+1. **Define claim scope**
+   - Primary claim: “The protocol improves policy behavior according to collected human preference judgments on the evaluated prompt distribution.”
+   - Do not claim general alignment, broad harmlessness, or universal preference learning without out-of-distribution and adversarial evidence.
+
+2. **Preference data collection**
+   - Collect pairwise human comparisons over diverse prompt categories.
+   - Use a written rubric separating helpfulness, harmlessness, truthfulness, refusal quality, and style.
+   - Record annotator disagreement and allow “tie / both bad” labels where appropriate.
+   - Split data by prompt source and task family into train, validation, and held-out test sets.
+   - Deduplicate prompts and responses across splits.
+
+3. **Reward model training**
+   - Train reward / preference models only on training comparisons.
+   - Tune on validation comparisons.
+   - Report held-out pairwise accuracy, calibration, and performance by prompt category.
+   - Evaluate robustness to paraphrase, formatting changes, response length, and adversarial prompts.
+   - Use ensemble or uncertainty estimates where feasible.
+
+4. **Reward model acceptance gate**
+   - Do not proceed to RL unless the reward model beats simple baselines on held-out data.
+   - Require category-level performance above predefined thresholds.
+   - Manually audit high-scoring and low-scoring examples for proxy exploitation.
+
+5. **Policy optimization**
+   - Optimize the policy against the learned reward with explicit KL control to a reference policy.
+   - Report algorithm, reward normalization, KL coefficient, rollout source, batch sizes, stopping rule, and checkpoint-selection criterion.
+   - Track reward score, KL divergence, length, refusal rate, and safety violations during training.
+   - Stop based on fresh validation human preference, not maximum reward score alone.
+
+6. **Policy evaluation**
+   - Compare against base, supervised, non-RL, and prior checkpoint baselines.
+   - Use blinded randomized human pairwise evaluation on prompts excluded from reward-model training.
+   - Report helpfulness and harmlessness separately.
+   - Include adversarial, ambiguous, and out-of-distribution evaluations.
+   - Provide confidence intervals and sample sizes.
+
+7. **Reward hacking audit**
+   - Sample outputs from low, medium, and high reward-score bands.
+   - Human-review top-reward outputs for exploitation.
+   - Test for length bias, sycophancy, over-refusal, under-refusal, and formatting bias.
+   - Run evaluation across RL checkpoints to detect overoptimization.
+
+8. **Reporting**
+   - Present aggregate and disaggregated results.
+   - Include failure cases and limitations.
+   - State that preference learning is conditional on the collected preference distribution, rater rubric, and evaluation set.
+   - Avoid claiming robust alignment unless supported by independent, adversarial, and longitudinal evidence.
+## OUTPUT: B1_kdense_subset
+
+## rl_protocol_audit
+
+| Source | Protocol element | What the packet supports | Evidence status | Main limitation |
+|---|---|---:|---|---|
+| Christiano 2017, *Deep RL from Human Preferences* | Preference data | Uses human preference comparisons to train reward predictors. | Direct from source note and included evidence description | Exact sampling process, annotator criteria, label quality controls, and dataset size are not provided in packet. |
+| Christiano 2017 | Reward model | Trains reward predictors from human preference comparisons. | Direct | Packet does not include reward-model validation metrics, calibration checks, uncertainty reporting, or held-out comparison performance. |
+| Christiano 2017 | Policy optimization | Uses reinforcement learning to optimize policies under learned rewards. | Direct | Packet does not include optimizer settings, reward regularization, overoptimization controls, or full implementation details. |
+| Christiano 2017 | Evaluation | Includes experiments. | Partial | Packet does not provide exact task metrics, baselines, result values, or human evaluation details. |
+| Bai 2022, *Training a Helpful and Harmless Assistant with RLHF* | Preference data | Uses preference models and RLHF-style optimization/evaluation for assistant behavior. | Direct | Packet omits exact preference-data construction, rater instructions, disagreement rates, and train/test separation details. |
+| Bai 2022 | Reward/preference model | Uses preference models. | Direct | Packet does not provide model validation numbers, calibration, robustness tests, or distribution-shift analysis. |
+| Bai 2022 | Policy optimization | Uses RLHF-style optimization for assistant behavior. | Direct | Packet omits optimization settings, KL/control terms, baseline policy details, and ablation detail. |
+| Bai 2022 | Evaluation | Includes evaluations and limitations. | Direct | Packet does not provide exact tables/figures, evaluation prompts, evaluator composition, or statistical uncertainty. |
+
+**Audit conclusion:** The packet supports only the broad claim that both protocols connect preference data to learned reward/preference models and then to RL-style policy optimization. It does **not** establish, from the supplied evidence alone, that the protocols fully validate alignment, harmlessness, helpfulness, or robust preference learning.
+
+## reward_model_validation_review
+
+| Claim | Source | Evidence supplied | Support status | Caveat |
+|---|---|---|---|---|
+| Human preferences can be used to train a reward predictor. | Christiano 2017 | Controlled note: reward predictors trained from human preference comparisons. | Direct | Does not establish general validity beyond the included experiments. |
+| A learned reward can be optimized by RL. | Christiano 2017 | Controlled note: RL optimizes policies under learned rewards. | Direct | Does not show whether optimized policies remain aligned with true human preferences under distribution shift. |
+| Preference models can support assistant RLHF. | Bai 2022 | Controlled note: preference models and RLHF-style optimization/evaluation for assistant behavior. | Direct | “Helpful” and “harmless” quality depends on omitted evaluator protocols and metrics. |
+| Reward/preference models were sufficiently validated. | Both | Packet says relevant sections/results exist but omits exact metrics and settings. | Partial | Not established by the packet. |
+| Reward models are robust to overoptimization or reward hacking. | Both | No specific evidence supplied. | Absent | Must be treated as a risk, not an established property. |
+
+Validation gaps visible in the packet:
+
+| Validation area | Required evidence | Packet status | Risk |
+|---|---|---|---|
+| Held-out preference accuracy | Train/test split, accuracy/AUC/log loss, confidence intervals | Not provided | Reward model may fit annotation artifacts rather than preferences. |
+| Calibration | Calibration curve or expected calibration error | Not provided | Reward scores may be poorly comparable across prompts/states. |
+| Annotator reliability | Agreement, adjudication, rater screening | Not provided | Preference target may be noisy or unstable. |
+| Distribution shift | Tests on unseen tasks/prompts/environments | Not provided | Reward model may fail when policy moves off-distribution. |
+| Overoptimization check | Performance versus RL steps/reward score/human judgment | Not provided | Policy may exploit proxy reward. |
+| Baseline comparison | SFT/base policy, non-RL policy, supervised preference baseline | Not detailed | Incremental value of RL is not established by packet. |
+
+## policy_evaluation_checklist
+
+| Area | Checklist item | Why it matters |
+|---|---|---|
+| Preference data | Define who labels comparisons, what instructions they receive, and how disagreement is handled. | Alignment claims depend on whose preferences are modeled. |
+| Preference data | Report dataset size, sampling scheme, train/validation/test split, and prompt/task coverage. | Prevents unsupported generalization. |
+| Reward model | Report held-out preference prediction metrics with uncertainty. | Shows whether the model predicts preferences beyond training data. |
+| Reward model | Test calibration and subgroup/task-slice performance. | Detects unreliable reward scores and hidden failure modes. |
+| Reward model | Evaluate on policy-generated samples from multiple optimization stages. | Tests distribution shift caused by RL. |
+| Policy optimization | Specify RL algorithm, reward normalization, KL/control terms, stopping criteria, and random seeds. | Necessary for reproducibility and overoptimization analysis. |
+| Baselines | Compare against base policy, supervised fine-tuned policy if present, and non-RL preference optimization alternative where applicable. | Separates RL gains from data/model gains. |
+| Human evaluation | Use blinded pairwise comparisons against baselines with clear helpfulness/harmlessness rubrics. | Reduces evaluator bias and supports preference-learning claims. |
+| Automated evaluation | Treat automated metrics as proxy evidence only unless validated against human judgments. | Avoids overclaiming from weak proxies. |
+| Safety | Include red-team or adversarial prompts/tasks and report failures. | Alignment and harmlessness claims require stress testing. |
+| Statistics | Report confidence intervals, number of evaluators, aggregation method, and multiple-comparison handling. | Supports strength of claims. |
+| Claim boundaries | State which tasks, users, environments, and model sizes are covered. | Prevents field-wide conclusions from narrow experiments. |
+
+## reward_hacking_and_proxy_risk_register
+
+| Risk | Evidence basis in packet | Severity | Likely effect on claim | Mitigation |
+|---|---|---:|---|---|
+| Reward overoptimization | Both sources optimize policies using learned reward/preference models. | High | Policy may increase reward score while reducing true human preference. | Track human preference versus reward score across RL steps; early stop on human-eval degradation. |
+| Preference-model distribution shift | RL changes policy outputs/states after reward model training. | High | Reward model may evaluate unfamiliar outputs unreliably. | Iterative data collection on current policy samples; hold out final policy evaluation prompts. |
+| Annotator preference ambiguity | Packet does not include rater protocol or disagreement handling. | Medium | Model may learn inconsistent or underspecified preferences. | Report rater instructions, agreement, adjudication, and disagreement-sensitive analysis. |
+| Proxy helpfulness/harmlessness | Bai 2022 concerns assistant helpfulness/harmlessness, but exact metrics are omitted. | High | Claims may exceed what measured evaluations establish. | Use separate rubrics and evaluations for helpfulness and harmlessness; avoid collapsing into one reward. |
+| Baseline weakness | Packet does not detail baseline policies or ablations. | Medium | Apparent RLHF gains may reflect weak comparisons. | Include base, supervised, and preference-model-only baselines. |
+| Evaluation leakage | Packet does not describe train/test prompt separation. | Medium | Evaluation may overstate generalization. | Maintain prompt/task-level held-out sets and document split rules. |
+| Automated evaluator bias | Packet mentions evaluations but not whether human or automated details are included. | Medium | Automated metrics may reward style or superficial compliance. | Validate automated metrics against blinded human judgments. |
+| Safety regression under helpfulness optimization | Assistant optimization may trade harmlessness for helpfulness if not separately evaluated. | High | “Helpful and harmless” claim may be only partially supported. | Report separate helpfulness and harmlessness scores and Pareto tradeoffs. |
+| Reproducibility gap | Packet omits exact implementation settings and numeric details. | Medium | Independent verification is limited. | Publish settings, seeds, model checkpoints or sufficient configs. |
+
+## revised_protocol
+
+1. **Define claim scope**
+   - State that the protocol tests whether preference-trained reward or preference models improve policy behavior on the specified tasks/prompts in the packet.
+   - Do not claim broad alignment, harmlessness, or general preference learning unless directly supported by held-out human evaluation.
+
+2. **Preference data protocol**
+   - Collect pairwise human preferences with documented rater instructions, eligibility criteria, disagreement handling, and quality controls.
+   - Record prompt/task provenance and keep train, validation, and final test sets separated at the prompt/task level.
+   - Report dataset size, label distribution, agreement, and uncertainty.
+
+3. **Reward/preference model validation**
+   - Train the reward/preference model only on training comparisons.
+   - Validate on held-out comparisons using accuracy/AUC or equivalent ranking metrics, calibration, and slice analysis.
+   - Test the model on outputs from the base policy, intermediate RL policies, and final RL policy to detect distribution shift.
+   - Report cases where reward score and human preference disagree.
+
+4. **Policy optimization**
+   - Specify the RL algorithm, initialization policy, reward normalization, KL or other constraint terms, stopping rule, seeds, and hyperparameters.
+   - Monitor both learned reward and independent human preference during optimization.
+   - Stop or roll back when reward improves but held-out human preference or safety evaluation worsens.
+
+5. **Baselines**
+   - Compare against the initial/base policy.
+   - Include a supervised or non-RL preference-learning baseline where available.
+   - Use identical evaluation prompts and blinded evaluators across all policies.
+
+6. **Evaluation**
+   - Run blinded pairwise human evaluation against baselines.
+   - For assistant behavior, evaluate helpfulness and harmlessness separately, then report tradeoffs.
+   - Include adversarial or stress-test prompts/tasks for reward hacking and safety regressions.
+   - Report confidence intervals, sample sizes, evaluator counts, and aggregation rules.
+
+7. **Claim boundaries**
+   - Supported claim: “Within the evaluated tasks/prompts, the RLHF or human-preference protocol improved human-rated behavior over specified baselines.”
+   - Not established by the packet: broad alignment, robust harmlessness, general reward-model validity, or absence of reward hacking.
+## OUTPUT: B2_orchestra_subset
+
+## rl_protocol_audit
+
+The supplied packet supports only a scoped audit of the protocol family, not a full validation of any specific implementation. The sources describe protocols that train reward or preference models from human comparisons, then optimize policies against learned rewards using RLHF-style policy optimization. That supports the broad claim that the protocol is a preference-learning/post-training RL approach, but not a strong claim that it robustly aligns behavior in general.
+
+| Audit area | Status from packet | Risk | Boundary |
+|---|---:|---|---|
+| Preference data | Human preference comparisons are used in both source notes. | Preference quality, annotator instructions, sampling, disagreement handling, and coverage are not specified. | Supports “learns from comparisons,” not “captures human values broadly.” |
+| Reward/preference model | Reward predictors/preference models are trained from comparisons. | Validation details, held-out splits, calibration, uncertainty, adversarial tests, and distribution-shift checks are missing. | Supports “model trained to predict preferences,” not “validated alignment reward.” |
+| Policy optimization | Policies are optimized under learned rewards/RLHF. | Optimizer, KL/control constraints, reward normalization, stopping rules, and overoptimization checks are unspecified. | Supports “RL optimized against learned reward,” not “safe optimization.” |
+| Evaluation metrics | Sources include evaluations and result tables/figures, but packet lacks exact metrics. | Metric alignment and aggregation cannot be audited. | Any improvement claim must be limited to the reported protocols in the original papers. |
+| Baselines | Baseline policies are implied by experiments but not detailed in the packet. | Fairness, strength, tuning, and compute comparability unknown. | No broad superiority claim is justified from packet alone. |
+| Human/automated eval | Human preferences and evaluations are included at a high level. | Eval population, prompt/task sampling, blind review, inter-rater reliability, and automated judge validity are unspecified. | Supports existence of evaluation, not robustness. |
+| Reward hacking | Learned rewards create proxy-optimization risk. | Packet does not establish systematic reward hacking detection or mitigation. | Alignment claims require explicit overoptimization and failure-mode audits. |
+
+## reward_model_validation_review
+
+| Claim | Type | Evidence burden | Supplied evidence | Support status | Allowed scope |
+|---|---|---|---|---|---|
+| Reward models learn from human preferences. | Preference-learning claim | Preference comparison data and reward model training procedure. | Source notes say both protocols use human preference comparisons/preference models. | Supported at high level. | The protocols train models from preference comparisons. |
+| Reward models are valid proxies for alignment. | Benchmark/proxy-validity claim | Held-out validation, calibration, adversarial checks, distribution-shift analysis, and failure-mode evidence. | Not included in packet. | Undersupported. | At most, they are learned preference predictors under the reported data distribution. |
+| RLHF improves helpfulness/harmlessness or task behavior. | Improvement claim | Compatible baseline comparison under shared metrics/protocols. | Packet says evaluations and result tables/figures exist, but omits details. | Not auditable from packet. | Only source-specific experimental settings, if original reported comparisons support it. |
+| Optimizing learned reward improves alignment. | Causal/alignment claim | Intervention evidence plus controls and mechanism-isolating ablations. | Protocol optimizes policies under learned rewards, but validation details are missing. | Partially supported as optimization of a proxy, not alignment. | “Optimizes behavior toward learned preference model.” |
+
+Required validation elements missing from the packet:
+
+| Validation item | Why it matters |
+|---|---|
+| Preference split design | Prevents leakage between reward model training and validation. |
+| Annotator guidance and demographics | Defines whose preferences are learned. |
+| Agreement/disagreement reporting | Distinguishes stable preference signal from noisy labels. |
+| Held-out reward model accuracy/calibration | Tests whether the model predicts unseen preferences. |
+| Reward model uncertainty | Helps identify low-confidence optimization regions. |
+| Adversarial or out-of-distribution prompts/tasks | Tests whether the reward proxy fails outside training support. |
+| Overoptimization curves | Detects when policy reward rises while human preference falls. |
+
+## policy_evaluation_checklist
+
+Use this before accepting alignment or preference-learning claims:
+
+| Check | Required evidence |
+|---|---|
+| Preference data provenance | Source of prompts/tasks, sampling method, annotator instructions, comparison format, label aggregation. |
+| Reward model split | Train/validation/test split with leakage controls. |
+| Reward model metrics | Accuracy or ranking loss, calibration, uncertainty, subgroup/task breakdowns. |
+| Baseline policies | SFT/pre-RL policy, non-RL baseline, prior method baseline, and reward-model-only comparison where relevant. |
+| Policy optimizer | RL algorithm, KL penalty or constraint, reward normalization, batch sizes, update counts, stopping criteria. |
+| Compute/tuning parity | Comparable search budget across baselines. |
+| Human evaluation | Blind randomized comparisons, evaluator count, disagreement, confidence intervals. |
+| Automated evaluation | Justification that automated metrics or judges measure the target construct. |
+| Per-task reporting | Results before aggregation, especially for helpfulness versus harmlessness tradeoffs. |
+| Safety and refusal behavior | Separate metrics for harmlessness, helpfulness, evasiveness, and false refusal. |
+| Reward hacking tests | Examples where reward model prefers bad outputs, adversarial prompts, and high-reward low-quality generations. |
+| Reproducibility | Code/configs, model versions, prompts, seeds, reward model checkpoints, data documentation. |
+
+## reward_hacking_and_proxy_risk_register
+
+| Severity | Risk | Evidence issue | Consequence | Minimal fix |
+|---|---|---|---|---|
+| High | Reward overoptimization | Packet does not include overoptimization curves or human eval versus reward score comparison. | Policy may exploit reward model while degrading true preference quality. | Track human preference as a function of RL steps/reward score; stop when human preference plateaus or reverses. |
+| High | Preference-model distribution shift | Reward model trained on one comparison distribution may score optimized policy outputs outside that distribution. | High reward may not mean aligned behavior. | Evaluate reward model on outputs from intermediate and final RL policies, including adversarial samples. |
+| High | Ambiguous alignment construct | “Helpful/harmless/aligned” are broader than pairwise preference prediction. | Claims may overstate what the reward model measures. | Define target constructs and map each metric to a bounded claim. |
+| Medium | Annotator bias or inconsistency | Packet lacks annotator protocol and agreement statistics. | Learned reward may encode unstable or narrow preferences. | Report annotator instructions, aggregation, disagreement, and subgroup/task analyses. |
+| Medium | Baseline weakness | Packet lacks baseline identity, tuning, and compute details. | Improvement claims may reflect weak comparisons. | Compare against strong SFT and non-RL baselines under equal evaluation protocols. |
+| Medium | Metric aggregation hides tradeoffs | Packet lacks per-task/per-category results. | Helpful gains may mask harmlessness failures, or vice versa. | Report helpfulness and harmlessness separately with per-category breakdowns. |
+| Medium | Automated evaluation mismatch | Packet notes evaluations but not metric validity. | Automated scores may not reflect human preference. | Validate automated metrics against blind human comparisons. |
+| Low | Reproducibility gaps | Exact numeric values, appendices, and implementation settings are omitted. | Independent verification is difficult from packet alone. | Provide configs, seeds, data schemas, checkpoints, and evaluation prompts. |
+
+## revised_protocol
+
+1. Define claim boundaries before training:
+   - Primary claim: the policy is optimized to match a specified preference model trained from a documented comparison dataset.
+   - Secondary claim: human evaluators prefer the optimized policy over named baselines under a fixed evaluation protocol.
+   - Do not claim broad alignment unless tested across heterogeneous tasks, evaluators, adversarial settings, and distribution shifts.
+
+2. Build and document preference data:
+   - Specify prompt/task sampling, annotator pool, instructions, comparison UI, label aggregation, and disagreement handling.
+   - Maintain separate reward-model train, validation, and test splits.
+   - Include samples from baseline, SFT, intermediate RL, and final RL policies to reduce distribution shift.
+
+3. Validate the reward model before policy optimization:
+   - Report held-out preference prediction, calibration, uncertainty, and per-category performance.
+   - Test adversarial and out-of-distribution examples.
+   - Identify examples where the reward model assigns high scores to clearly poor, evasive, unsafe, or nonsensical outputs.
+
+4. Constrain and monitor RL optimization:
+   - Use a documented RL algorithm with KL control against the reference policy.
+   - Report reward normalization, update counts, hyperparameters, compute budget, and stopping rules.
+   - Track reward score, KL distance, diversity, human preference, and safety metrics across training.
+
+5. Evaluate policies with strong baselines:
+   - Compare final policy against pre-RL/SFT policy and other relevant baselines.
+   - Use blinded randomized human comparisons with confidence intervals.
+   - Report helpfulness and harmlessness separately, plus aggregate results only after per-category reporting.
+
+6. Audit reward hacking:
+   - Plot learned reward versus human preference over RL steps.
+   - Manually inspect high-reward outputs.
+   - Run adversarial prompts and policy-generated edge cases through human review.
+   - Treat divergence between reward score and human judgment as a stopping or redesign trigger.
+
+7. Release reproducibility artifacts where possible:
+   - Include data documentation, prompt sets, reward model architecture/configuration, policy optimization settings, seeds, evaluation rubrics, and analysis scripts.
+
+Revised supported claim: “Under the specified comparison-data, reward-model, RL-optimization, and evaluation protocol, the post-trained policy is preferred by evaluators over named baselines on the tested task distribution.”
+
+Unsupported from the packet alone: “The protocol solves alignment,” “the reward model captures human values generally,” or “RLHF improvements generalize outside the evaluated settings.”
+## OUTPUT: B3_final_for_validation
+
+**Source Inventory**
+
+Sources supplied: Christiano et al. 2017, *Deep Reinforcement Learning from Human Preferences*; Bai et al. 2022, *Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback*. Evidence objects named in packet: abstracts, preference-data/reward-model sections, policy-optimization sections, evaluation protocol, result tables/figures, and limitations. The packet does not include exact numeric results, full tables, appendix details, or many implementation settings.
+
+**rl_protocol_audit**
+
+| Area | Audit finding | Evidence label | Source location | Boundary |
+|---|---|---:|---|---|
+| Preference data | Both protocols use human preference comparisons to train preference/reward models. | `DIRECT_PACKET_EVIDENCE` | Controlled Source Notes; included preference-data/preference-model sections | The packet does not specify annotator counts, labeling instructions, agreement, sampling strategy, or comparison volume. |
+| Reward model | Christiano et al. train reward predictors from human comparisons; Bai et al. use preference models for assistant behavior. | `DIRECT_PACKET_EVIDENCE` | Controlled Source Notes; reward predictor/preference model sections | Validation protocol details are mostly absent from packet. |
+| Policy optimization | Both use learned preference/reward signals in RL-style policy optimization. | `DIRECT_PACKET_EVIDENCE` | Controlled Source Notes; policy-optimization/RLHF sections | Optimizer, KL control, rollout sampling, seeds, and hyperparameter details are not supplied. |
+| Evaluation | Packet says evaluations, result tables/figures, and limitations are included. | `DIRECT_PACKET_EVIDENCE` | Evidence objects list | Exact metrics and result values are unavailable, so strength of alignment claims cannot be fully audited. |
+| Baselines | Baseline policy details are not included in the packet. | `LIMITED_CRITIQUE` | Packet Scope | Missing baseline detail weakens claims of improvement over prior or non-RLHF policies. |
+| RL setting | These are post-training or reward-learning protocols where learned rewards guide policy behavior. | `WITHIN_PACKET_SYNTHESIS` | Both source notes | Supported only at the high level described in packet. |
+| Claim scope | The packet supports claims that the papers study preference-learning/RLHF-style methods, not broad deployment alignment guarantees. | `LIMITED_CRITIQUE` | Packet Scope; limitations evidence object | Deployment robustness or full alignment would need external review or omitted details. |
+
+**reward_model_validation_review**
+
+The packet directly supports that reward or preference models are trained from human preference comparisons (`DIRECT_PACKET_EVIDENCE`). It does not provide enough detail to verify whether reward models are independently validated against held-out human judgments, calibrated, stress-tested, or evaluated under distribution shift (`LIMITED_CRITIQUE`).
+
+Key missing validation details:
+
+| Validation item | Status from packet | Risk |
+|---|---|---|
+| Held-out preference accuracy | Not specified | Reward model may fit collected comparisons without generalizing. |
+| Annotator agreement or quality control | Not specified | Human preference labels may be noisy or inconsistent. |
+| Data sampling policy | Not specified | Preference model may be biased toward sampled trajectories/responses. |
+| Calibration | Not specified | Reward scores may not correspond reliably to human preference strength. |
+| Adversarial or edge-case validation | Not specified | Reward hacking or proxy exploitation may go undetected. |
+| Separate validation for helpfulness vs harmlessness | Implied for Bai by topic, but not detailed | Tradeoffs between objectives may be obscured. |
+| Reward-model uncertainty | Not specified | Policy optimization may overexploit uncertain reward regions. |
+
+**policy_evaluation_checklist**
+
+| Checklist item | What should be verified | Evidence status |
+|---|---|---|
+| Behavior/source policy | Identify the model or policy that generated preference candidates. | Missing in packet. |
+| Learned policy | Specify initialized model/policy, RL algorithm, and update constraints. | High-level only. |
+| Reward model use | State whether reward is fixed, updated iteratively, ensembled, or uncertainty-aware. | Missing in packet. |
+| RL objective | Include learned reward, KL penalties, auxiliary objectives, and stopping rules. | Missing in packet. |
+| Baselines | Compare against supervised, pre-RL, non-RLHF, random/expert, or prior assistant policies as appropriate. | Not specified. |
+| Evaluation metrics | Separate reward-model score, human preference win rate, task success, helpfulness, harmlessness, and safety metrics. | Metrics not detailed. |
+| Human evaluation | Report evaluator pool, prompts/tasks, blinding, rubric, agreement, and sample size. | Not specified. |
+| Automated evaluation | Clarify proxy metrics and whether they correlate with human judgments. | Not specified. |
+| Variability | Report seeds, repeated runs, confidence intervals, or bootstrap uncertainty. | Not specified. |
+| Distribution shift | Evaluate prompts/tasks outside reward-model training distribution. | Not specified. |
+| Limitations | Separate benchmark preference gains from alignment or deployment claims. | Limitations object listed, details absent. |
+
+**reward_hacking_and_proxy_risk_register**
+
+| Risk | Why it matters | Evidence label | Mitigation in revised protocol |
+|---|---|---:|---|
+| Reward model overoptimization | RL can exploit learned reward errors instead of improving true human preference. | `LIMITED_CRITIQUE` | Use held-out human eval, KL constraints, reward-model ensembles, and early stopping. |
+| Preference data sampling bias | Reward model learns the distribution of compared examples, not necessarily general preference. | `LIMITED_CRITIQUE` | Stratify prompts/trajectories, include hard negatives, and document sampling policy. |
+| Proxy metric substitution | High learned reward may be mistaken for alignment. | `LIMITED_CRITIQUE` | Report learned reward separately from human preference and safety outcomes. |
+| Helpfulness-harmlessness tradeoff | Optimizing one objective may degrade the other. | `WITHIN_PACKET_SYNTHESIS` | Evaluate helpfulness and harmlessness separately plus combined decision rules. |
+| Evaluator inconsistency | Noisy labels can destabilize reward modeling. | `LIMITED_CRITIQUE` | Measure agreement, use adjudication, and audit ambiguous examples. |
+| Distribution shift | Reward model may fail on prompts unlike training comparisons. | `LIMITED_CRITIQUE` | Hold out prompt families and perform stress tests. |
+| Baseline weakness | Weak or unclear baselines can inflate apparent gains. | `LIMITED_CRITIQUE` | Include pre-RL, supervised, and non-RLHF baselines under the same evaluation. |
+| Deployment alignment overclaim | Packet supports preference-learning experiments, not broad real-world alignment guarantees. | `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` | Limit claims to evaluated settings unless external deployment evidence is supplied. |
+
+**revised_protocol**
+
+1. Define claims narrowly before training: preference-learning improvement, helpfulness, harmlessness, or alignment proxy. Mark deployment alignment as out of scope unless directly tested.
+
+2. Build preference data with documented sampling: source policy, prompt/task distribution, candidate generation method, annotator rubric, annotator count, disagreement handling, and train/validation/test split.
+
+3. Validate the reward/preference model before RL: held-out preference accuracy, calibration, subgroup or prompt-family performance, annotator agreement, uncertainty estimates, and adversarial or edge-case checks.
+
+4. Optimize policy with explicit safeguards: fixed reward-model version, KL or update constraints against the reference policy, reward clipping or normalization, early stopping on held-out human preference, and monitoring for reward-model score divergence from human judgments.
+
+5. Evaluate against clear baselines: initial policy, supervised/post-trained policy before RL, non-RLHF alternative, and any task-relevant prior baseline. Use identical prompts, sampling rules, and evaluator rubrics.
+
+6. Separate metrics: learned reward score, human preference win rate, helpfulness, harmlessness, refusal/safety behavior, task success where relevant, and uncertainty intervals. Do not aggregate heterogeneous metrics without explaining weights.
+
+7. Run reward-hacking checks: compare high-reward outputs to human judgments, inspect failures, test out-of-distribution prompts, and evaluate whether optimization increases model reward while reducing human-rated quality.
+
+8. Report reproducibility details: model versions, datasets, prompt sets, reward-model architecture when available, RL algorithm, hyperparameters, seeds/runs, evaluator instructions, raw or aggregate outputs, and known limitations.
+
+Supported conclusion: based on the packet, the protocols support studying preference-model-based RL/RLHF methods (`DIRECT_PACKET_EVIDENCE`). Stronger claims about general alignment, deployment robustness, or universal preference learning remain `UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW` unless the omitted paper details directly establish them.

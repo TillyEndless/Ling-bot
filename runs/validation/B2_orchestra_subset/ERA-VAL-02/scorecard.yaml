@@ -1,0 +1,30 @@
+run_id: validation_v0.1__B2_orchestra_subset__ERA-VAL-02__run001
+variant: B2_orchestra_subset
+task_id: ERA-VAL-02
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 5
+  evidence_traceability: 4
+  citation_validity: null
+  literature_coverage: null
+  comparison_fairness: 5
+  experimental_rigor: 5
+  benchmark_validity: 5
+  inference_boundary_discipline: 5
+  hypothesis_quality: null
+  rl_specific_correctness: null
+  output_usefulness: 5
+  efficiency: 4
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: evidence_traceability
+  description: Traceability is strong at the packet-evidence level but still lacks exact page/table references, which the
+    gold notes mark as requiring verification against canonical sources.
+  evidence: Rows are labeled as 'Source-derived' and cite packet content, but do not include page, section, or table locations.
+summary: Best overall variant. It cleanly separates metric types, visual samples, human evaluation absence, baselines, ablations,
+  compute, dataset splits, sample selection, and claim scope. The corrected protocol is concrete and directly aligned with
+  the task.

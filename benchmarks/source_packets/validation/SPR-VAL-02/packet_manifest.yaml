@@ -1,0 +1,23 @@
+task_id: SPR-VAL-02
+packet_id: validation_SPR-VAL-02_packet_v0_draft
+status: draft_pending_human_review
+sources:
+- id: decision_transformer
+  title: 'Decision Transformer: Reinforcement Learning via Sequence Modeling'
+  authors: Lili Chen et al.
+  year: 2021
+  identifier: arXiv:2106.01345
+  url: https://arxiv.org/pdf/2106.01345
+  filename: chen_2021_decision_transformer.pdf
+  include: Abstract; method formulation; datasets/environments; baselines; experiments;
+    limitations.
+  local_filename: chen_2021_decision_transformer.pdf
+  sha256: 6ff675a7b8286ca7bf8e01e4b90a41bf5c90f4c3c007e17fdb4d24e26fd05e28
+  page_count: '21'
+  included_in_model_packet: Abstract; method formulation; datasets/environments; baselines;
+    experiments; limitations.
+model_input_packet:
+  path: model_input_packet.md
+  sha256: d988cff44933dc95dc4c0e446f3c1105ccc4a5bd6414f53a6fd3708027a66ffa
+packet_matches_task_spec: true
+unresolved_source_version_issues: []

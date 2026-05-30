@@ -1,0 +1,37 @@
+run_id: validation_v0.1__B3_final_for_validation__ERA-VAL-01__run001
+variant: B3_final_for_validation
+task_id: ERA-VAL-01
+reviewer: codex_agent_draft_post_generation
+benchmark_version: validation_v0.1_agent_reviewed_internal
+scores:
+  factual_accuracy: 5
+  evidence_traceability: 5
+  citation_validity: null
+  literature_coverage: null
+  comparison_fairness: 4
+  experimental_rigor: 5
+  benchmark_validity: 5
+  inference_boundary_discipline: 5
+  hypothesis_quality: null
+  rl_specific_correctness: null
+  output_usefulness: 5
+  efficiency: 4
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: comparison_fairness
+  description: The output identifies baseline comparability needs but cannot deeply normalize comparisons because the packet
+    omits exact baselines and metrics. This is a limitation of the task materials rather than a serious output flaw.
+  evidence: Gold notes ambiguities requiring human review for exact page, section, table, and figure locations, and expects
+    baseline selection and metric appropriateness to be audited from the packet.
+- severity: minor
+  dimension: efficiency
+  description: The explicit evidence-burden labels improve rigor but add some verbosity compared with B1. The added structure
+    is useful, so this is only a minor efficiency cost.
+  evidence: The output repeats DIRECT_PACKET_EVIDENCE, LIMITED_CRITIQUE, and UNSUPPORTED_OR_NEEDS_EXTERNAL_REVIEW labels across
+    sections.
+summary: B3 is the best calibrated variant. It explicitly inventories supplied sources, separates direct packet evidence,
+  within-packet synthesis, limited critique, and unsupported claims, and fully covers contamination, saturation, prompt protocol,
+  baselines, uncertainty, leakage, and claim scope. It avoids external facts and does not invent numbers.

@@ -1,0 +1,163 @@
+2026-05-30T04:44:08.706311Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:44:08.730234Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+OpenAI Codex v0.133.0-alpha.1
+--------
+workdir: /private/tmp/ling_bot_validation_v0_1_execution/B0_base_agent
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: none
+reasoning summaries: none
+session id: 019e7732-585a-7e23-bbb9-fb1a9892fdc4
+--------
+user
+# Variant Runtime Instructions
+
+You are running benchmark variant `B0_base_agent`. No research skill is loaded. Use only the task prompt and supplied source packet. Do not use external retrieval or dynamic tools. Do not use knowledge outside the supplied source packet as evidence.
+
+# Task
+
+- Task ID: `SPR-VAL-02`
+- Split: `validation`
+- Task type: `single_paper_deep_reading`
+- Topic: sequence modeling for reinforcement learning
+- Research question: What does the provided Decision-Transformer-style paper demonstrate, and where are its evidence boundaries?
+
+## Input Prompt
+
+Read only the provided source packet. Produce a structured paper card, claim ledger, evidence ledger, baseline/metric summary, reproducibility notes, and limitation summary.
+Do not use external retrieval. If the packet does not contain a detail, say so.
+
+
+## Required Outputs
+
+- paper_card
+- claim_ledger
+- evidence_ledger
+- baseline_metric_summary
+- reproducibility_notes
+- limitations_and_open_questions
+
+# Source Packet
+
+# SPR-VAL-02 Model Input Packet
+## Sources
+- Decision Transformer: Reinforcement Learning via Sequence Modeling (arXiv:2106.01345; 2021). Local file: `chen_2021_decision_transformer.pdf`. Included evidence: Abstract; method formulation; datasets/environments; baselines; experiments; limitations.
+
+## Controlled Source Notes
+- Decision Transformer paper: formulates offline reinforcement learning as conditional sequence modeling over trajectories and returns.
+- Evidence objects: abstract, method formulation, datasets/environments, baseline/metric sections, experiments, reproducibility details, and limitations.
+
+## Packet Scope
+- This packet contains source metadata and neutral source notes prepared from the listed canonical files.
+- Some exact numeric values, full tables, appendix details, and implementation settings are not included in this model input packet.
+
+
+2026-05-30T04:44:08.756640Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-05-30T04:44:08.772289Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:44:08.772322Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:44:08.773329Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:44:08.773336Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:44:08.773704Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:44:08.773708Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:44:08.774087Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:44:08.774093Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:44:08.774608Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:44:08.774610Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:44:08.775419Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:44:08.775423Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:44:10.429874Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:44:10.429894Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:44:10.430241Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:44:10.430245Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:44:10.430568Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:44:10.430573Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:44:10.430892Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:44:10.430894Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:44:10.431201Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:44:10.431204Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+2026-05-30T04:44:10.431871Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path must not contain '..'
+2026-05-30T04:44:10.431874Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path must not contain '..'
+codex
+## paper_card
+
+- **Paper:** *Decision Transformer: Reinforcement Learning via Sequence Modeling*
+- **Identifier:** arXiv:2106.01345
+- **Year:** 2021
+- **Topic:** Sequence modeling for offline reinforcement learning
+- **Core idea:** The paper reformulates offline reinforcement learning as a conditional sequence modeling problem. Instead of learning a value function or policy through Bellman-style reinforcement learning updates, Decision Transformer models trajectories autoregressively and conditions action prediction on desired return.
+- **Model family:** Transformer-style autoregressive sequence model.
+- **Inputs described in packet:** Trajectories and returns; specifically, sequence modeling over states, actions, rewards/returns, and conditioning on target return.
+- **Setting:** Offline reinforcement learning.
+- **Evidence included in packet:** Abstract, method formulation, datasets/environments, baselines, experiments, reproducibility details, and limitations.
+- **Evidence missing from packet:** Exact numeric results, full tables, appendix details, and many implementation settings.
+
+## claim_ledger
+
+| Claim | Support in Packet | Evidence Boundary |
+|---|---|---|
+| Decision Transformer frames RL as conditional sequence modeling. | Explicitly stated in controlled source notes. | Packet supports the formulation but not all mathematical details. |
+| The method operates over trajectories and returns. | Explicitly stated. | Exact tokenization, context length, architecture dimensions, and training objective details are not included. |
+| The method targets offline RL. | Explicitly stated. | Packet does not provide full dataset construction details. |
+| The approach is Decision-Transformer-style and Transformer-based. | Title and source notes support this. | Specific Transformer architecture settings are not provided. |
+| The paper compares against baselines. | Packet says baseline/metric sections and baselines are included. | Specific baseline names, configurations, and exact scores are not present in the packet. |
+| The paper contains experiments on datasets/environments. | Packet says datasets/environments and experiments are included. | Exact environments, dataset variants, and numerical outcomes are not included. |
+| The paper discusses limitations. | Packet says limitations are included. | The packet does not enumerate the specific limitation text or full scope. |
+| The paper demonstrates that sequence modeling can be a viable framing for offline RL. | Supported by the controlled note and experiment inclusion. | Strength of empirical support cannot be quantified from this packet because exact results are absent. |
+
+## evidence_ledger
+
+| Evidence Object | What It Supports | What It Does Not Establish |
+|---|---|---|
+| Abstract | High-level claim that RL can be treated as sequence modeling. | Does not provide detailed experimental proof or reproducibility settings. |
+| Method formulation | Supports the central formulation: condition on desired returns and model trajectories autoregressively. | Does not, in this packet, provide exact loss, architecture, context window, or optimizer details. |
+| Datasets/environments section | Establishes that empirical evaluation was performed on RL datasets/environments. | Packet does not list exact datasets/environments. |
+| Baseline/metric sections | Establishes that comparisons and metrics exist. | Packet does not give baseline names, metric definitions, or values. |
+| Experiments | Supports that the method was evaluated empirically. | Packet omits exact numeric values and full tables, so performance magnitude and statistical reliability cannot be assessed here. |
+| Reproducibility details | Indicates that some implementation details are part of the source. | Packet says many implementation settings and appendix details are not included. |
+| Limitations | Establishes that the paper states boundaries or caveats. | Packet does not provide the specific limitations in detail. |
+
+## baseline_metric_summary
+
+The packet states that the paper includes baselines and baseline/metric sections, but it does **not** include the exact baseline names, metric definitions, numerical scores, full tables, or detailed comparison settings.
+
+What can be said from the packet:
+
+- The paper performs empirical comparisons.
+- The comparisons are in the offline RL setting.
+- Metrics and baselines are present in the original included evidence scope.
+- The supplied packet does not contain enough detail to summarize which baselines were used or how Decision Transformer ranked against them numerically.
+
+## reproducibility_notes
+
+Available from the packet:
+
+- The paper includes method formulation, experiments, datasets/environments, baselines, metrics, reproducibility details, and limitations.
+- The central reproducible framing is: train a Transformer-style sequence model over offline trajectories, conditioning behavior on desired return.
+
+Not available from the packet:
+
+- Exact model sizes.
+- Hyperparameters.
+- Optimizer settings.
+- Training schedules.
+- Context lengths.
+- Dataset preprocessing.
+- Evaluation protocol details.
+- Random seed handling.
+- Full appendix material.
+- Exact numeric tables.
+
+Because these details are not in the packet, a reproduction cannot be specified precisely from the supplied material alone.
+
+## limitations_and_open_questions
+
+- The packet does not provide exact numeric results, so the empirical strength of the demonstration cannot be audited here.
+- The packet does not list the specific datasets/environments, so the domain coverage of the evidence is unclear.
+- The packet does not provide full baseline details, so comparison fairness cannot be independently assessed from the packet.
+- The packet does not provide implementation settings, limiting reproducibility.
+- The packet says limitations are included, but does not spell them out; therefore the exact author-stated limitations cannot be summarized beyond noting that limitation material exists.
+- Open question from the supplied evidence: how robust is the Decision Transformer formulation across environments, dataset qualities, and baselines? The packet indicates experiments exist, but does not include enough detail to answer this.
+tokens used
+1,750
