@@ -1,0 +1,22 @@
+run_id: round1_dev_v0.2__B3_iter1__RL-DEV-01__run001
+variant: B3_iter1
+benchmark_version: round1_dev_v0.2
+task_id: RL-DEV-01
+model: gpt-5.5
+agent_environment: Codex CLI in isolated temp package
+codex_cli_version: codex-cli 0.133.0-alpha.1
+tool_permissions: none_dynamic; shell/browser/apps/plugins/computer-use/image/multi-agent
+  disabled for generation
+source_packet_sha256: d6e27f84723787f9e658966d0e250a1864063c0ad00aa85a81d64a85f82b70e7
+prompt_sha256: 4e39a50dcde45bc90c4b82bce3c8663aff3fb6850a24cef819de3104c5240b98
+fresh_context_confirmation: true
+generation_settings:
+  approval: never
+  sandbox: read-only
+  reasoning_effort: none
+  ephemeral: true
+  ignore_user_config: true
+  ignore_rules: true
+  skip_git_repo_check: true
+created_at: '2026-05-30'
+isolated_execution_package: /private/tmp/ling_bot_round1_dev_v0_2_B3_iter1

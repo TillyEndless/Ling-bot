@@ -1,0 +1,29 @@
+run_id: round1_dev_v0.2__B2_orchestra_subset__PS-DEV-01__run001
+variant: B2_orchestra_subset
+task_id: PS-DEV-01
+reviewer: codex_agent_draft
+benchmark_version: round1_dev_v0.2
+scores:
+  factual_accuracy: 5
+  evidence_traceability: 5
+  citation_validity: 5
+  literature_coverage: null
+  comparison_fairness: 5
+  experimental_rigor: 5
+  benchmark_validity: null
+  inference_boundary_discipline: 5
+  hypothesis_quality: 5
+  rl_specific_correctness: null
+  output_usefulness: 5
+  efficiency: 3
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: calibration
+  description: Very strong proposal artifact with provenance, evidence map, experiments, risks, and recoverability/use boundaries;
+    verbose.
+  evidence: raw_output.md
+summary: Very strong proposal artifact with provenance, evidence map, experiments, risks, and recoverability/use boundaries;
+  verbose.

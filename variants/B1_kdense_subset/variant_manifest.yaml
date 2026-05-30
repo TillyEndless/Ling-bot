@@ -1,0 +1,59 @@
+variant_id: B1_kdense_subset
+module_scope: literature_analysis_and_research_rigor
+implementation_type: instruction_reference_only
+runtime_tools_enabled: false
+external_services_enabled: false
+dynamic_retrieval_enabled: false
+scripts_enabled: false
+upstream_basis:
+  repository: K-Dense-AI/scientific-agent-skills
+  components:
+    - path: skills/literature-review/SKILL.md
+      consulted_files:
+        - skills/literature-review/SKILL.md
+        - skills/literature-review/references/citation_styles.md
+        - skills/literature-review/references/database_strategies.md
+        - skills/literature-review/assets/review_template.md
+      use: adapted_workflow_pattern
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: skills/citation-management/SKILL.md
+      consulted_files:
+        - skills/citation-management/SKILL.md
+        - skills/citation-management/references/citation_styles.md
+        - skills/citation-management/references/database_apis.md
+      use: adapted_citation_discipline_without_tools
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: skills/scientific-critical-thinking/SKILL.md
+      consulted_files:
+        - skills/scientific-critical-thinking/SKILL.md
+        - skills/scientific-critical-thinking/references/bias_detection.md
+        - skills/scientific-critical-thinking/references/evidence_evaluation.md
+        - skills/scientific-critical-thinking/references/validity_frameworks.md
+      use: adapted_critique_axes
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: skills/peer-review/SKILL.md
+      consulted_files:
+        - skills/peer-review/SKILL.md
+        - skills/peer-review/references/review_criteria.md
+        - skills/peer-review/references/review_templates.md
+      use: adapted_review_scaffolding
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+    - path: skills/hypothesis-generation/SKILL.md
+      consulted_files:
+        - skills/hypothesis-generation/SKILL.md
+        - skills/hypothesis-generation/references/experimental_design.md
+        - skills/hypothesis-generation/references/hypothesis_frameworks.md
+      use: adapted_hypothesis_template
+      copied_verbatim: false
+      license_observed: MIT in skill frontmatter according to upstream reuse ledger
+runtime_exclusions:
+  - no K-Dense scripts included
+  - no APIs included
+  - no database search included
+  - no external citation validation included
+  - no Orchestra-derived rules included
+  - no B3-original AI/ML/RL guidance included

@@ -1,0 +1,27 @@
+variant_id: B3_iter1
+module_scope: literature_analysis_and_research_rigor
+implementation_type: instruction_reference_only
+runtime_tools_enabled: false
+external_services_enabled: false
+dynamic_retrieval_enabled: false
+scripts_enabled: false
+originality: project-original general AI/ML/RL research-analysis guidance
+skill_directory: variants/B3_iter1/ai_ml_rl_literature_analysis
+revision_scope:
+  - concise source inventory discipline
+  - evidence-burden labeling for provenance and uncertainty
+  - general comparison, audit, and inference-boundary refinements
+  - label-use economy and compact source-inventory placement
+supported_modes:
+  - literature_mapping
+  - single_paper_structured_reading
+  - method_comparison
+  - benchmark_experimental_rigor_audit
+  - rl_protocol_analysis
+  - evidence_grounded_proposal_support
+runtime_exclusions:
+  - no upstream repository text copied
+  - no task identifiers
+  - no expected answer content
+  - no dynamic tools
+  - no Research OS orchestration

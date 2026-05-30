@@ -1,0 +1,29 @@
+run_id: round1_dev_v0.2__B3_your_v1_revised__MC-DEV-01__run001
+variant: B3_your_v1_revised
+task_id: MC-DEV-01
+reviewer: codex_agent_draft
+benchmark_version: round1_dev_v0.2
+scores:
+  factual_accuracy: 5
+  evidence_traceability: 5
+  citation_validity: 5
+  literature_coverage: null
+  comparison_fairness: 5
+  experimental_rigor: 5
+  benchmark_validity: null
+  inference_boundary_discipline: 5
+  hypothesis_quality: null
+  rl_specific_correctness: null
+  output_usefulness: 5
+  efficiency: 5
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: calibration
+  description: Fair DPO/PPO-style comparison preserving direct setup-specific DPO
+    evidence while preventing universal method-ranking claims.
+  evidence: raw_output.md
+summary: Fair DPO/PPO-style comparison preserving direct setup-specific DPO evidence
+  while preventing universal method-ranking claims.

@@ -1,0 +1,26 @@
+variant_id: B3_iter1
+audit_result: passed_static_audit
+files:
+- path: variants/B3_iter1/ai_ml_rl_literature_analysis/SKILL.md
+  sha256: 4522306ea7805886b2a6e78b2b3b761276d5573335956146491c1285d7230d6a
+- path: variants/B3_iter1/ai_ml_rl_literature_analysis/references/benchmark_and_experiment_audit.md
+  sha256: 37f5bd4cc63ffd12aa7cd49a6f89d13cf3cd3f4213a0562a979be82f0430654a
+- path: variants/B3_iter1/ai_ml_rl_literature_analysis/references/comparative_analysis_schema.md
+  sha256: e5f3698bc86f8d336d46444416a41bb9267d8795d633aca942bd8289af670314
+- path: variants/B3_iter1/ai_ml_rl_literature_analysis/references/evidence_traceability.md
+  sha256: 9a8a575d2cb25b3d2012927323508784e74e2e2d244b8626dc0043bc4bc2b9ac
+- path: variants/B3_iter1/ai_ml_rl_literature_analysis/references/inference_boundary_policy.md
+  sha256: 95c0964a1faab98de6b95d95f413c102f0da2e422afa6fae33b4eee41aedb10f
+- path: variants/B3_iter1/ai_ml_rl_literature_analysis/references/paper_reading_schema.md
+  sha256: 21fca374bdbbe08ab8b37f1c4c90674fe970abd6cda16f3a8d7812fc40f6edfe
+- path: variants/B3_iter1/ai_ml_rl_literature_analysis/references/rl_analysis_guidance.md
+  sha256: 5a2eb2b77469a4e52ae7f0f653f84a70a4a3951afe8e6141c765db9689d6ca13
+- path: variants/B3_iter1/ai_ml_rl_literature_analysis/references/workflow_modes.md
+  sha256: d58a0de9a61fd153df946a3addaba976c3603ad21c14efcc2f1f5e46861e2f4f
+- path: variants/B3_iter1/ai_ml_rl_literature_analysis/variant_manifest.yaml
+  sha256: a54f68e61cf0f0704fadbc87e4467d495d396747348dfcfb8c8f409d62b10b4f
+forbidden_pattern_hits: []
+runtime_tools_enabled: false
+dynamic_retrieval_enabled: false
+external_services_enabled: false
+scripts_enabled: false

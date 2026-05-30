@@ -1,0 +1,35 @@
+run_id: round1_dev_v0.2__B3_your_v1_original__LS-DEV-01__run001
+variant: B3_your_v1_original
+benchmark_version: round1_dev_v0.2
+task_id: LS-DEV-01
+model: gpt-5.5
+agent_environment: Codex CLI v0.133.0-alpha.1
+tool_permissions: none_dynamic
+tool_access_detail:
+  plugins: false
+  browser: false
+  computer_use: false
+  image_generation: false
+  apps: false
+  multi_agent: false
+  shell_tool: false
+  external_retrieval: false
+  external_apis: false
+source_packet_sha256: 7fa2a08a92695f861c73095ffdc430c3c7805434170a6eb5d37b9c958938be9c
+prompt_sha256: 8860139b1bbc3cb60ce91851b81db2ff6b0fc85dcee96ef80ce386153b631f35
+raw_output_sha256: 6b2292733d49e525d319ea500515b402ce2f290bbba47b54cced1df89b0432c5
+fresh_context_confirmation: true
+generation_settings:
+  approval: never
+  sandbox: read-only
+  reasoning_effort: none
+  reasoning_summaries: none
+  ephemeral: true
+  ignore_user_config: true
+  ignore_rules: true
+  working_directory: /private/tmp/ling_bot_round1_dev_v0_2/B3_your_v1_original_execution
+runtime_package_contamination_scan: reports/round1_dev_v0_2/B3_your_v1_original_execution_package_contamination_scan.md
+scoring_after_generation: true
+scored_against:
+  gold_annotation_sha256: c1fa6435f340a2b9330d65b8c9ea22094929b614e87e4c1a19a7df485841e3fb
+  rubric_sha256: ade3feab72b1c789c567fb865b5919d6442623ac4e4d3d7d94996ff1f157ca6b

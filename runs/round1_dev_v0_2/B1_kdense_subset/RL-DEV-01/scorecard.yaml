@@ -1,0 +1,29 @@
+run_id: round1_dev_v0.2__B1_kdense_subset__RL-DEV-01__run001
+variant: B1_kdense_subset
+task_id: RL-DEV-01
+reviewer: codex_agent_draft
+benchmark_version: round1_dev_v0.2
+scores:
+  factual_accuracy: 5
+  evidence_traceability: 5
+  citation_validity: 5
+  literature_coverage: null
+  comparison_fairness: 5
+  experimental_rigor: 5
+  benchmark_validity: 5
+  inference_boundary_discipline: 5
+  hypothesis_quality: null
+  rl_specific_correctness: 4
+  output_usefulness: 5
+  efficiency: 4
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: calibration
+  description: Strong protocol audit with correct offline/static dataset and metric separation. Lacks some specialized RL
+    nuance compared with B3 but meets the gold anchors.
+  evidence: raw_output.md
+summary: Strong protocol audit with correct offline/static dataset and metric separation. Lacks some specialized RL nuance
+  compared with B3 but meets the gold anchors.

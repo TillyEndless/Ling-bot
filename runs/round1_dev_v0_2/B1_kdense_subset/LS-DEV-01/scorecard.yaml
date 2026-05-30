@@ -1,0 +1,29 @@
+run_id: round1_dev_v0.2__B1_kdense_subset__LS-DEV-01__run001
+variant: B1_kdense_subset
+task_id: LS-DEV-01
+reviewer: codex_agent_draft
+benchmark_version: round1_dev_v0.2
+scores:
+  factual_accuracy: 5
+  evidence_traceability: 5
+  citation_validity: 5
+  literature_coverage: 5
+  comparison_fairness: 5
+  experimental_rigor: 4
+  benchmark_validity: null
+  inference_boundary_discipline: 5
+  hypothesis_quality: null
+  rl_specific_correctness: null
+  output_usefulness: 5
+  efficiency: 4
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: calibration
+  description: Excellent K-Dense-style fixed-corpus mapping with strong coverage table, taxonomy, method matrix, and unsupported
+    synthesis warnings; slightly verbose.
+  evidence: raw_output.md
+summary: Excellent K-Dense-style fixed-corpus mapping with strong coverage table, taxonomy, method matrix, and unsupported
+  synthesis warnings; slightly verbose.

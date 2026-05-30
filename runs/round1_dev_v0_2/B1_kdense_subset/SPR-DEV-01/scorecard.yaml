@@ -1,0 +1,29 @@
+run_id: round1_dev_v0.2__B1_kdense_subset__SPR-DEV-01__run001
+variant: B1_kdense_subset
+task_id: SPR-DEV-01
+reviewer: codex_agent_draft
+benchmark_version: round1_dev_v0.2
+scores:
+  factual_accuracy: 5
+  evidence_traceability: 5
+  citation_validity: 5
+  literature_coverage: null
+  comparison_fairness: 4
+  experimental_rigor: 5
+  benchmark_validity: null
+  inference_boundary_discipline: 5
+  hypothesis_quality: null
+  rl_specific_correctness: null
+  output_usefulness: 5
+  efficiency: 4
+hard_fail:
+  triggered: false
+  reasons: []
+findings:
+- severity: minor
+  dimension: calibration
+  description: Strong paper card, claim ledger, evidence ledger, limitations, and unknowns. Captures matrix/rank ablations
+    and separates efficiency dimensions.
+  evidence: raw_output.md
+summary: Strong paper card, claim ledger, evidence ledger, limitations, and unknowns. Captures matrix/rank ablations and separates
+  efficiency dimensions.
